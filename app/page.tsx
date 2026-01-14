@@ -1,41 +1,19 @@
-"use client";
-import SectionTypography from "./home/components/section-typography";
-import SectionSkeleton from "./home/components/section-skeleton";
-import { Header, Text } from "@citrica-ui";
-import useHomeHooks from "./home/hooks/hooks-home";
-import FormComponentsExample from "@/shared/components/examples/form-components-example";
-import { Col } from "@/styles/07-objects/objects";
-import QuoteForm from "@/shared/project-components/quote-form";
+'use client'
+import React from 'react'
+import { Button, Card } from 'citrica-ui-toolkit'
 
-export const dynamic = 'force-dynamic'
-
-export default function Home() {
-  const { ctaOnClick } = useHomeHooks();
-  const logo = (
-    <img
-      src="/img/citrica-logo.png"
-      alt="Citrica Logo"
-      className="h-8 w-auto"
-    />
-  );
-
+const PageHome = () => {
   return (
-    <>
-      {/* <Header logo={logo} variant="split" showButton buttonText="Hello" onButtonClick={ctaOnClick}/> */}
-      <section className="pt-[64px]">
-        <SectionTypography />
-        <SectionSkeleton />
-      </section>
-      <section className="pt-[64px]">
-        <FormComponentsExample />
-      </section>
-      <section className="pt-[64px]">
-        <SectionTypography />
-        <SectionSkeleton />
-      </section>
-                <Col cols={{ lg: 6, md: 3, sm: 4 }}>
-            <QuoteForm />
-          </Col>
-    </>
-  );
+    <div>PageHome
+
+      <Card>
+        <h2>Citrica Card</h2>
+        <p>This is a card component from Citrica UI Toolkit.</p>
+        <Button variant="primary">Citrica Button</Button>
+      </Card>
+      
+    </div>
+  )
 }
+
+export default PageHome

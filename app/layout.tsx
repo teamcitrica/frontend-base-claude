@@ -5,9 +5,9 @@ import { Providers } from "../shared/providers";
 
 import { siteConfig } from "@/config/site";
 // import { Toaster } from 'react-hot-toast';
-import SupabaseProvider from '@/shared/context/supabase-context'
-import { AuthContextProvider } from '@/shared/context/auth-context'
-import { AvailabilityProvider } from "./api/contexts/AvailabilityContext";
+// import SupabaseProvider from '@/shared/context/supabase-context' // DESCOMENTAR PARA USAR SUPABASE
+// import { AuthContextProvider } from '@/shared/context/auth-context' // DESCOMENTAR PARA USAR AUTH CON SUPABASE
+// import { AvailabilityProvider } from "./api/contexts/AvailabilityContext"; // DESCOMENTAR PARA USAR AVAILABILITY CONTEXT
 
 // import Navbar from "@ui/organism/navbar";
 
@@ -34,18 +34,18 @@ export default function RootLayout({
       <head />
       <body>
         {/* <Toaster/>  SE CAMBIÓ POR HEROUI TOAST*/}
-        <SupabaseProvider>
-          <AuthContextProvider>
-            <AvailabilityProvider>
+        {/* <SupabaseProvider> DESCOMENTAR PARA USAR SUPABASE */}
+          {/* <AuthContextProvider> */}
+            {/* <AvailabilityProvider> */}
               <Providers
                 themeProps={{ attribute: "data-theme", defaultTheme: "light" }}
               >
                 {/* <Navbar /> */}
                 {children}
               </Providers>
-            </AvailabilityProvider>
-          </AuthContextProvider>
-        </SupabaseProvider>
+            {/* </AvailabilityProvider> */}
+          {/* </AuthContextProvider> */}
+        {/* </SupabaseProvider> */}
       </body>
     </html>
   );
