@@ -48,6 +48,47 @@ public-hoist-pattern[]=*@nextui-org/*
 
 After modifying the `.npmrc` file, you need to run `pnpm install` again to ensure that the dependencies are installed correctly.
 
+## 📚 Documentation
+
+### Styles System Documentation
+
+This project includes a comprehensive styles and layout system. Check out the documentation:
+
+- **[styles/README.md](styles/README.md)** - Main styles documentation hub
+- **[styles/CITRICA-UI-TOOLKIT_README.md](styles/CITRICA-UI-TOOLKIT_README.md)** - UI Library "citrica-ui-toolkit"
+- **[styles/LAYOUT-SYSTEM.md](styles/LAYOUT-SYSTEM.md)** - Complete responsive grid system
+- **[styles/LAYOUT-VISUAL-GUIDE.md](styles/LAYOUT-VISUAL-GUIDE.md)** - Visual diagrams and examples
+- **[styles/LAYOUT-EXAMPLES.md](styles/LAYOUT-EXAMPLES.md)** - Complete code examples
+- **[styles/10-tokens/README.md](styles/10-tokens/README.md)** - Design tokens system (Client & Admin)
+- **[styles/10-tokens/EXAMPLES.md](styles/10-tokens/EXAMPLES.md)** - Token usage examples
+
+### Quick Start - Responsive Layout
+
+```tsx
+import { Container, Col } from 'citrica-ui-toolkit';
+
+<Container>
+  <Col cols={{ sm: 4, md: 3, lg: 6 }}>
+    {/* Mobile: 100%, Tablet: 50%, Desktop: 50% */}
+    Your content here
+  </Col>
+</Container>
+```
+
+### Quick Start - Component Tokens
+
+**For Client/Public App:**
+```tsx
+<Button className="btn-citrica-ui btn-primary" />
+<Input className="input-citrica-ui input-primary" />
+```
+
+**For Admin Panel:**
+```tsx
+<Button className="btn-citrica-ui-admin btn-primary-admin" />
+<Input className="input-citrica-ui-admin input-primary-admin" />
+```
+
 ## License
 
 Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).

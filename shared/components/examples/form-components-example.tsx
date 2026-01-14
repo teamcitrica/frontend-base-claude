@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Input, Textarea, Select, Button, Card, Text, Icon } from '@citrica-ui';
+import { Input, Textarea, Select, Button, Card, Text, Icon } from 'citrica-ui-toolkit';
 import { Container, Col } from '@/styles/07-objects/objects';
 
 const FormComponentsExample = () => {

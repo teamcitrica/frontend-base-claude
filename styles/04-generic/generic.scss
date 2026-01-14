@@ -6,7 +6,7 @@
 @import '../01-settings/colors-admin/colors-admin.scss';
 @import '../01-settings/colors-admin/colors-admin-dark-theme.scss';
 @import '../01-settings/colors-admin/colors-admin-light-theme.scss';
-@import '../10-tokens/form-tokens.scss';
+@import '../10-tokens/components/form-tokens.scss';
 :root{
   // Default light theme
   @include light-theme;
