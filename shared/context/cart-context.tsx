@@ -1,5 +1,5 @@
-"use client"
-import React, { createContext, useContext, useEffect, useState } from 'react';
+"use client";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 type DishCartItem = {
   id: string;
@@ -9,8 +9,6 @@ type DishCartItem = {
   photo_url: string;
   quantity: number;
 };
-
-
 
 type CartContextType = {
   cartItems: DishCartItem[];
@@ -24,17 +22,19 @@ const generateUniqueId = () => {
 
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
-export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
   const [cartItems, setCartItems] = useState<Record<string, DishCartItem>>({});
 
   useEffect(() => {
     // Cargar datos del localStorage al inicializarse
-    const storedCart = localStorage.getItem('cart');
+    const storedCart = localStorage.getItem("cart");
+
     if (storedCart) {
       setCartItems(JSON.parse(storedCart));
     }
   }, []);
-
 
   const addToCart = (item: DishCartItem) => {
     setCartItems((prevItems) => {
@@ -42,7 +42,13 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
       if (prevItems[itemId]) {
         // Si el producto ya está en el carrito, actualiza la cantidad
-        return { ...prevItems, [itemId]: { ...prevItems[itemId], quantity: prevItems[itemId].quantity + 1 } };
+        return {
+          ...prevItems,
+          [itemId]: {
+            ...prevItems[itemId],
+            quantity: prevItems[itemId].quantity + 1,
+          },
+        };
       }
 
       // Si el producto no está en el carrito, agrégalo
@@ -70,20 +76,24 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   useEffect(() => {
     // Guardar datos en el localStorage cada vez que cambie el carrito
-    localStorage.setItem('cart', JSON.stringify(cartItems));
+    localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);
 
   return (
-    <CartContext.Provider value={{ cartItems: Object.values(cartItems), addToCart, removeFromCart }}>
-    {children}
-  </CartContext.Provider>
+    <CartContext.Provider
+      value={{ cartItems: Object.values(cartItems), addToCart, removeFromCart }}
+    >
+      {children}
+    </CartContext.Provider>
   );
 };
 
 export const useCart = () => {
   const context = useContext(CartContext);
+
   if (!context) {
-    throw new Error('useCart must be used within a CartProvider');
+    throw new Error("useCart must be used within a CartProvider");
   }
+
   return context;
 };

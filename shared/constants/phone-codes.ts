@@ -89,5 +89,5 @@ export const PHONE_CODES = [
   { value: "+44", label: "🇬🇧 Reino Unido (+44)" },
   { value: "+1", label: "🇺🇸 Estados Unidos (+1)" },
   { value: "+58", label: "🇻🇪 Venezuela (+58)" },
-  { value: "+84", label: "🇻🇳 Vietnam (+84)" }
+  { value: "+84", label: "🇻🇳 Vietnam (+84)" },
 ];

@@ -1,11 +1,9 @@
+import React from "react";
 
-import React from 'react'
-import TitleConfigApp from './components/title-config-app';
+import TitleConfigApp from "./components/title-config-app";
 
 const TareasPage = () => {
-  return (
-    <TitleConfigApp />
-  )
-}
+  return <TitleConfigApp />;
+};
 
-export default TareasPage
+export default TareasPage;

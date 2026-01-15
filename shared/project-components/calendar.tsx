@@ -6,7 +6,7 @@ interface CalendarComponentProps {
   value?: any;
   onChange?: (date: any) => void;
   className?: string;
-  variant?: 'primary' | 'secondary';
+  variant?: "primary" | "secondary";
   minValue?: any;
   disabledRanges?: Array<[any, any]>;
 }
@@ -15,7 +15,7 @@ export default function CalendarComponent({
   value,
   onChange,
   className = "",
-  variant = 'primary',
+  variant = "primary",
   minValue = today(getLocalTimeZone()),
   disabledRanges = [],
 }: CalendarComponentProps) {
@@ -36,7 +36,8 @@ export default function CalendarComponent({
     );
   };
 
-  const calendarClass = variant === 'primary' ? 'calendar-primary' : 'calendar-secondary';
+  const calendarClass =
+    variant === "primary" ? "calendar-primary" : "calendar-secondary";
 
   return (
     <Calendar

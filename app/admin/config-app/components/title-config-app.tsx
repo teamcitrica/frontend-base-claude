@@ -2,8 +2,8 @@
 import React from "react";
 import { Suspense } from "react";
 import { useSearchParams } from "next/navigation";
+import { Text } from "citrica-ui-toolkit";
 
-import Text from "@/shared/components/citrica-ui/atoms/text";
 import { siteConfig } from "@/config/site";
 
 function Content() {

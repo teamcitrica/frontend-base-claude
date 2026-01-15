@@ -1,12 +1,15 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Container, Col } from "@citrica/objects";
-import Text from "@ui/atoms/text";
-import Button from "@ui/molecules/button";
-import Card from "@ui/atoms/card";
-import Icon from "@ui/atoms/icon";
 import {
-  Badge,
+  Text,
+  Button,
+  Card,
+  Icon,
+  Input,
+  Container,
+  Col,
+} from "citrica-ui-toolkit";
+import {
   Chip,
   Table,
   TableHeader,
@@ -14,11 +17,10 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Input,
-  Spinner
+  Spinner,
 } from "@heroui/react";
 
-import { useCustomers, Customer } from "@/app/hooks/useCustomers";
+import { useCustomers } from "@/app/hooks/useCustomers";
 
 const ClientesAdminPage = () => {
   const {
@@ -26,7 +28,7 @@ const ClientesAdminPage = () => {
     customers,
     getAllCustomers,
     deleteCustomer,
-    getCustomerStats
+    getCustomerStats,
   } = useCustomers();
 
   const [searchTerm, setSearchTerm] = useState("");
@@ -39,6 +41,7 @@ const ClientesAdminPage = () => {
 
   const loadStats = async () => {
     const result = await getCustomerStats();
+
     if (result.success && result.stats) {
       setStats(result.stats);
     }
@@ -49,9 +52,13 @@ const ClientesAdminPage = () => {
     await getAllCustomers(50, 0, search);
   };
 
-  const handleDeleteCustomer = async (customerId: string, customerName: string) => {
+  const handleDeleteCustomer = async (
+    customerId: string,
+    customerName: string,
+  ) => {
     if (confirm(`¿Estás seguro de eliminar el cliente "${customerName}"?`)) {
       const result = await deleteCustomer(customerId);
+
       if (result.success) {
         getAllCustomers(50, 0, searchTerm);
         loadStats();
@@ -62,33 +69,33 @@ const ClientesAdminPage = () => {
   };
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
+    return new Date(dateString).toLocaleDateString("es-ES", {
+      year: "numeric",
+      month: "short",
+      day: "numeric",
     });
   };
 
   const getInitials = (name: string) => {
     return name
-      .split(' ')
-      .map(word => word.charAt(0).toUpperCase())
+      .split(" ")
+      .map((word) => word.charAt(0).toUpperCase())
       .slice(0, 2)
-      .join('');
+      .join("");
   };
 
   return (
     <Container>
-      <Col cols={{ lg: 12, md: 6, sm: 4 }} className="space-y-6">
+      <Col className="space-y-6" cols={{ lg: 12, md: 6, sm: 4 }}>
         {/* Header */}
         <div className="flex items-center gap-3">
-          <Icon name="Users" size={24} className="text-[#964f20]" />
+          <Icon className="text-[#964f20]" name="Users" size={24} />
           <div>
-            <Text variant="title" color="#964f20">
+            <Text color="#964f20" variant="title">
               Gestión de Clientes
             </Text>
             <p>
-              <Text variant="body" color="var(--color-on-surface)">
+              <Text color="var(--color-on-surface)" variant="body">
                 Administra la base de datos de clientes del estudio
               </Text>
             </p>
@@ -101,16 +108,20 @@ const ClientesAdminPage = () => {
             <Card className="p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-blue-100 rounded-lg">
-                  <Icon name="Users" size={20} className="text-blue-600" />
+                  <Icon className="text-blue-600" name="Users" size={20} />
                 </div>
                 <div>
                   <p>
-                    <Text variant="label" color="color-on-surface" className="text-sm">
+                    <Text
+                      className="text-sm"
+                      color="color-on-surface"
+                      variant="label"
+                    >
                       Total Clientes
                     </Text>
                   </p>
                   <p>
-                    <Text variant="title" color="color-on-surface">
+                    <Text color="color-on-surface" variant="title">
                       {stats.total_customers}
                     </Text>
                   </p>
@@ -121,16 +132,20 @@ const ClientesAdminPage = () => {
             <Card className="p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-green-100 rounded-lg">
-                  <Icon name="UserPlus" size={20} className="text-green-600" />
+                  <Icon className="text-green-600" name="UserPlus" size={20} />
                 </div>
                 <div>
                   <p>
-                    <Text variant="label" color="color-on-surface" className="text-sm">
+                    <Text
+                      className="text-sm"
+                      color="color-on-surface"
+                      variant="label"
+                    >
                       Nuevos este mes
                     </Text>
                   </p>
                   <p>
-                    <Text variant="title" color="color-on-surface">
+                    <Text color="color-on-surface" variant="title">
                       {stats.new_customers_this_month}
                     </Text>
                   </p>
@@ -141,16 +156,20 @@ const ClientesAdminPage = () => {
             <Card className="p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-purple-100 rounded-lg">
-                  <Icon name="Calendar" size={20} className="text-purple-600" />
+                  <Icon className="text-purple-600" name="Calendar" size={20} />
                 </div>
                 <div>
                   <p>
-                    <Text variant="label" color="color-on-surface" className="text-sm">
+                    <Text
+                      className="text-sm"
+                      color="color-on-surface"
+                      variant="label"
+                    >
                       Con Reservas
                     </Text>
                   </p>
                   <p>
-                    <Text variant="title" color="color-on-surface">
+                    <Text color="color-on-surface" variant="title">
                       {stats.customers_with_bookings}
                     </Text>
                   </p>
@@ -161,18 +180,22 @@ const ClientesAdminPage = () => {
             <Card className="p-4">
               <div className="flex items-center gap-3">
                 <div className="p-2 bg-gray-100 rounded-lg">
-                  <Icon name="UserX" size={20} className="text-gray-600" />
+                  <Icon className="text-gray-600" name="UserX" size={20} />
                 </div>
                 <div>
                   <p>
-                  <Text variant="label" color="color-on-surface" className="text-sm">
-                    Sin Reservas
-                  </Text>
+                    <Text
+                      className="text-sm"
+                      color="color-on-surface"
+                      variant="label"
+                    >
+                      Sin Reservas
+                    </Text>
                   </p>
                   <p>
-                  <Text variant="title" color="color-on-surface">
-                    {stats.customers_without_bookings}
-                  </Text>
+                    <Text color="color-on-surface" variant="title">
+                      {stats.customers_without_bookings}
+                    </Text>
                   </p>
                 </div>
               </div>
@@ -184,11 +207,11 @@ const ClientesAdminPage = () => {
         <Card className="p-4">
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <Text variant="title" color="#964f20">
+              <Text color="#964f20" variant="title">
                 Lista de Clientes
               </Text>
               <p>
-                <Text variant="body" color="var(--color-on-surface)">
+                <Text color="var(--color-on-surface)" variant="body">
                   {customers.length} clientes registrados
                 </Text>
               </p>
@@ -196,12 +219,12 @@ const ClientesAdminPage = () => {
 
             <div className="flex flex-col md:flex-row gap-2">
               <Input
+                className="w-full md:w-80"
                 placeholder="Buscar por nombre, email o teléfono..."
+                size="sm"
+                startContent={<Icon name="Search" size={16} />}
                 value={searchTerm}
                 onValueChange={handleSearch}
-                startContent={<Icon name="Search" size={16} />}
-                className="w-full md:w-80"
-                size="sm"
               />
 
               {/* Botón para agregar cliente en futuras versiones */}
@@ -220,22 +243,25 @@ const ClientesAdminPage = () => {
         <Card className="p-2">
           {isLoading ? (
             <div className="text-center py-8">
-              <Spinner size="lg" color="primary" />
-              <Text variant="body" color="color-on-surface" className="mt-4">
+              <Spinner color="primary" size="lg" />
+              <Text className="mt-4" color="color-on-surface" variant="body">
                 Cargando clientes...
               </Text>
             </div>
           ) : customers.length === 0 ? (
             <div className="text-center py-8">
-              <Icon name="Users" size={48} className="mx-auto text-gray-400 mb-4" />
-              <Text variant="title" color="color-on-surface" className="mb-2">
+              <Icon
+                className="mx-auto text-gray-400 mb-4"
+                name="Users"
+                size={48}
+              />
+              <Text className="mb-2" color="color-on-surface" variant="title">
                 No hay clientes
               </Text>
-              <Text variant="body" color="color-on-surface">
+              <Text color="color-on-surface" variant="body">
                 {searchTerm
                   ? `No se encontraron clientes que coincidan con "${searchTerm}"`
-                  : "Aún no hay clientes registrados en el sistema"
-                }
+                  : "Aún no hay clientes registrados en el sistema"}
               </Text>
             </div>
           ) : (
@@ -245,7 +271,9 @@ const ClientesAdminPage = () => {
                 <TableColumn>CONTACTO</TableColumn>
                 <TableColumn>RESERVAS</TableColumn>
                 <TableColumn>REGISTRO</TableColumn>
-                <TableColumn className="flex justify-center items-center">ACCIONES</TableColumn>
+                <TableColumn className="flex justify-center items-center">
+                  ACCIONES
+                </TableColumn>
               </TableHeader>
               <TableBody>
                 {customers.map((customer) => (
@@ -257,12 +285,16 @@ const ClientesAdminPage = () => {
                         </div>
                         <div>
                           <p>
-                            <Text variant="body" color="color-on-surface">
+                            <Text color="color-on-surface" variant="body">
                               {customer.full_name}
                             </Text>
                           </p>
                           <p>
-                            <Text variant="label" color="color-on-surface" className="text-sm opacity-70">
+                            <Text
+                              className="text-sm opacity-70"
+                              color="color-on-surface"
+                              variant="label"
+                            >
                               ID: {customer.id.slice(0, 8)}...
                             </Text>
                           </p>
@@ -273,13 +305,17 @@ const ClientesAdminPage = () => {
                     <TableCell>
                       <div>
                         <p>
-                          <Text variant="body" color="color-on-surface">
+                          <Text color="color-on-surface" variant="body">
                             {customer.email}
                           </Text>
                         </p>
                         {customer.phone && (
                           <p>
-                            <Text variant="label" color="color-on-surface" className="text-sm">
+                            <Text
+                              className="text-sm"
+                              color="color-on-surface"
+                              variant="label"
+                            >
                               {customer.phone}
                             </Text>
                           </p>
@@ -290,8 +326,10 @@ const ClientesAdminPage = () => {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <Chip
+                          color={
+                            customer._count?.bookings ? "primary" : "default"
+                          }
                           size="sm"
-                          color={customer._count?.bookings ? "primary" : "default"}
                           variant="flat"
                         >
                           {customer._count?.bookings || 0} reservas
@@ -300,7 +338,7 @@ const ClientesAdminPage = () => {
                     </TableCell>
 
                     <TableCell>
-                      <Text variant="body" color="color-on-surface">
+                      <Text color="color-on-surface" variant="body">
                         {formatDate(customer.created_at)}
                       </Text>
                     </TableCell>
@@ -308,34 +346,39 @@ const ClientesAdminPage = () => {
                     <TableCell>
                       <div className="flex items-center justify-end gap-2">
                         <Button
+                          className="!min-w-0 !px-4"
                           size="sm"
                           variant="secondary"
                           onClick={() => {
                             // TODO: Implementar vista de detalles del cliente
                             alert("Funcionalidad de detalles en desarrollo");
                           }}
-                          className="!min-w-0 !px-4"
                         >
                           <Icon name="Eye" size={16} />
                         </Button>
 
                         <Button
+                          className="!min-w-0 !px-4"
                           size="sm"
                           variant="secondary"
                           onClick={() => {
                             // TODO: Implementar edición de cliente
                             alert("Funcionalidad de edición en desarrollo");
                           }}
-                          className="!min-w-0 !px-4"
                         >
                           <Icon name="Edit" size={16} />
                         </Button>
 
                         <Button
+                          className="!min-w-0 !px-4"
                           size="sm"
                           variant="danger"
-                          onClick={() => handleDeleteCustomer(customer.id, customer.full_name)}
-                          className="!min-w-0 !px-4"
+                          onClick={() =>
+                            handleDeleteCustomer(
+                              customer.id,
+                              customer.full_name,
+                            )
+                          }
                         >
                           <Icon name="Trash2" size={16} />
                         </Button>

@@ -1,11 +1,11 @@
-import React from 'react'
-import { Col, Container } from '@citrica/objects'
+import React from "react";
+import { Col, Container } from "@citrica/objects";
 import { Skeleton } from "@heroui/skeleton";
 
 const SectionSkeleton = () => {
   return (
     <Container>
-      <Col cols={{ lg: 6, md: 6, sm: 4 }} className="my-4">
+      <Col className="my-4" cols={{ lg: 6, md: 6, sm: 4 }}>
         <div className="mb-4">
           <Skeleton className="flex rounded-full w-12 h-12" />
         </div>
@@ -14,7 +14,7 @@ const SectionSkeleton = () => {
           <Skeleton className="h-3 w-4/5 rounded-lg" />
         </div>
       </Col>
-      <Col cols={{ lg: 6, md: 6, sm: 4 }} className="my-4">
+      <Col className="my-4" cols={{ lg: 6, md: 6, sm: 4 }}>
         <div className="mb-4">
           <Skeleton className="flex rounded-full w-12 h-12" />
         </div>
@@ -24,7 +24,7 @@ const SectionSkeleton = () => {
         </div>
       </Col>
     </Container>
-  )
-}
+  );
+};
 
-export default SectionSkeleton
+export default SectionSkeleton;

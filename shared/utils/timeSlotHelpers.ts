@@ -8,15 +8,16 @@
  * @returns String en formato "HH:MM - HH:MM" o múltiples rangos si hay gaps
  */
 export const formatTimeRange = (slots: string[]): string => {
-  if (!slots || slots.length === 0) return '';
+  if (!slots || slots.length === 0) return "";
 
   if (slots.length === 1) return slots[0];
 
   // Ordenar slots
   const sortedSlots = [...slots].sort((a, b) => {
-    const [hourA, minA] = a.split(':').map(Number);
-    const [hourB, minB] = b.split(':').map(Number);
-    return (hourA * 60 + minA) - (hourB * 60 + minB);
+    const [hourA, minA] = a.split(":").map(Number);
+    const [hourB, minB] = b.split(":").map(Number);
+
+    return hourA * 60 + minA - (hourB * 60 + minB);
   });
 
   // Agrupar slots consecutivos
@@ -24,8 +25,8 @@ export const formatTimeRange = (slots: string[]): string => {
   let currentRange: string[] = [sortedSlots[0]];
 
   for (let i = 1; i < sortedSlots.length; i++) {
-    const [prevHour, prevMin] = sortedSlots[i - 1].split(':').map(Number);
-    const [currHour, currMin] = sortedSlots[i].split(':').map(Number);
+    const [prevHour, prevMin] = sortedSlots[i - 1].split(":").map(Number);
+    const [currHour, currMin] = sortedSlots[i].split(":").map(Number);
 
     const prevMinutes = prevHour * 60 + prevMin;
     const currMinutes = currHour * 60 + currMin;
@@ -44,12 +45,12 @@ export const formatTimeRange = (slots: string[]): string => {
   ranges.push(currentRange);
 
   // Formatear cada rango: mostrar solo inicio y fin sin guiones
-  const formattedRanges = ranges.map(range => {
+  const formattedRanges = ranges.map((range) => {
     const startTime = range[0];
 
     // Calcular hora de fin (último slot + 30 minutos)
     const lastSlot = range[range.length - 1];
-    const [lastHour, lastMin] = lastSlot.split(':').map(Number);
+    const [lastHour, lastMin] = lastSlot.split(":").map(Number);
 
     let endHour = lastHour;
     let endMin = lastMin + 30;
@@ -59,13 +60,13 @@ export const formatTimeRange = (slots: string[]): string => {
       endMin -= 60;
     }
 
-    const endTime = `${String(endHour).padStart(2, '0')}:${String(endMin).padStart(2, '0')}`;
+    const endTime = `${String(endHour).padStart(2, "0")}:${String(endMin).padStart(2, "0")}`;
 
     return `${startTime} ${endTime}`;
   });
 
   // Unir los rangos con espacios
-  return formattedRanges.join(' ');
+  return formattedRanges.join(" ");
 };
 
 /**
@@ -74,12 +75,12 @@ export const formatTimeRange = (slots: string[]): string => {
  * @returns Duración en horas (ejemplo: "2.5 hrs")
  */
 export const calculateDuration = (slots: string[]): string => {
-  if (!slots || slots.length === 0) return '0 hrs';
+  if (!slots || slots.length === 0) return "0 hrs";
 
   const totalSlots = slots.length;
   const hours = totalSlots * 0.5; // Cada slot es 30 minutos = 0.5 horas
 
-  if (hours === 1) return '1 hr';
+  if (hours === 1) return "1 hr";
 
   return `${hours} hrs`;
 };
@@ -89,10 +90,12 @@ export const calculateDuration = (slots: string[]): string => {
  * @param slots - Array de slots en formato "HH:MM"
  * @returns Objeto con timeRange y duration
  */
-export const getTimeRangeInfo = (slots: string[]): { timeRange: string; duration: string } => {
+export const getTimeRangeInfo = (
+  slots: string[],
+): { timeRange: string; duration: string } => {
   return {
     timeRange: formatTimeRange(slots),
-    duration: calculateDuration(slots)
+    duration: calculateDuration(slots),
   };
 };
 
@@ -102,13 +105,14 @@ export const getTimeRangeInfo = (slots: string[]): { timeRange: string; duration
  * @returns String en formato "HH:MM - HH:MM, HH:MM - HH:MM (X minutos)" para múltiples rangos
  */
 export const formatTimeSlotsWithDuration = (slots: string[]): string => {
-  if (!slots || slots.length === 0) return '';
+  if (!slots || slots.length === 0) return "";
 
   // Ordenar slots
   const sortedSlots = [...slots].sort((a, b) => {
-    const [hourA, minA] = a.split(':').map(Number);
-    const [hourB, minB] = b.split(':').map(Number);
-    return (hourA * 60 + minA) - (hourB * 60 + minB);
+    const [hourA, minA] = a.split(":").map(Number);
+    const [hourB, minB] = b.split(":").map(Number);
+
+    return hourA * 60 + minA - (hourB * 60 + minB);
   });
 
   // Agrupar slots consecutivos
@@ -116,8 +120,8 @@ export const formatTimeSlotsWithDuration = (slots: string[]): string => {
   let currentRange: string[] = [sortedSlots[0]];
 
   for (let i = 1; i < sortedSlots.length; i++) {
-    const [prevHour, prevMin] = sortedSlots[i - 1].split(':').map(Number);
-    const [currHour, currMin] = sortedSlots[i].split(':').map(Number);
+    const [prevHour, prevMin] = sortedSlots[i - 1].split(":").map(Number);
+    const [currHour, currMin] = sortedSlots[i].split(":").map(Number);
 
     const prevMinutes = prevHour * 60 + prevMin;
     const currMinutes = currHour * 60 + currMin;
@@ -136,12 +140,12 @@ export const formatTimeSlotsWithDuration = (slots: string[]): string => {
   ranges.push(currentRange);
 
   // Formatear cada rango con su inicio y fin
-  const formattedRanges = ranges.map(range => {
+  const formattedRanges = ranges.map((range) => {
     const startTime = range[0];
 
     // Calcular hora de fin (último slot + 30 minutos)
     const lastSlot = range[range.length - 1];
-    const [lastHour, lastMin] = lastSlot.split(':').map(Number);
+    const [lastHour, lastMin] = lastSlot.split(":").map(Number);
 
     let endHour = lastHour;
     let endMin = lastMin + 30;
@@ -151,7 +155,7 @@ export const formatTimeSlotsWithDuration = (slots: string[]): string => {
       endMin -= 60;
     }
 
-    const endTime = `${String(endHour).padStart(2, '0')}:${String(endMin).padStart(2, '0')}`;
+    const endTime = `${String(endHour).padStart(2, "0")}:${String(endMin).padStart(2, "0")}`;
 
     return `${startTime} - ${endTime}`;
   });
@@ -160,5 +164,5 @@ export const formatTimeSlotsWithDuration = (slots: string[]): string => {
   const totalMinutes = slots.length * 30;
 
   // Unir los rangos con comas y agregar duración total al final
-  return `${formattedRanges.join(', ')} (${totalMinutes} min)`;
+  return `${formattedRanges.join(", ")} (${totalMinutes} min)`;
 };

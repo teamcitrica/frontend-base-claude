@@ -11,7 +11,7 @@ export async function GET(request: NextRequest) {
   // } else {
   //   return new Response('404')
   // }
-  return new Response('404');
+  return new Response("404");
 }
 
 export async function POST(request: NextRequest) {
@@ -50,5 +50,5 @@ export async function POST(request: NextRequest) {
   //   }
 
   // }
-  return new Response('404');
+  return new Response("404");
 }

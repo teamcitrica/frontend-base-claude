@@ -1,12 +1,14 @@
 "use client";
 import React, { useState } from "react";
-import Button from "@ui/molecules/button";
-import Icon from "@ui/atoms/icon";
+import { Button, Icon } from "citrica-ui-toolkit";
+
 import UnifiedAvailabilityManager from "./disponibilidad/components/unified-availability-manager";
 import WeeklyScheduleManager from "./disponibilidad/components/weekly-schedule-manager";
 
 const BookingAvailabilityView = () => {
-  const [activeSubTab, setActiveSubTab] = useState<"disponibilidad" | "semanal">("disponibilidad");
+  const [activeSubTab, setActiveSubTab] = useState<
+    "disponibilidad" | "semanal"
+  >("disponibilidad");
 
   const renderContent = () => {
     switch (activeSubTab) {
@@ -24,17 +26,17 @@ const BookingAvailabilityView = () => {
       <div className="flex justify-end gap-2">
         <Button
           size="sm"
+          startContent={<Icon name="Calendar" size={16} />}
           variant={activeSubTab === "disponibilidad" ? "primary" : "secondary"}
           onClick={() => setActiveSubTab("disponibilidad")}
-          startContent={<Icon name="Calendar" size={16} />}
         >
           Gestión de Disponibilidad
         </Button>
         <Button
           size="sm"
+          startContent={<Icon name="Clock" size={16} />}
           variant={activeSubTab === "semanal" ? "primary" : "secondary"}
           onClick={() => setActiveSubTab("semanal")}
-          startContent={<Icon name="Clock" size={16} />}
         >
           Configuración Semanal
         </Button>

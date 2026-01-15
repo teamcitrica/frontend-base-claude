@@ -1,13 +1,13 @@
-"use client"
-import React from 'react'
-import { Container, Col } from '@/styles/07-objects/objects';
-import Icon from '@ui/atoms/icon';
-import { Button, Text, Sidebar,  Select } from '@citrica-ui';
+"use client";
+import React from "react";
+import { Button, Text, Icon, Select, Input } from "citrica-ui-toolkit";
 import { useTheme } from "next-themes";
 import { addToast } from "@heroui/toast";
-import {  Input } from 'citrica-ui-toolkit'
+
+import { Container, Col } from "@/styles/07-objects/objects";
 const SectionTypography = () => {
   const { theme, setTheme } = useTheme();
+
   return (
     <>
       <Container>
@@ -17,79 +17,89 @@ const SectionTypography = () => {
             <Icon name="ChevronLeft" size={80} />
           </div>
           <h1>
-            <Text variant="display" textColor="color-on-container">Display</Text>
+            <Text textColor="color-on-container" variant="display">
+              Display
+            </Text>
           </h1>
           <section>
             <h2>
-              <Text variant="headline" textColor="color-on-container">Headline</Text>
+              <Text textColor="color-on-container" variant="headline">
+                Headline
+              </Text>
             </h2>
           </section>
           <h3>
-            <Text variant="title" textColor="color-on-container">Title</Text>
+            <Text textColor="color-on-container" variant="title">
+              Title
+            </Text>
           </h3>
           <h4>
-            <Text variant="subtitle" color="#F00">Subtitle</Text>
+            <Text color="#F00" variant="subtitle">
+              Subtitle
+            </Text>
           </h4>
           <p>
-            <Text variant="body" weight='bold'>Body</Text>
+            <Text variant="body" weight="bold">
+              Body
+            </Text>
           </p>
-          <p className='mb-8'>
+          <p className="mb-8">
             <Text variant="label">Label</Text>
           </p>
           <div>
             <Button
+              label="New Toast Test"
+              variant="primary"
               onClick={() => {
                 addToast({
                   title: "Toast title",
                   description: "Toast displayed successfully",
                   color: "success",
-                  radius: "sm",
                 });
               }}
-              label="New Toast Test"
-              variant="primary" />
+            />
           </div>
         </Col>
-        <div className='flex flex-col gap-4 mb-6'>
+        <div className="flex flex-col gap-4 mb-6">
           <p className="text-lg font-bold">Inputs con Citrica Design System:</p>
 
           <Input
-            label='Nombre completo'
-            placeholder='Escribe tu nombre aquí'
-            variant='primary'
+            label="Nombre completo"
+            placeholder="Escribe tu nombre aquí"
+            variant="primary"
           />
 
           <Input
+            required
             label="Correo electrónico"
             placeholder="tu@email.com"
+            startIcon="Mail"
             type="email"
             variant="secondary"
-            startIcon="Mail"
-            required
           />
 
           <Input
             label="Teléfono"
             placeholder="+51 999 999 999"
+            startIcon="Phone"
             type="tel"
             variant="primary"
-            startIcon="Phone"
           />
         </div>
         <div>
           <Select
-            variant="primary"
-            label="País"
-            placeholder="prueba de que sirve johan"
-            startIcon="Globe"
             required
+            label="País"
             options={[
               { value: "es", label: "España" },
               { value: "mx", label: "México" },
-              { value: "ar", label: "Argentina" }
+              { value: "ar", label: "Argentina" },
             ]}
+            placeholder="prueba de que sirve johan"
+            startIcon="Globe"
+            variant="primary"
             onSelectionChange={(keys) => {
-              console.log('Seleccionado:', keys);
+              console.log("Seleccionado:", keys);
             }}
           />
         </div>
@@ -97,16 +107,23 @@ const SectionTypography = () => {
       <Container>
         <Col cols={{ lg: 12, md: 6, sm: 4 }}>
           <button
-            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
             className="rounded-md p-2 hover:bg-accent"
+            onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           >
-            <Icon name="Sun" size={24} strokeWidth={1.4} className="text-on-accent" />
-            <Text variant='label' className="sr-only">Toggle theme</Text>
+            <Icon
+              className="text-on-accent"
+              name="Sun"
+              size={24}
+              strokeWidth={1.4}
+            />
+            <Text className="sr-only" variant="label">
+              Toggle theme
+            </Text>
           </button>
         </Col>
       </Container>
     </>
-  )
-}
+  );
+};
 
-export default SectionTypography
+export default SectionTypography;

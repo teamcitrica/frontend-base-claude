@@ -3,7 +3,8 @@
 // import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 // import { cookies } from "next/headers";
 // import { redirect } from 'next/navigation';
-import { Sidebar } from "@citrica-ui";
+import { Sidebar } from "@/shared/components/citrica-ui/organism/sidebar";
+
 import { siteConfig } from "@/config/site";
 
 // async function getSession() {
@@ -13,9 +14,9 @@ import { siteConfig } from "@/config/site";
 // }
 
 export default function PanelLayout({
-	children,
+  children,
 }: {
-	children: React.ReactNode;
+  children: React.ReactNode;
 }) {
   // const session = use(getSession());
   // // console.log('SESION ADMIN LAYOUT== ', session);
@@ -23,12 +24,12 @@ export default function PanelLayout({
   //   // console.log('redirect login');
   //   redirect('/signup')
   // }
-	return (
+  return (
     <div className="h-full flex flex-row justify-start min-h-screen">
       <Sidebar items={siteConfig.sidebarItems} />
       <div className="bg-[rgba(240,240,242,1)] flex-1 p-4 text-white w-[80%]">
-          {children}
+        {children}
       </div>
     </div>
-	);
+  );
 }

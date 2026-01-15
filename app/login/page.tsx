@@ -1,31 +1,32 @@
-// 'use client'
-// import React, { useEffect } from 'react'
-// import { useRouter } from 'next/navigation'
-// import { Container } from '@citrica/objects'
-// import { UserAuth } from '@/shared/context/auth-context'
-// import LoginContainer from '@/shared/components/citrica-ui/organism/login-container';
+"use client";
+import React, { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Container } from "@citrica/objects";
 
-// const LoginContainerPage = () => {
-//   const { userSession } = UserAuth();
-//   const router = useRouter();
+import { UserAuth } from "@/shared/context/auth-context";
+import LoginContainer from "@/shared/components/citrica-ui/organism/login-container";
 
-//   // Redirigir a admin si ya está autenticado
-//   useEffect(() => {
-//     if (userSession) {
-//       router.push('/admin');
-//     }
-//   }, [userSession, router]);
+const LoginContainerPage = () => {
+  const { userSession } = UserAuth();
+  const router = useRouter();
 
-//   // Si ya hay sesión, no mostrar el formulario (se redirigirá)
-//   if (userSession) {
-//     return null;
-//   }
+  // Redirigir a admin si ya está autenticado
+  useEffect(() => {
+    if (userSession) {
+      router.push("/admin");
+    }
+  }, [userSession, router]);
 
-//   return (
-//     <Container className='flex justify-center items-center h-screen'>
-//       <LoginContainer />
-//     </Container>
-//   )
-// }
+  // Si ya hay sesión, no mostrar el formulario (se redirigirá)
+  if (userSession) {
+    return null;
+  }
 
-// export default LoginContainerPage
+  return (
+    <Container className="flex justify-center items-center h-screen">
+      <LoginContainer />
+    </Container>
+  );
+};
+
+export default LoginContainerPage;
