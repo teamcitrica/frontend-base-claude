@@ -235,7 +235,7 @@ const BookingCalendarView = () => {
                     </Text>
 
                     {selectedDateBookings.length === 0 ? (
-                      <Text variant="body" color="color-on-surface" className="text-gray-500">
+                      <Text variant="body" textColor="color-outline">
                         No hay reservas para este día
                       </Text>
                     ) : (
@@ -263,7 +263,7 @@ const BookingCalendarView = () => {
                               </Text>
                             </p>
                             <p>
-                              <Text variant="body" color="color-on-surface" className="text-sm text-gray-500">
+                              <Text variant="body" textColor="color-outline" className="text-sm">
                                 {booking.session_type === "fotografia-modelo" ? "Fotografía Modelo" : "Fotografía Producto"}
                               </Text>
                             </p>

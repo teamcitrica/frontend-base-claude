@@ -4,32 +4,24 @@ import { Home, ClipboardCheck, Settings, Users, Bell, ShieldCheck } from "lucide
 const SUBITEM_SEARCH_PARAM = "page";
 
 export const siteConfig = {
-	name: "Proyecto Web",
-	description: "Descripción Proyecto Web",
+	name: "Yashira Torrealba",
+	description: "Masterclass de Fotografía Gastronómica",
 	navLinks: [
 		{
 			title: "Inicio",
-			href: "/",
+			href: "#hero",
 		},
 		{
-			title: "Item2",
-			href: "#proyect",
+			title: "Workflow",
+			href: "#contenido",
 		},
 		{
-			title: "Panel3",
-			href: "/panel",
-		},
-				{
-			title: "Inicio4",
-			href: "/",
+			title: "Galería",
+			href: "#galeria",
 		},
 		{
-			title: "Proyectos5",
-			href: "#proyect",
-		},
-		{
-			title: "Panel6",
-			href: "/panel",
+			title: "Instructor",
+			href: "#instructor",
 		}
 	],
 	subItemSearchParam: SUBITEM_SEARCH_PARAM, // FOR SUBSECTIONS IN SIDEBAR

@@ -22,7 +22,6 @@ $btn-citrica-ui: (
 
 .btn-primary{
   background-color: var(--color-primary-btn);
-  color: var(--color-primary-btn-text);
   border: none;
   &:hover{
     background-color: var(--color-primary-btn-hover);
@@ -30,11 +29,13 @@ $btn-citrica-ui: (
       color: var(--color-primary-btn-text-hover) !important;
     }
   }
+  span {
+    color: var(--color-primary-btn-text) !important;
+  }
 }
 
 .btn-secondary{
   background-color: var(--color-secondary-btn);
-  color: var(--color-secondary-btn-text);
   border: none;
   &:hover{
     background-color: var(--color-secondary-btn-hover);
@@ -42,16 +43,21 @@ $btn-citrica-ui: (
       color: var(--color-secondary-btn-text-hover) !important;
     }
   }
+  span {
+    color: var(--color-secondary-btn-text) !important;
+  }
 }
 
 .btn-flat{
   background-color: transparent;
-  color: var(--color-flat-btn-text);
   border: none;
   &:hover{
     background-color: var(--color-flat-btn-hover);
     .text-component {
       color: var(--color-flat-btn-text-hover) !important;
     }
+  }
+  span {
+    color: var(--color-flat-btn-text) !important;
   }
 }
