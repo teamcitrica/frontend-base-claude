@@ -782,6 +782,13 @@ import { Container, Col } from 'citrica-ui-toolkit';
 <Input className="input-citrica-ui-admin input-primary-admin" />
 ```
 
+## IMPORTANT FOR CREATE NEW WEB
+Change only this files:
+- app/page.tsx
+- config/site.ts
+- styles/01-settings/colors/colors.scss
+- styles/10-tokens/components/*
+
 ## License
 
 Licensed under the [MIT license](https://github.com/nextui-org/next-app-template/blob/main/LICENSE).
