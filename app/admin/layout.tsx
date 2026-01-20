@@ -1,6 +1,7 @@
-'use client'
+"use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
+
 import { Sidebar } from "@/shared/components/citrica-ui/organism/sidebar";
 import { siteConfig } from "@/config/site";
 import { UserAuth } from "@/shared/context/auth-context";
@@ -18,7 +19,7 @@ export default function PanelLayout({
   useEffect(() => {
     // Solo redirigir si no está cargando y no hay sesión
     if (!loading && userSession === null) {
-      router.push('/login');
+      router.push("/login");
     }
   }, [userSession, loading, router]);
 

@@ -1,10 +1,15 @@
-import React from 'react'
-import { Text } from '@citrica-ui';
+"use client";
+import React from "react";
+import { Text } from "citrica-ui-toolkit";
 
 const PanelPage = () => {
   return (
-    <div><Text variant="display" color='#45F'>Panel Page</Text></div>
-  )
-}
+    <div>
+      <Text color="#45F" variant="display">
+        Panel Page
+      </Text>
+    </div>
+  );
+};
 
 export default PanelPage;

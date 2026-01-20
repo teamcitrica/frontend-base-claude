@@ -6,9 +6,7 @@ export const dynamic = "force-dynamic";
 import React, { Suspense } from "react";
 import { useSearchParams, useRouter } from "next/navigation";
 import { Container, Col } from "@citrica/objects";
-import Text from "@ui/atoms/text";
-import Icon from "@ui/atoms/icon";
-import Button from "@ui/molecules/button";
+import { Text, Icon, Button } from "citrica-ui-toolkit";
 
 import WeeklyScheduleManager from "./components/weekly-schedule-manager";
 import UnifiedAvailabilityManager from "./components/unified-availability-manager";
@@ -41,18 +39,18 @@ const DisponibilidadContent = () => {
 
   return (
     <Container>
-      <Col cols={{ lg: 12, md: 6, sm: 4 }} className="space-y-6">
+      <Col className="space-y-6" cols={{ lg: 12, md: 6, sm: 4 }}>
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex items-center gap-3">
-            <Icon name="Clock" size={24} className="text-[#964f20]" />
+            <Icon className="text-[#964f20]" name="Clock" size={24} />
             <div>
               <p>
-              <Text variant="headline" color="#964f20">
-                Horarios
-              </Text>
+                <Text color="#964f20" variant="headline">
+                  Horarios
+                </Text>
               </p>
-              <Text variant="body" color="black">
+              <Text color="black" variant="body">
                 {getTabDescription()}
               </Text>
             </div>
@@ -62,17 +60,19 @@ const DisponibilidadContent = () => {
           <div className="flex gap-2">
             <Button
               size="sm"
-              variant={activeTab === "disponibilidad" ? "primary" : "secondary"}
-              onClick={() => router.push("/admin/disponibilidad?page=disponibilidad")}
               startContent={<Icon name="Calendar" size={16} />}
+              variant={activeTab === "disponibilidad" ? "primary" : "secondary"}
+              onClick={() =>
+                router.push("/admin/disponibilidad?page=disponibilidad")
+              }
             >
               Gestión de Disponibilidad
             </Button>
             <Button
               size="sm"
+              startContent={<Icon name="Clock" size={16} />}
               variant={activeTab === "semanal" ? "primary" : "secondary"}
               onClick={() => router.push("/admin/disponibilidad?page=semanal")}
-              startContent={<Icon name="Clock" size={16} />}
             >
               Configuración Semanal
             </Button>

@@ -25,3 +25,8 @@
 // export const supabase = getSupabase();
 
 // export default supabase;
+
+// Temporal mock para desarrollo sin Supabase
+export const supabase = null as any;
+export const getSupabase = () => null as any;
+export default supabase;

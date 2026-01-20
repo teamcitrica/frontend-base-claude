@@ -21,7 +21,7 @@ interface AuthValue {
   signUpWithPassword: (
     email: string,
     password: string,
-    userData: { first_name: string; last_name: string }
+    userData: { first_name: string; last_name: string },
   ) => Promise<{
     respData: any;
     respError: AuthError | null;
@@ -65,7 +65,6 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
   const [userInfo, setUserInfo] = useState<any>(null);
   const [loading, setLoading] = useState(true);
   const [isInitializing, setIsInitializing] = useState(true);
-
 
   const changeRole = (newrole: number) => {
     const newUser = {
@@ -111,7 +110,7 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
   const signUpWithPassword = async (
     email: string,
     password: string,
-    userData: { first_name: string; last_name: string }
+    userData: { first_name: string; last_name: string },
   ) => {
     let respData = null;
     let respError = null;
@@ -139,6 +138,7 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
         if (data.session && data.user) {
           setUserSession(data.session);
           const userId = data.user.id;
+
           // Esperar un poco para que el trigger de la base de datos cree el usuario
           setTimeout(async () => {
             await getUserInfo(userId);
@@ -159,13 +159,15 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
 
     try {
       // Intentar logout con scope global primero
-      const { error } = await supabase.auth.signOut({ scope: 'global' });
+      const { error } = await supabase.auth.signOut({ scope: "global" });
 
       if (error) {
         console.warn("Error en logout global:", error);
 
         // Si falla el global, intentar local
-        const { error: localError } = await supabase.auth.signOut({ scope: 'local' });
+        const { error: localError } = await supabase.auth.signOut({
+          scope: "local",
+        });
 
         if (localError) {
           console.error("Error en logout local:", localError);
@@ -190,11 +192,14 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
     console.log("llamando..");
 
     try {
-      const { data: userData, error } = await supabase
-        .rpc('get_user_with_role', { user_id: id })
+      const { data: userData, error } = await supabase.rpc(
+        "get_user_with_role",
+        { user_id: id },
+      );
 
       if (error) {
-        console.error('Error con función get_user_with_role:', error);
+        console.error("Error con función get_user_with_role:", error);
+
         return;
       }
 
@@ -202,11 +207,10 @@ export const AuthContextProvider = ({ children }: { children: any }) => {
         console.log("DATA USER ****", userData[0]);
         setUserInfo(userData[0]);
       } else {
-        console.log('No se encontró información del usuario');
+        console.log("No se encontró información del usuario");
       }
-
     } catch (error) {
-      console.error('Error general obteniendo usuario:', error);
+      console.error("Error general obteniendo usuario:", error);
     }
   };
 

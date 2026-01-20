@@ -6,18 +6,29 @@ export const dynamic = "force-dynamic";
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Container, Col } from "@citrica/objects";
-import Text from "@ui/atoms/text";
-import Button from "@ui/molecules/button";
-import Card from "@ui/atoms/card";
-import Icon from "@ui/atoms/icon";
-import Modal from "@ui/molecules/modal";
-import { Badge, Chip, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Select, SelectItem } from "@heroui/react";
+import { Text, Button, Card, Icon, Modal } from "citrica-ui-toolkit";
+import {
+  Chip,
+  Table,
+  TableHeader,
+  TableColumn,
+  TableBody,
+  TableRow,
+  TableCell,
+  Dropdown,
+  DropdownTrigger,
+  DropdownMenu,
+  DropdownItem,
+  Select,
+  SelectItem,
+} from "@heroui/react";
 import { addToast } from "@heroui/toast";
 
-import { useAdminBookings, AdminBooking } from "@/app/hooks/useAdminBookings";
 import BookingCalendarView from "./components/booking-calendar-view";
 import BookingStatsView from "./components/booking-stats-view";
 import BookingAvailabilityView from "./components/booking-availability-view";
+
+import { useAdminBookings, AdminBooking } from "@/app/hooks/useAdminBookings";
 import { formatTimeSlotsWithDuration } from "@/shared/utils/timeSlotHelpers";
 
 // Componente interno que usa useSearchParams
@@ -30,11 +41,13 @@ const ReservasContent = () => {
     bookings,
     getAllBookings,
     updateBookingStatus,
-    deleteBooking
+    deleteBooking,
   } = useAdminBookings();
 
   const [statusFilter, setStatusFilter] = useState<string>("all");
-  const [selectedBooking, setSelectedBooking] = useState<AdminBooking | null>(null);
+  const [selectedBooking, setSelectedBooking] = useState<AdminBooking | null>(
+    null,
+  );
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
   const [showCancelConfirm, setShowCancelConfirm] = useState(false);
@@ -46,42 +59,52 @@ const ReservasContent = () => {
 
   const getStatusColor = (status: string) => {
     switch (status) {
-      case "pending": return "warning";
-      case "confirmed": return "success";
-      case "cancelled": return "danger";
-      default: return "default";
+      case "pending":
+        return "warning";
+      case "confirmed":
+        return "success";
+      case "cancelled":
+        return "danger";
+      default:
+        return "default";
     }
   };
 
   const getStatusLabel = (status: string) => {
     switch (status) {
-      case "pending": return "Pendiente";
-      case "confirmed": return "Confirmada";
-      case "cancelled": return "Cancelada";
-      default: return status;
+      case "pending":
+        return "Pendiente";
+      case "confirmed":
+        return "Confirmada";
+      case "cancelled":
+        return "Cancelada";
+      default:
+        return status;
     }
   };
 
   const handleStatusChange = async (bookingId: string, newStatus: any) => {
-    console.log('handleStatusChange called with:', { bookingId, newStatus });
+    console.log("handleStatusChange called with:", { bookingId, newStatus });
     const result = await updateBookingStatus(bookingId, newStatus);
-    console.log('updateBookingStatus result:', result);
+
+    console.log("updateBookingStatus result:", result);
     // Ya no necesitamos recargar porque el hook actualiza el estado local optimísticamente
   };
 
   const formatDate = (dateString: string) => {
     // Evitar problemas de zona horaria agregando tiempo específico
     // en lugar de dejar que JavaScript interprete como UTC
-    return new Date(dateString + 'T12:00:00').toLocaleDateString('es-ES', {
-      weekday: 'long',
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric'
+    return new Date(dateString + "T12:00:00").toLocaleDateString("es-ES", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
 
   const formatTimeSlots = (timeSlots: string[]) => {
     if (!timeSlots || timeSlots.length === 0) return "";
+
     return formatTimeSlotsWithDuration(timeSlots);
   };
 
@@ -168,6 +191,7 @@ const ReservasContent = () => {
     if (!selectedBooking || !showDeleteConfirm) return;
 
     const result = await deleteBooking(selectedBooking.id);
+
     if (result.success) {
       addToast({
         title: "Reserva eliminada",
@@ -202,11 +226,11 @@ const ReservasContent = () => {
             <Card className="p-4">
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
-                  <Text variant="title" color="#964f20">
+                  <Text color="#964f20" variant="title">
                     Gestión de Reservas
                   </Text>
                   <p>
-                    <Text variant="body" color="var(--color-on-surface)">
+                    <Text color="var(--color-on-surface)" variant="body">
                       Administra todas las reservas del estudio
                     </Text>
                   </p>
@@ -216,25 +240,18 @@ const ReservasContent = () => {
                   <Select
                     label="Filtrar por estado"
                     placeholder="Selecciona un estado"
-                    size="sm"
                     selectedKeys={[statusFilter]}
+                    size="sm"
                     onSelectionChange={(keys) => {
                       const selectedKey = Array.from(keys)[0] as string;
+
                       setStatusFilter(selectedKey || "all");
                     }}
                   >
-                    <SelectItem key="all">
-                      Todas
-                    </SelectItem>
-                    <SelectItem key="pending">
-                      Pendientes
-                    </SelectItem>
-                    <SelectItem key="confirmed">
-                      Confirmadas
-                    </SelectItem>
-                    <SelectItem key="cancelled">
-                      Canceladas
-                    </SelectItem>
+                    <SelectItem key="all">Todas</SelectItem>
+                    <SelectItem key="pending">Pendientes</SelectItem>
+                    <SelectItem key="confirmed">Confirmadas</SelectItem>
+                    <SelectItem key="cancelled">Canceladas</SelectItem>
                   </Select>
                 </div>
               </div>
@@ -244,24 +261,31 @@ const ReservasContent = () => {
             <Card className="p-2">
               {isLoading ? (
                 <div className="text-center py-8">
-                  <Text variant="body" color="color-on-surface">
+                  <Text color="color-on-surface" variant="body">
                     Cargando reservas...
                   </Text>
                 </div>
               ) : bookings.length === 0 ? (
                 <div className="text-center py-8">
-                  <Icon name="Calendar" size={48} className="mx-auto text-gray-400 mb-4" />
+                  <Icon
+                    className="mx-auto text-gray-400 mb-4"
+                    name="Calendar"
+                    size={48}
+                  />
                   <p>
-                    <Text variant="title" color="color-on-surface" className="mb-2">
+                    <Text
+                      className="mb-2"
+                      color="color-on-surface"
+                      variant="title"
+                    >
                       No hay reservas
                     </Text>
                   </p>
                   <p>
-                    <Text variant="body" color="color-on-surface">
+                    <Text color="color-on-surface" variant="body">
                       {statusFilter === "all"
                         ? "Aún no se han realizado reservas"
-                        : `No hay reservas con estado "${getStatusLabel(statusFilter)}"`
-                      }
+                        : `No hay reservas con estado "${getStatusLabel(statusFilter)}"`}
                     </Text>
                   </p>
                 </div>
@@ -272,7 +296,9 @@ const ReservasContent = () => {
                     <TableColumn>FECHA & HORA</TableColumn>
                     <TableColumn>TIPO SESIÓN</TableColumn>
                     <TableColumn>ESTADO</TableColumn>
-                    <TableColumn className="flex justify-center items-center">ACCIONES</TableColumn>
+                    <TableColumn className="flex justify-center items-center">
+                      ACCIONES
+                    </TableColumn>
                   </TableHeader>
                   <TableBody>
                     {bookings.map((booking) => (
@@ -280,18 +306,30 @@ const ReservasContent = () => {
                         <TableCell>
                           <div>
                             <p>
-                              <Text variant="body" color="color-on-surface">
-                                {booking.customer ? booking.customer.full_name : 'Bloqueo Administrativo'}
+                              <Text color="color-on-surface" variant="body">
+                                {booking.customer
+                                  ? booking.customer.full_name
+                                  : "Bloqueo Administrativo"}
                               </Text>
                             </p>
                             <p>
-                              <Text variant="label" color="color-on-surface" className="text-sm">
-                                {booking.customer ? booking.customer.email : booking.reason || 'Sin razón especificada'}
+                              <Text
+                                className="text-sm"
+                                color="color-on-surface"
+                                variant="label"
+                              >
+                                {booking.customer
+                                  ? booking.customer.email
+                                  : booking.reason || "Sin razón especificada"}
                               </Text>
                             </p>
                             {booking.customer?.phone && (
                               <p>
-                                <Text variant="label" color="color-on-surface" className="text-sm">
+                                <Text
+                                  className="text-sm"
+                                  color="color-on-surface"
+                                  variant="label"
+                                >
                                   {booking.customer.phone}
                                 </Text>
                               </p>
@@ -301,12 +339,16 @@ const ReservasContent = () => {
                         <TableCell>
                           <div>
                             <p>
-                              <Text variant="body" color="color-on-surface">
+                              <Text color="color-on-surface" variant="body">
                                 {formatDate(booking.booking_date)}
                               </Text>
                             </p>
                             <p>
-                              <Text variant="label" color="color-on-surface" className="text-sm">
+                              <Text
+                                className="text-sm"
+                                color="color-on-surface"
+                                variant="label"
+                              >
                                 {formatTimeSlots(booking.time_slots)}
                               </Text>
                             </p>
@@ -314,22 +356,23 @@ const ReservasContent = () => {
                         </TableCell>
                         <TableCell>
                           <Chip
+                            color={
+                              booking.type_id === 2 ? "warning" : "primary"
+                            }
                             size="sm"
-                            color={booking.type_id === 2 ? "warning" : "primary"}
                             variant="flat"
                           >
                             {booking.type_id === 2
                               ? "Bloqueo"
                               : booking.session_type === "fotografia-modelo"
                                 ? "Fotografía Modelo"
-                                : "Fotografía Producto"
-                            }
+                                : "Fotografía Producto"}
                           </Chip>
                         </TableCell>
                         <TableCell>
                           <Chip
-                            size="sm"
                             color={getStatusColor(booking.status)}
+                            size="sm"
                             variant="flat"
                           >
                             {getStatusLabel(booking.status)}
@@ -339,36 +382,49 @@ const ReservasContent = () => {
                           <div className="flex items-center justify-end gap-2">
                             <button
                               className="text-lg cursor-pointer active:opacity-50 text-default-400 hover:text-default-600"
-                              onClick={() => handleOpenDetails(booking)}
                               title="Ver detalles"
+                              onClick={() => handleOpenDetails(booking)}
                             >
                               <Icon className="h-5 w-5" name="Eye" />
                             </button>
                             <Dropdown>
                               <DropdownTrigger>
                                 <button className="text-lg cursor-pointer active:opacity-50 text-default-400">
-                                  <Icon className="h-5 w-5" name="MoreVertical" />
+                                  <Icon
+                                    className="h-5 w-5"
+                                    name="MoreVertical"
+                                  />
                                 </button>
                               </DropdownTrigger>
                               <DropdownMenu
                                 aria-label="Acciones de reserva"
-                                onAction={(key) => handleBookingAction(key as string, booking)}
+                                onAction={(key) =>
+                                  handleBookingAction(key as string, booking)
+                                }
                               >
                                 <>
                                   {booking.status === "pending" && (
                                     <DropdownItem
                                       key="confirm"
                                       color="success"
-                                      startContent={<Icon className="h-4 w-4" name="Check" />}
+                                      startContent={
+                                        <Icon
+                                          className="h-4 w-4"
+                                          name="Check"
+                                        />
+                                      }
                                     >
                                       Confirmar
                                     </DropdownItem>
                                   )}
-                                  {(booking.status === "pending" || booking.status === "confirmed") && (
+                                  {(booking.status === "pending" ||
+                                    booking.status === "confirmed") && (
                                     <DropdownItem
                                       key="cancel"
                                       color="warning"
-                                      startContent={<Icon className="h-4 w-4" name="X" />}
+                                      startContent={
+                                        <Icon className="h-4 w-4" name="X" />
+                                      }
                                     >
                                       Cancelar
                                     </DropdownItem>
@@ -378,7 +434,9 @@ const ReservasContent = () => {
                                   key="delete"
                                   className="text-danger"
                                   color="danger"
-                                  startContent={<Icon className="h-4 w-4" name="Trash2" />}
+                                  startContent={
+                                    <Icon className="h-4 w-4" name="Trash2" />
+                                  }
                                 >
                                   Eliminar
                                 </DropdownItem>
@@ -400,23 +458,27 @@ const ReservasContent = () => {
   return (
     <>
       <Container>
-        <Col cols={{ lg: 12, md: 6, sm: 4 }} className="space-y-6">
+        <Col className="space-y-6" cols={{ lg: 12, md: 6, sm: 4 }}>
           {/* Header */}
           <div className="flex items-center gap-3">
-            <Icon name="Calendar" size={24} className="text-[#964f20]" />
+            <Icon className="text-[#964f20]" name="Calendar" size={24} />
             <div>
-              <Text variant="title" color="#964f20">
+              <Text color="#964f20" variant="title">
                 {activeTab === "lista" && "Lista de Reservas"}
                 {activeTab === "calendario" && "Calendario de Reservas"}
                 {activeTab === "estadisticas" && "Estadísticas de Reservas"}
                 {activeTab === "disponibilidad" && "Gestión de Disponibilidad"}
               </Text>
               <p>
-                <Text variant="body" color="var(--color-on-surface)">
-                  {activeTab === "lista" && "Gestiona todas las reservas del estudio"}
-                  {activeTab === "calendario" && "Vista mensual de reservas y disponibilidad"}
-                  {activeTab === "estadisticas" && "Métricas y análisis de reservas"}
-                  {activeTab === "disponibilidad" && "Configura horarios disponibles y bloqueos específicos"}
+                <Text color="var(--color-on-surface)" variant="body">
+                  {activeTab === "lista" &&
+                    "Gestiona todas las reservas del estudio"}
+                  {activeTab === "calendario" &&
+                    "Vista mensual de reservas y disponibilidad"}
+                  {activeTab === "estadisticas" &&
+                    "Métricas y análisis de reservas"}
+                  {activeTab === "disponibilidad" &&
+                    "Configura horarios disponibles y bloqueos específicos"}
                 </Text>
               </p>
             </div>
@@ -430,8 +492,8 @@ const ReservasContent = () => {
       {/* Modal de detalles */}
       <Modal
         isOpen={isModalOpen}
-        onClose={handleCloseModal}
         size="2xl"
+        onClose={handleCloseModal}
         title="Detalles de la Reserva"
         // footer={
         //   <div className="flex justify-end gap-2 w-full">
@@ -445,34 +507,59 @@ const ReservasContent = () => {
           <div className="space-y-4">
             {/* Cliente */}
             <div>
-              <Text variant="subtitle" color="#964f20">
+              <Text color="#964f20" variant="subtitle">
                 Información del Cliente
               </Text>
               <div className="mt-2 space-y-2">
                 <div>
-                  <Text variant="label" color="color-on-surface" className="font-semibold">
+                  <Text
+                    className="font-semibold"
+                    color="color-on-surface"
+                    variant="label"
+                  >
                     Nombre:
                   </Text>
-                  <Text variant="body" color="color-on-surface" className="ml-2">
-                    {selectedBooking.customer?.full_name || 'Bloqueo Administrativo'}
+                  <Text
+                    className="ml-2"
+                    color="color-on-surface"
+                    variant="body"
+                  >
+                    {selectedBooking.customer?.full_name ||
+                      "Bloqueo Administrativo"}
                   </Text>
                 </div>
                 {selectedBooking.customer?.email && (
                   <div>
-                    <Text variant="label" color="color-on-surface" className="font-semibold">
+                    <Text
+                      className="font-semibold"
+                      color="color-on-surface"
+                      variant="label"
+                    >
                       Email:
                     </Text>
-                    <Text variant="body" color="color-on-surface" className="ml-2">
+                    <Text
+                      className="ml-2"
+                      color="color-on-surface"
+                      variant="body"
+                    >
                       {selectedBooking.customer.email}
                     </Text>
                   </div>
                 )}
                 {selectedBooking.customer?.phone && (
                   <div>
-                    <Text variant="label" color="color-on-surface" className="font-semibold">
+                    <Text
+                      className="font-semibold"
+                      color="color-on-surface"
+                      variant="label"
+                    >
                       Teléfono:
                     </Text>
-                    <Text variant="body" color="color-on-surface" className="ml-2">
+                    <Text
+                      className="ml-2"
+                      color="color-on-surface"
+                      variant="body"
+                    >
                       {selectedBooking.customer.phone}
                     </Text>
                   </div>
@@ -482,58 +569,93 @@ const ReservasContent = () => {
 
             {/* Detalles de la reserva */}
             <div>
-              <Text variant="subtitle" color="#964f20">
+              <Text color="#964f20" variant="subtitle">
                 Detalles de la Reserva
               </Text>
               <div className="mt-2 space-y-2">
                 <div>
-                  <Text variant="label" color="color-on-surface" className="font-semibold">
+                  <Text
+                    className="font-semibold"
+                    color="color-on-surface"
+                    variant="label"
+                  >
                     Fecha:
                   </Text>
-                  <Text variant="body" color="color-on-surface" className="ml-2">
+                  <Text
+                    className="ml-2"
+                    color="color-on-surface"
+                    variant="body"
+                  >
                     {formatDate(selectedBooking.booking_date)}
                   </Text>
                 </div>
                 <div>
-                  <Text variant="label" color="color-on-surface" className="font-semibold">
+                  <Text
+                    className="font-semibold"
+                    color="color-on-surface"
+                    variant="label"
+                  >
                     Horario:
                   </Text>
-                  <Text variant="body" color="color-on-surface" className="ml-2">
+                  <Text
+                    className="ml-2"
+                    color="color-on-surface"
+                    variant="body"
+                  >
                     {formatTimeSlots(selectedBooking.time_slots)}
                   </Text>
                 </div>
                 <div>
-                  <Text variant="label" color="color-on-surface" className="font-semibold">
+                  <Text
+                    className="font-semibold"
+                    color="color-on-surface"
+                    variant="label"
+                  >
                     Tipo de sesión:
                   </Text>
-                  <Text variant="body" color="color-on-surface" className="ml-2">
+                  <Text
+                    className="ml-2"
+                    color="color-on-surface"
+                    variant="body"
+                  >
                     {selectedBooking.type_id === 2
                       ? "Bloqueo Administrativo"
                       : selectedBooking.session_type === "fotografia-modelo"
                         ? "Fotografía de Modelo"
-                        : "Fotografía de Producto"
-                    }
+                        : "Fotografía de Producto"}
                   </Text>
                 </div>
                 <div>
-                  <Text variant="label" color="color-on-surface" className="font-semibold">
+                  <Text
+                    className="font-semibold"
+                    color="color-on-surface"
+                    variant="label"
+                  >
                     Estado:
                   </Text>
                   <Chip
-                    size="sm"
-                    color={getStatusColor(selectedBooking.status)}
-                    variant="flat"
                     className="ml-2"
+                    color={getStatusColor(selectedBooking.status)}
+                    size="sm"
+                    variant="flat"
                   >
                     {getStatusLabel(selectedBooking.status)}
                   </Chip>
                 </div>
                 {selectedBooking.project_details && (
                   <div>
-                    <Text variant="label" color="color-on-surface" className="font-semibold">
+                    <Text
+                      className="font-semibold"
+                      color="color-on-surface"
+                      variant="label"
+                    >
                       Detalles del proyecto:
                     </Text>
-                    <Text variant="body" color="color-on-surface" className="mt-1">
+                    <Text
+                      className="mt-1"
+                      color="color-on-surface"
+                      variant="body"
+                    >
                       {selectedBooking.project_details}
                     </Text>
                   </div>
@@ -571,32 +693,31 @@ const ReservasContent = () => {
 
       {/* Modal de confirmación para confirmar reserva */}
       <Modal
-        isOpen={showConfirmModal}
-        onClose={handleCloseAllModals}
-        size="md"
-        title="Confirmar Reserva"
         footer={
           <div className="flex justify-end gap-2 w-full">
             <Button variant="secondary" onClick={handleCloseAllModals}>
               Cancelar
             </Button>
-            <Button variant="primary" onClick={handleConfirmBookingFromDropdown}>
+            <Button
+              variant="primary"
+              onClick={handleConfirmBookingFromDropdown}
+            >
               Confirmar
             </Button>
           </div>
         }
+        isOpen={showConfirmModal}
+        size="md"
+        title="Confirmar Reserva"
+        onClose={handleCloseAllModals}
       >
-        <Text variant="body" color="color-on-surface">
+        <Text color="color-on-surface" variant="body">
           ¿Estás seguro de que deseas confirmar esta reserva?
         </Text>
       </Modal>
 
       {/* Modal de confirmación para cancelar */}
       <Modal
-        isOpen={showCancelConfirm}
-        onClose={handleCloseAllModals}
-        size="md"
-        title="Cancelar Reserva"
         footer={
           <div className="flex justify-end gap-2 w-full">
             <Button variant="secondary" onClick={handleCloseAllModals}>
@@ -607,18 +728,18 @@ const ReservasContent = () => {
             </Button>
           </div>
         }
+        isOpen={showCancelConfirm}
+        size="md"
+        title="Cancelar Reserva"
+        onClose={handleCloseAllModals}
       >
-        <Text variant="body" color="color-on-surface">
+        <Text color="color-on-surface" variant="body">
           ¿Estás seguro de que deseas cancelar esta reserva?
         </Text>
       </Modal>
 
       {/* Modal de confirmación para eliminar */}
       <Modal
-        isOpen={showDeleteConfirm}
-        onClose={handleCloseAllModals}
-        size="md"
-        title="Eliminar Reserva"
         footer={
           <div className="flex justify-end gap-2 w-full">
             <Button variant="secondary" onClick={handleCloseAllModals}>
@@ -629,9 +750,14 @@ const ReservasContent = () => {
             </Button>
           </div>
         }
+        isOpen={showDeleteConfirm}
+        size="md"
+        title="Eliminar Reserva"
+        onClose={handleCloseAllModals}
       >
-        <Text variant="body" color="color-on-surface">
-          ¿Estás seguro de que deseas eliminar esta reserva? Esta acción no se puede deshacer.
+        <Text color="color-on-surface" variant="body">
+          ¿Estás seguro de que deseas eliminar esta reserva? Esta acción no se
+          puede deshacer.
         </Text>
       </Modal>
     </>

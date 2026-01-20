@@ -1,13 +1,12 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import Text from "@ui/atoms/text";
-import Button from "@ui/molecules/button";
-import Card from "@ui/atoms/card";
-import Modal from "@ui/molecules/modal";
-import Icon from "@ui/atoms/icon";
+import { Text, Button, Card, Modal, Icon } from "citrica-ui-toolkit";
 import { Switch } from "@heroui/react";
 
-import { useAdminBookings, WeeklyAvailability } from "@/app/hooks/useAdminBookings";
+import {
+  useAdminBookings,
+  WeeklyAvailability,
+} from "@/app/hooks/useAdminBookings";
 
 const WeeklyScheduleManager = () => {
   const {
@@ -15,7 +14,7 @@ const WeeklyScheduleManager = () => {
     weeklyAvailability,
     getWeeklyAvailability,
     updateDayAvailability,
-    toggleTimeSlot
+    toggleTimeSlot,
   } = useAdminBookings();
 
   const [hasChanges, setHasChanges] = useState(false);
@@ -34,16 +33,18 @@ const WeeklyScheduleManager = () => {
     { id: 4, name: "Jueves", short: "J" },
     { id: 5, name: "Viernes", short: "V" },
     { id: 6, name: "Sábado", short: "S" },
-    { id: 0, name: "Domingo", short: "D" }
+    { id: 0, name: "Domingo", short: "D" },
   ];
 
   // Generar slots de tiempo (cada 30 minutos)
   const generateTimeSlots = () => {
     const slots = [];
+
     for (let hour = 0; hour < 24; hour++) {
-      slots.push(`${String(hour).padStart(2, '0')}:00`);
-      slots.push(`${String(hour).padStart(2, '0')}:30`);
+      slots.push(`${String(hour).padStart(2, "0")}:00`);
+      slots.push(`${String(hour).padStart(2, "0")}:30`);
     }
+
     return slots;
   };
 
@@ -57,32 +58,44 @@ const WeeklyScheduleManager = () => {
     const result = await updateDayAvailability(dayOfWeek, isActive);
 
     if (!result.success) {
-      console.error('Error updating day availability:', result.error);
+      console.error("Error updating day availability:", result.error);
     }
   };
 
-  const handleTimeSlotToggle = async (dayOfWeek: number, timeSlot: string, isActive: boolean) => {
+  const handleTimeSlotToggle = async (
+    dayOfWeek: number,
+    timeSlot: string,
+    isActive: boolean,
+  ) => {
     const result = await toggleTimeSlot(dayOfWeek, timeSlot, isActive);
 
     if (result.success) {
       setHasChanges(true);
     } else {
-      console.error('Error toggling slot:', result.error);
+      console.error("Error toggling slot:", result.error);
     }
   };
 
-  const handleBulkTimeUpdate = async (dayOfWeek: number, startTime: string, endTime: string, isActive: boolean) => {
-    const dayConfig = weeklyAvailability.find(day => day.day_of_week === dayOfWeek);
+  const handleBulkTimeUpdate = async (
+    dayOfWeek: number,
+    startTime: string,
+    endTime: string,
+    isActive: boolean,
+  ) => {
+    const dayConfig = weeklyAvailability.find(
+      (day) => day.day_of_week === dayOfWeek,
+    );
+
     if (!dayConfig) return;
 
-    const startHour = parseInt(startTime.split(':')[0]);
-    const startMin = parseInt(startTime.split(':')[1]);
-    const endHour = parseInt(endTime.split(':')[0]);
-    const endMin = parseInt(endTime.split(':')[1]);
+    const startHour = parseInt(startTime.split(":")[0]);
+    const startMin = parseInt(startTime.split(":")[1]);
+    const endHour = parseInt(endTime.split(":")[0]);
+    const endMin = parseInt(endTime.split(":")[1]);
 
-    const updatedSlots = dayConfig.time_slots.map(slot => {
-      const slotHour = parseInt(slot.slot.split(':')[0]);
-      const slotMin = parseInt(slot.slot.split(':')[1]);
+    const updatedSlots = dayConfig.time_slots.map((slot) => {
+      const slotHour = parseInt(slot.slot.split(":")[0]);
+      const slotMin = parseInt(slot.slot.split(":")[1]);
 
       const slotTime = slotHour * 60 + slotMin;
       const startTimeMin = startHour * 60 + startMin;
@@ -91,6 +104,7 @@ const WeeklyScheduleManager = () => {
       if (slotTime >= startTimeMin && slotTime < endTimeMin) {
         return { ...slot, active: isActive };
       }
+
       return slot;
     });
 
@@ -99,31 +113,37 @@ const WeeklyScheduleManager = () => {
   };
 
   const getDayConfig = (dayOfWeek: number): WeeklyAvailability | undefined => {
-    return weeklyAvailability.find(day => day.day_of_week === dayOfWeek);
+    return weeklyAvailability.find((day) => day.day_of_week === dayOfWeek);
   };
 
   const getTimeSlotStatus = (dayOfWeek: number, timeSlot: string): boolean => {
     const dayConfig = getDayConfig(dayOfWeek);
+
     if (!dayConfig) return false;
 
-    const slot = dayConfig.time_slots.find(slot => slot.slot === timeSlot);
+    const slot = dayConfig.time_slots.find((slot) => slot.slot === timeSlot);
+
     return slot ? slot.active : false;
   };
 
   const getActiveTimeCount = (dayOfWeek: number): number => {
     const dayConfig = getDayConfig(dayOfWeek);
+
     if (!dayConfig) return 0;
 
-    return dayConfig.time_slots.filter(slot => slot.active).length;
+    return dayConfig.time_slots.filter((slot) => slot.active).length;
   };
 
   const areAllDaysClosed = (): boolean => {
-    return weeklyAvailability.every(day => !day.is_active);
+    return weeklyAvailability.every((day) => !day.is_active);
   };
 
   const handleApplyStandardHours = async () => {
     if (weeklyAvailability.length === 0) {
-      alert("Error: No se ha cargado la configuración semanal. Recarga la página.");
+      alert(
+        "Error: No se ha cargado la configuración semanal. Recarga la página.",
+      );
+
       return;
     }
 
@@ -161,6 +181,7 @@ const WeeklyScheduleManager = () => {
 
   const handleOpenToggleAllModal = () => {
     const shouldOpen = areAllDaysClosed();
+
     setIsOpeningAll(shouldOpen);
     setShowCloseAllModal(true);
   };
@@ -180,12 +201,13 @@ const WeeklyScheduleManager = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <p>
-            <Text variant="title" color="#964f20">
-              Configuración Semanal de Horarios
-            </Text>
+              <Text color="#964f20" variant="title">
+                Configuración Semanal de Horarios
+              </Text>
             </p>
-            <Text variant="body" color="color-on-surface">
-              Gestiona los horarios disponibles para cada día de la semana. Cada slot representa 30 minutos.
+            <Text color="color-on-surface" variant="body">
+              Gestiona los horarios disponibles para cada día de la semana. Cada
+              slot representa 30 minutos.
             </Text>
           </div>
 
@@ -212,7 +234,7 @@ const WeeklyScheduleManager = () => {
       {isLoading ? (
         <Card className="p-6">
           <div className="text-center py-8">
-            <Text variant="body" color="color-on-surface">
+            <Text color="color-on-surface" variant="body">
               Cargando configuración...
             </Text>
           </div>
@@ -230,27 +252,31 @@ const WeeklyScheduleManager = () => {
                   <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                     <div className="flex items-center gap-4">
                       <Switch
-                        isSelected={dayConfig?.is_active || false}
-                        onValueChange={(isActive) => handleDayToggle(day.id, isActive)}
                         color="primary"
+                        isSelected={dayConfig?.is_active || false}
+                        onValueChange={(isActive) =>
+                          handleDayToggle(day.id, isActive)
+                        }
                       />
                       <div>
                         <p>
-                        <Text variant="subtitle" color="color-on-surface">
-                          {day.name}
-                        </Text>
+                          <Text color="color-on-surface" variant="subtitle">
+                            {day.name}
+                          </Text>
                         </p>
                         <p>
-                        <Text variant="body" color="color-on-surface" className="text-sm">
-                          {dayConfig?.is_active
-                            ? `${activeSlots} slots activos (${Math.round(activeSlots * 0.5)} horas)`
-                            : "Día cerrado"
-                          }
-                        </Text>
+                          <Text
+                            className="text-sm"
+                            color="color-on-surface"
+                            variant="body"
+                          >
+                            {dayConfig?.is_active
+                              ? `${activeSlots} slots activos (${Math.round(activeSlots * 0.5)} horas)`
+                              : "Día cerrado"}
+                          </Text>
                         </p>
                       </div>
                     </div>
-
                   </div>
 
                   {/* Grid de horarios */}
@@ -258,7 +284,7 @@ const WeeklyScheduleManager = () => {
                     <div className="grid grid-cols-6 md:grid-cols-12 gap-2">
                       {timeSlots.map((timeSlot) => {
                         const isActive = getTimeSlotStatus(day.id, timeSlot);
-                        const hour = parseInt(timeSlot.split(':')[0]);
+                        const hour = parseInt(timeSlot.split(":")[0]);
                         const isBusinessHour = hour >= 8 && hour < 20;
 
                         return (
@@ -266,17 +292,18 @@ const WeeklyScheduleManager = () => {
                             key={timeSlot}
                             className={`
                               p-2 text-center text-xs rounded cursor-pointer transition-colors
-                              ${isActive
-                                ? 'bg-green-500 hover:bg-green-600 text-white'
-                                : isBusinessHour
-                                ? 'bg-red-300 hover:bg-red-400 text-white'
-                                : 'bg-gray-600 hover:bg-gray-700 text-white'
+                              ${
+                                isActive
+                                  ? "bg-green-500 hover:bg-green-600 text-white"
+                                  : isBusinessHour
+                                    ? "bg-red-300 hover:bg-red-400 text-white"
+                                    : "bg-gray-600 hover:bg-gray-700 text-white"
                               }
                             `}
+                            title={`${timeSlot} - ${String(hour + (timeSlot.includes(":30") ? 1 : 0)).padStart(2, "0")}:${timeSlot.includes(":30") ? "00" : "30"}`}
                             onClick={() => {
                               handleTimeSlotToggle(day.id, timeSlot, !isActive);
                             }}
-                            title={`${timeSlot} - ${String(hour + (timeSlot.includes(':30') ? 1 : 0)).padStart(2, '0')}:${timeSlot.includes(':30') ? '00' : '30'}`}
                           >
                             {timeSlot}
                           </div>
@@ -284,7 +311,6 @@ const WeeklyScheduleManager = () => {
                       })}
                     </div>
                   )}
-
                 </div>
               </Card>
             );
@@ -295,25 +321,25 @@ const WeeklyScheduleManager = () => {
       {/* Leyenda */}
       <Card className="p-6">
         <div className="space-y-3">
-          <Text variant="subtitle" color="#964f20">
+          <Text color="#964f20" variant="subtitle">
             Leyenda
           </Text>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-green-500 rounded"></div>
-              <Text variant="body" color="color-on-surface" className="text-sm">
+              <div className="w-4 h-4 bg-green-500 rounded" />
+              <Text className="text-sm" color="color-on-surface" variant="body">
                 Slot activo (disponible para reservas)
               </Text>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-red-300 rounded"></div>
-              <Text variant="body" color="color-on-surface" className="text-sm">
+              <div className="w-4 h-4 bg-red-300 rounded" />
+              <Text className="text-sm" color="color-on-surface" variant="body">
                 Slot inactivo (no disponible)
               </Text>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-4 h-4 bg-gray-600 rounded"></div>
-              <Text variant="body" color="color-on-surface" className="text-sm">
+              <div className="w-4 h-4 bg-gray-600 rounded" />
+              <Text className="text-sm" color="color-on-surface" variant="body">
                 Horario fuera de horario comercial típico
               </Text>
             </div>
@@ -323,16 +349,12 @@ const WeeklyScheduleManager = () => {
 
       {/* Modal Horario Estándar */}
       <Modal
-        isOpen={showStandardHoursModal}
-        onClose={() => setShowStandardHoursModal(false)}
-        size="lg"
-        title="Aplicar Horario Estándar"
         footer={
           <div className="flex justify-end gap-2 w-full">
             <Button
+              startContent={<Icon name="Check" size={20} />}
               variant="primary"
               onClick={handleApplyStandardHours}
-              startContent={<Icon name="Check" size={20} />}
             >
               Sí, aplicar horario estándar
             </Button>
@@ -344,18 +366,22 @@ const WeeklyScheduleManager = () => {
             </Button>
           </div>
         }
+        isOpen={showStandardHoursModal}
+        size="lg"
+        title="Aplicar Horario Estándar"
+        onClose={() => setShowStandardHoursModal(false)}
       >
         <div className="space-y-4">
           <div className="flex items-start gap-2 bg-blue-50 border border-blue-200 rounded-lg p-3">
-            <Icon name="Info" size={20} className="text-blue-600 mt-0.5" />
+            <Icon className="text-blue-600 mt-0.5" name="Info" size={20} />
             <div>
               <p>
-                <Text variant="body" color="#2563eb" className="font-bold">
+                <Text className="font-bold" color="#2563eb" variant="body">
                   Configuración de Horario Estándar
                 </Text>
               </p>
               <p>
-                <Text variant="body" color="#1e40af" className="text-sm mt-1">
+                <Text className="text-sm mt-1" color="#1e40af" variant="body">
                   Esta acción configurará los siguientes horarios:
                 </Text>
               </p>
@@ -364,21 +390,33 @@ const WeeklyScheduleManager = () => {
 
           <div className="space-y-2">
             <div className="flex justify-between py-2 border-b">
-              <Text variant="body" color="color-on-surface">Lunes a Viernes:</Text>
-              <Text variant="body" color="#964f20" className="font-semibold">9:00 AM - 6:00 PM</Text>
+              <Text color="color-on-surface" variant="body">
+                Lunes a Viernes:
+              </Text>
+              <Text className="font-semibold" color="#964f20" variant="body">
+                9:00 AM - 6:00 PM
+              </Text>
             </div>
             <div className="flex justify-between py-2 border-b">
-              <Text variant="body" color="color-on-surface">Sábado:</Text>
-              <Text variant="body" color="#964f20" className="font-semibold">10:00 AM - 4:00 PM</Text>
+              <Text color="color-on-surface" variant="body">
+                Sábado:
+              </Text>
+              <Text className="font-semibold" color="#964f20" variant="body">
+                10:00 AM - 4:00 PM
+              </Text>
             </div>
             <div className="flex justify-between py-2">
-              <Text variant="body" color="color-on-surface">Domingo:</Text>
-              <Text variant="body" color="#dc2626" className="font-semibold">Cerrado</Text>
+              <Text color="color-on-surface" variant="body">
+                Domingo:
+              </Text>
+              <Text className="font-semibold" color="#dc2626" variant="body">
+                Cerrado
+              </Text>
             </div>
           </div>
 
           <p>
-            <Text variant="body" color="#964f20" className="font-semibold">
+            <Text className="font-semibold" color="#964f20" variant="body">
               ¿Deseas aplicar esta configuración a toda la semana?
             </Text>
           </p>
@@ -387,18 +425,18 @@ const WeeklyScheduleManager = () => {
 
       {/* Modal Cerrar/Abrir Todo */}
       <Modal
-        isOpen={showCloseAllModal}
-        onClose={() => setShowCloseAllModal(false)}
-        size="lg"
-        title={isOpeningAll ? "Abrir Todos los Días" : "Cerrar Todos los Días"}
         footer={
           <div className="flex justify-end gap-2 w-full">
             <Button
+              startContent={
+                <Icon name={isOpeningAll ? "Check" : "X"} size={20} />
+              }
               variant={isOpeningAll ? "primary" : "danger"}
               onClick={handleToggleAllDays}
-              startContent={<Icon name={isOpeningAll ? "Check" : "X"} size={20} />}
             >
-              {isOpeningAll ? "Sí, abrir todos los días" : "Sí, cerrar todos los días"}
+              {isOpeningAll
+                ? "Sí, abrir todos los días"
+                : "Sí, cerrar todos los días"}
             </Button>
             <Button
               variant="secondary"
@@ -408,33 +446,51 @@ const WeeklyScheduleManager = () => {
             </Button>
           </div>
         }
+        isOpen={showCloseAllModal}
+        size="lg"
+        title={isOpeningAll ? "Abrir Todos los Días" : "Cerrar Todos los Días"}
+        onClose={() => setShowCloseAllModal(false)}
       >
         <div className="space-y-4">
-          <div className={`flex items-start gap-2 ${isOpeningAll ? 'bg-green-50 border-green-200' : 'bg-orange-50 border-orange-200'} border rounded-lg p-3`}>
-            <Icon name="AlertCircle" size={20} className={`${isOpeningAll ? 'text-green-600' : 'text-orange-600'} mt-0.5`} />
+          <div
+            className={`flex items-start gap-2 ${isOpeningAll ? "bg-green-50 border-green-200" : "bg-orange-50 border-orange-200"} border rounded-lg p-3`}
+          >
+            <Icon
+              className={`${isOpeningAll ? "text-green-600" : "text-orange-600"} mt-0.5`}
+              name="AlertCircle"
+              size={20}
+            />
             <div>
               <p>
-                <Text variant="body" color={isOpeningAll ? "#16a34a" : "#ea580c"} className="font-bold">
-                  {isOpeningAll ? "Abrir Disponibilidad" : "⚠️ Cerrar Disponibilidad"}
+                <Text
+                  className="font-bold"
+                  color={isOpeningAll ? "#16a34a" : "#ea580c"}
+                  variant="body"
+                >
+                  {isOpeningAll
+                    ? "Abrir Disponibilidad"
+                    : "⚠️ Cerrar Disponibilidad"}
                 </Text>
               </p>
               <p>
-                <Text variant="body" color={isOpeningAll ? "#15803d" : "#c2410c"} className="text-sm mt-1">
+                <Text
+                  className="text-sm mt-1"
+                  color={isOpeningAll ? "#15803d" : "#c2410c"}
+                  variant="body"
+                >
                   {isOpeningAll
                     ? "Esta acción activará todos los días de la semana. Podrás configurar los horarios específicos después."
-                    : "Esta acción cerrará todos los días de la semana. Los usuarios no podrán realizar reservas hasta que vuelvas a activar al menos un día."
-                  }
+                    : "Esta acción cerrará todos los días de la semana. Los usuarios no podrán realizar reservas hasta que vuelvas a activar al menos un día."}
                 </Text>
               </p>
             </div>
           </div>
 
           <p>
-            <Text variant="body" color="#964f20" className="font-semibold">
+            <Text className="font-semibold" color="#964f20" variant="body">
               {isOpeningAll
                 ? "¿Deseas abrir todos los días de la semana?"
-                : "¿Confirmas que deseas cerrar todos los días de la semana?"
-              }
+                : "¿Confirmas que deseas cerrar todos los días de la semana?"}
             </Text>
           </p>
         </div>

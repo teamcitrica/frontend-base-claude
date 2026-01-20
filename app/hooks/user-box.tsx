@@ -1,9 +1,11 @@
 "use client";
-import { DropCitrica, DropdownItemConfig } from "@/shared/components/citrica-ui/organism/drop-citrica";
-import { UserAuth } from "@/shared/context/auth-context";
 import { useRouter } from "next/navigation";
-import { toast } from "react-hot-toast";
 
+import {
+  DropCitrica,
+  DropdownItemConfig,
+} from "@/shared/components/citrica-ui/organism/drop-citrica";
+import { UserAuth } from "@/shared/context/auth-context";
 
 export const UserBox = () => {
   const { userInfo, signOut } = UserAuth();
@@ -14,7 +16,8 @@ export const UserBox = () => {
     await signOut();
   };
 
-  const fullName = `${userInfo?.first_name || ""} ${userInfo?.last_name || ""}`.trim();
+  const fullName =
+    `${userInfo?.first_name || ""} ${userInfo?.last_name || ""}`.trim();
 
   // Configurar los items del dropdown
   const dropdownItems: DropdownItemConfig[] = [
@@ -24,8 +27,8 @@ export const UserBox = () => {
       onClick: handleLogout,
       icon: "LogOut",
       color: "danger",
-      className: "flex justify-center pl-[16px] py-[13px] text-danger"
-    }
+      className: "flex justify-center pl-[16px] py-[13px] text-danger",
+    },
   ];
 
   const handleItemClick = (key: string, item: DropdownItemConfig) => {
@@ -36,17 +39,17 @@ export const UserBox = () => {
 
   return (
     <DropCitrica
-      userName={fullName || "Usuario"}
-      userAvatar={undefined} // Si tienes avatar del usuario, pásalo aquí
-      items={dropdownItems}
-      onItemClick={handleItemClick}
-      triggerBackgroundColor="#E9E6DD"
       avatarSize={40}
-      dropdownWidth="241px"
       dropdownHeight="96px"
+      dropdownWidth="241px"
+      items={dropdownItems}
       placement="bottom-start"
       showUserName={true}
+      triggerBackgroundColor="#E9E6DD"
       triggerClassName=""
+      userAvatar={undefined} // Si tienes avatar del usuario, pásalo aquí
+      userName={fullName || "Usuario"}
+      onItemClick={handleItemClick}
     />
   );
 };

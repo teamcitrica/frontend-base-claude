@@ -8,8 +8,8 @@ export type Customer = {
   email: string;
   phone: string;
   note: string;
-  birthday_day:number;
-  birthday_month:number;
+  birthday_day: number;
+  birthday_month: number;
 };
 
 // export type CustomerProp = {
@@ -25,7 +25,6 @@ export type Customer = {
 //   birthday_day:number;
 //   birthday_month:number;
 // };
-
 
 export const Months = [
   {
@@ -76,6 +75,4 @@ export const Months = [
     label: "Diciembre",
     value: 12,
   },
-
-
-]
+];

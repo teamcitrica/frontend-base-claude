@@ -35,16 +35,16 @@ export default function RootLayout({
       <body>
         {/* <Toaster/>  SE CAMBIÓ POR HEROUI TOAST*/}
         {/* <SupabaseProvider> DESCOMENTAR PARA USAR SUPABASE */}
-          {/* <AuthContextProvider> */}
-            {/* <AvailabilityProvider> */}
-              <Providers
-                themeProps={{ attribute: "data-theme", defaultTheme: "light" }}
-              >
-                {/* <Navbar /> */}
-                {children}
-              </Providers>
-            {/* </AvailabilityProvider> */}
-          {/* </AuthContextProvider> */}
+        {/* <AuthContextProvider> */}
+        {/* <AvailabilityProvider> */}
+        <Providers
+          themeProps={{ attribute: "data-theme", defaultTheme: "light" }}
+        >
+          {/* <Navbar /> */}
+          {children}
+        </Providers>
+        {/* </AvailabilityProvider> */}
+        {/* </AuthContextProvider> */}
         {/* </SupabaseProvider> */}
       </body>
     </html>

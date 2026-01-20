@@ -1,162 +1,193 @@
-// "use client";
-// import React, { createContext, useContext, useState, useCallback, ReactNode } from "react";
-// import { supabase } from "@/lib/supabase";
+"use client";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useCallback,
+  ReactNode,
+} from "react";
 
-// interface TimeSlot {
-//   slot: string;
-//   active: boolean;
-// }
+import { supabase } from "@/lib/supabase";
 
-// interface AvailableSlot {
-//   time_slot: string;
-//   is_available: boolean;
-//   covers_slots?: string[];
-// }
+interface TimeSlot {
+  slot: string;
+  active: boolean;
+}
 
-// interface AvailabilityContextType {
-//   // Estado
-//   isLoading: boolean;
-//   cachedSlots: Map<string, AvailableSlot[]>;
+interface AvailableSlot {
+  time_slot: string;
+  is_available: boolean;
+  covers_slots?: string[];
+}
 
-//   // Funciones
-//   getAvailableSlotsForDate: (date: string, displayMode?: '30min' | '1hour') => Promise<{ success: boolean; slots?: AvailableSlot[]; error?: any }>;
-//   clearCache: () => void;
-// }
+interface AvailabilityContextType {
+  // Estado
+  isLoading: boolean;
+  cachedSlots: Map<string, AvailableSlot[]>;
 
-// const AvailabilityContext = createContext<AvailabilityContextType | undefined>(undefined);
+  // Funciones
+  getAvailableSlotsForDate: (
+    date: string,
+    displayMode?: "30min" | "1hour",
+  ) => Promise<{ success: boolean; slots?: AvailableSlot[]; error?: any }>;
+  clearCache: () => void;
+}
 
-// export const AvailabilityProvider = ({ children }: { children: ReactNode }) => {
-//   const [isLoading, setIsLoading] = useState(false);
-//   const [cachedSlots, setCachedSlots] = useState<Map<string, AvailableSlot[]>>(new Map());
+const AvailabilityContext = createContext<AvailabilityContextType | undefined>(
+  undefined,
+);
 
-//   const clearCache = useCallback(() => {
-//     setCachedSlots(new Map());
-//   }, []);
+export const AvailabilityProvider = ({ children }: { children: ReactNode }) => {
+  const [isLoading, setIsLoading] = useState(false);
+  const [cachedSlots, setCachedSlots] = useState<Map<string, AvailableSlot[]>>(
+    new Map(),
+  );
 
-//   const getAvailableSlotsForDate = useCallback(async (date: string, displayMode: '30min' | '1hour' = '1hour') => {
-//     try {
-//       // Verificar cache
-//       const cacheKey = `${date}-${displayMode}`;
-//       if (cachedSlots.has(cacheKey)) {
-//         return { success: true, slots: cachedSlots.get(cacheKey) };
-//       }
+  const clearCache = useCallback(() => {
+    setCachedSlots(new Map());
+  }, []);
 
-//       setIsLoading(true);
+  const getAvailableSlotsForDate = useCallback(
+    async (date: string, displayMode: "30min" | "1hour" = "1hour") => {
+      try {
+        // Verificar cache
+        const cacheKey = `${date}-${displayMode}`;
 
-//       const targetDate = new Date(date + 'T00:00:00');
-//       const dayOfWeek = targetDate.getDay();
+        if (cachedSlots.has(cacheKey)) {
+          return { success: true, slots: cachedSlots.get(cacheKey) };
+        }
 
-//       // Obtener la configuración de disponibilidad para este día
-//       const { data: availabilityConfig, error: configError } = await supabase
-//         .from('studio_availability')
-//         .select('is_active, time_slots')
-//         .eq('day_of_week', dayOfWeek)
-//         .single();
+        setIsLoading(true);
 
-//       if (configError) throw configError;
+        const targetDate = new Date(date + "T00:00:00");
+        const dayOfWeek = targetDate.getDay();
 
-//       if (!availabilityConfig || !availabilityConfig.is_active) {
-//         return { success: true, slots: [] };
-//       }
+        // Obtener la configuración de disponibilidad para este día
+        const { data: availabilityConfig, error: configError } = await supabase
+          .from("studio_availability")
+          .select("is_active, time_slots")
+          .eq("day_of_week", dayOfWeek)
+          .single();
 
-//       // Obtener slots activos
-//       const baseSlots = availabilityConfig.time_slots || [];
-//       const activeSlots = baseSlots.filter((slot: TimeSlot) => slot.active);
+        if (configError) throw configError;
 
-//       if (activeSlots.length === 0) {
-//         return { success: true, slots: [] };
-//       }
+        if (!availabilityConfig || !availabilityConfig.is_active) {
+          return { success: true, slots: [] };
+        }
 
-//       // Obtener reservas y bloqueos para esta fecha
-//       const { data: bookings, error: bookingsError } = await supabase
-//         .from('bookings')
-//         .select('time_slots, type_id')
-//         .eq('booking_date', date)
-//         .neq('status', 'cancelled');
+        // Obtener slots activos
+        const baseSlots = availabilityConfig.time_slots || [];
+        const activeSlots = baseSlots.filter((slot: TimeSlot) => slot.active);
 
-//       if (bookingsError) throw bookingsError;
+        if (activeSlots.length === 0) {
+          return { success: true, slots: [] };
+        }
 
-//       // Crear set de slots ocupados
-//       const occupiedSlots = new Set<string>();
-//       bookings?.forEach((booking: any) => {
-//         booking.time_slots?.forEach((slot: string) => {
-//           if (booking.type_id === 2 && booking.time_slots?.includes('00:00')) {
-//             // Bloqueo de día completo
-//             for (let hour = 0; hour < 24; hour++) {
-//               occupiedSlots.add(`${String(hour).padStart(2, '0')}:00`);
-//               occupiedSlots.add(`${String(hour).padStart(2, '0')}:30`);
-//             }
-//           } else {
-//             occupiedSlots.add(slot);
-//           }
-//         });
-//       });
+        // Obtener reservas y bloqueos para esta fecha
+        const { data: bookings, error: bookingsError } = await supabase
+          .from("bookings")
+          .select("time_slots, type_id")
+          .eq("booking_date", date)
+          .neq("status", "cancelled");
 
-//       // Filtrar slots disponibles
-//       let availableSlots: AvailableSlot[] = activeSlots
-//         .filter((slot: TimeSlot) => !occupiedSlots.has(slot.slot))
-//         .map((slot: TimeSlot) => ({
-//           time_slot: slot.slot,
-//           is_available: true
-//         }));
+        if (bookingsError) throw bookingsError;
 
-//       // Convertir a horas completas si es necesario
-//       if (displayMode === '1hour') {
-//         const hourSlots: AvailableSlot[] = [];
-//         const processedHours = new Set<string>();
+        // Crear set de slots ocupados
+        const occupiedSlots = new Set<string>();
 
-//         availableSlots.forEach((slot: AvailableSlot) => {
-//           const hour = slot.time_slot.split(':')[0] + ':00';
-//           const halfHour = hour.replace(':00', ':30');
+        bookings?.forEach((booking: any) => {
+          booking.time_slots?.forEach((slot: string) => {
+            if (
+              booking.type_id === 2 &&
+              booking.time_slots?.includes("00:00")
+            ) {
+              // Bloqueo de día completo
+              for (let hour = 0; hour < 24; hour++) {
+                occupiedSlots.add(`${String(hour).padStart(2, "0")}:00`);
+                occupiedSlots.add(`${String(hour).padStart(2, "0")}:30`);
+              }
+            } else {
+              occupiedSlots.add(slot);
+            }
+          });
+        });
 
-//           if (!processedHours.has(hour)) {
-//             const has00 = availableSlots.some((s: AvailableSlot) => s.time_slot === hour);
-//             const has30 = availableSlots.some((s: AvailableSlot) => s.time_slot === halfHour);
+        // Filtrar slots disponibles
+        let availableSlots: AvailableSlot[] = activeSlots
+          .filter((slot: TimeSlot) => !occupiedSlots.has(slot.slot))
+          .map((slot: TimeSlot) => ({
+            time_slot: slot.slot,
+            is_available: true,
+          }));
 
-//             if (has00 && has30) {
-//               hourSlots.push({
-//                 time_slot: hour,
-//                 is_available: true,
-//                 covers_slots: [hour, halfHour]
-//               });
-//             }
-//             processedHours.add(hour);
-//           }
-//         });
+        // Convertir a horas completas si es necesario
+        if (displayMode === "1hour") {
+          const hourSlots: AvailableSlot[] = [];
+          const processedHours = new Set<string>();
 
-//         availableSlots = hourSlots;
-//       }
+          availableSlots.forEach((slot: AvailableSlot) => {
+            const hour = slot.time_slot.split(":")[0] + ":00";
+            const halfHour = hour.replace(":00", ":30");
 
-//       // Guardar en cache
-//       setCachedSlots(prev => new Map(prev).set(cacheKey, availableSlots));
+            if (!processedHours.has(hour)) {
+              const has00 = availableSlots.some(
+                (s: AvailableSlot) => s.time_slot === hour,
+              );
+              const has30 = availableSlots.some(
+                (s: AvailableSlot) => s.time_slot === halfHour,
+              );
 
-//       return { success: true, slots: availableSlots };
-//     } catch (error) {
-//       console.error('Error fetching available slots for date:', error);
-//       return { success: false, error };
-//     } finally {
-//       setIsLoading(false);
-//     }
-//   }, [cachedSlots]);
+              if (has00 && has30) {
+                hourSlots.push({
+                  time_slot: hour,
+                  is_available: true,
+                  covers_slots: [hour, halfHour],
+                });
+              }
+              processedHours.add(hour);
+            }
+          });
 
-//   const value = {
-//     isLoading,
-//     cachedSlots,
-//     getAvailableSlotsForDate,
-//     clearCache
-//   };
+          availableSlots = hourSlots;
+        }
 
-//   return (
-//     <AvailabilityContext.Provider value={value}>
-//       {children}
-//     </AvailabilityContext.Provider>
-//   );
-// };
+        // Guardar en cache
+        setCachedSlots((prev) => new Map(prev).set(cacheKey, availableSlots));
 
-// export const useAvailability = () => {
-//   const context = useContext(AvailabilityContext);
-//   if (context === undefined) {
-//     throw new Error('useAvailability must be used within an AvailabilityProvider');
-//   }
-//   return context;
-// };
+        return { success: true, slots: availableSlots };
+      } catch (error) {
+        console.error("Error fetching available slots for date:", error);
+
+        return { success: false, error };
+      } finally {
+        setIsLoading(false);
+      }
+    },
+    [cachedSlots],
+  );
+
+  const value = {
+    isLoading,
+    cachedSlots,
+    getAvailableSlotsForDate,
+    clearCache,
+  };
+
+  return (
+    <AvailabilityContext.Provider value={value}>
+      {children}
+    </AvailabilityContext.Provider>
+  );
+};
+
+export const useAvailability = () => {
+  const context = useContext(AvailabilityContext);
+
+  if (context === undefined) {
+    throw new Error(
+      "useAvailability must be used within an AvailabilityProvider",
+    );
+  }
+
+  return context;
+};
