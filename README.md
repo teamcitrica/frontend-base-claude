@@ -1,3 +1,31 @@
+# Base Admin - Frontend Template
+
+## 📖 Índice de Navegación Rápida
+
+### 🎯 Para Crear una Nueva Web
+- [🚀 REFERENCIA RÁPIDA: Crear Nueva Web](#-referencia-rápida-crear-nueva-web)
+- [🏗️ Estructura del Proyecto](#️-estructura-del-proyecto)
+- [⚠️ Componente Icon (IMPORTANTE)](#️-importante-componente-icon)
+
+### 📐 Sistema de Layout
+- [⚠️ Container + Col (REGLA DE ORO)](#️-importante-sistema-de-layout-responsivo)
+- [Grid System - Breakpoints](#-sistema-de-columnas-grid-system)
+- [Configuraciones Comunes](#-configuraciones-comunes)
+- [Ejemplo Completo de Página](#-ejemplo-completo-de-página)
+
+### 🎨 Componentes y Estilos
+- [⚠️ Text Component](#️-importante-usar-componente-text-para-tipografía)
+- [⚠️ Sistema de Colores](#️-importante-sistema-de-colores-en-componente-text)
+- [Button Component](#️-importante-sistema-de-colores-y-variantes)
+- [Componentes Disponibles](#-componentes-disponibles-en-citrica-ui-toolkit)
+
+### 📚 Documentación Detallada
+- [Styles System Documentation](#-documentation)
+- [Layout Examples](styles/LAYOUT-EXAMPLES.md)
+- [Design Tokens](styles/10-tokens/README.md)
+
+---
+
 ## 📚 Documentation
 
 ### Styles System Documentation
@@ -11,6 +39,78 @@ This project includes a comprehensive styles and layout system. Check out the do
 - **[styles/LAYOUT-EXAMPLES.md](styles/LAYOUT-EXAMPLES.md)** - Complete code examples
 - **[styles/10-tokens/README.md](styles/10-tokens/README.md)** - Design tokens system (Client & Admin)
 - **[styles/10-tokens/EXAMPLES.md](styles/10-tokens/EXAMPLES.md)** - Token usage examples
+
+---
+
+## 🏗️ Estructura del Proyecto
+
+### Stack Tecnológico
+
+**Framework y Librerías Principales:**
+- Next.js 15.5.9 con App Router
+- React 18.3.1
+- TypeScript 5.6.3 (strict mode)
+- Turbopack para desarrollo
+
+**UI y Estilos:**
+- HeroUI v2.4.25
+- citrica-ui-toolkit v0.0.11 (componentes personalizados)
+- Tailwind CSS 3.4.17
+- SCSS con metodología ITCSS
+- next-themes (soporte light/dark mode)
+
+**Backend y Data:**
+- Supabase v2.45.4
+- React Context para state management
+
+**Librerías Adicionales:**
+- Lucide React v0.475.0 (iconos)
+- Framer Motion v11.18.2 (animaciones)
+- react-hook-form v7.49.2
+- Swiper v10.3.1
+- GSAP v3.13.0
+
+### Estructura de Directorios
+
+```
+/app                          # Next.js App Router
+├── page.tsx                  # Página principal (landing page)
+├── layout.tsx                # Layout raíz
+├── admin/                    # Panel administrativo
+│   ├── reservas/
+│   ├── clientes/
+│   └── config-app/
+├── hooks/                    # Custom React hooks
+└── api/                      # API routes
+
+/config
+└── site.ts                   # Configuración del sitio (nav, metadata)
+
+/styles                       # Sistema de estilos ITCSS
+├── 01-settings/
+│   └── colors/
+│       └── colors.scss       # Tokens de color (IMPORTANTE)
+├── 10-tokens/
+│   └── components/           # Tokens de componentes
+└── globals.scss              # Importación principal
+
+/shared
+├── components/               # Componentes compartidos
+├── context/                  # React Context providers
+├── types/                    # TypeScript types
+└── utils/                    # Utilidades
+
+/node_modules/citrica-ui-toolkit  # Librería de componentes
+```
+
+### Archivos Clave para Modificar
+
+Al crear una nueva web, SOLO modifica estos archivos:
+
+1. **[app/page.tsx](app/page.tsx)** - Contenido de la landing page
+2. **[config/site.ts](config/site.ts)** - Nombre, navegación, metadata
+3. **[styles/01-settings/colors/colors.scss](styles/01-settings/colors/colors.scss)** - Colores del tema
+4. **styles/10-tokens/components/*** - Tokens de componentes (opcional)
 
 ---
 
@@ -319,7 +419,7 @@ Antes de crear cualquier UI, consulta la documentación: **[styles/CITRICA-UI-TO
 - `Autocomplete` - Select con búsqueda
 - `Textarea` - Campo de texto multilínea
 - `Text` - Tipografía
-- `Icon` - Iconos de Lucide
+- **`Icon`** - Iconos de Lucide (ver documentación detallada abajo)
 - **`Card`** - Tarjetas con header/footer
 - `Container` - Contenedor responsive
 - `Col` - Columnas del grid
@@ -332,6 +432,157 @@ Antes de crear cualquier UI, consulta la documentación: **[styles/CITRICA-UI-TO
 - `Header` - Navegación principal
 - `Footer` - Pie de página
 - `Sidebar` - Barra lateral con menú
+
+---
+
+## ⚠️ IMPORTANTE: Componente Icon
+
+### 🚨 REGLA DE ORO: Usa la prop "name", NO "iconName"
+
+El componente `Icon` de citrica-ui-toolkit usa la prop **`name`** para especificar el icono de Lucide React.
+
+#### ❌ INCORRECTO:
+```tsx
+// MAL - No usar "iconName"
+import { Icon } from 'citrica-ui-toolkit'
+
+<Icon iconName="Camera" size={24} />
+<Icon iconName="Play" size={18} color="#cd29ff" />
+```
+
+#### ✅ CORRECTO:
+```tsx
+// BIEN - Usar "name"
+import { Icon } from 'citrica-ui-toolkit'
+
+<Icon name="Camera" size={24} />
+<Icon name="Play" size={18} color="#cd29ff" />
+```
+
+### 📋 Props del Componente Icon
+
+```tsx
+interface IconProps {
+  name: IconName;           // Nombre del icono de Lucide (REQUERIDO)
+  size?: number;            // Tamaño del icono (default: 24)
+  strokeWidth?: number;     // Grosor del trazo
+  color?: string;           // Color del icono (hex, rgb, etc.)
+  fallback?: IconName;      // Icono de respaldo si el principal no existe
+}
+```
+
+### 🎯 Ejemplos de Uso Correcto
+
+```tsx
+import { Icon } from 'citrica-ui-toolkit'
+
+// Icono básico
+<Icon name="Camera" />
+
+// Icono con tamaño personalizado
+<Icon name="Film" size={32} />
+
+// Icono con color
+<Icon name="Play" size={18} color="#cd29ff" />
+
+// Icono con grosor de trazo personalizado
+<Icon name="Menu" size={24} strokeWidth={2} />
+
+// Icono con fallback
+<Icon name="CustomIcon" fallback="Circle" size={20} />
+```
+
+### 📚 Iconos Disponibles
+
+El componente Icon usa **Lucide React**, que incluye cientos de iconos. Los más comunes:
+
+**UI/Navegación:**
+- `Menu`, `X`, `ChevronRight`, `ChevronLeft`, `ChevronDown`, `ChevronUp`
+- `ArrowRight`, `ArrowLeft`, `ArrowUp`, `ArrowDown`
+- `Home`, `Settings`, `User`, `Users`, `Bell`
+
+**Medios/Contenido:**
+- `Camera`, `Film`, `Image`, `Video`, `Music`
+- `Play`, `Pause`, `Stop`, `SkipForward`, `SkipBack`
+- `Volume`, `VolumeX`, `Volume1`, `Volume2`
+
+**Comunicación:**
+- `Mail`, `Phone`, `MessageCircle`, `Send`
+- `Share`, `Share2`, `Download`, `Upload`
+
+**Edición:**
+- `Edit`, `Edit2`, `Edit3`, `Trash`, `Trash2`
+- `Copy`, `Check`, `X`, `Plus`, `Minus`
+
+**Indicadores:**
+- `AlertCircle`, `AlertTriangle`, `Info`, `CheckCircle`, `XCircle`
+- `Star`, `Heart`, `Eye`, `EyeOff`, `Lock`, `Unlock`
+
+**Negocios:**
+- `Briefcase`, `Calendar`, `Clock`, `DollarSign`, `CreditCard`
+- `ShoppingCart`, `Package`, `TrendingUp`, `TrendingDown`
+
+**Tecnología:**
+- `Code`, `Terminal`, `Database`, `Server`, `Wifi`
+- `Smartphone`, `Laptop`, `Monitor`, `Tablet`
+
+**Diseño/Creatividad:**
+- `Palette`, `Sparkles`, `Layers`, `Layout`, `Grid`
+- `Pen`, `PenTool`, `Brush`, `Eraser`
+
+Ver lista completa en: [https://lucide.dev/icons/](https://lucide.dev/icons/)
+
+### 🔄 Workflow para Usar Icon
+
+1. **Busca el icono** en [lucide.dev](https://lucide.dev/icons/)
+2. **Copia el nombre exacto** (case-sensitive, en PascalCase)
+3. **Importa Icon** de citrica-ui-toolkit
+4. **Usa el componente** con la prop `name`
+
+```tsx
+// Ejemplo completo
+import { Icon } from 'citrica-ui-toolkit'
+
+<button className="flex items-center gap-2">
+  <Icon name="Play" size={18} />
+  Ver Video
+</button>
+```
+
+### 🚫 Errores Comunes a Evitar
+
+```tsx
+// ❌ ERROR: Usar "iconName" en lugar de "name"
+<Icon iconName="Camera" size={24} />
+
+// ❌ ERROR: Importar iconos de lucide-react directamente
+import { Camera } from 'lucide-react'
+<Camera size={24} />
+
+// ❌ ERROR: Usar nombres en minúsculas o con guiones
+<Icon name="camera" size={24} />
+<Icon name="chevron-right" size={24} />
+
+// ✅ CORRECTO: Usar "name" con PascalCase
+<Icon name="Camera" size={24} />
+<Icon name="ChevronRight" size={24} />
+```
+
+### 📋 Checklist para Usar Icon
+
+- [ ] ¿Estoy usando `Icon` de citrica-ui-toolkit?
+- [ ] ¿Estoy usando la prop `name` (NO `iconName`)?
+- [ ] ¿El nombre del icono está en PascalCase?
+- [ ] ¿He verificado que el icono existe en Lucide?
+- [ ] ¿He definido el tamaño si no quiero usar el default (24)?
+
+### ✅ Resumen de Buenas Prácticas
+
+1. **SIEMPRE** usa `name` como prop (NO `iconName`)
+2. **IMPORTA** solo desde citrica-ui-toolkit (NO desde lucide-react)
+3. **USA** nombres en PascalCase exactamente como aparecen en Lucide
+4. **VERIFICA** en [lucide.dev](https://lucide.dev/icons/) si no estás seguro del nombre
+5. **DEFINE** tamaño y color según las necesidades del diseño
 
 ### 📋 Checklist antes de crear componentes
 
@@ -781,6 +1032,270 @@ import { Container, Col } from 'citrica-ui-toolkit';
 <Button className="btn-citrica-ui-admin btn-primary-admin" />
 <Input className="input-citrica-ui-admin input-primary-admin" />
 ```
+
+---
+
+## 🚀 REFERENCIA RÁPIDA: Crear Nueva Web
+
+### Archivos a Modificar
+
+Cuando recibas la tarea de crear una nueva landing page, SOLO modifica:
+
+1. **[config/site.ts](config/site.ts)** - Nombre del sitio y navegación
+2. **[styles/01-settings/colors/colors.scss](styles/01-settings/colors/colors.scss)** - Colores primarios
+3. **[app/page.tsx](app/page.tsx)** - Contenido de la página
+
+### Importaciones Obligatorias
+
+```tsx
+'use client'
+import { Button, Container, Col, Text, Icon } from 'citrica-ui-toolkit'
+import { siteConfig } from '@/config/site'
+```
+
+### Componentes Clave y Props Correctos
+
+| Componente | Props Importantes | Ejemplo |
+|------------|-------------------|---------|
+| **Icon** | `name` (NO iconName), `size`, `color` | `<Icon name="Camera" size={24} />` |
+| **Text** | `variant`, `as`, `weight`, `color` | `<Text variant="display" as="h1" weight="bold" color="#FFF">` |
+| **Button** | `variant="primary\|secondary\|flat"` | `<Button variant="primary">` |
+| **Container** | `noPadding`, `noLimit` | `<Container noPadding>` |
+| **Col** | `cols={{ sm: 4, md: 6, lg: 12 }}` | `<Col cols={{ sm: 4, md: 3, lg: 6 }}>` |
+
+### Estructura Base de Página
+
+```tsx
+'use client'
+import { Button, Container, Col, Text, Icon } from 'citrica-ui-toolkit'
+import { siteConfig } from '@/config/site'
+
+export default function Page() {
+  return (
+    <>
+      {/* Header */}
+      <header className="fixed top-0 w-full z-50">
+        <Container noPadding>
+          <Col cols={{ sm: 4, md: 6, lg: 12 }}>
+            {/* Navegación */}
+          </Col>
+        </Container>
+      </header>
+
+      {/* Hero Section */}
+      <section className="min-h-screen pt-20">
+        <Container>
+          <Col cols={{ sm: 4, md: 6, lg: 12 }}>
+            <Text variant="display" as="h1" weight="bold" color="#FFF">
+              Título Principal
+            </Text>
+          </Col>
+        </Container>
+      </section>
+
+      {/* Content Sections */}
+      <section className="py-24">
+        <Container>
+          {/* 3 columnas en desktop, 1 en mobile */}
+          <Col cols={{ sm: 4, md: 2, lg: 4 }}>Card 1</Col>
+          <Col cols={{ sm: 4, md: 2, lg: 4 }}>Card 2</Col>
+          <Col cols={{ sm: 4, md: 2, lg: 4 }}>Card 3</Col>
+        </Container>
+      </section>
+
+      {/* Footer */}
+      <footer className="py-12">
+        <Container>
+          <Col cols={{ sm: 4, md: 6, lg: 12 }}>
+            {/* Footer content */}
+          </Col>
+        </Container>
+      </footer>
+    </>
+  )
+}
+```
+
+### Errores Comunes a Evitar
+
+❌ **NO hacer:**
+```tsx
+// Error 1: Usar iconName en lugar de name
+<Icon iconName="Camera" size={24} />
+
+// Error 2: No usar Container + Col
+<div className="container">
+  <div className="grid grid-cols-3">Content</div>
+</div>
+
+// Error 3: Usar elementos HTML directos
+<h1>Título</h1>
+<p>Texto</p>
+
+// Error 4: Usar clases de Tailwind para colores en Text
+<Text variant="body" className="text-gray-500">Texto</Text>
+```
+
+✅ **SÍ hacer:**
+```tsx
+// Correcto 1: Usar name en Icon
+<Icon name="Camera" size={24} />
+
+// Correcto 2: Usar Container + Col
+<Container>
+  <Col cols={{ sm: 4, md: 2, lg: 4 }}>Content</Col>
+</Container>
+
+// Correcto 3: Usar componente Text
+<Text variant="display" as="h1">Título</Text>
+<Text variant="body" as="p">Texto</Text>
+
+// Correcto 4: Usar prop color en Text
+<Text variant="body" color="#6B7280">Texto</Text>
+```
+
+### Cambiar Colores del Tema
+
+**Archivo:** `styles/01-settings/colors/colors.scss`
+
+```scss
+// Color primario del sitio
+$color-light-primary: #cd29ff;  // Cambia este valor
+
+// Color del botón primario
+$color-light-primary-btn: #cd29ff;  // Cambia este valor
+$color-light-primary-btn-text: #FFFFFF;
+$color-light-primary-btn-hover: #b820e6;
+```
+
+### Configurar Navegación
+
+**Archivo:** `config/site.ts`
+
+```typescript
+export const siteConfig = {
+  name: "Nombre del Sitio",
+  description: "Descripción del sitio",
+  navLinks: [
+    { title: "Inicio", href: "#inicio" },
+    { title: "Servicios", href: "#servicios" },
+    { title: "Contacto", href: "#contacto" }
+  ],
+  // ... resto de la configuración
+}
+```
+
+### Grid System - Configuraciones Comunes
+
+```tsx
+// Full Width (100%)
+<Col cols={{ sm: 4, md: 6, lg: 12 }}>Full width</Col>
+
+// 2 Columnas (50% cada una)
+<Col cols={{ sm: 4, md: 3, lg: 6 }}>Columna 1</Col>
+<Col cols={{ sm: 4, md: 3, lg: 6 }}>Columna 2</Col>
+
+// 3 Columnas (33% cada una)
+<Col cols={{ sm: 4, md: 2, lg: 4 }}>Card 1</Col>
+<Col cols={{ sm: 4, md: 2, lg: 4 }}>Card 2</Col>
+<Col cols={{ sm: 4, md: 2, lg: 4 }}>Card 3</Col>
+
+// 4 Columnas (25% cada una)
+<Col cols={{ sm: 4, md: 3, lg: 3 }}>Card 1</Col>
+<Col cols={{ sm: 4, md: 3, lg: 3 }}>Card 2</Col>
+<Col cols={{ sm: 4, md: 3, lg: 3 }}>Card 3</Col>
+<Col cols={{ sm: 4, md: 3, lg: 3 }}>Card 4</Col>
+```
+
+---
+
+---
+
+## 📝 RESUMEN: Checklist Completo para Nueva Web
+
+### ✅ Paso 1: Configuración Inicial
+
+- [ ] **Actualizar [config/site.ts](config/site.ts)**
+  ```typescript
+  name: "Nombre del Sitio"
+  description: "Descripción"
+  navLinks: [{ title: "...", href: "#..." }]
+  ```
+
+- [ ] **Actualizar colores en [styles/01-settings/colors/colors.scss](styles/01-settings/colors/colors.scss)**
+  ```scss
+  $color-light-primary: #HEXCOLOR;
+  $color-light-primary-btn: #HEXCOLOR;
+  ```
+
+### ✅ Paso 2: Importaciones en app/page.tsx
+
+```tsx
+'use client'
+import { Button, Container, Col, Text, Icon } from 'citrica-ui-toolkit'
+import { siteConfig } from '@/config/site'
+```
+
+### ✅ Paso 3: Verificar Uso Correcto de Componentes
+
+**Icon Component:**
+- [ ] ✅ Usar `name` (NO `iconName`)
+- [ ] ✅ Verificar nombre en PascalCase
+- [ ] ✅ Ejemplo: `<Icon name="Camera" size={24} />`
+
+**Text Component:**
+- [ ] ✅ Usar variante correcta (display, headline, title, body, label)
+- [ ] ✅ Definir elemento semántico con `as`
+- [ ] ✅ Usar `color` prop (NO className con Tailwind)
+- [ ] ✅ Ejemplo: `<Text variant="display" as="h1" color="#FFF">`
+
+**Container + Col:**
+- [ ] ✅ TODAS las secciones usan `<Container>`
+- [ ] ✅ TODOS los elementos usan `<Col>`
+- [ ] ✅ Definir 3 breakpoints: `cols={{ sm: 4, md: 6, lg: 12 }}`
+
+**Button Component:**
+- [ ] ✅ Usar solo variantes del sistema (primary, secondary, flat)
+- [ ] ✅ NO usar estilos inline
+- [ ] ✅ Ejemplo: `<Button variant="primary">`
+
+### ✅ Paso 4: Estructura de Layout
+
+```tsx
+// ✅ CORRECTO
+<Container>
+  <Col cols={{ sm: 4, md: 3, lg: 6 }}>
+    <Text variant="display" as="h1">Título</Text>
+  </Col>
+</Container>
+
+// ❌ INCORRECTO
+<div className="container">
+  <h1>Título</h1>
+</div>
+```
+
+### 🎨 Referencia Visual de Props
+
+| Componente | Prop Key | Valores | Ejemplo |
+|------------|----------|---------|---------|
+| **Icon** | `name` | `"Camera"`, `"Play"`, etc. | `<Icon name="Camera" />` |
+| **Icon** | `size` | `number` (default: 24) | `<Icon name="Play" size={18} />` |
+| **Icon** | `color` | `string` (hex, rgb) | `<Icon name="Star" color="#cd29ff" />` |
+| **Text** | `variant` | `display`, `headline`, `title`, `subtitle`, `body`, `label` | `<Text variant="display" />` |
+| **Text** | `as` | `h1`, `h2`, `h3`, `h4`, `h5`, `h6`, `p`, `span`, `div` | `<Text as="h1" />` |
+| **Text** | `weight` | `light`, `normal`, `bold` | `<Text weight="bold" />` |
+| **Text** | `color` | `string` (hex, rgb) | `<Text color="#FFF" />` |
+| **Button** | `variant` | `primary`, `secondary`, `flat` | `<Button variant="primary" />` |
+| **Col** | `cols` | `{ sm: 1-4, md: 1-6, lg: 1-12 }` | `<Col cols={{ sm: 4, md: 3, lg: 6 }} />` |
+
+### 🔗 Links Útiles
+
+- **Iconos Lucide:** [https://lucide.dev/icons/](https://lucide.dev/icons/)
+- **Tailwind CSS:** [https://tailwindcss.com/docs](https://tailwindcss.com/docs)
+- **Next.js App Router:** [https://nextjs.org/docs/app](https://nextjs.org/docs/app)
+
+---
 
 ## IMPORTANT FOR CREATE NEW WEB
 Change only this files:
