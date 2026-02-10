@@ -10,7 +10,6 @@ import {
   ModalFooter,
 } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
-
 import { useAdminBookings } from "@/app/hooks/useAdminBookings";
 import { useStudioAvailability } from "@/app/hooks/useStudioAvailability";
 import { supabase } from "@/lib/supabase";

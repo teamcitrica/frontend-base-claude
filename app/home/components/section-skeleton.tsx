@@ -1,5 +1,5 @@
 import React from "react";
-import { Col, Container } from "@citrica/objects";
+import { Col, Container } from "citrica-ui-toolkit";
 import { Skeleton } from "@heroui/skeleton";
 
 const SectionSkeleton = () => {

@@ -1,10 +1,9 @@
 "use client";
 import React from "react";
-import { Button, Text, Icon, Select, Input } from "citrica-ui-toolkit";
+import { Button, Text, Icon, Select, Input, Container, Col } from "citrica-ui-toolkit";
 import { useTheme } from "next-themes";
 import { addToast } from "@heroui/toast";
 
-import { Container, Col } from "@/styles/07-objects/objects";
 const SectionTypography = () => {
   const { theme, setTheme } = useTheme();
 

@@ -1,7 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import { Button, Icon } from "citrica-ui-toolkit";
-
 import UnifiedAvailabilityManager from "./disponibilidad/components/unified-availability-manager";
 import WeeklyScheduleManager from "./disponibilidad/components/weekly-schedule-manager";
 

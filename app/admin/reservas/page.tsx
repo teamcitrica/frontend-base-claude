@@ -1,12 +1,9 @@
 "use client";
-
 // Deshabilitar prerenderizado estático - necesario para useSearchParams()
 export const dynamic = "force-dynamic";
-
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
-import { Container, Col } from "@citrica/objects";
-import { Text, Button, Card, Icon, Modal } from "citrica-ui-toolkit";
+import { Text, Button, Card, Container, Col, Icon, Modal } from "citrica-ui-toolkit";
 import {
   Chip,
   Table,
@@ -23,11 +20,9 @@ import {
   SelectItem,
 } from "@heroui/react";
 import { addToast } from "@heroui/toast";
-
 import BookingCalendarView from "./components/booking-calendar-view";
 import BookingStatsView from "./components/booking-stats-view";
 import BookingAvailabilityView from "./components/booking-availability-view";
-
 import { useAdminBookings, AdminBooking } from "@/app/hooks/useAdminBookings";
 import { formatTimeSlotsWithDuration } from "@/shared/utils/timeSlotHelpers";
 

@@ -2,10 +2,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useForm } from "react-hook-form";
-import { Text, Input, Icon, Button, Modal } from "citrica-ui-toolkit";
+import { Container, Text, Input, Icon, Button, Modal } from "citrica-ui-toolkit";
 import { Divider, Link } from "@heroui/react";
-
-import { Container } from "@/styles/07-objects/objects";
 
 type FormValues = {
   password: string;

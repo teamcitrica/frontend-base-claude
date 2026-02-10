@@ -1,10 +1,9 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Text, Button, Card, Icon } from "citrica-ui-toolkit";
+import { Text, Button, Card, Icon, Container, Col } from "citrica-ui-toolkit";
 import { Progress } from "@heroui/react";
-import { Container, Col } from "@citrica/objects";
-
 import { useAdminBookings, BookingStats } from "@/app/hooks/useAdminBookings";
+
 const BookingStatsView = () => {
   const { isLoading, getMonthStats } = useAdminBookings();
 

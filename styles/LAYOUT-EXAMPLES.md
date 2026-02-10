@@ -17,8 +17,7 @@ Ejemplos prácticos y listos para usar del sistema de grid responsivo.
 
 ```tsx
 // pages/landing.tsx
-import { Container, Col } from 'citrica-ui-toolkit';
-import { Button, Card, Text } from '@citrica-ui';
+import { Button, Card, Container, Col, Text } from 'citrica-ui-toolkit';
 
 const LandingPage = () => {
   return (
@@ -122,8 +121,7 @@ export default LandingPage;
 
 ```tsx
 // app/admin/dashboard/page.tsx
-import { Container, Col } from 'citrica-ui-toolkit';
-import { Card, Text, Button } from '@citrica-ui';
+import { Card, Container, Col, Text, Button } from 'citrica-ui-toolkit';
 
 const AdminDashboard = () => {
   return (
@@ -206,8 +204,7 @@ export default AdminDashboard;
 
 ```tsx
 // app/productos/page.tsx
-import { Container, Col } from 'citrica-ui-toolkit';
-import { Card, Text, Button } from '@citrica-ui';
+import { Card, Container, Col, Text, Button } from 'citrica-ui-toolkit';
 
 const ProductosPage = () => {
   const productos = [

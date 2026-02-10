@@ -1,6 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { Text, Button, Card } from "citrica-ui-toolkit";
+import { Text, Button, Card, Col, Container } from "citrica-ui-toolkit";
 import {
   Calendar,
   Modal,
@@ -11,11 +11,9 @@ import {
   useDisclosure,
 } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
-
 import { useAdminBookings } from "@/app/hooks/useAdminBookings";
 import { useStudioConfig } from "@/app/hooks/useStudioConfig";
 import { supabase } from "@/lib/supabase";
-import { Col, Container } from "@/styles/07-objects/objects";
 import { useAvailability } from "@/app/api/contexts/AvailabilityContext";
 
 const UnifiedAvailabilityManager = () => {

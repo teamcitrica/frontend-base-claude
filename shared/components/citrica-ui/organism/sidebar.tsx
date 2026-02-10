@@ -1,14 +1,12 @@
 "use client";
 import type { SidebarProps, MenuItem } from "../../../types/sidebar";
 import type { IconName } from "citrica-ui-toolkit";
-
 import React from "react";
 import { Suspense } from "react";
 import { Button } from "@heroui/react";
 import { Icon, Text } from "citrica-ui-toolkit";
 import { usePathname, useRouter } from "next/navigation";
 import { useSearchParams } from "next/navigation";
-
 import { getParamFromPath } from "@/shared/utils/general";
 import { siteConfig } from "@/config/site";
 

@@ -19,7 +19,6 @@ import {
   TableCell,
   Spinner,
 } from "@heroui/react";
-
 import { useCustomers } from "@/app/hooks/useCustomers";
 
 const ClientesAdminPage = () => {

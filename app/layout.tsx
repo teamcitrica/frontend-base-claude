@@ -1,8 +1,6 @@
 import "@/styles/globals.scss";
 import { Metadata } from "next";
-
 import { Providers } from "../shared/providers";
-
 import { siteConfig } from "@/config/site";
 // import { Toaster } from 'react-hot-toast';
 // import SupabaseProvider from '@/shared/context/supabase-context' // DESCOMENTAR PARA USAR SUPABASE

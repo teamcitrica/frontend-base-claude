@@ -1,9 +1,7 @@
 "use client";
 import React, { useState } from "react";
-import { Text, Input, Button, Modal, Icon } from "citrica-ui-toolkit";
+import { Container, Text, Input, Button, Modal, Icon } from "citrica-ui-toolkit";
 import { Divider, Link } from "@heroui/react";
-
-import { Container } from "@/styles/07-objects/objects";
 
 const ForgotPasswordPage = () => {
   const [isLoading, setIsLoading] = useState(false);

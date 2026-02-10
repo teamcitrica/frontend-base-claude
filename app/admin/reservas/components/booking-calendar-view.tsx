@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, Button, Card, Icon } from "citrica-ui-toolkit";
 import { Chip } from "@heroui/react";
-
 import { useAdminBookings } from "@/app/hooks/useAdminBookings";
 import { formatTimeSlotsWithDuration } from "@/shared/utils/timeSlotHelpers";
 

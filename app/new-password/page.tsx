@@ -1,5 +1,7 @@
-import { Container } from "@/styles/07-objects/objects";
+"use client";
+import { Container } from 'citrica-ui-toolkit';
 import NewPassword from "@/shared/components/citrica-ui/organism/new-password";
+import { use } from 'react';
 
 const NewPasswordPage = () => {
   return (

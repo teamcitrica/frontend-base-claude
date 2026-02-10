@@ -8,9 +8,10 @@ import {
   Card,
   Text,
   Icon,
+  Container,
+  Col,
 } from "citrica-ui-toolkit";
 
-import { Container, Col } from "@/styles/07-objects/objects";
 
 const FormComponentsExample = () => {
   const [formData, setFormData] = useState({

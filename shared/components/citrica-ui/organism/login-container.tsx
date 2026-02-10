@@ -1,13 +1,11 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Input, Button, Icon, Text } from "citrica-ui-toolkit";
+import { Input, Button, Icon, Text, Container } from "citrica-ui-toolkit";
 import { addToast } from "@heroui/toast";
 import { useForm } from "react-hook-form";
 import { Divider, Link } from "@heroui/react";
-
 import { UserAuth } from "@/shared/context/auth-context";
-import { Container } from "@/styles/07-objects/objects";
 
 type FormValues = {
   password: string;

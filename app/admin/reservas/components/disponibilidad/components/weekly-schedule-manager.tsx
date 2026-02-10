@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import { Text, Button, Card, Modal, Icon } from "citrica-ui-toolkit";
 import { Switch } from "@heroui/react";
-
 import {
   useAdminBookings,
   WeeklyAvailability,

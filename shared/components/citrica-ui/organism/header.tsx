@@ -1,8 +1,6 @@
 "use client";
 import React from "react";
-import { Col, Container } from "@citrica/objects";
-import { Text, Button, Icon } from "citrica-ui-toolkit";
-
+import { Text, Button, Icon, Col, Container } from "citrica-ui-toolkit";
 import { siteConfig } from "@/config/site";
 
 interface HeaderProps {
