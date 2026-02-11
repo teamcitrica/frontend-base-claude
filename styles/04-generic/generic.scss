@@ -7,12 +7,15 @@
 @import '../01-settings/colors-admin/colors-admin-dark-theme.scss';
 @import '../01-settings/colors-admin/colors-admin-light-theme.scss';
 @import '../10-tokens/components/form-tokens.scss';
+@import '../10-tokens/components-admin/form-admin-tokens.scss';
+
 :root{
   // Default light theme
   @include light-theme;
   @include admin-light-theme;
   @include a-set($root-vars);
   @include form-tokens;
+  @include form-admin-tokens;
 
   &[data-theme="light"] {
     @include light-theme;
