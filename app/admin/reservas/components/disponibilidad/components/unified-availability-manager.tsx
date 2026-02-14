@@ -1,15 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Text, Button, Card, Col, Container } from "citrica-ui-toolkit";
-import {
-  Calendar,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from "@heroui/react";
+import { Calendar, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import { useAdminBookings } from "@/app/hooks/useAdminBookings";
 import { useStudioConfig } from "@/app/hooks/useStudioConfig";
@@ -644,12 +636,12 @@ const UnifiedAvailabilityManager = () => {
         <Card className="p-6">
           <div>
             <p>
-              <Text color="#964f20" variant="title">
+              <Text isAdmin={true} color="color-admin-primary" variant="title">
                 Gestión Unificada de Disponibilidad
               </Text>
             </p>
             <p>
-              <Text color="color-on-surface" variant="body">
+              <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                 Selecciona un día en el calendario y gestiona su disponibilidad
                 slot por slot.
               </Text>
@@ -662,7 +654,7 @@ const UnifiedAvailabilityManager = () => {
         <Card className="p-6">
           <div className="space-y-4">
             <p>
-              <Text color="#964f20" variant="subtitle">
+              <Text isAdmin={true} color="color-admin-primary" variant="subtitle">
                 Calendario
               </Text>
             </p>
@@ -686,7 +678,7 @@ const UnifiedAvailabilityManager = () => {
             {/* Controles de horario */}
             <div className="space-y-3">
               <div className="flex gap-2 items-center flex-wrap">
-                <Text className="font-semibold" color="#964f20" variant="body">
+                <Text isAdmin={true} className="font-semibold" color="color-admin-primary" variant="body">
                   Horario de Oficina:
                 </Text>
                 <select
@@ -700,7 +692,7 @@ const UnifiedAvailabilityManager = () => {
                     </option>
                   ))}
                 </select>
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                   -
                 </Text>
                 <select
@@ -717,35 +709,38 @@ const UnifiedAvailabilityManager = () => {
               </div>
 
               <div className="flex gap-2 flex-wrap">
-                <Button size="sm" variant="flat" onClick={applyOfficeHours}>
+                <Button isAdmin={true} size="sm" variant="flat" onClick={applyOfficeHours}>
                   🕘 Aplicar Horario de Oficina
                 </Button>
-                <Button size="sm" variant="flat" onClick={activateAllSlots}>
+                <Button isAdmin={true} size="sm" variant="flat" onClick={activateAllSlots}>
                   🌐 Activar Todos los Slots
                 </Button>
               </div>
 
               {/* Configuración de modo de visualización para usuarios */}
               <div className="space-y-2 p-3 bg-blue-50 rounded-lg border border-blue-200">
-                <Text className="font-semibold" color="#1e40af" variant="body">
+                <Text isAdmin={true} className="font-semibold" color="#1e40af" variant="body">
                   🎛️ Configuración del Formulario Público:
                 </Text>
                 <div className="flex gap-2 items-center flex-wrap">
-                  <Text
+                  <Text 
+                    isAdmin={true}
                     className="text-sm"
-                    color="color-on-surface"
+                    color="color-admin-on-surface"
                     variant="body"
                   >
                     Los usuarios verán:
                   </Text>
-                  <Button
+                  <Button 
+                    isAdmin={true}
                     size="sm"
                     variant={userDisplayMode === "30min" ? "primary" : "flat"}
                     onClick={() => updateDisplayModeConfiguration("30min")}
                   >
                     Slots de 30min
                   </Button>
-                  <Button
+                  <Button 
+                    isAdmin={true}
                     size="sm"
                     variant={userDisplayMode === "1hour" ? "primary" : "flat"}
                     onClick={() => updateDisplayModeConfiguration("1hour")}
@@ -753,9 +748,10 @@ const UnifiedAvailabilityManager = () => {
                     Horas completas
                   </Button>
                 </div>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="text-xs"
-                  color="color-on-surface"
+                  color="color-admin-on-surface"
                   variant="body"
                 >
                   {userDisplayMode === "1hour"
@@ -766,21 +762,24 @@ const UnifiedAvailabilityManager = () => {
                 {/* Configuración de selección múltiple */}
                 <div className="pt-2 border-t border-blue-200">
                   <div className="flex gap-2 items-center flex-wrap">
-                    <Text
+                    <Text 
+                      isAdmin={true}
                       className="text-sm"
-                      color="color-on-surface"
+                      color="color-admin-on-surface"
                       variant="body"
                     >
                       Permitir selección:
                     </Text>
-                    <Button
+                    <Button 
+                      isAdmin={true}
                       size="sm"
                       variant={allowMultipleTimeSlots ? "primary" : "flat"}
                       onClick={() => updateMultipleTimeSlotsConfiguration(true)}
                     >
                       Múltiples horarios
                     </Button>
-                    <Button
+                    <Button 
+                      isAdmin={true}
                       size="sm"
                       variant={!allowMultipleTimeSlots ? "primary" : "flat"}
                       onClick={() =>
@@ -790,9 +789,10 @@ const UnifiedAvailabilityManager = () => {
                       Un solo horario
                     </Button>
                   </div>
-                  <Text
+                  <Text 
+                    isAdmin={true}
                     className="text-xs mt-1"
-                    color="color-on-surface"
+                    color="color-admin-on-surface"
                     variant="body"
                   >
                     {allowMultipleTimeSlots
@@ -806,31 +806,31 @@ const UnifiedAvailabilityManager = () => {
             <div className="flex gap-2 text-xs flex-wrap">
               <div className="flex items-center gap-1">
                 <div className="w-3 h-3 bg-green-500 rounded-full" />
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                   Disponible
                 </Text>
               </div>
               <div className="flex items-center gap-1">
                 <div className="w-3 h-3 bg-yellow-500 rounded-full" />
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                   Reservado
                 </Text>
               </div>
               <div className="flex items-center gap-1">
                 <div className="w-3 h-3 bg-red-500 rounded-full" />
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                   Bloqueado
                 </Text>
               </div>
               <div className="flex items-center gap-1">
                 <div className="w-3 h-3 bg-red-300 rounded-full" />
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                   Inactivo
                 </Text>
               </div>
               <div className="flex items-center gap-1">
                 <div className="w-3 h-3 bg-gray-600 rounded-full" />
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                   Fuera de horario
                 </Text>
               </div>
@@ -843,7 +843,7 @@ const UnifiedAvailabilityManager = () => {
         <Card className="p-6">
           <div className="space-y-4">
             <div className="flex justify-between items-center">
-              <Text color="#964f20" variant="subtitle">
+              <Text isAdmin={true} color="color-admin-primary" variant="subtitle">
                 Horarios - {selectedDate && formatDateForDisplay(selectedDate)}
               </Text>
             </div>
@@ -851,7 +851,8 @@ const UnifiedAvailabilityManager = () => {
             {/* Acciones rápidas */}
             <div className="space-y-2">
               <div className="flex gap-2 flex-wrap">
-                <Button
+                <Button 
+                  isAdmin={true}
                   disabled={isLoading}
                   size="sm"
                   variant="danger"
@@ -859,7 +860,8 @@ const UnifiedAvailabilityManager = () => {
                 >
                   Bloquear Todo el Día
                 </Button>
-                <Button
+                <Button 
+                  isAdmin={true}
                   disabled={isLoading}
                   size="sm"
                   variant="success"
@@ -870,7 +872,7 @@ const UnifiedAvailabilityManager = () => {
               </div>
 
               {/* <div className="flex gap-2 flex-wrap">
-                <Button
+                <Button isAdmin={true}
                   size="sm"
                   variant="danger"
                   onClick={blockEntireMonth}
@@ -879,7 +881,7 @@ const UnifiedAvailabilityManager = () => {
                 >
                   🗓️ Bloquear Mes Completo
                 </Button>
-                <Button
+                <Button isAdmin={true}
                   size="sm"
                   variant="success"
                   onClick={unblockEntireMonth}
@@ -894,7 +896,7 @@ const UnifiedAvailabilityManager = () => {
             {/* Grid de slots */}
             {isLoading ? (
               <div className="text-center py-8">
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                   Cargando horarios...
                 </Text>
               </div>
@@ -937,9 +939,10 @@ const UnifiedAvailabilityManager = () => {
             {/* Estadísticas */}
             <div className="grid grid-cols-4 gap-2 pt-4 border-t text-center">
               <div>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="font-semibold"
-                  color="color-on-surface"
+                  color="color-admin-on-surface"
                   variant="body"
                 >
                   {
@@ -948,50 +951,56 @@ const UnifiedAvailabilityManager = () => {
                     ).length
                   }
                 </Text>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="text-xs"
-                  color="color-on-surface"
+                  color="color-admin-on-surface"
                   variant="label"
                 >
                   Disponibles
                 </Text>
               </div>
               <div>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="font-semibold"
-                  color="color-on-surface"
+                  color="color-admin-on-surface"
                   variant="body"
                 >
                   {reservedSlots.length}
                 </Text>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="text-xs"
-                  color="color-on-surface"
+                  color="color-admin-on-surface"
                   variant="label"
                 >
                   Reservados
                 </Text>
               </div>
               <div>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="font-semibold"
-                  color="color-on-surface"
+                  color="color-admin-on-surface"
                   variant="body"
                 >
                   {blockedSlots.length}
                 </Text>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="text-xs"
-                  color="color-on-surface"
+                  color="color-admin-on-surface"
                   variant="label"
                 >
                   Bloqueados
                 </Text>
               </div>
               <div>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="font-semibold"
-                  color="color-on-surface"
+                  color="color-admin-on-surface"
                   variant="body"
                 >
                   {
@@ -1002,9 +1011,9 @@ const UnifiedAvailabilityManager = () => {
                     ).length
                   }
                 </Text>
-                <Text
+                <Text isAdmin={true} 
                   className="text-xs"
-                  color="color-on-surface"
+                  color="color-admin-on-surface"
                   variant="label"
                 >
                   Inactivos
@@ -1019,7 +1028,7 @@ const UnifiedAvailabilityManager = () => {
       <Modal isOpen={isOpen} size="lg" onClose={onClose}>
         <ModalContent>
           <ModalHeader>
-            <Text color="#964f20" variant="subtitle">
+            <Text isAdmin={true} color="color-admin-primary" variant="subtitle">
               ¿Desea Bloquear la hora {modalData?.timeSlot}?
             </Text>
           </ModalHeader>
@@ -1030,18 +1039,18 @@ const UnifiedAvailabilityManager = () => {
                 onClick={handleBlockForToday}
               >
                 <p>
-                  <Text
+                  <Text isAdmin={true} 
                     className="font-semibold mb-2"
-                    color="color-on-surface"
+                    color="color-admin-on-surface"
                     variant="body"
                   >
                     📅 Bloquear solo para hoy
                   </Text>
                 </p>
                 <p>
-                  <Text
+                  <Text isAdmin={true} 
                     className="text-sm"
-                    color="color-on-surface"
+                    color="color-admin-on-surface"
                     variant="body"
                   >
                     El slot {modalData?.timeSlot} se bloqueará únicamente para
@@ -1056,12 +1065,12 @@ const UnifiedAvailabilityManager = () => {
                 className="w-full p-4 bg-orange-50 hover:bg-orange-100 rounded-lg border-2 border-orange-200 hover:border-orange-400 transition-all cursor-pointer text-left"
               >
                 <p>
-                  <Text variant="body" color="color-on-surface" className="font-semibold mb-2">
+                  <Text isAdmin={true}variant="body" color="color-admin-on-surface" className="font-semibold mb-2">
                     🔒 Desactivar permanentemente
                   </Text>
                 </p>
                 <p>
-                  <Text variant="body" color="color-on-surface" className="text-sm">
+                  <Text isAdmin={true}variant="body" color="color-admin-on-surface" className="text-sm">
                     El slot {modalData?.timeSlot} se desactivará de la configuración semanal.
                     Ya no estará disponible para ningún {modalData?.dayName} hasta que lo reactives.
                   </Text>
@@ -1070,7 +1079,7 @@ const UnifiedAvailabilityManager = () => {
             </div>
           </ModalBody>
           <ModalFooter>
-            <Button fullWidth size="sm" variant="flat" onClick={onClose}>
+            <Button isAdmin={true} fullWidth size="sm" variant="flat" onClick={onClose}>
               Cancelar
             </Button>
           </ModalFooter>

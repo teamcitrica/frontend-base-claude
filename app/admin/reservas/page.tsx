@@ -4,21 +4,7 @@ export const dynamic = "force-dynamic";
 import React, { useState, useEffect, Suspense } from "react";
 import { useSearchParams } from "next/navigation";
 import { Text, Button, Card, Container, Col, Icon, Modal } from "citrica-ui-toolkit";
-import {
-  Chip,
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  Dropdown,
-  DropdownTrigger,
-  DropdownMenu,
-  DropdownItem,
-  Select,
-  SelectItem,
-} from "@heroui/react";
+import { Chip, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Dropdown, DropdownTrigger, DropdownMenu, DropdownItem, Select, SelectItem } from "@heroui/react";
 import { addToast } from "@heroui/toast";
 import BookingCalendarView from "./components/booking-calendar-view";
 import BookingStatsView from "./components/booking-stats-view";
@@ -207,25 +193,22 @@ const ReservasContent = () => {
     switch (activeTab) {
       case "calendario":
         return <BookingCalendarView />;
-
       case "estadisticas":
         return <BookingStatsView />;
-
       case "disponibilidad":
         return <BookingAvailabilityView />;
-
       default: // "lista"
         return (
           <div className="space-y-2">
             {/* Filtros */}
-            <Card className="p-4">
+            <Card>
               <div className="flex flex-col md:flex-row justify-between items-start md:items-center">
                 <div>
-                  <Text color="#964f20" variant="title">
+                  <Text isAdmin={true} textColor="color-admin-primary" variant="title">
                     Gestión de Reservas
                   </Text>
                   <p>
-                    <Text color="var(--color-on-surface)" variant="body">
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       Administra todas las reservas del estudio
                     </Text>
                   </p>
@@ -256,28 +239,20 @@ const ReservasContent = () => {
             <Card className="p-2">
               {isLoading ? (
                 <div className="text-center py-8">
-                  <Text color="color-on-surface" variant="body">
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                     Cargando reservas...
                   </Text>
                 </div>
               ) : bookings.length === 0 ? (
                 <div className="text-center py-8">
-                  <Icon
-                    className="mx-auto text-gray-400 mb-4"
-                    name="Calendar"
-                    size={48}
-                  />
+                  <Icon className="mx-auto text-gray-400 mb-4" name="Calendar" size={48}/>
                   <p>
-                    <Text
-                      className="mb-2"
-                      color="color-on-surface"
-                      variant="title"
-                    >
+                    <Text isAdmin={true} className="mb-2" textColor="color-admin-on-surface" variant="title">
                       No hay reservas
                     </Text>
                   </p>
                   <p>
-                    <Text color="color-on-surface" variant="body">
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       {statusFilter === "all"
                         ? "Aún no se han realizado reservas"
                         : `No hay reservas con estado "${getStatusLabel(statusFilter)}"`}
@@ -301,18 +276,14 @@ const ReservasContent = () => {
                         <TableCell>
                           <div>
                             <p>
-                              <Text color="color-on-surface" variant="body">
+                              <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                                 {booking.customer
                                   ? booking.customer.full_name
                                   : "Bloqueo Administrativo"}
                               </Text>
                             </p>
                             <p>
-                              <Text
-                                className="text-sm"
-                                color="color-on-surface"
-                                variant="label"
-                              >
+                              <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                                 {booking.customer
                                   ? booking.customer.email
                                   : booking.reason || "Sin razón especificada"}
@@ -320,11 +291,7 @@ const ReservasContent = () => {
                             </p>
                             {booking.customer?.phone && (
                               <p>
-                                <Text
-                                  className="text-sm"
-                                  color="color-on-surface"
-                                  variant="label"
-                                >
+                                <Text isAdmin={true} className="text-sm" textColor="color-admin-on-surface" variant="label">
                                   {booking.customer.phone}
                                 </Text>
                               </p>
@@ -334,16 +301,12 @@ const ReservasContent = () => {
                         <TableCell>
                           <div>
                             <p>
-                              <Text color="color-on-surface" variant="body">
+                              <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                                 {formatDate(booking.booking_date)}
                               </Text>
                             </p>
                             <p>
-                              <Text
-                                className="text-sm"
-                                color="color-on-surface"
-                                variant="label"
-                              >
+                              <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                                 {formatTimeSlots(booking.time_slots)}
                               </Text>
                             </p>
@@ -380,15 +343,12 @@ const ReservasContent = () => {
                               title="Ver detalles"
                               onClick={() => handleOpenDetails(booking)}
                             >
-                              <Icon className="h-5 w-5" name="Eye" />
+                              <Icon size={20} name="Eye" />
                             </button>
                             <Dropdown>
                               <DropdownTrigger>
                                 <button className="text-lg cursor-pointer active:opacity-50 text-default-400">
-                                  <Icon
-                                    className="h-5 w-5"
-                                    name="MoreVertical"
-                                  />
+                                  <Icon size={20} name="MoreVertical" />
                                 </button>
                               </DropdownTrigger>
                               <DropdownMenu
@@ -403,10 +363,7 @@ const ReservasContent = () => {
                                       key="confirm"
                                       color="success"
                                       startContent={
-                                        <Icon
-                                          className="h-4 w-4"
-                                          name="Check"
-                                        />
+                                        <Icon size={16} name="Check" />
                                       }
                                     >
                                       Confirmar
@@ -418,7 +375,7 @@ const ReservasContent = () => {
                                       key="cancel"
                                       color="warning"
                                       startContent={
-                                        <Icon className="h-4 w-4" name="X" />
+                                        <Icon size={16} name="X" />
                                       }
                                     >
                                       Cancelar
@@ -430,7 +387,7 @@ const ReservasContent = () => {
                                   className="text-danger"
                                   color="danger"
                                   startContent={
-                                    <Icon className="h-4 w-4" name="Trash2" />
+                                    <Icon size={16} name="Trash2" />
                                   }
                                 >
                                   Eliminar
@@ -456,16 +413,16 @@ const ReservasContent = () => {
         <Col className="space-y-6" cols={{ lg: 12, md: 6, sm: 4 }}>
           {/* Header */}
           <div className="flex items-center gap-3">
-            <Icon className="text-[#964f20]" name="Calendar" size={24} />
+            <Icon className="text-[var(--color-admin-primary)]" name="Calendar" size={24} />
             <div>
-              <Text color="#964f20" variant="title">
+              <Text isAdmin={true} textColor="color-admin-primary" variant="title">
                 {activeTab === "lista" && "Lista de Reservas"}
                 {activeTab === "calendario" && "Calendario de Reservas"}
                 {activeTab === "estadisticas" && "Estadísticas de Reservas"}
                 {activeTab === "disponibilidad" && "Gestión de Disponibilidad"}
               </Text>
               <p>
-                <Text color="var(--color-on-surface)" variant="body">
+                <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                   {activeTab === "lista" &&
                     "Gestiona todas las reservas del estudio"}
                   {activeTab === "calendario" &&
@@ -492,7 +449,7 @@ const ReservasContent = () => {
         title="Detalles de la Reserva"
         // footer={
         //   <div className="flex justify-end gap-2 w-full">
-        //     <Button variant="secondary" onClick={handleCloseModal}>
+        //     <Button isAdmin={true}variant="secondary" onClick={handleCloseModal}>
         //       Cerrar
         //     </Button>
         //   </div>
@@ -502,59 +459,35 @@ const ReservasContent = () => {
           <div className="space-y-4">
             {/* Cliente */}
             <div>
-              <Text color="#964f20" variant="subtitle">
+              <Text isAdmin={true} textColor="color-admin-primary" variant="subtitle">
                 Información del Cliente
               </Text>
               <div className="mt-2 space-y-2">
                 <div>
-                  <Text
-                    className="font-semibold"
-                    color="color-on-surface"
-                    variant="label"
-                  >
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                     Nombre:
                   </Text>
-                  <Text
-                    className="ml-2"
-                    color="color-on-surface"
-                    variant="body"
-                  >
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                     {selectedBooking.customer?.full_name ||
                       "Bloqueo Administrativo"}
                   </Text>
                 </div>
                 {selectedBooking.customer?.email && (
                   <div>
-                    <Text
-                      className="font-semibold"
-                      color="color-on-surface"
-                      variant="label"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                       Email:
                     </Text>
-                    <Text
-                      className="ml-2"
-                      color="color-on-surface"
-                      variant="body"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       {selectedBooking.customer.email}
                     </Text>
                   </div>
                 )}
                 {selectedBooking.customer?.phone && (
                   <div>
-                    <Text
-                      className="font-semibold"
-                      color="color-on-surface"
-                      variant="label"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                       Teléfono:
                     </Text>
-                    <Text
-                      className="ml-2"
-                      color="color-on-surface"
-                      variant="body"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       {selectedBooking.customer.phone}
                     </Text>
                   </div>
@@ -564,55 +497,31 @@ const ReservasContent = () => {
 
             {/* Detalles de la reserva */}
             <div>
-              <Text color="#964f20" variant="subtitle">
+              <Text isAdmin={true} textColor="color-admin-primary" variant="subtitle">
                 Detalles de la Reserva
               </Text>
               <div className="mt-2 space-y-2">
                 <div>
-                  <Text
-                    className="font-semibold"
-                    color="color-on-surface"
-                    variant="label"
-                  >
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                     Fecha:
                   </Text>
-                  <Text
-                    className="ml-2"
-                    color="color-on-surface"
-                    variant="body"
-                  >
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                     {formatDate(selectedBooking.booking_date)}
                   </Text>
                 </div>
                 <div>
-                  <Text
-                    className="font-semibold"
-                    color="color-on-surface"
-                    variant="label"
-                  >
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                     Horario:
                   </Text>
-                  <Text
-                    className="ml-2"
-                    color="color-on-surface"
-                    variant="body"
-                  >
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                     {formatTimeSlots(selectedBooking.time_slots)}
                   </Text>
                 </div>
                 <div>
-                  <Text
-                    className="font-semibold"
-                    color="color-on-surface"
-                    variant="label"
-                  >
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                     Tipo de sesión:
                   </Text>
-                  <Text
-                    className="ml-2"
-                    color="color-on-surface"
-                    variant="body"
-                  >
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                     {selectedBooking.type_id === 2
                       ? "Bloqueo Administrativo"
                       : selectedBooking.session_type === "fotografia-modelo"
@@ -621,11 +530,7 @@ const ReservasContent = () => {
                   </Text>
                 </div>
                 <div>
-                  <Text
-                    className="font-semibold"
-                    color="color-on-surface"
-                    variant="label"
-                  >
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                     Estado:
                   </Text>
                   <Chip
@@ -639,18 +544,10 @@ const ReservasContent = () => {
                 </div>
                 {selectedBooking.project_details && (
                   <div>
-                    <Text
-                      className="font-semibold"
-                      color="color-on-surface"
-                      variant="label"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                       Detalles del proyecto:
                     </Text>
-                    <Text
-                      className="mt-1"
-                      color="color-on-surface"
-                      variant="body"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       {selectedBooking.project_details}
                     </Text>
                   </div>
@@ -660,23 +557,23 @@ const ReservasContent = () => {
 
             {/* Información adicional */}
             {/* <div>
-              <Text variant="subtitle" color="#964f20">
+              <Text isAdmin={true}variant="subtitle" color="color-admin-primary">
                 Información Adicional
               </Text>
               <div className="mt-2 space-y-2">
                 <div>
-                  <Text variant="label" color="color-on-surface" className="font-semibold">
+                  <Text isAdmin={true}variant="label" color="color-admin-on-surface" className="font-semibold">
                     Creada:
                   </Text>
-                  <Text variant="body" color="color-on-surface" className="ml-2">
+                  <Text isAdmin={true}variant="body" color="color-admin-on-surface" className="ml-2">
                     {new Date(selectedBooking.created_at).toLocaleString('es-ES')}
                   </Text>
                 </div>
                 <div>
-                  <Text variant="label" color="color-on-surface" className="font-semibold">
+                  <Text isAdmin={true}variant="label" color="color-admin-on-surface" className="font-semibold">
                     Última actualización:
                   </Text>
-                  <Text variant="body" color="color-on-surface" className="ml-2">
+                  <Text isAdmin={true}variant="body" color="color-admin-on-surface" className="ml-2">
                     {new Date(selectedBooking.updated_at).toLocaleString('es-ES')}
                   </Text>
                 </div>
@@ -690,10 +587,15 @@ const ReservasContent = () => {
       <Modal
         footer={
           <div className="flex justify-end gap-2 w-full">
-            <Button variant="secondary" onClick={handleCloseAllModals}>
+            <Button 
+              isAdmin={true} 
+              variant="secondary" 
+              onClick={handleCloseAllModals}
+            >
               Cancelar
             </Button>
-            <Button
+            <Button 
+              isAdmin={true}
               variant="primary"
               onClick={handleConfirmBookingFromDropdown}
             >
@@ -706,7 +608,7 @@ const ReservasContent = () => {
         title="Confirmar Reserva"
         onClose={handleCloseAllModals}
       >
-        <Text color="color-on-surface" variant="body">
+        <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
           ¿Estás seguro de que deseas confirmar esta reserva?
         </Text>
       </Modal>
@@ -715,10 +617,10 @@ const ReservasContent = () => {
       <Modal
         footer={
           <div className="flex justify-end gap-2 w-full">
-            <Button variant="secondary" onClick={handleCloseAllModals}>
+            <Button isAdmin={true} variant="secondary" onClick={handleCloseAllModals}>
               No, mantener
             </Button>
-            <Button variant="primary" onClick={handleCancelBooking}>
+            <Button isAdmin={true} variant="primary" onClick={handleCancelBooking}>
               Sí, cancelar
             </Button>
           </div>
@@ -728,7 +630,7 @@ const ReservasContent = () => {
         title="Cancelar Reserva"
         onClose={handleCloseAllModals}
       >
-        <Text color="color-on-surface" variant="body">
+        <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
           ¿Estás seguro de que deseas cancelar esta reserva?
         </Text>
       </Modal>
@@ -737,10 +639,10 @@ const ReservasContent = () => {
       <Modal
         footer={
           <div className="flex justify-end gap-2 w-full">
-            <Button variant="secondary" onClick={handleCloseAllModals}>
+            <Button isAdmin={true} variant="secondary" onClick={handleCloseAllModals}>
               Cancelar
             </Button>
-            <Button variant="primary" onClick={handleDeleteBooking}>
+            <Button isAdmin={true} variant="primary" onClick={handleDeleteBooking}>
               Eliminar
             </Button>
           </div>
@@ -750,7 +652,7 @@ const ReservasContent = () => {
         title="Eliminar Reserva"
         onClose={handleCloseAllModals}
       >
-        <Text color="color-on-surface" variant="body">
+        <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
           ¿Estás seguro de que deseas eliminar esta reserva? Esta acción no se
           puede deshacer.
         </Text>

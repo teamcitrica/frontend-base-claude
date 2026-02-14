@@ -11,7 +11,7 @@ function Content() {
 
   return (
     <div>
-      <Text variant="headline">{`Config App ${typeApp}`}</Text>
+      <Text isAdmin={true} textColor="color-admin-primary" variant="headline">{`Config App ${typeApp}`}</Text>
     </div>
   );
 }

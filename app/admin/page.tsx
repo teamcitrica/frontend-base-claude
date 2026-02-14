@@ -54,26 +54,27 @@ const BookingStatsView = () => {
 
   return (
     <Container>
-      <Col className="space-y-6" cols={{ lg: 12, md: 6, sm: 4 }}>
-        <div className="space-y-6">
+      <Col noPadding className="space-y-6" cols={{ lg: 12, md: 6, sm: 4 }}>
+        <div className="space-y-2">
           {/* Header */}
-          <Card className="p-6">
+          <Card>
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <div>
                 <p>
-                  <Text className="capitalize" color="#964f20" variant="title">
+                  <Text isAdmin={true} className="capitalize" textColor="color-admin-primary" variant="title">
                     Estadísticas - {monthYear}
                   </Text>
                 </p>
                 <p>
-                  <Text color="color-on-surface" variant="body">
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                     Métricas de reservas del estudio
                   </Text>
                 </p>
               </div>
 
               <div className="flex gap-2">
-                <Button
+                <Button 
+                  isAdmin={true}
                   size="sm"
                   startContent={<Icon name="ChevronLeft" size={16} />}
                   variant="secondary"
@@ -81,14 +82,16 @@ const BookingStatsView = () => {
                 >
                   Anterior
                 </Button>
-                <Button
+                <Button 
+                  isAdmin={true}
                   size="sm"
                   variant="secondary"
                   onClick={goToCurrentMonth}
                 >
                   Actual
                 </Button>
-                <Button
+                <Button 
+                  isAdmin={true}
                   endContent={<Icon name="ChevronRight" size={16} />}
                   size="sm"
                   variant="secondary"
@@ -104,23 +107,19 @@ const BookingStatsView = () => {
           {isLoading ? (
             <Card className="p-6">
               <div className="text-center py-8">
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                   Cargando estadísticas...
                 </Text>
               </div>
             </Card>
           ) : !stats ? (
             <Card className="p-6">
-              <div className="text-center py-8">
-                <Icon
-                  className="mx-auto text-gray-400 mb-4"
-                  name="AlertCircle"
-                  size={48}
-                />
-                <Text className="mb-2" color="color-on-surface" variant="title">
+              <div className="flex flex-col justify-center items-center py-8">
+                <Icon className="mb-4" color="#9ca3af" name="AlertCircle" size={48}/>
+                <Text isAdmin={true} className="mb-2" textColor="color-admin-on-surface" variant="title">
                   No se pudieron cargar las estadísticas
                 </Text>
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                   Intenta recargar la página o seleccionar otro mes
                 </Text>
               </div>
@@ -131,35 +130,23 @@ const BookingStatsView = () => {
               <Card className="p-6">
                 <div className="flex items-center gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <Icon
-                        className="text-blue-600"
-                        name="Calendar"
-                        size={24}
-                      />
+                    <div className="bg-blue-100 rounded-lg flex items-center justify-center">
+                      <Icon color="#2563eb" name="Calendar" size={24} />
                     </div>
                   </div>
                   <div className="flex-1">
                     <p>
-                      <Text
-                        className="text-2xl font-bold"
-                        color="color-on-surface"
-                        variant="title"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="title">
                         {stats.total_days}
                       </Text>
                     </p>
                     <p>
-                      <Text color="color-on-surface" variant="subtitle">
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="subtitle">
                         Días del Mes
                       </Text>
                     </p>
                     <p>
-                      <Text
-                        className="text-sm"
-                        color="color-on-surface"
-                        variant="body"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         Total de días en {monthYear}
                       </Text>
                     </p>
@@ -171,35 +158,23 @@ const BookingStatsView = () => {
               <Card className="p-6">
                 <div className="flex items-center gap-4">
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
-                      <Icon
-                        className="text-green-600"
-                        name="CheckCircle"
-                        size={24}
-                      />
+                    <div className="bg-green-100 rounded-lg flex items-center justify-center">
+                      <Icon color="#16a34a" name="CheckCircle" size={24}/>
                     </div>
                   </div>
                   <div className="flex-1">
                     <p>
-                      <Text
-                        className="text-2xl font-bold"
-                        color="color-on-surface"
-                        variant="title"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="title">
                         {stats.days_with_bookings}
                       </Text>
                     </p>
                     <p>
-                      <Text color="color-on-surface" variant="subtitle">
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="subtitle">
                         Días con Reservas
                       </Text>
                     </p>
                     <p>
-                      <Text
-                        className="text-sm"
-                        color="color-on-surface"
-                        variant="body"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface"  variant="body">
                         {reservationPercentage}% de días ocupados
                       </Text>
                     </p>
@@ -219,34 +194,23 @@ const BookingStatsView = () => {
                 <div className="flex items-center gap-4">
                   <div className="flex-shrink-0">
                     <div className="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                      <Icon
-                        className="text-purple-600"
-                        name="Clock"
-                        size={24}
-                      />
+                      <Icon color="#9333ea" name="Clock" size={24}/>
                     </div>
                   </div>
                   <div className="flex-1">
                     <p>
-                      <Text
-                        className="text-2xl font-bold"
-                        color="color-on-surface"
-                        variant="title"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="title">
                         {stats.total_bookings}
                       </Text>
                     </p>
                     <p>
-                      <Text color="color-on-surface" variant="subtitle">
+                      <Text 
+                        isAdmin={true} textColor="color-admin-on-surface" variant="subtitle">
                         Total Reservas
                       </Text>
                     </p>
                     <p>
-                      <Text
-                        className="text-sm"
-                        color="color-on-surface"
-                        variant="body"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         Reservas confirmadas en el mes
                       </Text>
                     </p>
@@ -260,28 +224,20 @@ const BookingStatsView = () => {
           {stats && (
             <Card className="p-6">
               <p>
-                <Text className="mb-4" color="#964f20" variant="subtitle">
+                <Text isAdmin={true} className="mb-4" textColor="color-admin-primary" variant="subtitle">
                   Resumen del Mes
                 </Text>
               </p>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div>
                   <p>
-                    <Text
-                      className="text-sm"
-                      color="color-on-surface"
-                      variant="body"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       • Días con actividad: {stats.days_with_bookings} de{" "}
                       {stats.total_days} días
                     </Text>
                   </p>
                   <p>
-                    <Text
-                      className="text-sm"
-                      color="color-on-surface"
-                      variant="body"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       • Promedio de reservas por día activo:{" "}
                       {stats.days_with_bookings > 0
                         ? Math.round(
@@ -292,11 +248,7 @@ const BookingStatsView = () => {
                     </Text>
                   </p>
                   <p>
-                    <Text
-                      className="text-sm"
-                      color="color-on-surface"
-                      variant="body"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       • Días libres:{" "}
                       {stats.total_days - stats.days_with_bookings} días
                     </Text>
@@ -304,20 +256,12 @@ const BookingStatsView = () => {
                 </div>
                 <div>
                   <p>
-                    <Text
-                      className="text-sm"
-                      color="color-on-surface"
-                      variant="body"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       • Nivel de ocupación: {reservationPercentage}%
                     </Text>
                   </p>
                   <p>
-                    <Text
-                      className="text-sm"
-                      color="color-on-surface"
-                      variant="body"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       • Total de sesiones: {stats.total_bookings}
                     </Text>
                   </p>

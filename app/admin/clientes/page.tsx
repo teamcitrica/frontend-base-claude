@@ -1,24 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import {
-  Text,
-  Button,
-  Card,
-  Icon,
-  Input,
-  Container,
-  Col,
-} from "citrica-ui-toolkit";
-import {
-  Chip,
-  Table,
-  TableHeader,
-  TableColumn,
-  TableBody,
-  TableRow,
-  TableCell,
-  Spinner,
-} from "@heroui/react";
+import { Text, Button, Card, Icon, Input, Container, Col } from "citrica-ui-toolkit";
+import { Chip, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell, Spinner } from "@heroui/react";
 import { useCustomers } from "@/app/hooks/useCustomers";
 
 const ClientesAdminPage = () => {
@@ -85,16 +68,16 @@ const ClientesAdminPage = () => {
 
   return (
     <Container>
-      <Col className="space-y-6" cols={{ lg: 12, md: 6, sm: 4 }}>
+      <Col className="space-y-2" cols={{ lg: 12, md: 6, sm: 4 }}>
         {/* Header */}
         <div className="flex items-center gap-3">
-          <Icon className="text-[#964f20]" name="Users" size={24} />
+          <Icon className="text-[var(--color-admin-primary)]" name="Users" size={24} />
           <div>
-            <Text color="#964f20" variant="title">
+            <Text isAdmin={true} textColor="color-admin-primary" variant="title">
               Gestión de Clientes
             </Text>
             <p>
-              <Text color="var(--color-on-surface)" variant="body">
+              <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                 Administra la base de datos de clientes del estudio
               </Text>
             </p>
@@ -111,16 +94,12 @@ const ClientesAdminPage = () => {
                 </div>
                 <div>
                   <p>
-                    <Text
-                      className="text-sm"
-                      color="color-on-surface"
-                      variant="label"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                       Total Clientes
                     </Text>
                   </p>
                   <p>
-                    <Text color="color-on-surface" variant="title">
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="title">
                       {stats.total_customers}
                     </Text>
                   </p>
@@ -135,16 +114,12 @@ const ClientesAdminPage = () => {
                 </div>
                 <div>
                   <p>
-                    <Text
-                      className="text-sm"
-                      color="color-on-surface"
-                      variant="label"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                       Nuevos este mes
                     </Text>
                   </p>
                   <p>
-                    <Text color="color-on-surface" variant="title">
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="title">
                       {stats.new_customers_this_month}
                     </Text>
                   </p>
@@ -159,16 +134,12 @@ const ClientesAdminPage = () => {
                 </div>
                 <div>
                   <p>
-                    <Text
-                      className="text-sm"
-                      color="color-on-surface"
-                      variant="label"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                       Con Reservas
                     </Text>
                   </p>
                   <p>
-                    <Text color="color-on-surface" variant="title">
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="title">
                       {stats.customers_with_bookings}
                     </Text>
                   </p>
@@ -183,16 +154,12 @@ const ClientesAdminPage = () => {
                 </div>
                 <div>
                   <p>
-                    <Text
-                      className="text-sm"
-                      color="color-on-surface"
-                      variant="label"
-                    >
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                       Sin Reservas
                     </Text>
                   </p>
                   <p>
-                    <Text color="color-on-surface" variant="title">
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="title">
                       {stats.customers_without_bookings}
                     </Text>
                   </p>
@@ -203,14 +170,14 @@ const ClientesAdminPage = () => {
         )}
 
         {/* Controles y búsqueda */}
-        <Card className="p-4">
+        <Card>
           <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
             <div>
-              <Text color="#964f20" variant="title">
+              <Text isAdmin={true} textColor="color-admin-primary" variant="title">
                 Lista de Clientes
               </Text>
               <p>
-                <Text color="var(--color-on-surface)" variant="body">
+                <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                   {customers.length} clientes registrados
                 </Text>
               </p>
@@ -227,7 +194,7 @@ const ClientesAdminPage = () => {
               />
 
               {/* Botón para agregar cliente en futuras versiones */}
-              {/* <Button
+              {/* <Button isAdmin={true}
                 size="sm"
                 variant="primary"
                 startContent={<Icon name="UserPlus" size={16} />}
@@ -243,21 +210,17 @@ const ClientesAdminPage = () => {
           {isLoading ? (
             <div className="text-center py-8">
               <Spinner color="primary" size="lg" />
-              <Text className="mt-4" color="color-on-surface" variant="body">
+              <Text isAdmin={true} className="mt-4" textColor="color-admin-on-surface" variant="body">
                 Cargando clientes...
               </Text>
             </div>
           ) : customers.length === 0 ? (
-            <div className="text-center py-8">
-              <Icon
-                className="mx-auto text-gray-400 mb-4"
-                name="Users"
-                size={48}
-              />
-              <Text className="mb-2" color="color-on-surface" variant="title">
+            <div className="flex flex-col text-center py-8">
+              <Icon className="mx-auto text-gray-400 mb-4" name="Users" size={48} />
+              <Text isAdmin={true} className="mb-2" textColor="color-admin-on-surface" variant="title">
                 No hay clientes
               </Text>
-              <Text color="color-on-surface" variant="body">
+              <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                 {searchTerm
                   ? `No se encontraron clientes que coincidan con "${searchTerm}"`
                   : "Aún no hay clientes registrados en el sistema"}
@@ -279,21 +242,17 @@ const ClientesAdminPage = () => {
                   <TableRow key={customer.id}>
                     <TableCell>
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 bg-[#964f20] text-white rounded-full flex items-center justify-center text-sm font-medium">
+                        <div className="w-10 h-10 bg-[var(--color-admin-primary)] text-white rounded-full flex items-center justify-center text-sm font-medium">
                           {getInitials(customer.full_name)}
                         </div>
                         <div>
                           <p>
-                            <Text color="color-on-surface" variant="body">
+                            <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                               {customer.full_name}
                             </Text>
                           </p>
                           <p>
-                            <Text
-                              className="text-sm opacity-70"
-                              color="color-on-surface"
-                              variant="label"
-                            >
+                            <Text isAdmin={true} className="opacity-70" textColor="color-admin-on-surface" variant="label">
                               ID: {customer.id.slice(0, 8)}...
                             </Text>
                           </p>
@@ -304,17 +263,13 @@ const ClientesAdminPage = () => {
                     <TableCell>
                       <div>
                         <p>
-                          <Text color="color-on-surface" variant="body">
+                          <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                             {customer.email}
                           </Text>
                         </p>
                         {customer.phone && (
                           <p>
-                            <Text
-                              className="text-sm"
-                              color="color-on-surface"
-                              variant="label"
-                            >
+                            <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                               {customer.phone}
                             </Text>
                           </p>
@@ -325,9 +280,7 @@ const ClientesAdminPage = () => {
                     <TableCell>
                       <div className="flex items-center gap-2">
                         <Chip
-                          color={
-                            customer._count?.bookings ? "primary" : "default"
-                          }
+                          color={customer._count?.bookings ? "primary" : "default"}
                           size="sm"
                           variant="flat"
                         >
@@ -337,7 +290,7 @@ const ClientesAdminPage = () => {
                     </TableCell>
 
                     <TableCell>
-                      <Text color="color-on-surface" variant="body">
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         {formatDate(customer.created_at)}
                       </Text>
                     </TableCell>
@@ -345,6 +298,7 @@ const ClientesAdminPage = () => {
                     <TableCell>
                       <div className="flex items-center justify-end gap-2">
                         <Button
+                          isAdmin={true}
                           className="!min-w-0 !px-4"
                           size="sm"
                           variant="secondary"
@@ -357,6 +311,7 @@ const ClientesAdminPage = () => {
                         </Button>
 
                         <Button
+                          isAdmin={true}
                           className="!min-w-0 !px-4"
                           size="sm"
                           variant="secondary"
@@ -369,6 +324,7 @@ const ClientesAdminPage = () => {
                         </Button>
 
                         <Button
+                          isAdmin={true}
                           className="!min-w-0 !px-4"
                           size="sm"
                           variant="danger"

@@ -5,7 +5,7 @@ import { Text } from "citrica-ui-toolkit";
 const TareasPage = () => {
   return (
     <div>
-      <Text color="#F94" variant="title">
+      <Text isAdmin={true} textColor="color-admin-primary" variant="title">
         Tareas
       </Text>
     </div>

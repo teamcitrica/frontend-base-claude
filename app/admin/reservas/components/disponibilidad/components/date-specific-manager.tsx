@@ -1,14 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { Text, Button, Card } from "citrica-ui-toolkit";
-import {
-  Calendar,
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-} from "@heroui/react";
+import { Calendar, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
 import { useAdminBookings } from "@/app/hooks/useAdminBookings";
 import { useStudioAvailability } from "@/app/hooks/useStudioAvailability";
@@ -362,12 +355,11 @@ const DateSpecificManager = () => {
       {/* Header */}
       <Card className="p-6">
         <div>
-          <Text color="#964f20" variant="title">
+          <Text isAdmin={true} textColor="color-admin-primary" variant="title">
             Gestión por Fechas Específicas
           </Text>
-          <Text color="color-on-surface" variant="body">
-            Selecciona un día en el calendario para gestionar sus horarios
-            específicos. Esto anulará la configuración semanal para ese día.
+          <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
+            Selecciona un día en el calendario para gestionar sus horarios específicos. Esto anulará la configuración semanal para ese día.
           </Text>
         </div>
       </Card>
@@ -375,16 +367,16 @@ const DateSpecificManager = () => {
       {/* Calendario */}
       <Card className="p-6">
         <div className="flex flex-col items-center gap-4">
-          <Text color="#964f20" variant="subtitle">
+          <Text isAdmin={true} textColor="color-admin-primary" variant="subtitle">
             Calendario de Disponibilidad
           </Text>
 
           {/* Botón de prueba para verificar el modal */}
           <Button
+            isAdmin={true}
             variant="secondary"
             onClick={() => {
               const testDate = today(getLocalTimeZone());
-
               handleDateSelect(testDate);
             }}
           >
@@ -411,13 +403,13 @@ const DateSpecificManager = () => {
           <div className="flex gap-4 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-green-500 rounded-full" />
-              <Text color="color-on-surface" variant="body">
+              <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                 Disponible (configuración semanal)
               </Text>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-3 h-3 bg-red-500 rounded-full" />
-              <Text color="color-on-surface" variant="body">
+              <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                 Tiene bloqueos específicos
               </Text>
             </div>
@@ -435,11 +427,11 @@ const DateSpecificManager = () => {
         <ModalContent>
           <ModalHeader>
             <div>
-              <Text color="#964f20" variant="title">
+              <Text isAdmin={true} textColor="color-admin-primary" variant="title">
                 Gestionar Horarios
               </Text>
               {selectedDate && (
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                   {formatDateForDisplay(selectedDate)}
                 </Text>
               )}
@@ -449,7 +441,7 @@ const DateSpecificManager = () => {
           <ModalBody>
             {isLoading ? (
               <div className="text-center py-8">
-                <Text color="color-on-surface" variant="body">
+                <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                   Cargando horarios...
                 </Text>
               </div>
@@ -457,10 +449,16 @@ const DateSpecificManager = () => {
               <div className="space-y-4">
                 {/* Acciones rápidas */}
                 <div className="flex gap-2 mb-4">
-                  <Button size="sm" variant="danger" onClick={blockEntireDay}>
+                  <Button
+                    isAdmin={true}
+                    size="sm"
+                    variant="danger"
+                    onClick={blockEntireDay}
+                  >
                     Bloquear Todo el Día
                   </Button>
                   <Button
+                    isAdmin={true}
                     size="sm"
                     variant="success"
                     onClick={unblockEntireDay}
@@ -484,16 +482,16 @@ const DateSpecificManager = () => {
 
                     return (
                       <Button
+                        isAdmin={true}
                         key={timeSlot}
                         className={`
                           !min-w-0 text-xs transition-all
                           ${!isBusinessHour ? "opacity-50" : ""}
-                          ${
-                            isBlocked
-                              ? "bg-red-500 text-white hover:bg-red-600"
-                              : isAvailableByDefault
-                                ? "bg-green-500 text-white hover:bg-green-600"
-                                : "bg-gray-300 text-gray-700 hover:bg-gray-400"
+                          ${isBlocked
+                            ? "bg-red-500 text-white hover:bg-red-600"
+                            : isAvailableByDefault
+                              ? "bg-green-500 text-white hover:bg-green-600"
+                              : "bg-gray-300 text-gray-700 hover:bg-gray-400"
                           }
                         `}
                         size="sm"
@@ -514,37 +512,25 @@ const DateSpecificManager = () => {
 
                 {/* Leyenda */}
                 <div className="space-y-2 text-xs">
-                  <Text color="#964f20" variant="subtitle">
+                  <Text isAdmin={true} textColor="color-admin-primary" variant="subtitle">
                     Leyenda
                   </Text>
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-2">
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 bg-green-500 hover:bg-green-600 rounded border" />
-                      <Text
-                        className="text-xs"
-                        color="color-on-surface"
-                        variant="body"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         Disponible (configuración semanal)
                       </Text>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 bg-gray-300 hover:bg-gray-400 rounded border" />
-                      <Text
-                        className="text-xs"
-                        color="color-on-surface"
-                        variant="body"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         No disponible (configuración semanal)
                       </Text>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-4 h-4 bg-red-500 hover:bg-red-600 rounded border" />
-                      <Text
-                        className="text-xs"
-                        color="color-on-surface"
-                        variant="body"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         Bloqueado específicamente
                       </Text>
                     </div>
@@ -555,7 +541,10 @@ const DateSpecificManager = () => {
           </ModalBody>
 
           <ModalFooter>
-            <Button variant="secondary" onClick={() => setIsModalOpen(false)}>
+            <Button
+              isAdmin={true}
+              variant="secondary"
+              onClick={() => setIsModalOpen(false)}>
               Cerrar
             </Button>
           </ModalFooter>

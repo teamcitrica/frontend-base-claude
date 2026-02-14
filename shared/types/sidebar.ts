@@ -8,8 +8,10 @@ export interface MenuItem {
   icon: string;
   href?: string;
   subItems?: SubMenuItem[];
+  allowedRoles?: number[]; // Control de permisos por rol
 }
 
 export interface SidebarProps {
   items: MenuItem[];
+  session?: any;
 }

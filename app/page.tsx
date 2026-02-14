@@ -1,60 +1,73 @@
 "use client";
 import React from "react";
-import { Button, Container, Col, Text } from "citrica-ui-toolkit";
+import { Button, Container, Col, Text, Header } from "citrica-ui-toolkit";
+import { siteConfig } from "@/config/site";
+
+// Logo component
+const logo = (
+  <img
+    src="/img/citrica-logo.png"
+    alt="Citrica Logo"
+    className="h-12 w-auto"
+  />
+);
+
+// Scroll to section helper
+const scrollToSection = (sectionId: string) => {
+  const element = document.getElementById(sectionId);
+  if (element) {
+    element.scrollIntoView({ behavior: "smooth" });
+    history.replaceState(null, "", `#${sectionId}`);
+  }
+};
 
 const PageHome = () => {
   return (
     <>
       {/* Header */}
-      <header className="fixed top-0 w-full z-50 bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-black/5 dark:border-white/10">
+      <Header
+        logo={logo}
+        variant="floating"
+        showButton
+        buttonText="Contáctanos"
+        aria-label="Contáctanos - Ir a sección de contacto"
+        navItems={siteConfig.navLinks}
+      />
+      {/* <header className="fixed top-0 w-full z-50 bg-white/90 dark:bg-black/90 backdrop-blur-md border-b border-black/5 dark:border-white/10">
         <Container noPadding>
           <Col cols={{ sm: 4, md: 6, lg: 12 }}>
             <div className="flex items-center justify-between h-20 px-6 lg:px-20">
               <div className="flex items-center gap-2">
                 <div className="w-8 h-8 bg-black dark:bg-white flex items-center justify-center">
-                  <span className="text-white dark:text-black text-xl">💪</span>
+                  <Text variant="body" textColor="color-black">💪</Text>
                 </div>
-                <Text
-                  as="h2"
-                  className="tracking-wider"
-                  variant="title"
-                  weight="bold"
-                >
+                <Text as="h2" className="tracking-wider" variant="title" weight="bold">
                   DUMBBELLDANCE
                 </Text>
               </div>
               <nav className="hidden md:flex items-center gap-10">
-                <a
-                  className="text-xs font-bold tracking-widest hover:text-[#EAFF00] transition-colors"
-                  href="#"
-                >
-                  CURSO
+                <a className="tracking-widest hover:text-[#EAFF00] transition-colors" href="#">
+                  <Text variant="label" textColor="black" className="!font-thin">CURSO</Text>
                 </a>
-                <a
-                  className="text-xs font-bold tracking-widest hover:text-[#EAFF00] transition-colors"
-                  href="#"
-                >
-                  EXAMEN
+                <a className="tracking-widest hover:text-[#EAFF00] transition-colors" href="#">
+                  <Text variant="label" textColor="black" className="!font-thin">EXAMEN</Text>
                 </a>
-                <a
-                  className="text-xs font-bold tracking-widest hover:text-[#EAFF00] transition-colors"
-                  href="#"
-                >
-                  REDDI
+                <a className="tracking-widest hover:text-[#EAFF00] transition-colors" href="#">
+                  <Text variant="label" textColor="black" className="!font-thin">REDDI</Text>
                 </a>
-                <a
-                  className="text-xs font-bold tracking-widest hover:text-[#EAFF00] transition-colors"
-                  href="#"
-                >
-                  NOSOTROS
+                <a className="tracking-widest hover:text-[#EAFF00] transition-colors" href="#">
+                  <Text variant="label" textColor="black" className="!font-thin">NOSOTROS</Text>
                 </a>
               </nav>
               <div className="flex items-center gap-4">
-                <button className="text-xs font-bold tracking-widest hover:opacity-70 transition-opacity">
-                  LOGIN
-                </button>
                 <Button
-                  className="px-6 py-3 text-xs font-black tracking-widest uppercase"
+                  className="tracking-widest hover:opacity-70 transition-opacity"
+                  variant="secondary"
+                >
+                  LOGIN
+                </Button>
+                <Button
+                  className="px-6 py-3 tracking-widest uppercase"
                   variant="primary"
                 >
                   COMENZAR
@@ -63,10 +76,10 @@ const PageHome = () => {
             </div>
           </Col>
         </Container>
-      </header>
+      </header> */}
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+      <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden py-20">
         <div className="absolute inset-0 bg-black">
           <div className="absolute inset-0 bg-black/60 z-10" />
           <video
@@ -87,22 +100,15 @@ const PageHome = () => {
         <Container>
           <Col cols={{ sm: 4, md: 6, lg: 12 }}>
             <div className="relative z-20 text-center px-6 max-w-6xl mx-auto">
-              <Text
-                as="h1"
-                className="text-5xl md:text-7xl lg:text-8xl leading-tight mb-8 tracking-normal uppercase"
+              <Text as="h1" className="text-5xl md:text-7xl lg:text-8xl leading-tight mb-8 tracking-normal uppercase"
                 color="#FFF"
-                style={{ fontFamily: "Anton, sans-serif" }}
                 variant="display"
                 weight="bold"
               >
-                CERTIFÍCATE CON EL ESTÁNDAR DE ÉLITE: DOMINA EL MÉTODO
-                DUMBBELLDANCE Y LIDERA EL MERCADO FITNESS.
+                CERTIFÍCATE CON EL ESTÁNDAR DE ÉLITE: DOMINA EL MÉTODO DUMBBELLDANCE Y LIDERA EL MERCADO FITNESS.
               </Text>
-              <Text
-                as="p"
-                className="text-lg md:text-2xl font-normal leading-relaxed max-w-4xl mx-auto mb-12"
+              <Text as="p" className="text-lg md:text-2xl font-normal leading-relaxed max-w-4xl mx-auto mb-12"
                 color="rgba(255, 255, 255, 0.9)"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 variant="body"
               >
                 Accede a la metodología de alto rendimiento diseñada por Erika
@@ -111,14 +117,16 @@ const PageHome = () => {
               </Text>
               <div className="flex flex-col md:flex-row items-center justify-center gap-6">
                 <Button
-                  className="px-12 py-6 text-lg font-black tracking-tighter uppercase"
+                  className="tracking-tighter uppercase"
                   variant="primary"
+                  size="sm"
                 >
                   INICIAR CERTIFICACIÓN
                 </Button>
                 <Button
-                  className="px-12 py-6 text-lg font-black tracking-tighter uppercase"
+                  className="tracking-tighter uppercase"
                   variant="secondary"
+                  size="lg"
                 >
                   VER PROGRAMA
                 </Button>
@@ -129,7 +137,7 @@ const PageHome = () => {
       </section>
 
       {/* Certificación en 24 horas */}
-      <section className="bg-white dark:bg-black py-24 border-b border-black/5">
+      <section className="bg-white dark:bg-black py-20 border-b border-black/5">
         <Container>
           <Col cols={{ sm: 4, md: 3, lg: 6 }}>
             <div
@@ -143,22 +151,16 @@ const PageHome = () => {
           </Col>
           <Col cols={{ sm: 4, md: 3, lg: 6 }}>
             <div className="w-full space-y-8">
-              <Text
-                as="h2"
-                className="text-5xl md:text-7xl tracking-tighter leading-none italic uppercase"
-                style={{ fontFamily: "Anton, sans-serif" }}
-                variant="display"
+              <Text as="h2" className="tracking-tighter leading-none italic uppercase"
+                variant="headline"
                 weight="bold"
+                textColor="color-on-surface"
               >
-                CERTIFICACIÓN
-                <br />
-                EN 24 HORAS
+                CERTIFICACIÓN <br /> EN 24 HORAS
               </Text>
               <div className="h-1 w-24 bg-[#EAFF00]" />
-              <Text
-                as="p"
-                className="text-xl text-neutral-600 dark:text-neutral-400 font-light leading-relaxed max-w-lg"
-                style={{ fontFamily: "Roboto, sans-serif" }}
+              <Text as="p" textColor="color-on-surface"
+                className="leading-relaxed max-w-lg"
                 variant="body"
               >
                 Nuestro sistema 100% automatizado está diseñado para la
@@ -169,10 +171,10 @@ const PageHome = () => {
                 <div>
                   <Text
                     as="p"
-                    className="text-3xl tracking-tighter"
-                    style={{ fontFamily: "Anton, sans-serif" }}
+                    className="tracking-tighter"
                     variant="title"
                     weight="bold"
+                    textColor="color-black"
                   >
                     100%
                   </Text>
@@ -181,6 +183,7 @@ const PageHome = () => {
                     className="text-xs font-bold tracking-widest uppercase"
                     color="#737373"
                     variant="label"
+                    weight="bold"
                   >
                     Digital
                   </Text>
@@ -188,18 +191,19 @@ const PageHome = () => {
                 <div>
                   <Text
                     as="p"
-                    className="text-3xl tracking-tighter"
-                    style={{ fontFamily: "Anton, sans-serif" }}
+                    className="tracking-tighter"
                     variant="title"
                     weight="bold"
+                    textColor="color-black"
                   >
                     HD
                   </Text>
                   <Text
                     as="p"
-                    className="text-xs font-bold tracking-widest uppercase"
+                    className="tracking-widest uppercase"
                     color="#737373"
                     variant="label"
+                    weight="bold"
                   >
                     Librería Video
                   </Text>
@@ -211,14 +215,13 @@ const PageHome = () => {
       </section>
 
       {/* Tres Pilares del Éxito */}
-      <section className="bg-white dark:bg-black py-32">
+      <section className="bg-white dark:bg-black py-20">
         <Container>
           <Col cols={{ sm: 4, md: 6, lg: 12 }}>
             <div className="mb-20 space-y-4">
               <Text
                 as="h2"
-                className="text-4xl md:text-5xl tracking-tighter italic uppercase"
-                style={{ fontFamily: "Anton, sans-serif" }}
+                className="tracking-tighter italic uppercase"
                 variant="display"
                 weight="bold"
               >
@@ -226,9 +229,10 @@ const PageHome = () => {
               </Text>
               <Text
                 as="p"
-                className="text-neutral-500 text-lg uppercase tracking-wide"
-                style={{ fontFamily: "Roboto, sans-serif" }}
+                className="uppercase tracking-wide"
                 variant="body"
+                weight="bold"
+                textColor="color-on-surface"
               >
                 METODOLOGÍA DE ALTO RENDIMIENTO PARA LÍDERES FITNESS.
               </Text>
@@ -237,13 +241,12 @@ const PageHome = () => {
 
           <Col cols={{ sm: 4, md: 2, lg: 4 }}>
             <div className="p-12 border border-black/10 dark:border-white/10 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors group">
-              <span className="text-4xl mb-8 block group-hover:text-[#EAFF00] transition-colors">
+              <Text variant="headline" className="mb-8 block group-hover:text-[#EAFF00] transition-colors">
                 📚
-              </span>
+              </Text>
               <Text
                 as="h3"
-                className="text-2xl mb-4 tracking-tight uppercase"
-                style={{ fontFamily: "Anton, sans-serif" }}
+                className="mb-4 tracking-tight uppercase"
                 variant="title"
                 weight="bold"
               >
@@ -252,7 +255,6 @@ const PageHome = () => {
               <Text
                 as="p"
                 className="font-light leading-relaxed"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 textColor="color-on-surface-var"
                 variant="body"
               >
@@ -265,13 +267,12 @@ const PageHome = () => {
 
           <Col cols={{ sm: 4, md: 2, lg: 4 }}>
             <div className="p-12 border border-black/10 dark:border-white/10 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors group">
-              <span className="text-4xl mb-8 block group-hover:text-[#EAFF00] transition-colors">
+              <Text variant="headline" className="mb-8 block group-hover:text-[#EAFF00] transition-colors">
                 🎓
-              </span>
+              </Text>
               <Text
                 as="h3"
-                className="text-2xl mb-4 tracking-tight uppercase"
-                style={{ fontFamily: "Anton, sans-serif" }}
+                className="mb-4 tracking-tight uppercase"
                 variant="title"
                 weight="bold"
               >
@@ -280,7 +281,6 @@ const PageHome = () => {
               <Text
                 as="p"
                 className="font-light leading-relaxed"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 textColor="color-on-surface-var"
                 variant="body"
               >
@@ -293,13 +293,12 @@ const PageHome = () => {
 
           <Col cols={{ sm: 4, md: 2, lg: 4 }}>
             <div className="p-12 border border-black/10 dark:border-white/10 hover:bg-neutral-50 dark:hover:bg-neutral-900/50 transition-colors group">
-              <span className="text-4xl mb-8 block group-hover:text-[#EAFF00] transition-colors">
+              <Text variant="headline" className="mb-8 block group-hover:text-[#EAFF00] transition-colors">
                 🌍
-              </span>
+              </Text>
               <Text
                 as="h3"
-                className="text-2xl mb-4 tracking-tight uppercase"
-                style={{ fontFamily: "Anton, sans-serif" }}
+                className="mb-4 tracking-tight uppercase"
                 variant="title"
                 weight="bold"
               >
@@ -308,7 +307,6 @@ const PageHome = () => {
               <Text
                 as="p"
                 className="font-light leading-relaxed"
-                style={{ fontFamily: "Roboto, sans-serif" }}
                 textColor="color-on-surface-var"
                 variant="body"
               >
@@ -329,7 +327,6 @@ const PageHome = () => {
                 <Text
                   as="h2"
                   className="text-3xl tracking-tighter italic uppercase"
-                  style={{ fontFamily: "Anton, sans-serif" }}
                   variant="headline"
                   weight="bold"
                 >
@@ -338,7 +335,6 @@ const PageHome = () => {
                 <Text
                   as="p"
                   className="text-neutral-500 uppercase text-sm tracking-widest font-bold"
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                   variant="label"
                 >
                   COMPROMISO CON LA EXCELENCIA
@@ -350,7 +346,6 @@ const PageHome = () => {
                     as="div"
                     className="text-xl"
                     color="#EAFF00"
-                    style={{ fontFamily: "Anton, sans-serif" }}
                     variant="title"
                     weight="bold"
                   >
@@ -367,8 +362,7 @@ const PageHome = () => {
                     </Text>
                     <Text
                       as="p"
-                      className="text-sm leading-relaxed"
-                      style={{ fontFamily: "Roboto, sans-serif" }}
+                      className="leading-relaxed"
                       textColor="color-on-surface-var"
                       variant="body"
                     >
@@ -383,7 +377,6 @@ const PageHome = () => {
                     as="div"
                     className="text-xl"
                     color="#EAFF00"
-                    style={{ fontFamily: "Anton, sans-serif" }}
                     variant="title"
                     weight="bold"
                   >
@@ -400,8 +393,7 @@ const PageHome = () => {
                     </Text>
                     <Text
                       as="p"
-                      className="text-sm leading-relaxed"
-                      style={{ fontFamily: "Roboto, sans-serif" }}
+                      className="leading-relaxed"
                       textColor="color-on-surface-var"
                       variant="body"
                     >
@@ -418,8 +410,7 @@ const PageHome = () => {
             <div className="bg-white dark:bg-black p-12 border border-black/5 dark:border-white/10 space-y-10">
               <Text
                 as="h3"
-                className="text-xl tracking-widest uppercase"
-                style={{ fontFamily: "Anton, sans-serif" }}
+                className="tracking-widest uppercase"
                 variant="title"
                 weight="bold"
               >
@@ -427,7 +418,6 @@ const PageHome = () => {
               </Text>
               <div
                 className="flex flex-wrap gap-8 opacity-40 transition-all duration-500 hover:opacity-100"
-                style={{ filter: "grayscale(100%)" }}
               >
                 <div className="h-8 w-24 bg-neutral-200 dark:bg-neutral-800 flex items-center justify-center font-bold text-xs uppercase tracking-widest">
                   STRIPE
@@ -446,7 +436,6 @@ const PageHome = () => {
                 <Text
                   as="p"
                   className="text-sm font-medium leading-relaxed italic"
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                   variant="body"
                 >
                   "El sistema de certificación más eficiente que he utilizado.
@@ -474,12 +463,11 @@ const PageHome = () => {
             <div className="space-y-6 pb-20 border-b border-white/10">
               <div className="flex items-center gap-2">
                 <div className="w-6 h-6 bg-white flex items-center justify-center">
-                  <span className="text-black text-sm">💪</span>
+                  <Text variant="label" textColor="color-black">💪</Text>
                 </div>
                 <Text
                   as="h2"
-                  className="text-lg tracking-wider uppercase"
-                  style={{ fontFamily: "Anton, sans-serif" }}
+                  className="tracking-wider uppercase"
                   variant="title"
                   weight="bold"
                 >
@@ -488,8 +476,8 @@ const PageHome = () => {
               </div>
               <Text
                 as="p"
-                className="text-neutral-500 text-sm max-w-sm uppercase tracking-wider leading-loose"
-                style={{ fontFamily: "Roboto, sans-serif" }}
+                textColor="color-secondary"
+                className="max-w-sm uppercase tracking-wider leading-loose"
                 variant="body"
               >
                 Forjando el futuro de la instrucción fitness a través de
@@ -502,9 +490,10 @@ const PageHome = () => {
             <div className="space-y-4 pb-20 border-b border-white/10 md:border-b-0">
               <Text
                 as="h4"
-                className="text-xs font-bold tracking-[0.2em] uppercase"
+                className="tracking-[0.2em] uppercase"
                 color="#A3A3A3"
                 variant="label"
+                weight="bold"
               >
                 Plataforma
               </Text>
@@ -512,21 +501,18 @@ const PageHome = () => {
                 <a
                   className="text-sm hover:text-[#EAFF00] transition-colors uppercase tracking-tight"
                   href="#"
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                 >
                   El Curso
                 </a>
                 <a
                   className="text-sm hover:text-[#EAFF00] transition-colors uppercase tracking-tight"
                   href="#"
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                 >
                   Examen Online
                 </a>
                 <a
                   className="text-sm hover:text-[#EAFF00] transition-colors uppercase tracking-tight"
                   href="#"
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                 >
                   Mapa REDDI
                 </a>
@@ -538,9 +524,10 @@ const PageHome = () => {
             <div className="space-y-4 pb-20 border-b border-white/10 md:border-b-0">
               <Text
                 as="h4"
-                className="text-xs font-bold tracking-[0.2em] uppercase"
+                className="tracking-[0.2em] uppercase"
                 color="#A3A3A3"
                 variant="label"
+                weight="bold"
               >
                 Legal
               </Text>
@@ -548,21 +535,18 @@ const PageHome = () => {
                 <a
                   className="text-sm hover:text-[#EAFF00] transition-colors uppercase tracking-tight"
                   href="#"
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                 >
                   Reembolsos
                 </a>
                 <a
                   className="text-sm hover:text-[#EAFF00] transition-colors uppercase tracking-tight"
                   href="#"
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                 >
                   Privacidad
                 </a>
                 <a
                   className="text-sm hover:text-[#EAFF00] transition-colors uppercase tracking-tight"
                   href="#"
-                  style={{ fontFamily: "Roboto, sans-serif" }}
                 >
                   Soporte
                 </a>
@@ -572,13 +556,8 @@ const PageHome = () => {
 
           <Col cols={{ sm: 4, md: 6, lg: 12 }}>
             <div className="pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-              <Text
-                as="p"
-                className="text-[10px] text-neutral-600 font-bold tracking-widest uppercase"
-                style={{ fontFamily: "Roboto, sans-serif" }}
-                variant="label"
-              >
-                © 2024 DUMBBELLDANCE. TODOS LOS DERECHOS RESERVADOS.
+              <Text variant="label" weight="bold" className="!font-thin tracking-widest uppercase" color="#A3A3A3">
+                © {new Date().getFullYear()} DUMBBELLDANCE. TODOS LOS DERECHOS RESERVADOS.
               </Text>
               <div className="flex gap-6">
                 <a

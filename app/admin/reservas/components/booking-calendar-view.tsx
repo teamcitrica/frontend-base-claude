@@ -111,18 +111,19 @@ const BookingCalendarView = () => {
       <Card className="p-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div>
-            <Text color="#964f20" variant="title">
+            <Text isAdmin={true} textColor="color-admin-primary" variant="title">
               {monthYear}
             </Text>
             <p>
-              <Text color="color-on-surface" variant="body">
+              <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                 Vista de calendario de reservas
               </Text>
             </p>
           </div>
 
           <div className="flex gap-2">
-            <Button
+            <Button 
+              isAdmin={true}
               size="sm"
               startContent={<Icon name="ChevronLeft" size={16} />}
               variant="secondary"
@@ -130,10 +131,16 @@ const BookingCalendarView = () => {
             >
               Anterior
             </Button>
-            <Button size="sm" variant="secondary" onClick={goToToday}>
+            <Button 
+              isAdmin={true}
+              size="sm"
+              variant="secondary"
+              onClick={goToToday}
+            >
               Hoy
             </Button>
-            <Button
+            <Button 
+              isAdmin={true}
               endContent={<Icon name="ChevronRight" size={16} />}
               size="sm"
               variant="secondary"
@@ -153,7 +160,7 @@ const BookingCalendarView = () => {
             <div className="grid grid-cols-7 gap-2 mb-4">
               {["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"].map((day) => (
                 <div key={day} className="text-center p-2">
-                  <Text color="color-on-surface" variant="label">
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                     {day}
                   </Text>
                 </div>
@@ -183,8 +190,8 @@ const BookingCalendarView = () => {
                     key={`day-${dateStr}`}
                     className={`
                       h-20 border rounded-lg p-2 cursor-pointer transition-colors
-                      ${isSelected ? "border-[#964f20] bg-[#964f20]/10" : "border-gray-200 hover:border-gray-300"}
-                      ${isToday ? "ring-2 ring-[#964f20]/30" : ""}
+                      ${isSelected ? "border-[var(--color-admin-primary)] bg-[var(--color-admin-primary)]/10" : "border-gray-200 hover:border-gray-300"}
+                      ${isToday ? "ring-2 ring-[var(--color-admin-primary)]/30" : ""}
                     `}
                     onClick={() =>
                       setSelectedDate(selectedDate === dateStr ? null : dateStr)
@@ -192,7 +199,7 @@ const BookingCalendarView = () => {
                   >
                     <div className="flex flex-col h-full">
                       <span
-                        className={`text-sm ${isToday ? "font-bold text-[#964f20]" : "text-gray-700"}`}
+                        className={`text-sm ${isToday ? "font-bold text-[var(--color-admin-primary)]" : "text-gray-700"}`}
                       >
                         {day}
                       </span>
@@ -234,8 +241,8 @@ const BookingCalendarView = () => {
           <Card className="p-6">
             <div className="space-y-4">
               <div className="flex items-center gap-2">
-                <Icon className="text-[#964f20]" name="Info" size={20} />
-                <Text color="#964f20" variant="subtitle">
+                <Icon className="text-[var(--color-admin-primary)]" name="Info" size={20} />
+                <Text isAdmin={true} textColor="color-admin-primary" variant="subtitle">
                   {selectedDate ? "Detalles del día" : "Información"}
                 </Text>
               </div>
@@ -244,12 +251,12 @@ const BookingCalendarView = () => {
                 <div className="space-y-4">
                   <div>
                     <p>
-                      <Text color="color-on-surface" variant="body">
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         <strong>Fecha seleccionada:</strong>
                       </Text>
                     </p>
                     <p>
-                      <Text color="color-on-surface" variant="body">
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         {new Date(
                           selectedDate + "T00:00:00",
                         ).toLocaleDateString("es-ES", {
@@ -263,12 +270,12 @@ const BookingCalendarView = () => {
                   </div>
 
                   <div>
-                    <Text color="color-on-surface" variant="body">
+                    <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                       <strong>Reservas ({selectedDateBookings.length}):</strong>
                     </Text>
 
                     {selectedDateBookings.length === 0 ? (
-                      <Text textColor="color-outline" variant="body">
+                      <Text isAdmin={true} textColor="color-admin-outline" variant="body">
                         No hay reservas para este día
                       </Text>
                     ) : (
@@ -279,7 +286,7 @@ const BookingCalendarView = () => {
                             className="p-3 border rounded-lg border-gray-200"
                           >
                             <div className="flex justify-between items-start mb-1">
-                              <Text color="color-on-surface" variant="label">
+                              <Text isAdmin={true} textColor="color-admin-on-surface" variant="label">
                                 {booking.customer
                                   ? booking.customer.full_name
                                   : "Bloqueo Administrativo"}
@@ -293,22 +300,14 @@ const BookingCalendarView = () => {
                               </Chip>
                             </div>
                             <p>
-                              <Text
-                                className="text-sm"
-                                color="color-on-surface"
-                                variant="body"
-                              >
+                              <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                                 {formatTimeSlotsWithDuration(
                                   booking.time_slots,
                                 )}
                               </Text>
                             </p>
                             <p>
-                              <Text
-                                className="text-sm"
-                                textColor="color-outline"
-                                variant="body"
-                              >
+                              <Text isAdmin={true} textColor="color-admin-outline" variant="body">
                                 {booking.session_type === "fotografia-modelo"
                                   ? "Fotografía Modelo"
                                   : "Fotografía Producto"}
@@ -322,39 +321,26 @@ const BookingCalendarView = () => {
                 </div>
               ) : (
                 <div className="space-y-2">
-                  <Text color="color-on-surface" variant="body">
-                    Haz clic en cualquier día del calendario para ver los
-                    detalles de las reservas.
+                  <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
+                    Haz clic en cualquier día del calendario para ver los detalles de las reservas.
                   </Text>
 
                   <div className="space-y-2 mt-4">
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-yellow-500 rounded" />
-                      <Text
-                        className="text-sm"
-                        color="color-on-surface"
-                        variant="body"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         Pendiente
                       </Text>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-green-500 rounded" />
-                      <Text
-                        className="text-sm"
-                        color="color-on-surface"
-                        variant="body"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                         Confirmada
                       </Text>
                     </div>
                     <div className="flex items-center gap-2">
                       <div className="w-3 h-3 bg-red-500 rounded" />
-                      <Text
-                        className="text-sm"
-                        color="color-on-surface"
-                        variant="body"
-                      >
+                      <Text isAdmin={true} textColor="color-admin-on-surface"variant="body">
                         Cancelada
                       </Text>
                     </div>

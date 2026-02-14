@@ -24,6 +24,7 @@ const BookingAvailabilityView = () => {
       {/* Navegación de sub-pestañas */}
       <div className="flex justify-end gap-2">
         <Button
+          isAdmin={true}
           size="sm"
           startContent={<Icon name="Calendar" size={16} />}
           variant={activeSubTab === "disponibilidad" ? "primary" : "secondary"}
@@ -32,6 +33,7 @@ const BookingAvailabilityView = () => {
           Gestión de Disponibilidad
         </Button>
         <Button
+          isAdmin={true}
           size="sm"
           startContent={<Icon name="Clock" size={16} />}
           variant={activeSubTab === "semanal" ? "primary" : "secondary"}

@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import { Text, Button, Card, Icon } from "citrica-ui-toolkit";
 import { Input as DateInput, Select, SelectItem } from "@heroui/react";
-
 import { useAdminBookings } from "@/app/hooks/useAdminBookings";
 
 const QuickConfigManager = () => {
@@ -98,12 +97,12 @@ const QuickConfigManager = () => {
       <Card className="p-6">
         <div>
           <p>
-            <Text color="#964f20" variant="title">
+            <Text isAdmin={true} color="color-admin-primary" variant="title">
               Configuración Rápida
             </Text>
           </p>
           <p>
-            <Text color="color-on-surface" variant="body">
+            <Text isAdmin={true} color="color-admin-on-surface" variant="body">
               Herramientas para configurar disponibilidad masiva y aplicar
               cambios a múltiples días
             </Text>
@@ -115,12 +114,12 @@ const QuickConfigManager = () => {
       <Card className="p-6">
         <div className="space-y-4">
           <p>
-            <Text color="#964f20" variant="subtitle">
+            <Text isAdmin={true} color="color-admin-primary" variant="subtitle">
               Configuraciones Predefinidas
             </Text>
           </p>
           <p>
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               Aplica configuraciones comunes a toda la semana
             </Text>
           </p>
@@ -129,7 +128,7 @@ const QuickConfigManager = () => {
             {presets.map((preset, index) => (
               <div
                 key={index}
-                className="p-4 border border-gray-200 rounded-lg hover:border-[#964f20] transition-colors cursor-pointer"
+                className="p-4 border border-gray-200 rounded-lg hover:border-[var(--color-admin-primary)] transition-colors cursor-pointer"
                 onClick={async () => {
                   if (
                     confirm(
@@ -160,14 +159,15 @@ const QuickConfigManager = () => {
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
                     <p>
-                      <Text color="color-on-surface" variant="subtitle">
+                      <Text isAdmin={true} color="color-admin-on-surface" variant="subtitle">
                         {preset.name}
                       </Text>
                     </p>
                     <p>
-                      <Text
+                      <Text 
+                        isAdmin={true}
                         className="text-sm mt-1"
-                        color="color-on-surface"
+                        color="color-admin-on-surface"
                         variant="body"
                       >
                         {preset.description}
@@ -190,12 +190,12 @@ const QuickConfigManager = () => {
       <Card className="p-6">
         <div className="space-y-4">
           <p>
-            <Text color="#964f20" variant="subtitle">
+            <Text isAdmin={true} color="color-admin-primary" variant="subtitle">
               Acciones por Lotes
             </Text>
           </p>
           <p>
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               Aplica cambios a un rango de fechas específico
             </Text>
           </p>
@@ -244,7 +244,7 @@ const QuickConfigManager = () => {
 
           {batchConfig.startDate && batchConfig.endDate && (
             <div className="p-4 bg-blue-50 rounded-lg">
-              <Text className="text-sm" color="color-on-surface" variant="body">
+              <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
                 <strong>Resumen:</strong> Se aplicará la acción "
                 {batchConfig.action === "generate"
                   ? "Generar Slots"
@@ -265,6 +265,7 @@ const QuickConfigManager = () => {
           )}
 
           <Button
+            isAdmin={true}
             disabled={
               !batchConfig.startDate || !batchConfig.endDate || isLoading
             }
@@ -283,19 +284,20 @@ const QuickConfigManager = () => {
         <Card className="p-6">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <Icon className="text-[#964f20]" name="Zap" size={20} />
-              <Text color="#964f20" variant="subtitle">
+              <Icon className="text-[var(--color-admin-primary)]" name="Zap" size={20} />
+              <Text isAdmin={true} color="color-admin-primary" variant="subtitle">
                 Generación Automática
               </Text>
             </div>
 
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               Genera slots automáticamente para los próximos meses basándose en
               tu configuración semanal
             </Text>
 
             <div className="space-y-2">
               <Button
+                isAdmin={true}
                 fullWidth
                 size="sm"
                 variant="secondary"
@@ -340,6 +342,7 @@ const QuickConfigManager = () => {
               </Button>
 
               <Button
+                isAdmin={true}
                 fullWidth
                 size="sm"
                 variant="secondary"
@@ -379,6 +382,7 @@ const QuickConfigManager = () => {
               </Button>
 
               <Button
+                isAdmin={true}
                 fullWidth
                 size="sm"
                 variant="secondary"
@@ -430,17 +434,18 @@ const QuickConfigManager = () => {
                 name="AlertTriangle"
                 size={20}
               />
-              <Text color="#964f20" variant="subtitle">
+              <Text isAdmin={true} color="color-admin-primary" variant="subtitle">
                 Acciones de Emergencia
               </Text>
             </div>
 
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               Herramientas para situaciones especiales (usar con precaución)
             </Text>
 
             <div className="space-y-2">
               <Button
+                isAdmin={true}
                 fullWidth
                 size="sm"
                 variant="warning"
@@ -478,6 +483,7 @@ const QuickConfigManager = () => {
               </Button>
 
               <Button
+                isAdmin={true}
                 fullWidth
                 size="sm"
                 variant="warning"
@@ -515,6 +521,7 @@ const QuickConfigManager = () => {
               </Button>
 
               <Button
+                isAdmin={true}
                 fullWidth
                 size="sm"
                 variant="danger"
@@ -551,35 +558,35 @@ const QuickConfigManager = () => {
       {/* Información */}
       <Card className="p-6">
         <div className="space-y-3">
-          <Text color="#964f20" variant="subtitle">
+          <Text isAdmin={true} color="color-admin-primary" variant="subtitle">
             Información Importante
           </Text>
           <div className="space-y-2 text-sm">
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               • <strong>Configuraciones Predefinidas:</strong> Aplican horarios
               estándar a toda la semana
             </Text>
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               • <strong>Generar Slots:</strong> Activa un período eliminando
               bloqueos existentes
             </Text>
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               • <strong>Activar Período:</strong> Elimina bloqueos y permite
               reservas en el rango seleccionado
             </Text>
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               • <strong>Desactivar Período:</strong> Bloquea completamente un
               rango de fechas
             </Text>
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               • <strong>Acciones de Emergencia:</strong> Cierran inmediatamente
               días o toda la disponibilidad
             </Text>
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               • Los slots se generan dinámicamente basándose en la configuración
               semanal
             </Text>
-            <Text className="text-sm" color="color-on-surface" variant="body">
+            <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
               • Siempre verifica las fechas antes de aplicar cambios masivos
             </Text>
           </div>

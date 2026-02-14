@@ -1,5 +1,4 @@
 import React from "react";
-
 import TitleConfigApp from "./components/title-config-app";
 
 const TareasPage = () => {

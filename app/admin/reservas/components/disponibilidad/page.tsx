@@ -35,18 +35,18 @@ const DisponibilidadContent = () => {
 
   return (
     <Container>
-      <Col className="space-y-6" cols={{ lg: 12, md: 6, sm: 4 }}>
+      <Col className="space-y-3" cols={{ lg: 12, md: 6, sm: 4 }}>
         {/* Header */}
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div className="flex items-center gap-3">
-            <Icon className="text-[#964f20]" name="Clock" size={24} />
+            <Icon className="text-[var(--color-admin-primary)]" name="Clock" size={24} />
             <div>
               <p>
-                <Text color="#964f20" variant="headline">
+                <Text isAdmin={true} textColor="color-admin-primary" variant="headline">
                   Horarios
                 </Text>
               </p>
-              <Text color="black" variant="body">
+              <Text isAdmin={true} textColor="color-admin-on-surface" variant="body">
                 {getTabDescription()}
               </Text>
             </div>
@@ -54,7 +54,8 @@ const DisponibilidadContent = () => {
 
           {/* Navegación de pestañas */}
           <div className="flex gap-2">
-            <Button
+            <Button 
+              isAdmin={true}
               size="sm"
               startContent={<Icon name="Calendar" size={16} />}
               variant={activeTab === "disponibilidad" ? "primary" : "secondary"}
@@ -64,7 +65,8 @@ const DisponibilidadContent = () => {
             >
               Gestión de Disponibilidad
             </Button>
-            <Button
+            <Button 
+              isAdmin={true}
               size="sm"
               startContent={<Icon name="Clock" size={16} />}
               variant={activeTab === "semanal" ? "primary" : "secondary"}

@@ -2,10 +2,7 @@
 import React, { useState, useEffect } from "react";
 import { Text, Button, Card, Modal, Icon } from "citrica-ui-toolkit";
 import { Switch } from "@heroui/react";
-import {
-  useAdminBookings,
-  WeeklyAvailability,
-} from "@/app/hooks/useAdminBookings";
+import { useAdminBookings, WeeklyAvailability } from "@/app/hooks/useAdminBookings";
 
 const WeeklyScheduleManager = () => {
   const {
@@ -200,18 +197,19 @@ const WeeklyScheduleManager = () => {
         <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
           <div>
             <p>
-              <Text color="#964f20" variant="title">
+              <Text isAdmin={true} color="color-admin-primary" variant="title">
                 Configuración Semanal de Horarios
               </Text>
             </p>
-            <Text color="color-on-surface" variant="body">
+            <Text isAdmin={true} color="color-admin-on-surface" variant="body">
               Gestiona los horarios disponibles para cada día de la semana. Cada
               slot representa 30 minutos.
             </Text>
           </div>
 
           <div className="flex gap-2">
-            <Button
+            <Button 
+              isAdmin={true}
               size="sm"
               variant="secondary"
               onClick={() => setShowStandardHoursModal(true)}
@@ -219,7 +217,8 @@ const WeeklyScheduleManager = () => {
               Horario Estándar
             </Button>
 
-            <Button
+            <Button 
+              isAdmin={true}
               size="sm"
               variant="secondary"
               onClick={handleOpenToggleAllModal}
@@ -233,7 +232,7 @@ const WeeklyScheduleManager = () => {
       {isLoading ? (
         <Card className="p-6">
           <div className="text-center py-8">
-            <Text color="color-on-surface" variant="body">
+            <Text isAdmin={true} color="color-admin-on-surface" variant="body">
               Cargando configuración...
             </Text>
           </div>
@@ -259,14 +258,15 @@ const WeeklyScheduleManager = () => {
                       />
                       <div>
                         <p>
-                          <Text color="color-on-surface" variant="subtitle">
+                          <Text isAdmin={true} color="color-admin-on-surface" variant="subtitle">
                             {day.name}
                           </Text>
                         </p>
                         <p>
-                          <Text
+                          <Text 
+                            isAdmin={true}
                             className="text-sm"
-                            color="color-on-surface"
+                            color="color-admin-on-surface"
                             variant="body"
                           >
                             {dayConfig?.is_active
@@ -320,25 +320,25 @@ const WeeklyScheduleManager = () => {
       {/* Leyenda */}
       <Card className="p-6">
         <div className="space-y-3">
-          <Text color="#964f20" variant="subtitle">
+          <Text isAdmin={true} color="color-admin-primary" variant="subtitle">
             Leyenda
           </Text>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-green-500 rounded" />
-              <Text className="text-sm" color="color-on-surface" variant="body">
+              <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
                 Slot activo (disponible para reservas)
               </Text>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-red-300 rounded" />
-              <Text className="text-sm" color="color-on-surface" variant="body">
+              <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
                 Slot inactivo (no disponible)
               </Text>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 bg-gray-600 rounded" />
-              <Text className="text-sm" color="color-on-surface" variant="body">
+              <Text isAdmin={true} className="text-sm" color="color-admin-on-surface" variant="body">
                 Horario fuera de horario comercial típico
               </Text>
             </div>
@@ -350,14 +350,16 @@ const WeeklyScheduleManager = () => {
       <Modal
         footer={
           <div className="flex justify-end gap-2 w-full">
-            <Button
+            <Button 
+              isAdmin={true}
               startContent={<Icon name="Check" size={20} />}
               variant="primary"
               onClick={handleApplyStandardHours}
             >
               Sí, aplicar horario estándar
             </Button>
-            <Button
+            <Button 
+              isAdmin={true}
               variant="secondary"
               onClick={() => setShowStandardHoursModal(false)}
             >
@@ -375,12 +377,12 @@ const WeeklyScheduleManager = () => {
             <Icon className="text-blue-600 mt-0.5" name="Info" size={20} />
             <div>
               <p>
-                <Text className="font-bold" color="#2563eb" variant="body">
+                <Text isAdmin={true} className="font-bold" color="#2563eb" variant="body">
                   Configuración de Horario Estándar
                 </Text>
               </p>
               <p>
-                <Text className="text-sm mt-1" color="#1e40af" variant="body">
+                <Text isAdmin={true} className="text-sm mt-1" color="#1e40af" variant="body">
                   Esta acción configurará los siguientes horarios:
                 </Text>
               </p>
@@ -389,33 +391,33 @@ const WeeklyScheduleManager = () => {
 
           <div className="space-y-2">
             <div className="flex justify-between py-2 border-b">
-              <Text color="color-on-surface" variant="body">
+              <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                 Lunes a Viernes:
               </Text>
-              <Text className="font-semibold" color="#964f20" variant="body">
+              <Text isAdmin={true}className="font-semibold" color="color-admin-primary" variant="body">
                 9:00 AM - 6:00 PM
               </Text>
             </div>
             <div className="flex justify-between py-2 border-b">
-              <Text color="color-on-surface" variant="body">
+              <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                 Sábado:
               </Text>
-              <Text className="font-semibold" color="#964f20" variant="body">
+              <Text isAdmin={true} className="font-semibold" color="color-admin-primary" variant="body">
                 10:00 AM - 4:00 PM
               </Text>
             </div>
             <div className="flex justify-between py-2">
-              <Text color="color-on-surface" variant="body">
+              <Text isAdmin={true} color="color-admin-on-surface" variant="body">
                 Domingo:
               </Text>
-              <Text className="font-semibold" color="#dc2626" variant="body">
+              <Text isAdmin={true} className="font-semibold" color="#dc2626" variant="body">
                 Cerrado
               </Text>
             </div>
           </div>
 
           <p>
-            <Text className="font-semibold" color="#964f20" variant="body">
+            <Text isAdmin={true} className="font-semibold" color="color-admin-primary" variant="body">
               ¿Deseas aplicar esta configuración a toda la semana?
             </Text>
           </p>
@@ -426,7 +428,8 @@ const WeeklyScheduleManager = () => {
       <Modal
         footer={
           <div className="flex justify-end gap-2 w-full">
-            <Button
+            <Button 
+              isAdmin={true}
               startContent={
                 <Icon name={isOpeningAll ? "Check" : "X"} size={20} />
               }
@@ -437,7 +440,8 @@ const WeeklyScheduleManager = () => {
                 ? "Sí, abrir todos los días"
                 : "Sí, cerrar todos los días"}
             </Button>
-            <Button
+            <Button 
+              isAdmin={true}
               variant="secondary"
               onClick={() => setShowCloseAllModal(false)}
             >
@@ -461,7 +465,8 @@ const WeeklyScheduleManager = () => {
             />
             <div>
               <p>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="font-bold"
                   color={isOpeningAll ? "#16a34a" : "#ea580c"}
                   variant="body"
@@ -472,7 +477,8 @@ const WeeklyScheduleManager = () => {
                 </Text>
               </p>
               <p>
-                <Text
+                <Text 
+                  isAdmin={true}
                   className="text-sm mt-1"
                   color={isOpeningAll ? "#15803d" : "#c2410c"}
                   variant="body"
@@ -486,7 +492,7 @@ const WeeklyScheduleManager = () => {
           </div>
 
           <p>
-            <Text className="font-semibold" color="#964f20" variant="body">
+            <Text isAdmin={true} className="font-semibold" color="color-admin-primary" variant="body">
               {isOpeningAll
                 ? "¿Deseas abrir todos los días de la semana?"
                 : "¿Confirmas que deseas cerrar todos los días de la semana?"}
