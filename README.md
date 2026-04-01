@@ -1,4 +1,4 @@
-# Base Admin - Frontend Template
+# Base Admin - Frontend Template 2
 
 ## 📖 Índice de Navegación Rápida
 
