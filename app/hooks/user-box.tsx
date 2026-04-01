@@ -1,6 +1,6 @@
 "use client";
 import { useRouter } from "next/navigation";
-import { DropCitrica, DropdownItemConfig } from "@/shared/components/citrica-ui/organism/drop-citrica";
+import { DropCitrica, DropdownItemConfig } from "@/shared/components/organisms/drop-citrica";
 import { UserAuth } from "@/shared/context/auth-context";
 
 export const UserBox = () => {

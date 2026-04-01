@@ -3,7 +3,7 @@
 // import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 // import { cookies } from "next/headers";
 // import { redirect } from 'next/navigation';
-import { Sidebar } from "@/shared/components/citrica-ui/organism/sidebar";
+import { Sidebar } from "@/shared/components/organisms/sidebar";
 import { siteConfig } from "@/config/site";
 
 // async function getSession() {

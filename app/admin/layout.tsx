@@ -1,10 +1,10 @@
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Sidebar } from "@/shared/components/citrica-ui/organism/sidebar";
+import { Sidebar } from "@/shared/components/organisms/sidebar";
 import { siteConfig } from "@/config/site";
 import { UserAuth } from "@/shared/context/auth-context";
-import Navbar from "@/shared/components/citrica-ui/organism/navbar";
+import Navbar from "@/shared/components/organisms/navbar";
 import "@/styles/globals.scss";
 
 export default function PanelLayout({

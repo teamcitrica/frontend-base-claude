@@ -445,7 +445,6 @@ const PageHome = () => {
                 <Text
                   as="p"
                   className="mt-4 text-xs font-bold tracking-widest uppercase"
-                  color="#EAFF00"
                   variant="label"
                 >
                   — Master Coach Pro

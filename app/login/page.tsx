@@ -3,7 +3,7 @@ import React, { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { Container } from 'citrica-ui-toolkit';
 import { UserAuth } from "@/shared/context/auth-context";
-import LoginContainer from "@/shared/components/citrica-ui/organism/login-container";
+import LoginContainer from "@/shared/components/organisms/login-container";
 
 const LoginContainerPage = () => {
   const { userSession } = UserAuth();

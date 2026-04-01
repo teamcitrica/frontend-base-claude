@@ -23,11 +23,13 @@ frontend-base-admin-cteam is a Next.js 15 base administration application built 
 ## Component Architecture
 The app uses a structured atomic design pattern:
 
-### Citrica UI System (`/shared/components/citrica-ui/`)
-- **Atoms**: Basic components like `text.tsx`, `card.tsx`, `icon.ts`
-- **Molecules**: Combined components like `button.tsx`, `carrusel.tsx`, `modal.tsx`  
-- **Organisms**: Complex components like `navbar.tsx`, `sidebar.tsx`, `footer.tsx`, `header.tsx`
-- **Third-parties**: External component integrations like `video.jsx`
+### Project Organisms (`/shared/components/organisms/`)
+Project-specific organism components that consume `citrica-ui-toolkit` internally:
+- `header.tsx`, `footer.tsx`, `navbar.tsx`, `sidebar.tsx`
+- `login-container.tsx`, `forgot-password.tsx`, `new-password.tsx`
+- `drop-citrica.tsx`, `video.tsx`, `animated-content.tsx`
+
+Note: Atoms and molecules (Button, Input, Select, Text, Icon, Card, etc.) come from `citrica-ui-toolkit` package.
 
 #### Header Component (`header.tsx`)
 Multi-variant header component with optional button functionality:
@@ -79,37 +81,42 @@ import { Button, Input, Select, Text } from 'citrica-ui-toolkit';
 ### Citrica Design System (Styles Architecture)
 SCSS files organized in numbered folders following ITCSS methodology:
 
-1. **01-settings**: Global variables, colors, fonts, mixins
-   - `colors/` - Light/dark theme color tokens
-   - `colors-admin/` - Admin-specific color tokens
+1. **01-settings**: Global variables, fonts, mixins
    - `settings.scss` - Grid system, typography, responsive variables
    - `mixins.scss` - Responsive mixins and utilities
 
 2. **02-tools**: SCSS functions and tools
 3. **03-external**: External library overrides
-4. **04-generic**: Reset and normalize styles
+4. **04-generic**: Reset and normalize styles (applies theme mixins in `:root`)
 5. **05-tags**: HTML tag defaults
 6. **06-keyframes**: Animation keyframes
 7. **07-objects**: Layout objects (grid, containers)
 8. **08-components**: Component-specific styles
 9. **09-utilities**: Utility classes
-10. **10-tokens**: Design tokens for components
-    - `button-tokens.scss` - Button variants and states
-    - `input-tokens.scss` - Input field styling
-    - `select-tokens.scss` - Select dropdown styling
-    - `textarea-tokens.scss` - Textarea styling
-    - `text-tokens.scss` - Typography tokens
-    - `calendar-tokens.scss` - Calendar component tokens
-    - `form-tokens.scss` - Form-wide tokens
-    - `login-tokens.scss` - Login-specific tokens
+10. **10-tokens**: Centralized design tokens (colors + components)
+    - `web/colors/` - Web color palette (`_palette.scss`) + theme mixins (`_light-theme.scss`, `_dark-theme.scss`)
+    - `web/components/` - Web component tokens (`_button.scss`, `_input.scss`, `_select.scss`, `_textarea.scss`, `_text.scss`, `_calendar.scss`, `_form.scss`, `_login.scss`)
+    - `admin/colors/` - Admin color palette + theme mixins
+    - `admin/components/` - Admin component tokens (same structure as web)
+    - `tokens.scss` - Main file that imports all tokens
 11. **11-atomic-design**: Atomic design components
 12. **custom.scss**: Project-specific custom styles
 
 **Design Token System:**
-- Supports both regular and admin variants for all components
+- Supports both web and admin variants for all components
 - CSS variables for dynamic theming
 - Responsive typography and spacing scales
 - Color tokens following Material Design naming (primary, secondary, tertiary, etc.)
+
+## Documentation
+Detailed documentation is available in the `docs/` folder:
+- `docs/styles-overview.md` - Complete styles system overview
+- `docs/tokens-system.md` - Design tokens architecture
+- `docs/tokens-examples.md` - Token usage examples
+- `docs/citrica-ui-toolkit.md` - Component documentation
+- `docs/layout-system.md` - Grid system documentation
+- `docs/layout-examples.md` - Layout code examples
+- `docs/layout-visual-guide.md` - Visual grid diagrams
 
 ## Key Features & Patterns
 - **Responsive Navbar**: Auto-changing colors on scroll, mobile drawer menu

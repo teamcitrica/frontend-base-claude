@@ -1,7 +1,7 @@
 "use client";
 import { Container } from 'citrica-ui-toolkit';
 import { Suspense } from 'react';
-import NewPassword from "@/shared/components/citrica-ui/organism/new-password";
+import NewPassword from "@/shared/components/organisms/new-password";
 
 const NewPasswordPage = () => {
   return (

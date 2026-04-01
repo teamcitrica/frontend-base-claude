@@ -2,72 +2,25 @@
 // TOKENS - MAIN FILE
 // ============================================
 // This file imports all token definitions for both
-// client/public side and admin side components
+// web (public) and admin side components
 // ============================================
 
-// CLIENT/PUBLIC SIDE COMPONENTS
-@import './components/text-tokens.scss';
-@import './components/button-tokens.scss';
-@import './components/input-tokens.scss';
-@import './components/select-tokens.scss';
-@import './components/textarea-tokens.scss';
-@import './components/form-tokens.scss';
-@import './components/login-tokens.scss';
-@import './components/calendar-tokens.scss';
+// WEB (PUBLIC) COMPONENTS
+@import './web/components/_text.scss';
+@import './web/components/_button.scss';
+@import './web/components/_input.scss';
+@import './web/components/_select.scss';
+@import './web/components/_textarea.scss';
+@import './web/components/_form.scss';
+@import './web/components/_login.scss';
+@import './web/components/_calendar.scss';
 
-// ADMIN SIDE COMPONENTS
-@import './components-admin/text-admin-tokens.scss';
-@import './components-admin/button-admin-tokens.scss';
-@import './components-admin/input-admin-tokens.scss';
-@import './components-admin/select-admin-tokens.scss';
-@import './components-admin/textarea-admin-tokens.scss';
-@import './components-admin/form-admin-tokens.scss';
-@import './components-admin/login-admin-tokens.scss';
-@import './components-admin/calendar-admin-tokens.scss';
-
-// ============================================
-// NOTES:
-// ============================================
-// - Client components use: .btn-primary, .input-primary, etc.
-// - Admin components use: .btn-primary-admin, .input-primary-admin, etc.
-// - Client tokens use: --color-primary-*, --form-radius-*, etc.
-// - Admin tokens use: --color-admin-primary-*, --form-admin-radius-*, etc.
-// ============================================
-// BUTTONS
-
-// .btn {
-//   font-family: var(--font-family-a);
-//   font-weight: 500;
-//   font-size: var(--btn-size);
-//   line-height: var(--btn-height);
-//   letter-spacing: 0;
-//   text-decoration: none;
-//   text-transform: none;
-// }
-// .btn-link {
-//   font-family: var(--font-family-a);
-//   font-weight: normal;
-//   font-size: var(--btn-link-size);
-//   line-height: var(--btn-link-height);
-//   letter-spacing: 0;
-//   text-decoration: none;
-//   text-transform: none;
-// }
-// .btn-big {
-//   font-family: var(--font-family-a);
-//   font-weight: normal;
-//   font-size: var(--btn-big-size);
-//   line-height: var(--btn-big-height);
-//   letter-spacing: 0;
-//   text-decoration: none;
-//   text-transform: none;
-// }
-// Typography colors
-// background colors
-
-// color navbar
-
-// .navbar-text-color :hover{
-//   color: #D5B16C;
-// }
-
+// ADMIN COMPONENTS
+@import './admin/components/_text.scss';
+@import './admin/components/_button.scss';
+@import './admin/components/_input.scss';
+@import './admin/components/_select.scss';
+@import './admin/components/_textarea.scss';
+@import './admin/components/_form.scss';
+@import './admin/components/_login.scss';
+@import './admin/components/_calendar.scss';
