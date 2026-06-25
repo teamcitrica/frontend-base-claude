@@ -54,7 +54,7 @@ Multi-variant header component with optional button functionality:
 - Uses siteConfig.navLinks for navigation items
 - Smooth scroll to sections functionality
 
-### Citrica UI Toolkit (citrica-ui-toolkit v0.0.10)
+### Citrica UI Toolkit (citrica-ui-toolkit v0.0.18)
 Custom component library built on top of HeroUI with Citrica design tokens.
 
 **Available Components:**
