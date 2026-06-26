@@ -20,6 +20,15 @@ $btn-citrica-ui: (
   @include a-set($btn-citrica-ui);
 }
 
+// Botón solo-icono: cuadrado (sin el ancho mínimo ni el padding del botón base).
+// El componente Button añade esta clase cuando recibe isIconOnly.
+// !important para superar el min-width/padding del botón base (misma especificidad).
+.btn-icon-only-citrica-ui {
+  min-width: 0 !important;
+  padding: 0 !important;
+  aspect-ratio: 1 / 1;
+}
+
 .btn-primary{
   background-color: var(--color-primary-btn);
   border: none;
