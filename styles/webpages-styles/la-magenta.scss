@@ -1,0 +1,443 @@
+// ============================================
+// LA MAGENTA BAKERY — landing (repostería francesa)
+// ============================================
+// Paleta de marca aplicada como OVERRIDE de variables CSS bajo el scope
+// `.la-magenta`. Los componentes de citrica-ui-toolkit (Button, Input, Select,
+// Textarea, Modal...) leen estas mismas variables, así que heredan la paleta
+// automáticamente sin tocar los tokens globales (home DumbbellDance y /admin
+// quedan intactos). El Modal se renderiza en un portal fuera del DOM del
+// wrapper, por eso al usarlo se le pasa className="la-magenta".
+// SOLO variables de token en el JSX; los hex viven aquí.
+// ============================================
+
+// ---- Colores de marca ----
+$lm-crema:        #F2E9E0; // fondo base
+$lm-crema-alt:    #FAF5EF; // crema clara (tarjetas)
+$lm-lila:         #DCD3E3; // superficie alterna
+$lm-lavanda:      #B3AED6; // acento frío / decoración
+$lm-salvia:       #CADFC9; // acento fresco / badges
+$lm-malva:        #B287AB; // acento principal (decorativo / titulares grandes)
+$lm-malva-deep:   #855579; // malva para CTA / texto (contraste AA con blanco)
+$lm-malva-deeper: #6E4463; // hover
+$lm-gold:         #C0A181; // dorado hairlines / monograma / flechas
+$lm-gold-deep:    #9A7B54; // dorado para números serif grandes
+$lm-gold-text:    #7A5E3E; // dorado seguro para texto pequeño
+$lm-tinta:        #3E332E; // texto de cuerpo
+$lm-tinta-soft:   #5A4A42; // texto secundario
+
+.la-magenta {
+  // ---- Superficies / roles ----
+  --lm-crema: #{$lm-crema};
+  --lm-crema-alt: #{$lm-crema-alt};
+  --lm-lila: #{$lm-lila};
+  --lm-lavanda: #{$lm-lavanda};
+  --lm-salvia: #{$lm-salvia};
+  --lm-malva: #{$lm-malva};
+  --lm-malva-deep: #{$lm-malva-deep};
+  --lm-gold: #{$lm-gold};
+  --lm-gold-deep: #{$lm-gold-deep};
+  --lm-gold-text: #{$lm-gold-text};
+  --lm-tinta: #{$lm-tinta};
+  --lm-tinta-soft: #{$lm-tinta-soft};
+
+  // ---- Override de tokens del sistema (toolkit hereda) ----
+  --color-surface: #{$lm-crema};
+  --color-on-surface: #{$lm-tinta};
+  --color-on-surface-var: #{$lm-tinta-soft};
+  --color-surface-container-lowest: #FFFFFF;
+  --color-surface-container-low: #{$lm-crema-alt};
+  --color-surface-container: #{$lm-crema};
+  --color-surface-container-high: #{$lm-lila};
+  --color-surface-container-highest: #{$lm-lavanda};
+
+  --color-primary: #{$lm-malva};
+  --color-on-primary: #FFFFFF;
+  --color-primary-container: #EBDFEA;
+  --color-on-primary-container: #4A2E45;
+  --color-secondary: #{$lm-gold};
+  --color-on-secondary: #2E2318;
+  --color-tertiary: #{$lm-lavanda};
+  --color-outline: #D8CFC4;
+  --color-outline-variant: #E7DED4;
+
+  // ---- Botones ----
+  --color-primary-btn: #{$lm-malva-deep};
+  --color-primary-btn-hover: #{$lm-malva-deeper};
+  --color-primary-btn-text: #FFFFFF;
+  --color-primary-btn-text-hover: #FFFFFF;
+  --color-primary-btn-border: #{$lm-malva-deep};
+  --color-primary-btn-border-hover: #{$lm-malva-deeper};
+
+  --color-secondary-btn: #{$lm-tinta};
+  --color-secondary-btn-hover: #2A221E;
+  --color-secondary-btn-text: #FFFFFF;
+  --color-secondary-btn-text-hover: #FFFFFF;
+  --color-secondary-btn-border: #{$lm-tinta};
+  --color-secondary-btn-border-hover: #2A221E;
+
+  --color-flat-btn: transparent;
+  --color-flat-btn-text: #{$lm-gold-text};
+  --color-flat-btn-hover: rgba(192, 161, 129, 0.14);
+  --color-flat-btn-text-hover: #5E4830;
+  --color-flat-btn-border: transparent;
+  --color-flat-btn-border-hover: transparent;
+
+  // ---- Input / Select / Textarea (focus malva) ----
+  --color-primary-input-bg: #FFFFFF;
+  --color-primary-input-border: #D8CFC4;
+  --color-primary-input-border-hover: #{$lm-malva-deep};
+  --color-primary-input-label: #{$lm-tinta};
+  --color-primary-input-text: #{$lm-tinta};
+  --color-primary-input-text-hover: #{$lm-tinta};
+  --color-primary-input-placeholder: #97887C;
+
+  --color-primary-select-bg: #FFFFFF;
+  --color-primary-select-border: #D8CFC4;
+  --color-primary-select-border-hover: #{$lm-malva-deep};
+  --color-primary-select-label: #{$lm-tinta};
+  --color-primary-select-text: #{$lm-tinta};
+  --color-primary-select-text-hover: #{$lm-tinta};
+  --color-primary-select-placeholder: #97887C;
+  --color-primary-select-item-text: #{$lm-tinta};
+  --color-primary-select-item-bg: #FFFFFF;
+  --color-primary-select-item-bg-hover: rgba(133, 85, 121, 0.10);
+  --color-primary-select-item-bg-selected: #{$lm-malva-deep};
+  --color-primary-select-item-text-selected: #FFFFFF;
+
+  --color-primary-textarea-bg: #FFFFFF;
+  --color-primary-textarea-border: #D8CFC4;
+  --color-primary-textarea-border-hover: #{$lm-malva-deep};
+  --color-primary-textarea-label: #{$lm-tinta};
+  --color-primary-textarea-text: #{$lm-tinta};
+  --color-primary-textarea-text-hover: #{$lm-tinta};
+  --color-primary-textarea-placeholder: #97887C;
+
+  background-color: var(--lm-crema);
+  color: var(--lm-tinta);
+  overflow-x: hidden;
+}
+
+// El Modal vive en un portal: replicamos las variables imprescindibles.
+.la-magenta,
+.la-magenta-modal {
+  --color-primary-btn: #{$lm-malva-deep};
+  --color-primary-btn-hover: #{$lm-malva-deeper};
+  --color-flat-btn-text: #{$lm-gold-text};
+}
+.la-magenta-modal {
+  --color-surface: #{$lm-crema};
+}
+
+// ---- Tipografía ----
+.la-magenta__serif {
+  font-family: var(--font-la-serif), "Georgia", "Times New Roman", serif !important;
+  letter-spacing: 0 !important;
+}
+.la-magenta__italic {
+  font-style: italic;
+}
+.la-magenta__kicker {
+  font-family: var(--font-family-c);
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--lm-gold-text);
+  display: inline-block;
+}
+
+// ---- Detalles dorados ----
+.la-magenta__hairline {
+  height: 1px;
+  width: 72px;
+  background: var(--lm-gold);
+  border: 0;
+  display: block;
+}
+.la-magenta__hairline--center { margin-left: auto; margin-right: auto; }
+
+.la-magenta__arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--lm-gold-text);
+  font-family: var(--font-family-c);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  font-size: 12px;
+  font-weight: 700;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+  transition: gap 0.25s ease, color 0.25s ease;
+  &::after {
+    content: "";
+    width: 46px;
+    height: 1px;
+    background: currentColor;
+    transition: width 0.25s ease;
+  }
+  &:hover { gap: 16px; color: #5E4830; &::after { width: 60px; } }
+}
+
+.la-magenta__monogram {
+  font-family: var(--font-la-serif), "Georgia", serif;
+  font-style: italic;
+  font-weight: 500;
+  color: var(--lm-gold);
+  font-size: 44px;
+  line-height: 1;
+}
+
+// ---- Geometría decorativa (clip-path) ----
+.la-magenta__geo {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+.la-magenta__geo-tri {
+  position: absolute;
+  width: 60%;
+  height: 55%;
+}
+.la-magenta__geo-tri--bl {
+  left: 0; bottom: 0;
+  background: var(--lm-lila);
+  clip-path: polygon(0 100%, 0 0, 100% 100%);
+}
+.la-magenta__geo-tri--br {
+  right: 0; bottom: 0;
+  width: 34%; height: 40%;
+  background: var(--lm-malva);
+  clip-path: polygon(100% 100%, 100% 20%, 0 100%);
+}
+.la-magenta__geo-line {
+  position: absolute;
+  left: -10%; bottom: 38%;
+  width: 120%; height: 1px;
+  background: var(--lm-gold);
+  transform: rotate(-13deg);
+  transform-origin: left center;
+  opacity: 0.7;
+}
+// Esquinas del checkout
+.la-magenta__corner {
+  position: absolute;
+  width: 120px; height: 120px;
+  pointer-events: none;
+  opacity: 0.55;
+}
+.la-magenta__corner--tl { top: 0; left: 0; background: var(--lm-salvia);
+  clip-path: polygon(0 0, 100% 0, 0 100%); }
+.la-magenta__corner--tr { top: 0; right: 0; background: var(--lm-lavanda);
+  clip-path: polygon(100% 0, 100% 100%, 0 0); }
+.la-magenta__corner--bl { bottom: 0; left: 0; background: var(--lm-lavanda);
+  clip-path: polygon(0 100%, 100% 100%, 0 0); }
+.la-magenta__corner--br { bottom: 0; right: 0; background: var(--lm-salvia);
+  clip-path: polygon(100% 100%, 0 100%, 100% 0); }
+
+// ---- Secciones ----
+.la-magenta__section { position: relative; padding: 72px 0; }
+@media (min-width: 1191px) { .la-magenta__section { padding: 112px 0; } }
+.la-magenta__section--crema { background: var(--lm-crema); }
+.la-magenta__section--lila  { background: var(--lm-lila); }
+.la-magenta__section--tinta { background: var(--lm-tinta); }
+
+.la-magenta__hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  background: var(--lm-crema);
+  overflow: hidden;
+}
+.la-magenta__hero-inner { position: relative; z-index: 2; text-align: center; }
+
+// ---- Placeholder de imagen (bloque pastel) ----
+.la-magenta__ph {
+  position: relative;
+  width: 100%;
+  background: var(--lm-lila);
+  border: 1px solid var(--lm-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.la-magenta__ph--salvia  { background: var(--lm-salvia); }
+.la-magenta__ph--lavanda { background: var(--lm-lavanda); }
+.la-magenta__ph--malva   { background: var(--lm-malva); }
+.la-magenta__ph-mono {
+  font-family: var(--font-la-serif), serif;
+  font-style: italic;
+  color: rgba(62, 51, 46, 0.35);
+  font-size: 40px;
+}
+.la-magenta__ph img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+.la-magenta__ratio-45 { aspect-ratio: 4 / 5; }
+.la-magenta__ratio-11 { aspect-ratio: 1 / 1; }
+.la-magenta__ratio-43 { aspect-ratio: 4 / 3; }
+
+// ---- Tarjeta de producto ----
+.la-magenta__product {
+  background: #FFFFFF;
+  border: 1px solid var(--lm-gold);
+  border-radius: 2px;
+  overflow: hidden;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 18px 40px rgba(133, 85, 121, 0.16);
+  }
+}
+.la-magenta__product-body { padding: 22px 22px 26px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+.la-magenta__badge {
+  position: absolute;
+  top: 14px; left: 14px;
+  background: var(--lm-salvia);
+  color: var(--lm-tinta);
+  font-family: var(--font-family-c);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+  z-index: 2;
+}
+.la-magenta__price { color: var(--lm-malva-deep); font-weight: 700; }
+
+// ---- Cifras de confianza ----
+.la-magenta__stat-num {
+  font-family: var(--font-la-serif), serif;
+  color: var(--lm-gold-deep);
+  font-size: 52px;
+  line-height: 1;
+  font-weight: 600;
+}
+
+// ---- Portafolio ----
+.la-magenta__gallery-item {
+  position: relative;
+  cursor: pointer;
+  overflow: hidden;
+  border: 1px solid var(--lm-gold);
+}
+.la-magenta__gallery-item .la-magenta__ph { transition: transform 0.5s ease; }
+.la-magenta__gallery-item:hover .la-magenta__ph { transform: scale(1.06); }
+.la-magenta__gallery-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(242, 233, 224, 0.82);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 16px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 2;
+}
+.la-magenta__gallery-item:hover .la-magenta__gallery-overlay { opacity: 1; }
+
+// ---- Filtros ----
+.la-magenta__filter {
+  border: 1px solid var(--lm-gold);
+  background: transparent;
+  color: var(--lm-tinta-soft);
+  font-family: var(--font-family-c);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 9px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  &:hover { border-color: var(--lm-malva-deep); color: var(--lm-malva-deep); }
+  &.is-active {
+    background: var(--lm-malva-deep);
+    border-color: var(--lm-malva-deep);
+    color: #FFFFFF;
+  }
+}
+
+// ---- Testimonios ----
+.la-magenta__quote {
+  font-family: var(--font-la-serif), serif;
+  font-style: italic;
+  color: var(--lm-tinta);
+  line-height: 1.5;
+}
+.la-magenta__heart { color: var(--lm-malva); }
+
+// ---- Checkout ----
+.la-magenta__summary {
+  background: #FFFFFF;
+  border: 1px solid var(--lm-gold);
+  padding: 26px;
+}
+.la-magenta__summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--lm-crema);
+}
+.la-magenta__qty {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.la-magenta__qty button {
+  width: 26px; height: 26px;
+  border: 1px solid var(--lm-gold);
+  border-radius: 50%;
+  background: transparent;
+  color: var(--lm-malva-deep);
+  cursor: pointer;
+  line-height: 1;
+  display: inline-flex; align-items: center; justify-content: center;
+  &:hover { background: rgba(133, 85, 121, 0.1); }
+}
+.la-magenta__empty { text-align: center; padding: 32px 16px; }
+
+// ---- Footer ----
+.la-magenta__footer {
+  background: var(--lm-tinta);
+  color: #EFE7DE;
+  padding: 64px 0 40px;
+}
+.la-magenta__footer-brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+}
+.la-magenta__footer-diamond { color: var(--lm-gold); font-size: 14px; }
+.la-magenta__footer a { color: #CDBFB3; transition: color 0.2s ease; }
+.la-magenta__footer a:hover { color: var(--lm-gold); }
+
+// ---- Animación de entrada ----
+.la-magenta__reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.la-magenta__reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .la-magenta__reveal { opacity: 1; transform: none; transition: none; }
+}

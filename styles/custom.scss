@@ -1,5 +1,6 @@
 @import './webpages-styles/sections.scss';
 @import './webpages-styles/home.scss';
+@import './webpages-styles/la-magenta.scss';
 
 // SOLO ESTILOS GLOBALES DE LA WEB
 
@@ -623,6 +624,7 @@
     box-shadow: 0 6px 24px rgba(37, 211, 102, 0.6);
   }
 
+  
   svg {
     width: 32px;
     height: 32px;

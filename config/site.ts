@@ -25,6 +25,15 @@ export const siteConfig = {
       href: "#instructor",
     },
   ],
+  // Navegación de la landing "La Magenta Bakery".
+  // Separada de navLinks para no alterar la home existente.
+  laMagentaNavLinks: [
+    { title: "Favoritos", href: "#favoritos" },
+    { title: "Historia", href: "#historia" },
+    { title: "Testimonios", href: "#testimonios" },
+    { title: "Portafolio", href: "#portafolio" },
+    { title: "Pedido", href: "#pedido" },
+  ],
   subItemSearchParam: SUBITEM_SEARCH_PARAM, // FOR SUBSECTIONS IN SIDEBAR
   sidebarItems: [
     {
