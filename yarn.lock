@@ -4694,10 +4694,10 @@ chalk@^4.0.0:
   optionalDependencies:
     fsevents "~2.3.2"
 
-citrica-ui-toolkit@0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/citrica-ui-toolkit/-/citrica-ui-toolkit-0.0.20.tgz#7bf7f8e589d594ae09e9199b2f64138d0c2af1ba"
-  integrity sha512-1gWuZBGzdIpdsT+YuUHCVvJsrEcSUX9UqOkPGBQW2gcanDv5cWrwVNR+oaOI6HW2ziv5oqEf6RpEnOGhnUoNRQ==
+citrica-ui-toolkit@0.0.25:
+  version "0.0.25"
+  resolved "https://registry.yarnpkg.com/citrica-ui-toolkit/-/citrica-ui-toolkit-0.0.25.tgz#973abbb004feccc1a4de302b92e486262a713753"
+  integrity sha512-yZ+W8f4563mrfWn6Ye4+MqIn9tpzMacw6/e3juEae6L8UxY8Cem/ERZUVfIj9/J+QDG0brDB2+Fjx4Ag1++j9w==
   dependencies:
     "@heroui/accordion" "^2.2.29"
     "@heroui/autocomplete" "2.3.31"
