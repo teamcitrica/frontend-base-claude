@@ -46,3 +46,6 @@ next-env.d.ts
 
 # Built Visual Studio Code Extensions
 *.vsix
+
+# Windows "Mark of the Web" metadata (NTFS Zone.Identifier ADS)
+*:Zone.Identifier

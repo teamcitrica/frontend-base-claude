@@ -108,6 +108,27 @@ SCSS files organized in numbered folders following ITCSS methodology:
 - Responsive typography and spacing scales
 - Color tokens following Material Design naming (primary, secondary, tertiary, etc.)
 
+## ImPulso Design-System Rules (tokens-first, component-first)
+
+The public web surface is the **ImPulso** landing (`app/page.tsx` + `styles/webpages-styles/impulso.scss`). When building or editing it — including via the `impeccable` skill — these rules are non-negotiable so the system stays single-sourced. Full spec: **DESIGN.md §10**.
+
+**1. Color — one source of truth.** All brand hex live in `styles/10-tokens/web/colors/_palette.scss`; edit color values only there. Everything else consumes the emitted variables: `var(--color-primary)` (orange), `var(--color-text-black)` (carbón), `var(--color-surface)` (neutral-50), `var(--color-tertiary)` (yellow), `var(--color-on-surface-var)`, etc. **Never** hardcode hex/rgba in `.tsx` or `styles/webpages-styles/*.scss`, and **never** add intermediate aliases (e.g. `--im-orange`). For a carbón tone with no token, derive it inline with `color-mix()` over tokens.
+
+**2. Typography — Text component + variants.** Render text with the toolkit `Text` component and pick a `variant`; don't hardcode `font-family`/`clamp()` in the page. Scale lives in `styles/10-tokens/web/components/_text.scss`; fonts in `styles/01-settings/settings.scss` (`--font-family-a` = Anton, `--font-family-b/c/d` = Lato). Variant → role: `display` = hero, `headline` = section titles, `title` = card/step titles (all **Anton**, uppercase); `subtitle`/`body`/`label` = **Lato**.
+
+**3. Buttons & forms — token-driven.** Use `<Button variant="primary|secondary|flat">`. Colors from `--color-*-btn` (`_palette.scss`), render from `_button.scss`, pill radius from `--form-radius-btn` in `_form.scss`. Don't restyle buttons in landing SCSS.
+
+**4. Components — prioritize `citrica-ui-toolkit`.** Reach for the toolkit before hand-rolling markup: `Button`, `Input`, `Select`, `Textarea`, `Text`, `Icon`, `Card`, `Modal`, `Carousel`, `Header`, and the `Container`/`Col` grid. Reserve custom `.impulso__*` SCSS for layout / section rhythm / signature gestures the toolkit doesn't cover — and even there, colors are tokens.
+
+| Concern | File |
+|---|---|
+| Brand colors (hex) | `styles/10-tokens/web/colors/_palette.scss` |
+| Type scale / variants | `styles/10-tokens/web/components/_text.scss` |
+| Fonts (Anton/Lato) | `styles/01-settings/settings.scss` |
+| Button render | `styles/10-tokens/web/components/_button.scss` |
+| Button/form radius | `styles/10-tokens/web/components/_form.scss` |
+| Landing layout only | `styles/webpages-styles/impulso.scss` |
+
 ## Documentation
 Detailed documentation is available in the `docs/` folder:
 - `docs/styles-overview.md` - Complete styles system overview

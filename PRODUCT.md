@@ -4,49 +4,69 @@
 
 brand
 
+> This repo was forked from the Citrica base template and is now the **ImPulso** project. The surface in focus is a brand/marketing landing page — design IS the product. The Supabase-backed admin scaffolding from the base still exists in the repo but is secondary; the landing page is what this document defaults to.
+
 ## Users
 
-**Who builds on it:** The Citrica team. This is an internal base template — a curated starting point the team forks to spin up new client projects, not a finished product itself.
+**Who it's for:** Owners and managers of gastronomic businesses — restaurants of medium-to-high ticket, cafés, dark kitchens, food trucks, F&B brands, and culinary ventures. The specific buyer is a restaurant owner who is spending on marketing (photos, video, paid ads) and cannot tell what actually brings diners through the door. They are frustrated by a "black box" of marketing spend and by leads slipping away.
 
-**Who uses the end result:** The client staff who operate each fork — managing data through the admin panel (clientes, tareas, reservas, config-app), and the client's own audience visiting the marketing surfaces (home, login flows).
+**Who builds on it:** The ImPulso / Citrica team, extending this landing into a live acquisition page and any follow-on marketing surfaces.
 
-**Context:** Two surfaces ship in one repo. A brand/marketing layer (multi-variant header, home page, auth screens) and a product/admin layer (Supabase-backed dashboard with sidebar nav and role gating). The brand layer is the primary surface this document defaults to, because first impressions and identity are set there; the admin layer serves the operator's workflow. Both must look like deliberate Citrica work the moment a fork boots.
+**Context:** A single, conversion-focused long-scroll landing page in Spanish (Peruvian/Latin American register). The visitor arrives skeptical — they've been burned by agencies that "sell the perfect idea and then disappear." The page's whole job is to convert that skepticism into one booked call: the free "estudio gratuito" / diagnosis.
 
-**Job to be done:** Give the Citrica team a base they can fork and ship from immediately — defaults good enough to go live, identity strong enough that no fork reads as a generic template, and structure clear enough that the next developer extends it without fighting it.
+**Job to be done:** Convince a busy, results-oriented restaurant owner that ImPulso runs marketing as a measurable system for filling tables — not as vanity "presence" — and get them to book a free diagnostic call.
 
 ## Product Purpose
 
-A reusable Next.js 15 foundation (HeroUI + `citrica-ui-toolkit` + the Citrica SCSS design system + Supabase) that encodes Citrica's visual identity and engineering conventions once, so every client project starts from a polished, on-brand, accessible-by-default baseline instead of from scratch.
+ImPulso is a **growth & content agency for the gastronomic sector**. The value proposition: *"Le damos impulso a tu marca gastronómica: del plato a la pantalla, de la pantalla a la mesa llena."* The landing page sells the **Sistema Mesa Activa** — a 4-step method (visibility diagnosis → local positioning → diner acquisition → weekly optimization) that turns marketing spend into a predictable flow of diners, with full transparency on ROI.
 
-**Success looks like:** a forked project that can go to a client demo on day one without a design cleanup pass — brand-forward, clean, and obviously not a stock admin template.
+**Success looks like:** a restaurant owner who lands, recognizes their own pain in the copy ("metes plata y no sabes si vuelve"), trusts that ImPulso are operators who own restaurants themselves, and books the free diagnostic call. The single conversion event is **"Agendar mi estudio gratuito."**
 
 ## Brand Personality
 
-**Three words:** Clean, efficient, engineered.
+**Three words:** Energetic, direct, appetite-driven.
 
-**Voice & tone:** Confident and precise without shouting. The orange (`#FF5B00`) is the brand's signature and leads as a deliberate accent, not a wash. Restraint is the default; flourish is earned. The feel to anchor to is **Linear** — sharp typography, generous structure, subtle intentional motion, an engineered rather than decorated surface.
+**Archetype:** *El Motivador con hambre de resultados* — part coach, part foodie. Speaks like the restaurant owner, not like a consultant.
 
-**Emotional goal:** The user (operator or visitor) should feel the product is competent and cared-for. Calm in the admin, confident on the brand pages. Never busy, never generic.
+**Voice & tone:** Direct, sensory, backed by data, close/familiar. Says "Llenamos tus mesas," not "Ofrecemos soluciones integrales de comunicación." Every claim earns trust with a real, verifiable number ("+180% de reservas en 3 meses"). Warm Peruvian/Latin Spanish, never corporate.
+
+**Emotional goal:** The visitor should feel *understood* and *in control*. Understood, because ImPulso are restaurant owners who know what an empty Tuesday night feels like. In control, because for the first time they'll know exactly what each sol invested returns.
+
+**Art-direction north star:** *"La carta del mercado moderno"* — the bluntness of a market poster (Anton, carbón black, orange) meeting the discipline of a growth agency (clean grids, visible metrics, generous white). High contrast between light sections and carbón (`#111111`) sections; orange **always** means action.
 
 ## Anti-references
 
-- **Generic Bootstrap admin.** No boxy gray card grids, no default-blue, no cramped dense tables as the reflex layout. This is the single most important thing to avoid.
-- **Unstyled HeroUI default look.** It must never read as a HeroUI demo — no purple/violet defaults, no component-library-out-of-the-box feel. The Citrica identity (orange, precision, spacing) must be legible immediately.
-- Loud, over-animated, gradient-everything, glassmorphism-by-default styling. Clean & efficient is the brief, not maximalism.
+- **The marketing black box.** The product exists to kill "creo que funcionó" marketing; the page must never itself feel like vague agency fluff. Every section pushes toward a measurable claim or a concrete next step.
+- **Corporate/consultant coldness.** No "sinergia," "holístico," "disruptivo," "soluciones 360°," "ecosistema." No stock "business people shaking hands." This brand is *not* corporate-cold, pretentious, over-technical, or generic.
+- **Editorial-magazine aesthetic.** Anton is a poster/sports-headline voice, not a Klim display-serif specimen. No display-serif + italic + drop-caps + ruled-column magazine affectation. The lane is *market poster / results scoreboard*, deliberately un-editorial.
+- **Generic 3D / corporate-memphis illustration.** Food photography is the protagonist; the brand is the amplifier. No generic 3D blobs, no memphis characters, no sketchy SVG.
+- **Orange as a wash.** Orange is 10% (action & accent only). Spreading it everywhere kills its force. Yellow is a condiment, max one yellow element per viewport.
+- **Hardcoded styling / hand-rolled components.** The system is single-sourced: brand colors live only in the `_palette.scss` tokens and UI is built on `citrica-ui-toolkit`. Hardcoded hex, intermediate CSS aliases (`--im-*`), or bespoke markup that duplicates a toolkit component are defects, not shortcuts. (See the Implementation contract below and DESIGN.md §10.)
 
 ## Design Principles
 
-1. **Base, not boilerplate.** Every default must be good enough to ship as-is. Forks should inherit quality, not a cleanup backlog. If a default would need fixing before a client demo, it's not done.
-2. **Identity over template.** The work must read as Citrica at a glance and never as a stock admin or a HeroUI demo. Brand presence (the orange, the type, the spacing rhythm) is non-negotiable, even in utilitarian admin screens.
-3. **Earn every element.** Clean & efficient means restraint. Remove before adding. Whitespace and hierarchy do the work; decoration is the exception that has to justify itself.
-4. **Engineered, not decorated.** Polish comes from precision and consistency — aligned grids, consistent tokens, deliberate motion — the Linear way. Not from flourish layered on top.
-5. **Forkable clarity.** Because this seeds many projects, structure and tokens must be obvious to the next developer. Conventions over cleverness; a pattern used once should be a pattern named and reusable.
+1. **Flujo, no presencia.** Marketing is diner flow, not "presence." Every section answers, implicitly, "how many new diners did this bring?" The page sells a measurable system, so the design keeps metrics visible and claims concrete.
+2. **La comida es la protagonista.** Real, warm, kinetic food photography leads; ImPulso amplifies it. Cold, desaturated, or blurry food imagery is a defect. Motion in the imagery (falling sauce, steam, hands cooking) echoes the name *ImPulso*.
+3. **Alto contraste, ritmo de cartel.** Alternate white / `neutral-50` / carbón sections for rhythm. At least one carbón section per page — that's the "poster moment" of the brand. Restraint everywhere so the loud moments land.
+4. **El naranja es acción.** Orange marks exactly what to click or notice, nowhere else. Respect 60-30-10 (neutral / carbón / orange). One bicolor "pulso" gesture per page, max; one yellow highlight per viewport, max.
+5. **Datos que se pueden verificar.** Trust is built with real numbers, an honest guarantee, and operator credibility ("somos dueños de restaurante"), not adjectives. At least one real, verifiable metric visible.
+
+## Implementation contract
+
+The ImPulso surface is **tokens-first and component-first** — the same rules bind hand edits and automated design passes (e.g. the `impeccable` skill):
+
+- **Colors** come only from the design tokens in `styles/10-tokens/web/colors/_palette.scss`, consumed as `var(--color-*)`. No hardcoded hex/rgba, no intermediate `--im-*` aliases; derive token-less carbón tones with `color-mix()` over tokens.
+- **Typography** is the toolkit `Text` component chosen by `variant` (Anton for `display`/`headline`/`title`, Lato for `subtitle`/`body`/`label`); the scale lives in `_text.scss`, fonts in `settings.scss`.
+- **Components** come from `citrica-ui-toolkit` first — `Button`, `Input`, `Select`, `Textarea`, `Text`, `Icon`, `Card`, `Header`, and the `Container`/`Col` grid. Custom `.impulso__*` SCSS is reserved for layout/section treatments the toolkit doesn't cover.
+
+Full detail and the file map live in **DESIGN.md §10**.
 
 ## Accessibility & Inclusion
 
-Best-effort, with sensible defaults that propagate to every fork rather than a formal certification commitment:
+Best-effort with sensible, verified-contrast defaults (per the brand book's WCAG table):
 
-- Aim for readable contrast on body and interactive text (the toolkit and tokens should not ship low-contrast defaults).
-- Preserve visible focus states and keyboard operability for forms, nav, and the sidebar.
-- Honor `prefers-reduced-motion` for any motion added (the repo already includes GSAP/Framer Motion).
-- No hard WCAG level is mandated at the base layer; individual client forks can raise the bar to AA/AAA when their context (gov, health, education) requires it.
+- Body text and small UI text meet ≥4.5:1. Small orange text uses `#A83E15` (7.0:1 on white), **never** the `#E8622C` base. White-on-orange is reserved for large/bold text and buttons only (3.4:1).
+- Anton never below 24px (legibility floor). It carries titles only, never paragraphs.
+- Every photo with text over it gets a carbón overlay (40–60%) for contrast.
+- Visible focus on every interactive element (outline 2px `#111111`, offset 2px).
+- `prefers-reduced-motion` honored: the one orchestrated hero reveal (slide-up + yellow underline draw) degrades to a crossfade or instant state.

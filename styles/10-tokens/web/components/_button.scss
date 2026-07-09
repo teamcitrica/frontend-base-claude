@@ -43,11 +43,16 @@ $btn-citrica-ui: (
   }
 }
 
+// Secundario = outline: fondo transparente + borde, e invierte a sólido en
+// hover. Los valores viven en los tokens (_palette.scss); si se dejan sólidos
+// vuelve a comportarse como botón lleno sin tocar aquí.
 .btn-secondary{
   background-color: var(--color-secondary-btn);
-  border: none;
+  border: var(--form-border-size-btn) solid var(--color-secondary-btn-border);
+  transition: background-color 0.22s ease, border-color 0.22s ease;
   &:hover{
     background-color: var(--color-secondary-btn-hover);
+    border-color: var(--color-secondary-btn-border-hover);
     .text-component {
       color: var(--color-secondary-btn-text-hover) !important;
     }

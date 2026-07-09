@@ -5,8 +5,8 @@ const ROL_CLIENTE = 12;
 const SUBITEM_SEARCH_PARAM = "page";
 
 export const siteConfig = {
-  name: "Frontend Base - Claude",
-  description: "A base template for building admin dashboards with Next.js and NextUI.",
+  name: "New Project",
+  description: "This is a awesome project.",
   navLinks: [
     {
       title: "CURSO",
@@ -25,14 +25,18 @@ export const siteConfig = {
       href: "#instructor",
     },
   ],
-  // Navegación de la landing "La Magenta Bakery".
-  // Separada de navLinks para no alterar la home existente.
   laMagentaNavLinks: [
     { title: "Favoritos", href: "#favoritos" },
     { title: "Historia", href: "#historia" },
     { title: "Testimonios", href: "#testimonios" },
     { title: "Portafolio", href: "#portafolio" },
     { title: "Pedido", href: "#pedido" },
+  ],
+  impulsoNavLinks: [
+    { title: "El problema", href: "#problema" },
+    { title: "Cómo funciona", href: "#metodo" },
+    { title: "Resultados", href: "#resultados" },
+    { title: "Garantía", href: "#garantia" },
   ],
   subItemSearchParam: SUBITEM_SEARCH_PARAM, // FOR SUBSECTIONS IN SIDEBAR
   sidebarItems: [
