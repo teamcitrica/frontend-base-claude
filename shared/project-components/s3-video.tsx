@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Text } from "citrica-ui-toolkit";
 
 type S3VideoProps = {
@@ -24,47 +24,11 @@ const S3Video = ({
   poster,
   fill = false,
 }: S3VideoProps) => {
-  const [url, setUrl] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState(false);
 
-  useEffect(() => {
-    let cancelled = false;
+  const src = `/api/s3/video?key=${encodeURIComponent(videoKey)}`;
 
-    setUrl(null);
-    setError(null);
-
-    const load = async () => {
-      try {
-        const res = await fetch(
-          `/api/s3/presigned?key=${encodeURIComponent(videoKey)}`,
-        );
-
-        if (!res.ok) {
-          const data = await res.json().catch(() => ({}));
-
-          throw new Error(data.error || `Error ${res.status}`);
-        }
-
-        const { url: signedUrl } = await res.json();
-
-        if (!cancelled) setUrl(signedUrl);
-      } catch (e) {
-        if (!cancelled) {
-          setError(
-            e instanceof Error ? e.message : "No se pudo cargar el video.",
-          );
-        }
-      }
-    };
-
-    load();
-
-    return () => {
-      cancelled = true;
-    };
-  }, [videoKey]);
-
-  if (error || !url) {
+  if (error) {
     return (
       <div
         className={className}
@@ -77,7 +41,7 @@ const S3Video = ({
         }}
       >
         <Text as="p" variant="body">
-          {error ?? "Cargando video…"}
+          No se pudo cargar el video.
         </Text>
       </div>
     );
@@ -93,7 +57,7 @@ const S3Video = ({
       loop={loop}
       muted={muted}
       poster={poster}
-      src={url}
+      src={src}
       style={
         fill
           ? {
@@ -105,6 +69,7 @@ const S3Video = ({
             }
           : { width: "100%", height: "auto", display: "block" }
       }
+      onError={() => setError(true)}
     />
   );
 };
