@@ -1,14 +1,9 @@
-// ============================================================
-// Cliente de AWS S3 (bucket privado de videos).
-// SOLO se importa desde código de servidor (route handlers, server
-// actions, server components). Las credenciales viven en .env.local
-// y NUNCA deben exponerse al cliente (sin prefijo NEXT_PUBLIC_).
-// ============================================================
+
 import "server-only";
 
 import { S3Client } from "@aws-sdk/client-s3";
 
-// Lee y valida las variables de entorno una sola vez al cargar el módulo.
+
 const region = process.env.AWS_REGION;
 const accessKeyId = process.env.AWS_ACCESS_KEY_ID;
 const secretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
@@ -22,7 +17,7 @@ if (!region || !accessKeyId || !secretAccessKey || !S3_BUCKET) {
   );
 }
 
-export const s3Client = new S3Client({
+   export const s3Client = new S3Client({
   region,
   credentials: { accessKeyId, secretAccessKey },
 });
