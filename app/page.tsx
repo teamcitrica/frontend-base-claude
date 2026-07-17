@@ -2,10 +2,21 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { Button, Col, Container, Icon, Input, Select, Text, Textarea, Header } from "citrica-ui-toolkit";
+import {
+  Button,
+  Col,
+  Container,
+  Icon,
+  Input,
+  Select,
+  Text,
+  Textarea,
+  Header,
+} from "citrica-ui-toolkit";
 import { addToast } from "@heroui/toast";
 
 import { siteConfig } from "@/config/site";
+import S3Video from "@/shared/project-components/s3-video";
 
 // ============================================================
 // ImPULSO — Growth & Content Agency (sector gastronómico)
@@ -25,7 +36,7 @@ const METRICS = [
   { num: "−40%", label: "costo por reserva" },
 ];
 
-const PAINS = ([
+const PAINS = [
   {
     icon: "CircleDollarSign",
     title: "Metes plata y no sabes si vuelve.",
@@ -41,9 +52,9 @@ const PAINS = ([
     title: "No sabes qué cortar ni qué duplicar.",
     desc: "Sin visibilidad real del retorno, cada decisión de inversión es una apuesta a ciegas.",
   },
-] as const);
+] as const;
 
-const STEPS = ([
+const STEPS = [
   {
     icon: "Search",
     title: "Diagnóstico de visibilidad",
@@ -64,9 +75,9 @@ const STEPS = ([
     title: "Optimización semanal",
     desc: "Medimos cada 7 días. Si algo no rinde, lo ajustamos de inmediato. Transparencia total sobre tu inversión.",
   },
-] as const);
+] as const;
 
-const OUTCOMES = ([
+const OUTCOMES = [
   {
     icon: "TrendingUp",
     title: "Flujo constante",
@@ -82,7 +93,7 @@ const OUTCOMES = ([
     title: "Un equipo encima",
     desc: "Te avisamos y ajustamos las campañas antes de que tengas que preguntar.",
   },
-] as const);
+] as const;
 
 const CIUDADES = [
   { value: "lima-centro", label: "Lima (Centro)" },
@@ -224,10 +235,16 @@ const PageImpulso = () => {
   const submit = () => {
     const { nombre, restaurante, email, whatsapp } = form;
 
-    if (!nombre.trim() || !restaurante.trim() || !email.trim() || !whatsapp.trim()) {
+    if (
+      !nombre.trim() ||
+      !restaurante.trim() ||
+      !email.trim() ||
+      !whatsapp.trim()
+    ) {
       addToast({
         title: "Faltan datos",
-        description: "Completa nombre, restaurante, email y WhatsApp para continuar.",
+        description:
+          "Completa nombre, restaurante, email y WhatsApp para continuar.",
         color: "warning",
       });
 
@@ -247,7 +264,14 @@ const PageImpulso = () => {
       description: `Gracias ${nombre.split(" ")[0]}. Te contactamos esta semana para agendar tu estudio gratuito.`,
       color: "success",
     });
-    setForm({ nombre: "", restaurante: "", email: "", whatsapp: "", ciudad: "", mensaje: "" });
+    setForm({
+      nombre: "",
+      restaurante: "",
+      email: "",
+      whatsapp: "",
+      ciudad: "",
+      mensaje: "",
+    });
   };
 
   const set = (k: keyof typeof form) => (v: string) =>
@@ -259,11 +283,11 @@ const PageImpulso = () => {
           derecha, sólido con sombra al scroll. Los colores de marca los hereda
           del scope `.impulso` (--color-primary = naranja, etc.). */}
       <Header
-        variant="basic"
-        logo={<Wordmark size={26} />}
-        navItems={siteConfig.impulsoNavLinks}
         showButton
         buttonText="Agenda tu estudio"
+        logo={<Wordmark size={26} />}
+        navItems={siteConfig.impulsoNavLinks}
+        variant="basic"
         onButtonClick={() => scrollToSection("agenda")}
       />
 
@@ -271,10 +295,18 @@ const PageImpulso = () => {
       <section className="impulso__hero" id="hero">
         <Container>
           <Col cols={{ sm: 4, md: 6, lg: 7 }}>
-            <div className="flex flex-col items-start" style={{ maxWidth: 620 }}>
-              <div className="impulso__eyebrow-row impulso__hero-in mb-6" style={{ ["--i" as any]: 0 }}>
+            <div
+              className="flex flex-col items-start"
+              style={{ maxWidth: 620 }}
+            >
+              <div
+                className="impulso__eyebrow-row impulso__hero-in mb-6"
+                style={{ ["--i" as any]: 0 }}
+              >
                 <span className="impulso__rule" />
-                <span className="impulso__eyebrow">Agencia de marketing gastronómico</span>
+                <span className="impulso__eyebrow">
+                  Agencia de marketing gastronómico
+                </span>
               </div>
 
               <Text
@@ -295,9 +327,17 @@ const PageImpulso = () => {
                   color="var(--color-on-surface-var)"
                   variant="body"
                 >
-                  <span style={{ display: "block", maxWidth: 520, fontSize: 18, lineHeight: 1.6 }}>
-                    Marketing y contenido para restaurantes de ticket medio y alto que quieren
-                    crecer de forma constante — y por fin saber qué campaña les trae comensales.
+                  <span
+                    style={{
+                      display: "block",
+                      maxWidth: 520,
+                      fontSize: 18,
+                      lineHeight: 1.6,
+                    }}
+                  >
+                    Marketing y contenido para restaurantes de ticket medio y
+                    alto que quieren crecer de forma constante — y por fin saber
+                    qué campaña les trae comensales.
                   </span>
                 </Text>
               </div>
@@ -321,19 +361,29 @@ const PageImpulso = () => {
           </Col>
 
           <Col cols={{ sm: 4, md: 6, lg: 5 }}>
-            <div className="impulso__hero-in mt-10 lg:mt-0" style={{ ["--i" as any]: 2 }}>
+            <div
+              className="impulso__hero-in mt-10 lg:mt-0"
+              style={{ ["--i" as any]: 2 }}
+            >
               <div className="impulso__hero-photo">
-                <ImImage
-                  overlay
-                  priority
-                  alt="Plato de carne a la parrilla con papas fritas, servido en un restaurante"
-                  imgId="1600891964092-4316c288032e"
-                  ratio="r45"
-                  sizes="(max-width: 1190px) 100vw, 42vw"
-                />
+                <div className="impulso__img impulso__img--r45 impulso__img--overlay">
+                  <S3Video
+                    autoPlay
+                    fill
+                    loop
+                    muted
+                    controls={false}
+                    videoKey="parkano/Stories 2024_Garbanzos_Freidoras de Aire Oster.mp4"
+                  />
+                </div>
                 <div className="impulso__hero-badge">
                   <span className="im-num">+180%</span>
-                  <Text as="p" className="mt-1" color="var(--color-surface)" variant="label">
+                  <Text
+                    as="p"
+                    className="mt-1"
+                    color="var(--color-surface)"
+                    variant="label"
+                  >
                     reservas en 3 meses{/* ILUSTRATIVO */}
                   </Text>
                 </div>
@@ -344,13 +394,21 @@ const PageImpulso = () => {
       </section>
 
       {/* ===================== PRUEBA SOCIAL (strip) ===================== */}
-      <section className="impulso__section impulso__section--carbon" style={{ paddingTop: 48, paddingBottom: 48 }}>
+      <section
+        className="impulso__section impulso__section--carbon"
+        style={{ paddingTop: 48, paddingBottom: 48 }}
+      >
         <Container>
           {METRICS.map((m) => (
             <Col key={m.label} cols={{ sm: 4, md: 2, lg: 4 }}>
               <div className="impulso__reveal text-center md:text-left py-3">
                 <span className="impulso__metric-num">{m.num}</span>
-                <Text as="p" className="mt-2" color="var(--color-outline)" variant="body">
+                <Text
+                  as="p"
+                  className="mt-2"
+                  color="var(--color-outline)"
+                  variant="body"
+                >
                   {m.label}
                 </Text>
               </div>
@@ -360,7 +418,10 @@ const PageImpulso = () => {
       </section>
 
       {/* ===================== EL PROBLEMA ===================== */}
-      <section className="impulso__section impulso__section--warm" id="problema">
+      <section
+        className="impulso__section impulso__section--warm"
+        id="problema"
+      >
         <Container>
           <Col cols={{ sm: 4, md: 6, lg: 5 }}>
             <div className="impulso__reveal lg:pr-6">
@@ -387,13 +448,27 @@ const PageImpulso = () => {
                 {PAINS.map((p) => (
                   <div key={p.title} className="impulso__pain">
                     <span className="impulso__pain-ico">
-                      <Icon color="var(--color-flat-btn-text)" name={p.icon} size={22} />
+                      <Icon
+                        color="var(--color-flat-btn-text)"
+                        name={p.icon}
+                        size={22}
+                      />
                     </span>
                     <div>
-                      <Text as="p" color="var(--color-text-black)" variant="body" weight="bold">
+                      <Text
+                        as="p"
+                        color="var(--color-text-black)"
+                        variant="body"
+                        weight="bold"
+                      >
                         {p.title}
                       </Text>
-                      <Text as="p" className="mt-1" color="var(--color-on-surface-var)" variant="body">
+                      <Text
+                        as="p"
+                        className="mt-1"
+                        color="var(--color-on-surface-var)"
+                        variant="body"
+                      >
                         {p.desc}
                       </Text>
                     </div>
@@ -420,12 +495,26 @@ const PageImpulso = () => {
                 El marketing no es presencia. Es{" "}
                 <span className="impulso__accent">flujo de comensales</span>.
               </Text>
-              <Text as="p" className="mt-6" color="var(--color-on-surface)" variant="body">
-                <span style={{ display: "block", maxWidth: 720, fontSize: 18, lineHeight: 1.65 }}>
-                  Cada campaña responde una sola pregunta: <b>¿cuánta gente nueva trajo a tu
-                  local?</b> Si no lo puedes responder, no es marketing — es gasto. Por eso no
-                  empezamos metiendo plata en anuncios: empezamos auditando cómo te encuentra hoy
-                  un comensal nuevo, y dónde estás perdiendo reservas sin darte cuenta.
+              <Text
+                as="p"
+                className="mt-6"
+                color="var(--color-on-surface)"
+                variant="body"
+              >
+                <span
+                  style={{
+                    display: "block",
+                    maxWidth: 720,
+                    fontSize: 18,
+                    lineHeight: 1.65,
+                  }}
+                >
+                  Cada campaña responde una sola pregunta:{" "}
+                  <b>¿cuánta gente nueva trajo a tu local?</b> Si no lo puedes
+                  responder, no es marketing — es gasto. Por eso no empezamos
+                  metiendo plata en anuncios: empezamos auditando cómo te
+                  encuentra hoy un comensal nuevo, y dónde estás perdiendo
+                  reservas sin darte cuenta.
                 </span>
               </Text>
             </div>
@@ -434,7 +523,10 @@ const PageImpulso = () => {
       </section>
 
       {/* ===================== MÉTODO (Sistema Mesa Activa) ===================== */}
-      <section className="impulso__section impulso__section--carbon" id="metodo">
+      <section
+        className="impulso__section impulso__section--carbon"
+        id="metodo"
+      >
         <Container>
           <Col cols={{ sm: 4, md: 6, lg: 12 }}>
             <div className="impulso__reveal" style={{ maxWidth: 720 }}>
@@ -442,10 +534,22 @@ const PageImpulso = () => {
               <Text as="h2" className="mt-3" variant="headline">
                 El Sistema <span className="impulso__accent">Mesa Activa</span>
               </Text>
-              <Text as="p" className="mt-5" color="var(--color-outline)" variant="body">
-                <span style={{ display: "block", maxWidth: 560, fontSize: 18, lineHeight: 1.6 }}>
-                  Cuatro pasos, en orden. Cada uno construye sobre el anterior — de diagnóstico a
-                  mesas llenas.
+              <Text
+                as="p"
+                className="mt-5"
+                color="var(--color-outline)"
+                variant="body"
+              >
+                <span
+                  style={{
+                    display: "block",
+                    maxWidth: 560,
+                    fontSize: 18,
+                    lineHeight: 1.6,
+                  }}
+                >
+                  Cuatro pasos, en orden. Cada uno construye sobre el anterior —
+                  de diagnóstico a mesas llenas.
                 </span>
               </Text>
             </div>
@@ -457,7 +561,11 @@ const PageImpulso = () => {
                 <div className="impulso__step">
                   <div className="flex items-center justify-between">
                     <span className="impulso__step-n">{i + 1}</span>
-                    <Icon color="var(--color-tertiary)" name={s.icon} size={24} />
+                    <Icon
+                      color="var(--color-tertiary)"
+                      name={s.icon}
+                      size={24}
+                    />
                   </div>
                   <Text as="h3" className="mt-1" variant="title">
                     {s.title}
@@ -473,7 +581,10 @@ const PageImpulso = () => {
       </section>
 
       {/* ===================== RESULTADOS ===================== */}
-      <section className="impulso__section impulso__section--white" id="resultados">
+      <section
+        className="impulso__section impulso__section--white"
+        id="resultados"
+      >
         <Container>
           <Col cols={{ sm: 4, md: 6, lg: 12 }}>
             <div className="impulso__reveal" style={{ maxWidth: 720 }}>
@@ -484,7 +595,8 @@ const PageImpulso = () => {
                 color="var(--color-text-black)"
                 variant="headline"
               >
-                En 90 días, un restaurante con <span className="impulso__mark">flujo constante</span>
+                En 90 días, un restaurante con{" "}
+                <span className="impulso__mark">flujo constante</span>
               </Text>
             </div>
           </Col>
@@ -496,10 +608,19 @@ const PageImpulso = () => {
                   <span className="impulso__card-ico">
                     <Icon color="#FFFFFF" name={o.icon} size={24} />
                   </span>
-                  <Text as="h3" className="mt-2" color="var(--color-text-black)" variant="title">
+                  <Text
+                    as="h3"
+                    className="mt-2"
+                    color="var(--color-text-black)"
+                    variant="title"
+                  >
                     {o.title}
                   </Text>
-                  <Text as="p" color="var(--color-on-surface-var)" variant="body">
+                  <Text
+                    as="p"
+                    color="var(--color-on-surface-var)"
+                    variant="body"
+                  >
                     {o.desc}
                   </Text>
                 </div>
@@ -523,11 +644,19 @@ const PageImpulso = () => {
               >
                 Entendemos tu negocio porque lo vivimos
               </Text>
-              <Text as="p" className="mt-6" color="var(--color-on-surface)" variant="body">
-                <span style={{ display: "block", fontSize: 17, lineHeight: 1.65 }}>
-                  Somos dueños de restaurante. Probamos cada estrategia en nuestro propio negocio
-                  antes de aplicarla contigo. Y venimos de agencias de primer nivel: sabemos
-                  distinguir lo que genera ventas reales de lo que es simple humo.
+              <Text
+                as="p"
+                className="mt-6"
+                color="var(--color-on-surface)"
+                variant="body"
+              >
+                <span
+                  style={{ display: "block", fontSize: 17, lineHeight: 1.65 }}
+                >
+                  Somos dueños de restaurante. Probamos cada estrategia en
+                  nuestro propio negocio antes de aplicarla contigo. Y venimos
+                  de agencias de primer nivel: sabemos distinguir lo que genera
+                  ventas reales de lo que es simple humo.
                 </span>
               </Text>
 
@@ -535,11 +664,22 @@ const PageImpulso = () => {
                 className="mt-8 pl-5"
                 style={{ borderLeft: "3px solid var(--color-primary)" }}
               >
-                <Text as="p" className="impulso__quote" color="var(--color-text-black)" variant="subtitle">
-                  “No te vendemos teoría, te vendemos lo que ya nos funcionó a nosotros. Sabemos lo
-                  que es tener mesas vacías un martes por la noche.”
+                <Text
+                  as="p"
+                  className="impulso__quote"
+                  color="var(--color-text-black)"
+                  variant="subtitle"
+                >
+                  “No te vendemos teoría, te vendemos lo que ya nos funcionó a
+                  nosotros. Sabemos lo que es tener mesas vacías un martes por
+                  la noche.”
                 </Text>
-                <Text as="p" className="mt-3" color="var(--color-on-surface-var)" variant="label">
+                <Text
+                  as="p"
+                  className="mt-3"
+                  color="var(--color-on-surface-var)"
+                  variant="label"
+                >
                   Equipo ImPulso · dueños de restaurante{/* ILUSTRATIVO */}
                 </Text>
               </div>
@@ -559,7 +699,10 @@ const PageImpulso = () => {
       </section>
 
       {/* ===================== GARANTÍA ===================== */}
-      <section className="impulso__section impulso__section--white" id="garantia">
+      <section
+        className="impulso__section impulso__section--white"
+        id="garantia"
+      >
         <Container>
           <Col cols={{ sm: 4, md: 6, lg: 12 }}>
             <div className="impulso__reveal">
@@ -571,18 +714,27 @@ const PageImpulso = () => {
                   <div className="mb-3">
                     <span className="impulso__badge">Garantía de 90 días</span>
                   </div>
-                  <Text
-                    as="h2"
-                    color="var(--color-text-black)"
-                    variant="title"
-                  >
+                  <Text as="h2" color="var(--color-text-black)" variant="title">
                     Nuestro compromiso contigo
                   </Text>
-                  <Text as="p" className="mt-3" color="var(--color-on-surface)" variant="body">
-                    <span style={{ display: "block", maxWidth: 720, fontSize: 17, lineHeight: 1.6 }}>
-                      Si en los primeros 90 días no hay una mejora clara en tu visibilidad y
-                      rendimiento publicitario, seguimos trabajando contigo un mes adicional sin
-                      costo — hasta que los resultados sean visibles. Sin letras pequeñas.
+                  <Text
+                    as="p"
+                    className="mt-3"
+                    color="var(--color-on-surface)"
+                    variant="body"
+                  >
+                    <span
+                      style={{
+                        display: "block",
+                        maxWidth: 720,
+                        fontSize: 17,
+                        lineHeight: 1.6,
+                      }}
+                    >
+                      Si en los primeros 90 días no hay una mejora clara en tu
+                      visibilidad y rendimiento publicitario, seguimos
+                      trabajando contigo un mes adicional sin costo — hasta que
+                      los resultados sean visibles. Sin letras pequeñas.
                     </span>
                   </Text>
                 </div>
@@ -593,32 +745,50 @@ const PageImpulso = () => {
       </section>
 
       {/* ===================== CTA FINAL + FORM ===================== */}
-      <section className="impulso__section impulso__section--carbon" id="agenda">
+      <section
+        className="impulso__section impulso__section--carbon"
+        id="agenda"
+      >
         <Container>
           <Col cols={{ sm: 4, md: 6, lg: 5 }}>
             <div className="impulso__reveal lg:pr-8">
               <span className="impulso__eyebrow">¿Hablamos esta semana?</span>
               <Text as="h2" className="mt-3" variant="headline">
-                Recupera el control de tu <span className="impulso__accent">marketing</span>
+                Recupera el control de tu{" "}
+                <span className="impulso__accent">marketing</span>
               </Text>
-              <Text as="p" className="mt-6" color="var(--color-outline)" variant="body">
-                <span style={{ display: "block", fontSize: 17, lineHeight: 1.65 }}>
-                  Rellena el formulario y agendamos tu estudio gratuito. Sin compromiso — solo una
-                  conversación honesta sobre tu situación y qué hacer para mejorarla.
+              <Text
+                as="p"
+                className="mt-6"
+                color="var(--color-outline)"
+                variant="body"
+              >
+                <span
+                  style={{ display: "block", fontSize: 17, lineHeight: 1.65 }}
+                >
+                  Rellena el formulario y agendamos tu estudio gratuito. Sin
+                  compromiso — solo una conversación honesta sobre tu situación
+                  y qué hacer para mejorarla.
                 </span>
               </Text>
 
               <div className="mt-8 flex flex-col gap-3">
-                {["Diagnóstico real de tu visibilidad", "Dónde estás perdiendo reservas hoy", "Un plan claro, sin humo"].map(
-                  (li) => (
-                    <div key={li} className="flex items-center gap-3">
-                      <Icon color="var(--color-tertiary)" name="Check" size={20} />
-                      <Text as="span" color="var(--color-surface)" variant="body">
-                        {li}
-                      </Text>
-                    </div>
-                  ),
-                )}
+                {[
+                  "Diagnóstico real de tu visibilidad",
+                  "Dónde estás perdiendo reservas hoy",
+                  "Un plan claro, sin humo",
+                ].map((li) => (
+                  <div key={li} className="flex items-center gap-3">
+                    <Icon
+                      color="var(--color-tertiary)"
+                      name="Check"
+                      size={20}
+                    />
+                    <Text as="span" color="var(--color-surface)" variant="body">
+                      {li}
+                    </Text>
+                  </div>
+                ))}
               </div>
             </div>
           </Col>
@@ -676,7 +846,10 @@ const PageImpulso = () => {
                     startIcon="MapPin"
                     variant="primary"
                     onSelectionChange={(keys) =>
-                      setForm((f) => ({ ...f, ciudad: Array.from(keys)[0] as string }))
+                      setForm((f) => ({
+                        ...f,
+                        ciudad: Array.from(keys)[0] as string,
+                      }))
                     }
                   />
                 </div>
@@ -694,7 +867,11 @@ const PageImpulso = () => {
                 </div>
 
                 <div className="mt-7 flex flex-col sm:flex-row sm:items-center gap-4 sm:justify-between">
-                  <Text as="p" color="var(--color-primary-input-placeholder)" variant="label">
+                  <Text
+                    as="p"
+                    color="var(--color-primary-input-placeholder)"
+                    variant="label"
+                  >
                     Respuesta en menos de 24h · sin compromiso
                   </Text>
                   <Button
@@ -716,10 +893,15 @@ const PageImpulso = () => {
           <Col cols={{ sm: 4, md: 3, lg: 6 }}>
             <div>
               <Wordmark light size={30} />
-              <Text as="p" className="mt-4" color="var(--color-secondary-fixed-dim)" variant="body">
+              <Text
+                as="p"
+                className="mt-4"
+                color="var(--color-secondary-fixed-dim)"
+                variant="body"
+              >
                 <span style={{ display: "block", maxWidth: 340 }}>
-                  Growth &amp; Content Agency para el sector gastronómico. Del plato a la pantalla,
-                  de la pantalla a la mesa llena.
+                  Growth &amp; Content Agency para el sector gastronómico. Del
+                  plato a la pantalla, de la pantalla a la mesa llena.
                 </span>
               </Text>
             </div>
@@ -744,7 +926,12 @@ const PageImpulso = () => {
                   <Wordmark light size={13} />
                 </span>
                 <button onClick={() => scrollToSection("agenda")}>
-                  <Text as="span" color="var(--color-tertiary)" variant="body" weight="bold">
+                  <Text
+                    as="span"
+                    color="var(--color-tertiary)"
+                    variant="body"
+                    weight="bold"
+                  >
                     Agenda tu estudio →
                   </Text>
                 </button>
@@ -752,9 +939,17 @@ const PageImpulso = () => {
             </div>
           </Col>
           <Col cols={{ sm: 4, md: 6, lg: 12 }}>
-            <div className="mt-12 pt-6" style={{ borderTop: "1px solid rgba(255,255,255,0.10)" }}>
-              <Text as="p" color="var(--color-secondary-fixed-dim)" variant="label">
-                © {new Date().getFullYear()} ImPulso. Hecho con hambre de resultados en Lima.
+            <div
+              className="mt-12 pt-6"
+              style={{ borderTop: "1px solid rgba(255,255,255,0.10)" }}
+            >
+              <Text
+                as="p"
+                color="var(--color-secondary-fixed-dim)"
+                variant="label"
+              >
+                © {new Date().getFullYear()} ImPulso. Hecho con hambre de
+                resultados en Lima.
               </Text>
             </div>
           </Col>
