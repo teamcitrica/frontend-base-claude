@@ -49,3 +49,6 @@ next-env.d.ts
 
 # Windows "Mark of the Web" metadata (NTFS Zone.Identifier ADS)
 *:Zone.Identifier
+
+# Capturas de `npm run shot` (verificación visual, ADR-0004)
+.shots/

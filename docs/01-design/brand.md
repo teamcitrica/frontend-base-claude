@@ -317,6 +317,22 @@ Segundo recurso de firma: el **subrayado marcador amarillo** (`#F5DE4B`, trazo g
 
 ## 8. Tokens CSS de referencia
 
+> ### ⚠️ Estos nombres NO existen en el código
+>
+> El bloque de abajo es **nomenclatura conceptual del brand book**, no la API real del
+> repo. Se verificó contra `styles/` el 2026-08-01: **ninguna** de estas variables
+> (`--color-orange-500`, `--color-neutral-900`, `--font-display`, `--space-2`,
+> `--radius-pill`, `--shadow-card`) está definida. Usarlas produce CSS que no resuelve.
+>
+> **Los nombres reales** salen de `styles/10-tokens/web/colors/_palette.scss` y tienen
+> forma `var(--color-primary)`, `var(--color-text-black)`, `var(--color-surface)`,
+> `var(--color-tertiary)`. Las fuentes son `var(--font-family-a)` (Anton) y
+> `var(--font-family-b/c/d)` (Lato).
+>
+> Para escribir código, la referencia correcta es
+> **[implementation-contract.md](implementation-contract.md)**. Lee el bloque de abajo
+> como paleta de marca (qué hex es qué), nunca como nombres a copiar.
+
 ```css
 :root {
   /* Marca */

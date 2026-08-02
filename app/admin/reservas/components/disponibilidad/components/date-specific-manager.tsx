@@ -3,7 +3,10 @@ import React, { useState, useEffect } from "react";
 import { Text, Button, Card } from "citrica-ui-toolkit";
 import { Calendar, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
-import { useAdminBookings } from "@/app/hooks/useAdminBookings";
+import {
+  useAdminBookings,
+  type AdminBooking,
+} from "@/app/hooks/useAdminBookings";
 import { useStudioAvailability } from "@/app/hooks/useStudioAvailability";
 import { supabase } from "@/lib/supabase";
 
@@ -178,7 +181,7 @@ const DateSpecificManager = () => {
       if (!blocksError && dayBlocks) {
         const blocked: string[] = [];
 
-        dayBlocks.forEach((block) => {
+        dayBlocks.forEach((block: AdminBooking) => {
           if (block.time_slots && Array.isArray(block.time_slots)) {
             if (
               block.time_slots.includes("00:00") ||
@@ -221,7 +224,7 @@ const DateSpecificManager = () => {
 
         // Buscar bloques que contengan este timeSlot
         const targetBlocks = blocksToRemove?.filter(
-          (block) =>
+          (block: AdminBooking) =>
             block.time_slots &&
             (block.time_slots.includes(timeSlot) ||
               block.time_slots.includes("00:00")), // Bloqueo completo del día

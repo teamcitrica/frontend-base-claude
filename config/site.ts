@@ -5,8 +5,9 @@ const ROL_CLIENTE = 12;
 const SUBITEM_SEARCH_PARAM = "page";
 
 export const siteConfig = {
-  name: "New Project",
-  description: "This is a awesome project.",
+  name: "ImPulso",
+  description:
+    "Agencia de marketing gastronómico. Llenamos tus mesas con datos, no con suerte.",
   navLinks: [
     {
       title: "CURSO",
@@ -44,35 +45,32 @@ export const siteConfig = {
       title: "USUARIOS DE SISTEMA",
       icon: "Users",
       href: "/admin/users",
-			allowedRoles: [ROL_ADMIN],
-			subItems: [
-				{
-					title: "Usuarios",
-					href: "/admin/users/usuarios",
-				},
-
-			],
+      allowedRoles: [ROL_ADMIN],
+      subItems: [
+        {
+          title: "Usuarios",
+          href: "/admin/users/usuarios",
+        },
+      ],
     },
     {
       title: "HOME",
       icon: "Settings",
       href: "/",
       allowedRoles: [ROL_ADMIN],
-			subItems: [
-			],
+      subItems: [],
     },
     {
       title: "CLIENTES",
       icon: "Users",
       href: "/admin/clientes",
       allowedRoles: [ROL_ADMIN],
-			subItems: [
-				{
-					title: "Usuarios",
-					href: "/admin/clientes/",
-				},
-
-			],
+      subItems: [
+        {
+          title: "Usuarios",
+          href: "/admin/clientes/",
+        },
+      ],
     },
     {
       title: "RESERVAS",

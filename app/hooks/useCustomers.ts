@@ -15,6 +15,11 @@ export interface Customer {
   };
 }
 
+/** Fila cruda de `customers` con el join `bookings!left(id, status)`. */
+interface CustomerRow extends Omit<Customer, "_count"> {
+  bookings?: Array<{ id: string; status: string }>;
+}
+
 export interface CustomerStats {
   total_customers: number;
   new_customers_this_month: number;
@@ -58,9 +63,9 @@ export const useCustomers = () => {
       if (error) throw error;
 
       // Procesar los datos para incluir el conteo de reservas activas (excluyendo canceladas)
-      const processedCustomers = (data || []).map((customer) => {
+      const processedCustomers = (data || []).map((customer: CustomerRow) => {
         const activeBookings = (customer.bookings || []).filter(
-          (booking: any) => booking.status !== "cancelled",
+          (booking) => booking.status !== "cancelled",
         );
 
         return {
@@ -122,7 +127,7 @@ export const useCustomers = () => {
       if (bookingsError) throw bookingsError;
 
       const uniqueCustomersWithBookings = new Set(
-        customersWithBookings?.map((c) => c.id) || [],
+        customersWithBookings?.map((c: Pick<Customer, "id">) => c.id) || [],
       ).size;
 
       const stats: CustomerStats = {

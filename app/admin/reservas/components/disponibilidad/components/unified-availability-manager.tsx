@@ -3,7 +3,10 @@ import React, { useState, useEffect } from "react";
 import { Text, Button, Card, Col, Container } from "citrica-ui-toolkit";
 import { Calendar, Modal, ModalContent, ModalHeader, ModalBody, ModalFooter, useDisclosure } from "@heroui/react";
 import { today, getLocalTimeZone } from "@internationalized/date";
-import { useAdminBookings } from "@/app/hooks/useAdminBookings";
+import {
+  useAdminBookings,
+  type AdminBooking,
+} from "@/app/hooks/useAdminBookings";
 import { useStudioConfig } from "@/app/hooks/useStudioConfig";
 import { supabase } from "@/lib/supabase";
 import { useAvailability } from "@/app/api/contexts/AvailabilityContext";
@@ -146,7 +149,7 @@ const UnifiedAvailabilityManager = () => {
       const blocked: string[] = [];
       const reserved: string[] = [];
 
-      bookings?.forEach((booking) => {
+      bookings?.forEach((booking: AdminBooking) => {
         if (booking.time_slots && Array.isArray(booking.time_slots)) {
           const slots = booking.time_slots;
 
@@ -196,7 +199,7 @@ const UnifiedAvailabilityManager = () => {
         }
 
         const targetBlocks = blocksToRemove?.filter(
-          (block) =>
+          (block: AdminBooking) =>
             block.time_slots &&
             (block.time_slots.includes(timeSlot) ||
               block.time_slots.includes("00:00")),
@@ -494,7 +497,7 @@ const UnifiedAvailabilityManager = () => {
           .eq("status", "confirmed");
 
         // Si no hay bloqueo completo, crearlo
-        const hasFullDayBlock = existingBlocks?.some((block) =>
+        const hasFullDayBlock = existingBlocks?.some((block: AdminBooking) =>
           block.time_slots?.includes("00:00"),
         );
 

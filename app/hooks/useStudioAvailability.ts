@@ -20,6 +20,16 @@ export interface StudioAvailability {
   time_slots: TimeSlot[];
 }
 
+/** Proyección de `bookings` que se consulta para calcular los slots ocupados. */
+interface BookingSlots {
+  booking_date?: string;
+  time_slots?: string[] | null;
+  type_id: number;
+}
+
+/** Proyección de `studio_availability` (sin `id`). */
+type WeeklyConfigRow = Omit<StudioAvailability, "id">;
+
 export const useStudioAvailability = () => {
   const [isLoading, setIsLoading] = useState(false);
 
@@ -87,7 +97,7 @@ export const useStudioAvailability = () => {
         // Crear set de slots ocupados
         const occupiedSlots = new Set<string>();
 
-        bookings?.forEach((booking) => {
+        bookings?.forEach((booking: BookingSlots) => {
           booking.time_slots?.forEach((slot: string) => {
             if (
               booking.type_id === 2 &&
@@ -172,7 +182,7 @@ export const useStudioAvailability = () => {
         // Crear mapa de disponibilidad por día de la semana
         const availabilityMap = new Map();
 
-        weeklyConfig?.forEach((config) => {
+        weeklyConfig?.forEach((config: WeeklyConfigRow) => {
           const hasActiveSlots = config.time_slots?.some(
             (slot: any) => slot.active,
           );
@@ -217,7 +227,7 @@ export const useStudioAvailability = () => {
         // Crear mapa de slots ocupados por fecha
         const occupiedSlotsMap = new Map();
 
-        bookings?.forEach((booking) => {
+        bookings?.forEach((booking: BookingSlots) => {
           const date = booking.booking_date;
 
           if (!occupiedSlotsMap.has(date)) {
@@ -252,7 +262,7 @@ export const useStudioAvailability = () => {
 
           // Obtener configuración de este día
           const dayConfig = weeklyConfig?.find(
-            (config) => config.day_of_week === dayOfWeek,
+            (config: WeeklyConfigRow) => config.day_of_week === dayOfWeek,
           );
 
           if (!dayConfig) continue;
