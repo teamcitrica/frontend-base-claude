@@ -112,76 +112,59 @@ cambia la pantalla.
 
 | Carpeta | Qué contiene |
 |---|---|
-| [docs/00-harness/](docs/00-harness/) | Proceso: flujo SDD, convenciones, Definition of Done |
-| [docs/](docs/) | Usuarios, JTBD, personalidad de marca, anti-referencias |
-| [docs/01-design/](docs/01-design/) | Contrato, design system, brand book, y `reference/` (toolkit, grid, tokens) |
-| [docs/02-architecture/](docs/02-architecture/) | Stack, directorios, datos y auth |
-| [docs/03-specs/](docs/03-specs/) | Specs por feature + plantilla |
-| [docs/04-decisions/](docs/04-decisions/) | ADRs |
+| Brand colors (hex) | `styles/10-tokens/web/colors/_palette.scss` |
+| Type scale / variants | `styles/10-tokens/web/components/_text.scss` |
+| Fonts (Anton/Lato) | `styles/01-settings/settings.scss` |
+| Button render | `styles/10-tokens/web/components/_button.scss` |
+| Button/form radius | `styles/10-tokens/web/components/_form.scss` |
+| Landing layout only | `styles/webpages-styles/impulso.scss` |
 
-## Trampas conocidas
+## SEO / Open Graph
+Social card metadata is centralized so a cloned project only edits one block.
 
-Verificadas contra el código el 2026-08-01:
+- `config/site.ts` → `siteConfig.seo` is the single source of truth (url, siteName, title, description, tagline, imageAlt, locale, keywords, twitter handles, colors, ogFont, indexable).
+- `lib/seo.ts` exports `buildMetadata(page?)` and `viewport`. `SITE_URL` resolves from `NEXT_PUBLIC_SITE_URL` → `seo.url` → Vercel env → localhost, and feeds `metadataBase`, canonical and `og:url`.
+- `app/layout.tsx` applies `buildMetadata()` site-wide with the `%s | Marca` title template.
+- `app/opengraph-image.tsx` generates the 1200×630 image with `next/og` from `seo.colors` and the brand font in `/fonts` (`next.config.js` traces that folder). `app/twitter-image.tsx` re-exports it.
+- Per-route metadata: `export const metadata = buildMetadata({ title, description, path, image, type, noIndex })` from a server `page.tsx` or `layout.tsx`.
+- Never hardcode metadata in a page — go through `buildMetadata`. Keep `seo.colors` in sync with `styles/10-tokens/web/colors/_palette.scss`.
 
-1. **`docs/01-design/brand.md` §8 lista variables CSS que no existen**
-   (`--color-orange-500`, `--font-display`, `--space-2`, `--radius-pill`…). Los nombres
-   reales son `var(--color-primary)`, `var(--color-text-black)`,
-   `var(--font-family-a/b)`. El documento lleva la advertencia; no copies de ahí.
-2. **El color vive en `styles/10-tokens/web/colors/_palette.scss`.** Documentación
-   antigua apuntaba a `styles/01-settings/colors/colors.scss`, que **no existe**.
-3. **36 hex hardcodeados en `.tsx`** (sobre todo
-   `disponibilidad/weekly-schedule-manager.tsx`, `organisms/navbar.tsx`,
-   `app/admin/page.tsx`, `organisms/drop-citrica.tsx`). Es deuda conocida: no la
-   repliques, y si tocas uno de esos archivos, déjalo limpio.
-4. **`Icon` usa la prop `name`, no `iconName`.**
-5. **`Text` tiene `color` y `textColor`, y no son intercambiables.** `textColor` recibe
-   el nombre del token **sin `--`** y lo envuelve en `var(--…)`. `color` recibe un valor
-   CSS crudo. `color="color-primary"` **no pinta nada** — produce
-   `style={{color:"color-primary"}}`, que el navegador descarta, y el texto hereda.
-   Lo mismo con `<Icon color="primary">`, que va a parar a `stroke`. El hook no lo
-   detecta porque no hay hex: es una **violación silenciosa**. Ya hay 72 en el repo
-   (`app/admin/reservas/`, `shared/project-components/quote-form.tsx`).
-   Usa `textColor="color-primary"` o `color="var(--color-primary)"`.
-6. En zsh, `grep --include=*.tsx` necesita comillas: `--include='*.tsx'`. Ojo también
-   con el word-splitting: `eslint $FILES` pasa la variable como **un solo argumento**;
-   usa `${=FILES}` o un array.
-7. **`docs/product.md` y `docs/design.md` no se mueven ni se renombran.** La skill
-   `impeccable` los busca con esos nombres en `docs/`; si no los encuentra reporta
-   `NO_PRODUCT_MD` y arranca un init que sobrescribe el brief. Comprobar con
-   `node ~/.claude/skills/impeccable/scripts/context.mjs`.
-8. **El cliente de Supabase no está tipado.** `lib/supabase.ts` exporta un
-   `SupabaseClient` sin el genérico `Database`, así que todo `data` de una query es
-   `any`. Al escribir una query nueva, **anota el callback** o reintroduces un
-   `implicit any` — y el typecheck ya está en cero. Las interfaces útiles
-   (`AdminBooking`, `Customer`, `StudioAvailability`, `Booking`) ya existen en
-   `app/hooks/*`; usa `Pick<>` cuando el `select()` traiga solo algunas columnas.
-9. **El `Header` del toolkit sin prop `logo` pinta "Matour".** Es el placeholder de
-   otra marca, en blanco sobre header blanco: parece un logo roto y se ve como si
-   estuviera terminado. Pásale siempre `logo`. Y si falta el asset, hay tres salidas —
-   pedirlo, un sustituto propio marcado `TEMPORAL`, u omitirlo resolviendo el hueco en
-   composición. Nunca el default de la librería.
-   Ver [ADR-0004](docs/04-decisions/0004-verificacion-visual-y-assets.md).
-10. **`tailwind.config.js` debe escanear el toolkit.** Sin
-   `./node_modules/citrica-ui-toolkit/dist/**/*.{js,mjs}` en `content`, Tailwind no
-   genera las clases responsive que usan sus componentes y el nav del `Header` queda
-   oculto a cualquier ancho. Si añades otra librería de UI con clases de Tailwind, va
-   igual al `content`.
-11. **Auditar imágenes sin hacer scroll da falsos positivos.** `next/image` es `lazy`
-   bajo el fold: `naturalWidth === 0` no significa rota, significa que no ha entrado en
-   viewport. `npm run shot` recorre la página antes de auditar; si lo haces a mano,
-   hazlo tú.
-12. **El foco de los campos ya lo define el sistema.** `_input.scss` (y sus hermanos)
-   marcan el foco con `[data-focus="true"]` cambiando `border-color` al naranja de marca,
-   **no** con `outline`. Si auditas foco midiendo solo `outline` vas a leer "no hay
-   indicador" y a taparlo con uno peor — ya pasó. Mide `outline`, `border-color`,
-   `box-shadow` y `background-color`, y tabula con teclado: `element.focus()` no dispara
-   `:focus-visible`. Ver [ADR-0004](docs/04-decisions/0004-verificacion-visual-y-assets.md).
-13. **`<AvailabilityProvider>` está comentado en `app/layout.tsx`** pero
-   `disponibilidad/unified-availability-manager.tsx` llama a `useAvailability()`. Ese
-   panel lanza `useAvailability must be used within an AvailabilityProvider` en runtime.
-   Bug preexistente, anotado en [ADR-0002](docs/04-decisions/0002-verificacion-pendiente.md).
+Full guide and checklist: `docs/opengraph.md`.
 
-## Convención de idioma
+## Documentation
+Detailed documentation is available in the `docs/` folder:
+- `docs/opengraph.md` - Open Graph / SEO metadata structure
+- `docs/styles-overview.md` - Complete styles system overview
+- `docs/tokens-system.md` - Design tokens architecture
+- `docs/tokens-examples.md` - Token usage examples
+- `docs/citrica-ui-toolkit.md` - Component documentation
+- `docs/layout-system.md` - Grid system documentation
+- `docs/layout-examples.md` - Layout code examples
+- `docs/layout-visual-guide.md` - Visual grid diagrams
 
-Documentación, specs y comentarios en **español**. Código, nombres de archivo, ramas y
-commits en **inglés**. Copy de la UI en español (registro peruano/latino).
+## Key Features & Patterns
+- **Responsive Navbar**: Auto-changing colors on scroll, mobile drawer menu
+- **Admin Panel**: Sidebar navigation with nested sub-items using URL search params
+  - `/admin/reservas` - Booking management with calendar, weekly, and availability views
+  - `/admin/clientes` - Client management
+  - `/admin/tareas` - Task management
+  - `/admin/config-app` - Application configuration
+- **Form Management**: Custom hooks for data management with Supabase integration
+- **Authentication**: Supabase auth context with login, forgot password, and new password pages
+- **Toast System**: HeroUI toast provider with top-right placement
+
+## Database Integration
+- Supabase client with custom hooks in `/app/hooks/`
+
+## File Structure Notes  
+- App pages follow Next.js App Router convention
+- Shared utilities in `/shared/` with TypeScript types
+- Site configuration centralized in `/config/site.ts`
+- Custom fonts in `/fonts/` directory
+- Static assets in `/public/img/`
+
+## Development Notes
+- Uses ES modules and TypeScript strict mode
+- Custom icon system with Lucide React icons
+- Locale set to Spanish (es-ES) in HeroUI provider
+- Environment supports both development and production builds with Turbo mode
