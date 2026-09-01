@@ -1,7 +1,6 @@
 import "@/styles/globals.scss";
-import { Metadata } from "next";
 import { Providers } from "../shared/providers";
-import { siteConfig } from "@/config/site";
+import { buildMetadata, viewport as seoViewport } from "@/lib/seo";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 // import { Toaster } from 'react-hot-toast';
 // import SupabaseProvider from '@/shared/context/supabase-context' // DESCOMENTAR PARA USAR SUPABASE
@@ -15,18 +14,8 @@ import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
  *  `.env.local` (`NEXT_PUBLIC_GA_ID`); si está vacío, no se carga nada. */
 const analyticsId = process.env.NEXT_PUBLIC_GA_ID;
 
-export const metadata: Metadata = {
-  title: {
-    default: siteConfig.name,
-    template: `%s -${siteConfig.name}`,
-  },
-  description: siteConfig.description,
-  icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
-  },
-};
+export const metadata = buildMetadata();
+export const viewport = seoViewport;
 
 export default function RootLayout({
   children,

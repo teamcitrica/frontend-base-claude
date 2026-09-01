@@ -5,9 +5,31 @@ const ROL_CLIENTE = 12;
 const SUBITEM_SEARCH_PARAM = "page";
 
 export const siteConfig = {
-  name: "ImPulso",
-  description:
-    "Agencia de marketing gastronómico. Llenamos tus mesas con datos, no con suerte.",
+  name: "New Project",
+  description: "This is a awesome project.",
+
+  seo: {
+    url: "https://frontend-base-claude.vercel.app",
+    siteName: "",
+    title: "",
+    description: "",
+    tagline: "",
+    imageAlt: "",
+    locale: "es_ES",
+    keywords: [] as string[],
+    twitter: {
+      site: "",
+      creator: "",
+    },
+    colors: {
+      brand: "#E8622C",
+      background: "#111111",
+      foreground: "#F7F6F4",
+    },
+    ogFont: "Manrope-ExtraBold.ttf",
+    indexable: true,
+  },
+
   navLinks: [
     {
       title: "CURSO",
