@@ -1,0 +1,433 @@
+// ============================================================
+// HOME — Landing de conversión ImPulso (SPEC-0001)
+// Solo layout, ritmo de sección y gestos de marca.
+// El color sale de tokens; la escala tipográfica de _text.scss.
+// Cero hex, cero rgba(), cero clamp(), cero font-family.
+// ============================================================
+
+.home {
+  // Escala de espaciado base 4pt. Nombres semánticos, no de valor.
+  --home-space-2xs: 4px;
+  --home-space-xs: 8px;
+  --home-space-sm: 12px;
+  --home-space-md: 24px;
+  --home-space-lg: 40px;
+  --home-space-xl: 64px;
+  --home-space-2xl: 96px;
+
+  // Ritmo vertical por sección. Varía a propósito: el dolor va apretado,
+  // la garantía respira. Espaciado uniforme = sin jerarquía.
+  --home-section-y: var(--home-space-xl);
+
+  background-color: var(--color-text-white);
+  overflow-x: hidden;
+}
+
+// ---------- Ritmo de sección ----------
+
+.home__section {
+  padding-block: var(--home-section-y);
+}
+
+// El Header del toolkit es `fixed`: sin esto, saltar a un ancla mete el
+// título debajo de la barra.
+.home__section,
+.home__hero {
+  scroll-margin-block-start: var(--home-space-xl);
+}
+
+.home__section--tight {
+  --home-section-y: var(--home-space-lg);
+}
+
+.home__section--airy {
+  --home-section-y: var(--home-space-2xl);
+}
+
+// Alternancia de fondo. El carbón se reserva al hero: un segundo bloque
+// oscuro le restaría fuerza al primero.
+.home__section--surface {
+  background-color: var(--color-surface);
+}
+
+// ---------- Medida de lectura ----------
+// Tope de línea para prosa. Sin esto los párrafos se estiran a 12 columnas
+// y dejan de leerse.
+
+.home__measure {
+  max-width: 68ch;
+}
+
+.home__measure--narrow {
+  max-width: 52ch;
+}
+
+// ---------- Hero ----------
+// Full-bleed carbón con foto y capa de contraste. El toolkit no tiene
+// una sección a sangre con overlay, por eso vive aquí.
+
+.home__hero {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: 92svh;
+  padding-block: var(--home-space-2xl) var(--home-space-xl);
+  background-color: var(--color-text-black);
+  isolation: isolate;
+}
+
+.home__hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  overflow: hidden;
+}
+
+.home__hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+}
+
+// Overlay de contraste 40–60% derivado con color-mix sobre el token.
+// rgba() literal está prohibido en este archivo y el hook lo bloquea.
+.home__hero-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    to top,
+    color-mix(in srgb, var(--color-text-black) 88%, transparent) 0%,
+    color-mix(in srgb, var(--color-text-black) 62%, transparent) 55%,
+    color-mix(in srgb, var(--color-text-black) 45%, transparent) 100%
+  );
+}
+
+// Sin medida propia en el contenedor: `ch` es relativo al font-size del
+// elemento, así que una sola medida aquí parte el titular de 92px en seis
+// líneas y empuja el CTA fuera del fold. Cada hijo lleva la suya.
+.home__hero-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-space-md);
+}
+
+.home__hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--home-space-md);
+  margin-top: var(--home-space-xs);
+}
+
+// El enlace secundario medía 80x16: por debajo del mínimo de área táctil.
+// El padding lo lleva a 44px sin cambiar cómo se ve.
+.home__hero-actions a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding-inline: var(--home-space-xs);
+}
+
+// Titular claro sobre oscuro: el tipo se lee más ligero y pide aire.
+// 15ch a tamaño display deja el titular en tres líneas y el CTA dentro
+// del primer viewport.
+.home__hero-title {
+  max-width: 15ch;
+  line-height: 1.04;
+}
+
+// Medida de lectura del hero, a su propio tamaño de fuente.
+.home__hero-lead {
+  max-width: 38ch;
+}
+
+// ---------- Gesto de marca: subrayado amarillo ----------
+// Una vez por página. Firma, no patrón.
+
+.home__underline {
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.home__underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0.04em;
+  height: 0.14em;
+  background-color: var(--color-tertiary);
+  transform-origin: left center;
+  z-index: -1;
+}
+
+// ---------- Prueba social ----------
+// Métricas sueltas, sin cards. Las rejillas de cards idénticas están
+// prohibidas y aquí además restarían fuerza al número.
+
+.home__metrics {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--home-space-lg) var(--home-space-2xl);
+  align-items: flex-start;
+}
+
+.home__metric {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-space-2xs);
+  min-width: 12ch;
+}
+
+// ---------- Lista de dolores ----------
+
+.home__pains {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-space-md);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home__pain {
+  display: flex;
+  gap: var(--home-space-sm);
+  align-items: flex-start;
+  padding-block: var(--home-space-sm);
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.home__pain-icon {
+  flex: 0 0 auto;
+  margin-top: var(--home-space-2xs);
+  line-height: 0;
+}
+
+// ---------- Método: 4 pasos ----------
+// Numerados porque SON una secuencia real. Es la única numeración
+// de la página.
+
+.home__steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+  gap: var(--home-space-lg);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.home__step {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-space-xs);
+  padding-top: var(--home-space-sm);
+  border-top: 2px solid var(--color-primary);
+}
+
+.home__step-index {
+  display: block;
+  line-height: 1;
+}
+
+// ---------- Media de secciones ----------
+
+.home__media {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.home__media--wide {
+  aspect-ratio: 16 / 10;
+}
+
+.home__media--tall {
+  aspect-ratio: 4 / 3;
+}
+
+.home__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// ---------- Garantía ----------
+
+.home__guarantee {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-space-md);
+  padding: var(--home-space-lg);
+  border: 2px solid var(--color-text-black);
+  border-radius: 12px;
+  background-color: var(--color-text-white);
+}
+
+// ---------- Formulario ----------
+
+.home__form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-space-md);
+}
+
+.home__form-row {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: var(--home-space-md);
+}
+
+.home__form-note {
+  display: flex;
+  gap: var(--home-space-xs);
+  align-items: flex-start;
+}
+
+.home__form-status {
+  padding: var(--home-space-md);
+  border-radius: 12px;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-outline-variant);
+}
+
+// ---------- Footer ----------
+
+.home__footer {
+  padding-block: var(--home-space-xl) var(--home-space-lg);
+  background-color: var(--color-text-black);
+}
+
+.home__footer-top {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--home-space-md);
+  padding-bottom: var(--home-space-md);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--color-text-white) 22%, transparent);
+}
+
+.home__footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--home-space-xs);
+  padding-top: var(--home-space-md);
+}
+
+// ---------- Foco visible ----------
+// Piso de accesibilidad: 2px de outline con 2px de offset en todo lo
+// interactivo. Sobre el hero carbón el negro no se ve, así que ahí invierte.
+
+// Solo enlaces y botones. Los campos de formulario **ya** tienen su foco
+// definido por el sistema en `_input.scss` / `_textarea.scss` / `_select.scss`
+// (`[data-focus="true"]` cambia el `border-color`), y meterles un outline
+// encima los afea y duplica el indicador.
+//
+// Dos selectores porque los componentes de HeroUI que envuelve el toolkit
+// anulan el outline nativo y marcan el foco con `data-focus-visible="true"`
+// — misma convención de `_accordion.scss` y `_calendar.scss`.
+.home :is(a, button):focus-visible,
+.home :is(a, button)[data-focus-visible="true"] {
+  outline: 2px solid var(--color-text-black) !important;
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+.home__hero :is(a, button):focus-visible,
+.home__hero :is(a, button)[data-focus-visible="true"],
+.home__footer :is(a, button):focus-visible,
+.home__footer :is(a, button)[data-focus-visible="true"] {
+  outline-color: var(--color-text-white) !important;
+}
+
+// ---------- Motion ----------
+// Un solo momento orquestado, el del hero. El contenido es visible por
+// defecto y la animación solo lo mejora: nada queda condicionado a una
+// clase que puede no dispararse en headless o en una pestaña oculta.
+// Ease-out exponencial, sin rebote. Total por debajo de 700ms.
+
+@keyframes home-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes home-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.home__hero-body > * {
+  animation: home-rise 460ms cubic-bezier(0.25, 1, 0.5, 1) both;
+}
+
+.home__hero-body > *:nth-child(1) {
+  animation-delay: 40ms;
+}
+.home__hero-body > *:nth-child(2) {
+  animation-delay: 110ms;
+}
+.home__hero-body > *:nth-child(3) {
+  animation-delay: 180ms;
+}
+.home__hero-body > *:nth-child(4) {
+  animation-delay: 250ms;
+}
+
+// El subrayado se dibuja de izquierda a derecha, después del titular.
+.home__hero-title .home__underline::after {
+  animation: home-draw 400ms cubic-bezier(0.25, 1, 0.5, 1) 380ms both;
+}
+
+// Transición de hover, no de layout.
+.home__metric,
+.home__step {
+  transition: opacity 200ms ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home__hero-body > *,
+  .home__hero-title .home__underline::after {
+    animation: none;
+  }
+
+  // El subrayado existe igual: pasa de dibujarse a estar puesto.
+  .home__hero-title .home__underline::after {
+    transform: none;
+  }
+
+  .home__metric,
+  .home__step {
+    transition: none;
+  }
+}
+
+// ---------- Utilidades de composición ----------
+
+.home__stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--home-space-md);
+}
+
+.home__stack--tight {
+  gap: var(--home-space-xs);
+}
+
+.home__stack--loose {
+  gap: var(--home-space-lg);
+}

@@ -43,6 +43,12 @@ export interface BlockedPeriod {
   is_active: boolean;
 }
 
+/** Proyección de `bookings` con solo el id (cancelación de bloqueos). */
+type BookingIdRow = Pick<AdminBooking, "id">;
+
+/** Proyección de `bookings` usada para el cálculo de estadísticas. */
+type BookingDateRow = Pick<AdminBooking, "booking_date">;
+
 export interface BookingStats {
   total_days: number;
   days_with_bookings: number;
@@ -404,7 +410,7 @@ export const useAdminBookings = () => {
       if (error) throw error;
 
       const periods =
-        data?.map((booking) => ({
+        data?.map((booking: AdminBooking) => ({
           id: booking.id,
           start_date: booking.booking_date,
           end_date: booking.booking_date, // Para períodos de un día
@@ -564,7 +570,7 @@ export const useAdminBookings = () => {
       // Calcular estadísticas
       const totalBookings = bookings?.length || 0;
       const uniqueDates = Array.from(
-        new Set(bookings?.map((b) => b.booking_date) || []),
+        new Set(bookings?.map((b: BookingDateRow) => b.booking_date) || []),
       );
       const daysWithBookings = uniqueDates.length;
 
@@ -725,7 +731,9 @@ export const useAdminBookings = () => {
         if (fetchError) throw fetchError;
 
         if (existingBlocks && existingBlocks.length > 0) {
-          const blockIds = existingBlocks.map((block) => block.id);
+          const blockIds = existingBlocks.map(
+            (block: BookingIdRow) => block.id,
+          );
           const { error: cancelError } = await supabase
             .from("bookings")
             .update({ status: "cancelled" })

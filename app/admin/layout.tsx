@@ -1,7 +1,8 @@
 "use client";
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { Sidebar } from "@/shared/components/organisms/sidebar";
+
+import SidebarNav from "@/shared/components/organisms/sidebar-nav";
 import { siteConfig } from "@/config/site";
 import { UserAuth } from "@/shared/context/auth-context";
 import Navbar from "@/shared/components/organisms/navbar";
@@ -36,7 +37,10 @@ export default function PanelLayout({
     <div className="container-general-pase-admin w-full flex justify-center">
       <div className="w-full">
         <div className="h-full bg-[#EFE6DC] flex flex-row justify-start min-h-full">
-          <Sidebar items={siteConfig.sidebarItems} />
+          <SidebarNav
+            items={siteConfig.sidebarItems}
+            roleId={userInfo?.role_id}
+          />
           <div className="bg-[#EFE6DC] flex-1 text-white w-[80%]">
             <Navbar session={userSession} />
             <div className="pt-3 max-h-[90vh] overflow-y-scroll">

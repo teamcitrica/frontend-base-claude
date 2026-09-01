@@ -3,7 +3,7 @@
 // import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 // import { cookies } from "next/headers";
 // import { redirect } from 'next/navigation';
-import { Sidebar } from "@/shared/components/organisms/sidebar";
+import SidebarNav from "@/shared/components/organisms/sidebar-nav";
 import { siteConfig } from "@/config/site";
 
 // async function getSession() {
@@ -25,7 +25,7 @@ export default function PanelLayout({
   // }
   return (
     <div className="h-full flex flex-row justify-start min-h-screen">
-      <Sidebar items={siteConfig.sidebarItems} />
+      <SidebarNav items={siteConfig.sidebarItems} />
       <div className="bg-[rgba(240,240,242,1)] flex-1 p-4 text-white w-[80%]">
         {children}
       </div>

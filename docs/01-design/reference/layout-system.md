@@ -27,7 +27,7 @@ El sistema usa **CSS Custom Properties** (variables CSS) que cambian automática
 --container-padding: 24px, 56px o 112px  // Padding del contenedor
 ```
 
-Estas variables se definen en [01-settings/settings.scss](frontend-baseadmin-cteam/styles/01-settings/settings.scss:167-208).
+Estas variables se definen en `styles/01-settings/settings.scss` (líneas 167-208).
 
 ---
 

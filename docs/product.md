@@ -53,13 +53,15 @@ ImPulso is a **growth & content agency for the gastronomic sector**. The value p
 
 ## Implementation contract
 
-The ImPulso surface is **tokens-first and component-first** — the same rules bind hand edits and automated design passes (e.g. the `impeccable` skill):
+La superficie ImPulso es **tokens-first** y **component-first**. Las reglas obligan por
+igual a ediciones a mano y a pases automatizados (incluida la skill `impeccable`).
 
-- **Colors** come only from the design tokens in `styles/10-tokens/web/colors/_palette.scss`, consumed as `var(--color-*)`. No hardcoded hex/rgba, no intermediate `--im-*` aliases; derive token-less carbón tones with `color-mix()` over tokens.
-- **Typography** is the toolkit `Text` component chosen by `variant` (Anton for `display`/`headline`/`title`, Lato for `subtitle`/`body`/`label`); the scale lives in `_text.scss`, fonts in `settings.scss`.
-- **Components** come from `citrica-ui-toolkit` first — `Button`, `Input`, `Select`, `Textarea`, `Text`, `Icon`, `Card`, `Header`, and the `Container`/`Col` grid. Custom `.impulso__*` SCSS is reserved for layout/section treatments the toolkit doesn't cover.
+> Las cuatro reglas completas, con su mapa de archivos y sus comandos de verificación,
+> viven en **[docs/01-design/implementation-contract.md](01-design/implementation-contract.md)**.
+> Fuente única — ver [ADR-0001](04-decisions/0001-contrato-fuente-unica.md).
 
-Full detail and the file map live in **DESIGN.md §10**.
+En una línea: **color solo desde `_palette.scss`, texto solo con `Text`, layout solo con
+`Container`/`Col`, componente del toolkit antes que markup propio.**
 
 ## Accessibility & Inclusion
 

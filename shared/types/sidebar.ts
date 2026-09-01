@@ -11,7 +11,11 @@ export interface MenuItem {
   allowedRoles?: number[]; // Control de permisos por rol
 }
 
-export interface SidebarProps {
+export interface SidebarNavProps {
   items: MenuItem[];
-  session?: any;
+  /**
+   * Rol del usuario actual. Si se omite, no se filtra por `allowedRoles`
+   * (comportamiento de los layouts sin auth conectada).
+   */
+  roleId?: number | null;
 }

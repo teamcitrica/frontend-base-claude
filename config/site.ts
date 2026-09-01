@@ -67,35 +67,32 @@ export const siteConfig = {
       title: "USUARIOS DE SISTEMA",
       icon: "Users",
       href: "/admin/users",
-			allowedRoles: [ROL_ADMIN],
-			subItems: [
-				{
-					title: "Usuarios",
-					href: "/admin/users/usuarios",
-				},
-
-			],
+      allowedRoles: [ROL_ADMIN],
+      subItems: [
+        {
+          title: "Usuarios",
+          href: "/admin/users/usuarios",
+        },
+      ],
     },
     {
       title: "HOME",
       icon: "Settings",
       href: "/",
       allowedRoles: [ROL_ADMIN],
-			subItems: [
-			],
+      subItems: [],
     },
     {
       title: "CLIENTES",
       icon: "Users",
       href: "/admin/clientes",
       allowedRoles: [ROL_ADMIN],
-			subItems: [
-				{
-					title: "Usuarios",
-					href: "/admin/clientes/",
-				},
-
-			],
+      subItems: [
+        {
+          title: "Usuarios",
+          href: "/admin/clientes/",
+        },
+      ],
     },
     {
       title: "RESERVAS",

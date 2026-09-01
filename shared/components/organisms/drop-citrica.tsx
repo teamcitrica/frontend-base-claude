@@ -1,5 +1,4 @@
 "use client";
-import { Avatar } from "@heroui/avatar";
 import React from 'react';
 import { Dropdown, DropdownTrigger, DropdownMenu, DropdownItem } from "@heroui/dropdown";
 import { Icon, type IconName, Text } from "citrica-ui-toolkit";

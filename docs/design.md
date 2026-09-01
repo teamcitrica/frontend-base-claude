@@ -80,7 +80,7 @@ components:
 
 > **Source of truth.** This document is derived from `NEW_BRAND.md` (ImPulso Brand Toolkit v1.0, Julio 2026). Where they differ, the toolkit wins — update it there and re-derive.
 >
-> **Implementation status — migrated & live.** The ImPulso values are already in code: the palette (`_palette.scss`), the type scale (`_text.scss`), the fonts (`settings.scss`), and the button/form tokens (`_button.scss` / `_form.scss`); the landing (`app/page.tsx` + `styles/webpages-styles/impulso.scss`) is built on `citrica-ui-toolkit`. There is no legacy `#FF5B00` and no hardcoded hex. **When extending this surface, follow §10 to keep it single-sourced** — that section is the build contract, not the aspiration.
+> **Implementation status — migrated & live.** The ImPulso values are already in code: the palette (`_palette.scss`), the type scale (`_text.scss`), the fonts (`settings.scss`), and the button/form tokens (`_button.scss` / `_form.scss`); the landing (`app/page.tsx`) is built on `citrica-ui-toolkit`. There is no legacy `#FF5B00` and no hardcoded hex. **When extending this surface, follow §10 to keep it single-sourced** — that section is the build contract, not the aspiration.
 
 ## 1. Overview
 
@@ -243,31 +243,13 @@ The conversion long-scroll (from `NEW_BRAND.md` §6.5 and the landing copy):
 
 ## 10. Implementation contract (tokens-first, component-first)
 
-How this spec is realized in code. **Hard rules for anyone building or editing the ImPulso surface — hand edits and automated design passes alike.**
-
-### Color — single source of truth
-- Every brand hex lives in `styles/10-tokens/web/colors/_palette.scss`. Change colors **only** there; the theme mixins emit `--color-*` at `:root`.
-- Consume tokens everywhere else: `var(--color-primary)` (orange), `var(--color-text-black)` (carbón), `var(--color-surface)` (neutral-50), `var(--color-tertiary)` (yellow), `var(--color-on-surface-var)` (neutral-600), `var(--color-outline)` / `var(--color-outline-variant)` (borders), etc.
-- **No hardcoded hex/rgba** in `.tsx` or `styles/webpages-styles/*.scss`, and **no intermediate aliases** (`--im-*`). For a carbón-section tone with no token, derive it inline with `color-mix()` over tokens — e.g. `color-mix(in srgb, var(--color-text-black) 92%, var(--color-primary))` for a raised carbón surface.
-
-### Typography — Text component + variants
-- Use the toolkit `Text` component and choose a **variant** — never hardcode `font-family` or `clamp()` sizes in the page.
-- Values live in `styles/10-tokens/web/components/_text.scss`; fonts are loaded/named in `styles/01-settings/settings.scss` (`--font-family-a` = Anton, `--font-family-b/c/d` = Lato).
-- Variant → role: `display` = hero, `headline` = section titles, `title` = card/step/guarantee titles (**all Anton, uppercase**); `subtitle` / `body` / `label` = **Lato** reading text.
-
-### Buttons & forms — token-driven
-- `<Button variant="primary|secondary|flat">`. Colors from `--color-*-btn` (`_palette.scss`), render behavior from `_button.scss`, pill radius from `--form-radius-btn` in `_form.scss`. The secondary button is a carbón outline that inverts on hover — defined once in the tokens, never per-page.
-
-### Components — prioritize `citrica-ui-toolkit`
-- Build with the toolkit before writing markup: `Button`, `Input`, `Select`, `Textarea`, `Text`, `Icon`, `Card`, `Modal`, `Carousel`, `Header`, and the `Container` / `Col` grid.
-- Reserve custom `.impulso__*` SCSS for **layout, section rhythm, and the signature gestures** (hero composition, carbón sections, pulso bicolor, yellow underline) — the parts the toolkit doesn't cover. Colors there are still tokens.
-
-### File map
-| Concern | File |
-|---|---|
-| Brand colors (hex) | `styles/10-tokens/web/colors/_palette.scss` |
-| Type scale / variants | `styles/10-tokens/web/components/_text.scss` |
-| Fonts (Anton / Lato) | `styles/01-settings/settings.scss` |
-| Button render | `styles/10-tokens/web/components/_button.scss` |
-| Button / form radius | `styles/10-tokens/web/components/_form.scss` |
-| Landing layout only | `styles/webpages-styles/impulso.scss` |
+> **Movido.** Las cuatro reglas vinculantes (color solo desde tokens, tipografía vía
+> `Text`, botones dirigidos por tokens, toolkit antes que markup propio) y el mapa de
+> archivos viven ahora en un solo lugar:
+>
+> ### → **[implementation-contract.md](01-design/implementation-contract.md)**
+>
+> Este documento (`design.md`) cubre el **porqué** estético: paleta, escala
+> tipográfica, gestos de marca, layout, motion. El contrato cubre el **cómo** operativo.
+>
+> Motivo del cambio: [ADR-0001](04-decisions/0001-contrato-fuente-unica.md).

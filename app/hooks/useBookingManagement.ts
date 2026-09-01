@@ -25,6 +25,9 @@ export interface Booking {
   status: "pending" | "confirmed" | "cancelled";
 }
 
+/** Proyección de `bookings` que se consulta para calcular slots ocupados. */
+type BookingSlotsRow = Pick<Booking, "time_slots" | "type_id">;
+
 interface HeroUIDate {
   year: number;
   month: number;
@@ -130,7 +133,7 @@ export const useBookingManagement = () => {
         // Crear set de slots ocupados
         const occupiedSlots = new Set<string>();
 
-        bookings?.forEach((booking) => {
+        bookings?.forEach((booking: BookingSlotsRow) => {
           booking.time_slots?.forEach((slot: string) => {
             if (
               booking.type_id === 2 &&

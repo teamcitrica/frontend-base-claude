@@ -109,8 +109,8 @@ $border-extra-bold: "";
 // BRAND SYSTEM TYPOGRAPHY — ImPulso
 // Anton → display / titulares (mayúsculas, ≥24px, nunca párrafos).
 // Lato  → cuerpo, navegación, formularios, captions.
-// Slot `a` = Anton: lo consumen las clases display de la landing
-// (.impulso__display/__h1/__h2/__h3). El toolkit Text usa b/c/d = Lato.
+// Slot `a` = Anton: lo consume la variante `display` del toolkit Text.
+// Los slots b/c/d = Lato para cuerpo, navegación y formularios.
 $font-family-a: 'Anton', Impact, 'Arial Narrow Bold', sans-serif;
 $font-family-b: 'Lato', 'Helvetica Neue', Arial, sans-serif;
 $font-family-c: 'Lato', 'Helvetica Neue', Arial, sans-serif;
