@@ -129,8 +129,21 @@ The public web surface is the **ImPulso** landing (`app/page.tsx` + `styles/webp
 | Button/form radius | `styles/10-tokens/web/components/_form.scss` |
 | Landing layout only | `styles/webpages-styles/impulso.scss` |
 
+## SEO / Open Graph
+Social card metadata is centralized so a cloned project only edits one block.
+
+- `config/site.ts` → `siteConfig.seo` is the single source of truth (url, siteName, title, description, tagline, imageAlt, locale, keywords, twitter handles, colors, ogFont, indexable).
+- `lib/seo.ts` exports `buildMetadata(page?)` and `viewport`. `SITE_URL` resolves from `NEXT_PUBLIC_SITE_URL` → `seo.url` → Vercel env → localhost, and feeds `metadataBase`, canonical and `og:url`.
+- `app/layout.tsx` applies `buildMetadata()` site-wide with the `%s | Marca` title template.
+- `app/opengraph-image.tsx` generates the 1200×630 image with `next/og` from `seo.colors` and the brand font in `/fonts` (`next.config.js` traces that folder). `app/twitter-image.tsx` re-exports it.
+- Per-route metadata: `export const metadata = buildMetadata({ title, description, path, image, type, noIndex })` from a server `page.tsx` or `layout.tsx`.
+- Never hardcode metadata in a page — go through `buildMetadata`. Keep `seo.colors` in sync with `styles/10-tokens/web/colors/_palette.scss`.
+
+Full guide and checklist: `docs/opengraph.md`.
+
 ## Documentation
 Detailed documentation is available in the `docs/` folder:
+- `docs/opengraph.md` - Open Graph / SEO metadata structure
 - `docs/styles-overview.md` - Complete styles system overview
 - `docs/tokens-system.md` - Design tokens architecture
 - `docs/tokens-examples.md` - Token usage examples

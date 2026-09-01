@@ -10,6 +10,10 @@ const nextConfig = {
     // Solo usar temporalmente mientras Supabase no está conectado
     ignoreBuildErrors: true,
   },
+  outputFileTracingIncludes: {
+    "/opengraph-image": ["./fonts/**"],
+    "/twitter-image": ["./fonts/**"],
+  },
   images: {
   remotePatterns: [
     {
