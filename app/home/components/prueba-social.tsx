@@ -2,6 +2,8 @@
 
 import { Col, Container, Text } from "citrica-ui-toolkit";
 
+import { Cluster, Section, Stack } from "@/shared/components/layout";
+
 /**
  * Tira de prueba social. Va inmediatamente después del hero porque el
  * visitante llega quemado por agencias y necesita un número antes de leer
@@ -15,24 +17,24 @@ const metrics = [
 ];
 
 const PruebaSocial = () => (
-  <section className="home__section home__section--tight" id="prueba">
+  <Section id="prueba" rhythm="tight">
     <Container>
       <Col cols={{ sm: 4, md: 6, lg: 12 }}>
-        <ul className="home__metrics">
+        <Cluster align="start" as="ul" gap={{ row: 10, column: 24 }}>
           {metrics.map((metric) => (
-            <li key={metric.label} className="home__metric">
+            <Stack key={metric.label} as="li" className="home__metric" gap={1}>
               <Text as="span" textColor="color-primary" variant="headline">
                 {metric.value}
               </Text>
               <Text as="span" textColor="color-on-surface-var" variant="label">
                 {metric.label}
               </Text>
-            </li>
+            </Stack>
           ))}
-        </ul>
+        </Cluster>
       </Col>
     </Container>
-  </section>
+  </Section>
 );
 
 export default PruebaSocial;

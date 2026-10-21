@@ -2,21 +2,23 @@
 
 import { Col, Container, Text } from "citrica-ui-toolkit";
 
+import { Section, Stack } from "@/shared/components/layout";
+
 /**
  * "No es falta de esfuerzo. Es falta de sistema."
  * Quita la culpa antes de proponer nada. Sección corta y densa.
  */
 const Sistema = () => (
-  <section className="home__section home__section--tight" id="sistema">
+  <Section id="sistema" rhythm="tight">
     <Container>
       <Col cols={{ sm: 4, md: 6, lg: 10, lgPush: 1 }}>
-        <div className="home__stack">
+        <Stack gap={6}>
           <Text as="h2" textColor="color-text-black" variant="headline">
             No es falta de esfuerzo. Es falta de sistema.
           </Text>
           <Text
             as="p"
-            className="home__measure"
+            className="u-measure-prose"
             textColor="color-on-surface-var"
             variant="subtitle"
           >
@@ -27,17 +29,17 @@ const Sistema = () => (
           </Text>
           <Text
             as="p"
-            className="home__measure"
+            className="u-measure-prose"
             textColor="color-on-surface-var"
             variant="body"
           >
             Sin un sistema que conecte lo que publicas con lo que se reserva,
             cada mes vuelves a empezar de cero y a decidir por corazonada.
           </Text>
-        </div>
+        </Stack>
       </Col>
     </Container>
-  </section>
+  </Section>
 );
 
 export default Sistema;

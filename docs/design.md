@@ -27,16 +27,26 @@ colors:
   warning: "#D9BF28"
   error: "#C63A2B"
   info: "#2D6FA8"
+# Valores reales del render (ADR-0006). Los tokens viven en styles/10-tokens/web/foundations/
 rounded:
-  card: "8px"
-  input: "8px"
-  pill: "999px"     # buttons, badges
+  card: "12px"      # --radius-md (cards, media, superficies)
+  input: "10px"     # --form-radius-input
+  pill: "999px"     # --radius-pill (buttons, badges)
 spacing:
-  scale: "8px base — 8 / 16 / 24 / 32 / 48 / 64 / 96 / 128"
+  scale: "4px base — --space-N = N×4px, igual que Tailwind (gap-6 = --space-6 = 24px)"
+  steps: "1:4 · 2:8 · 3:12 · 4:16 · 6:24 · 8:32 · 10:40 · 12:48 · 16:64 · 24:96 · 32:128"
+  section: "--section-y-tight 40px · --section-y 64px · --section-y-airy 96px"
 grid:
-  columns: 12
-  maxWidth: "1200–1280px"
-  gutter: "24px"
+  columns: "12 lg / 6 md / 4 sm"
+  maxWidth: "1366px"
+  gutter: "56px lg / 20px md / 20px sm"
+  padding: "112px lg / 56px md / 24px sm"
+motion:
+  ease: "--ease-out — cubic-bezier(0.25, 1, 0.5, 1)"
+  durations: "--duration-fast 200ms · --duration-base 400ms · --duration-slow 460ms"
+measure:
+  prose: "--measure-prose 68ch"
+  narrow: "--measure-narrow 52ch"
 components:
   button-primary:
     backgroundColor: "{colors.impulso-orange}"
@@ -173,10 +183,15 @@ A thick, slightly irregular highlighter stroke (`#F5DE4B`) under 1–3 key words
 
 ## 5. Layout
 
-- **Grid:** 12 columns, max-width 1200–1280px, 24px gutter.
-- **Spacing:** 8px scale (8 / 16 / 24 / 32 / 48 / 64 / 96 / 128). Vary for rhythm — generous between sections, tight within groups.
-- **Section rhythm:** alternate white / `neutral-50` / carbón. At least one carbón section per page (the poster moment).
-- **Shape:** `8px` on cards and inputs; `999px` pill on buttons and badges. The orange avatar circle is the one fully-round hero shape. **Do not** round cards past 16px.
+> Values below are the rendered ones and their tokens ([ADR-0006](04-decisions/0006-documentacion-refleja-render.md)).
+> Source: `styles/10-tokens/web/foundations/`.
+
+- **Grid:** `Container`/`Col` — 12 / 6 / 4 columns (lg / md / sm), container 1366px, gutter 56 / 20 / 20px, side padding 112 / 56 / 24px.
+- **Composition:** layout primitives in `shared/components/layout/` ([ADR-0007](04-decisions/0007-layout-con-primitivas.md)) — `Section` (rhythm + tone), `Stack`, `Cluster`, `Media`, `AutoGrid`, and `Grid` + `Cell` for the bold moves the poster register asks for: text over full-bleed photography, asymmetric offsets, overlapping blocks, partial breakouts. Live reference: `/dev/layout`.
+- **Spacing:** 4px scale, `--space-N` = N × 4px, identical to Tailwind (`gap-6` = `var(--space-6)` = 24px). Steps: 1, 2, 3, 4, 6, 8, 10, 12, 16, 24, 32. Vary for rhythm — generous between sections, tight within groups.
+- **Section rhythm:** vertical padding `--section-y` (64px), `--section-y-tight` (40px) for pain/urgency, `--section-y-airy` (96px) for sections that breathe. Alternate white / `neutral-50` / carbón. At least one carbón section per page (the poster moment).
+- **Reading measure:** prose capped at `--measure-prose` (68ch); short leads at `--measure-narrow` (52ch).
+- **Shape:** `--radius-md` (12px) on cards, media and surfaces; inputs 10px (`--form-radius-input`); `--radius-pill` (999px) on buttons and badges. The orange avatar circle is the one fully-round hero shape. **Do not** round cards past 16px.
 - **Imagery:** food photography leads — warm, contrasted, kinetic (falling sauce, steam, fire, hands cooking). Duotone orange/carbón for text-over-photo sections; carbón overlay 40–60% behind white text; circular crops (avatar echo) for featured dishes/portraits. Zero imagery on this food brief is a bug — ship real photography, never colored placeholder blocks.
 
 ## 6. Components
@@ -187,7 +202,7 @@ A thick, slightly irregular highlighter stroke (`#F5DE4B`) under 1–3 key words
 - **Tertiary / link:** `#A83E15` text, Lato 700, hover adds a yellow (`#F5DE4B`) highlighter underline.
 
 ### Card de servicio
-White fill, 1px `#E2E0DC` border, `8px` radius, 32px padding. Hover: border → orange + subtle lift `0 8px 24px rgba(17,17,17,0.08)`. Icon: 24px Lucide inside a 48px orange circle (avatar echo). **Never** pair the 1px border with a wide shadow at rest — the lift is a hover-only affordance.
+White fill, 1px `#E2E0DC` border, `--radius-md` (12px), `--space-8` (32px) padding. Hover: border → orange + subtle lift `0 8px 24px rgba(17,17,17,0.08)`. Icon: 24px Lucide inside a 48px orange circle (avatar echo). **Never** pair the 1px border with a wide shadow at rest — the lift is a hover-only affordance.
 
 ### Badge
 Amarillo Sazón fill, carbón text, Lato 700 12px uppercase, `4px 12px`, pill. One per viewport.
@@ -200,8 +215,9 @@ Lucide, 1.5–2px stroke, 24px standard. Carbón on light, white on orange/carb�
 
 ## 7. Motion
 
-- Hovers: 200–250ms `ease-out`.
-- **One orchestrated moment:** the hero reveal — title slides up in a light stagger while the yellow underline draws left-to-right over ~400ms.
+- Curve: `--ease-out` (`cubic-bezier(0.25, 1, 0.5, 1)`).
+- Hovers: `--duration-fast` (200ms).
+- **One orchestrated moment:** the hero reveal — title slides up in a light stagger (`--duration-slow`, 460ms) while the yellow underline draws left-to-right (`--duration-base`, 400ms).
 - Every animation ships a `prefers-reduced-motion` alternative (crossfade / instant). The underline draw becomes a static underline.
 - Ease-out with exponential curves; no bounce, no elastic. Don't animate layout properties.
 

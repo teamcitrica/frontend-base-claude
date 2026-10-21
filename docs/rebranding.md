@@ -118,10 +118,13 @@ $font-family-a-admin: 'Inter', sans-serif;        // panel admin
 4. Ajusta la escala en `styles/10-tokens/web/components/_text.scss` si la nueva
    tipografía necesita otros tamaños por variante.
 
-### Paso 5 — Forma · `styles/10-tokens/web/components/`
+### Paso 5 — Forma · `styles/10-tokens/web/foundations/` y `components/`
 
 | Archivo | Qué controla |
 |---|---|
+| `foundations/_radius.scss` | `--radius-md` (cards, media) y `--radius-pill`: el carácter redondeado o recto de la marca |
+| `foundations/_motion.scss` | Curva y duraciones: el pulso de la marca |
+| `foundations/_space.scss` | Ritmo de sección (`--section-y*`). La escala `--space-N` **no** se toca: es la regla de medir compartida con Tailwind |
 | `_form.scss` | `--form-radius-btn` (pill), `--form-radius-input`, grosores de borde |
 | `_button.scss` | Render de las variantes de botón |
 | `_input.scss` · `_select.scss` · `_textarea.scss` | Campos |
@@ -162,7 +165,6 @@ se reserva para ritmo de sección y gestos de marca que el toolkit no da; el gri
 >
 > ```scss
 > // styles/custom.scss
-> @import './webpages-styles/sections.scss';
 > @import './webpages-styles/home.scss';
 > @import './webpages-styles/<marca>.scss';   // ← agrega esta línea
 > ```

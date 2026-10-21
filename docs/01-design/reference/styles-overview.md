@@ -47,7 +47,6 @@ styles/
 │   └── tokens.scss       # Archivo principal de imports
 │
 ├── 11-atomic-design/     # Atomic Design System
-├── themes/               # Temas adicionales
 ├── webpages-styles/      # Estilos por pagina
 │
 ├── globals.scss          # Archivo principal (importa todo)

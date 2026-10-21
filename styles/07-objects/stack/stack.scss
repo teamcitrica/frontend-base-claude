@@ -1,0 +1,13 @@
+// STACK — pila vertical con un espacio constante entre hijos.
+// Componente: shared/components/layout/stack.tsx
+
+.o-stack {
+  display: flex;
+  flex-direction: column;
+
+  @each $n in $space-steps {
+    &--gap-#{$n} {
+      gap: var(--space-#{$n});
+    }
+  }
+}

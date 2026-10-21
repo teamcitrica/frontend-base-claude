@@ -2,6 +2,13 @@
 
 Documentación completa del sistema de grid responsivo y layout de Citrica BaseAdmin.
 
+> **Primero lee esto.** Este documento cubre la retícula `Container`/`Col` y sus mixins.
+> Para componer una página (apilar, poner en fila, proporciones, superposición, salida a
+> sangre) se usan las **primitivas de layout** de `shared/components/layout/`
+> ([ADR-0007](../../04-decisions/0007-layout-con-primitivas.md)). Qué es cada una, cuándo
+> usarla y ejemplos vivos: **`/dev/layout`** con `npm run dev`. `Grid` + `Cell` comparten
+> columnas y gutter con `Container`/`Col`: un `Cell span 8` mide lo mismo que un `Col lg 8`.
+
 ## Tabla de Contenidos
 
 1. [Conceptos Fundamentales](#conceptos-fundamentales)
@@ -558,7 +565,6 @@ Ejemplos:
 - **Container**: `styles/07-objects/container/container.scss`
 - **Col**: `styles/07-objects/col/col.scss`
 - **Ejemplo Home**: `app/page.tsx`
-- **Ejemplo Typography**: `app/home/components/section-typography.tsx`
 
 ---
 

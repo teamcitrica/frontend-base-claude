@@ -61,7 +61,7 @@ igual a ediciones a mano y a pases automatizados (incluida la skill `impeccable`
 > Fuente única — ver [ADR-0001](04-decisions/0001-contrato-fuente-unica.md).
 
 En una línea: **color solo desde `_palette.scss`, texto solo con `Text`, layout solo con
-`Container`/`Col`, componente del toolkit antes que markup propio.**
+`Container`/`Col` y las primitivas de layout, componente del toolkit antes que markup propio.**
 
 ## Accessibility & Inclusion
 

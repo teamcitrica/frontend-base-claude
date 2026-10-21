@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { Col, Container, Text } from "citrica-ui-toolkit";
 
+import { Cluster, Media, Section, Stack } from "@/shared/components/layout";
+
 /**
  * Qué vas a conseguir. Es la sección que el nav llama "Resultados".
  * La foto es el resultado, literal: la mesa llena.
@@ -14,41 +16,48 @@ const outcomes = [
 ];
 
 const Resultados = () => (
-  <section className="home__section" id="resultados">
+  <Section id="resultados">
     <Container>
       <Col cols={{ sm: 4, md: 6, lg: 6 }}>
-        <div className="home__stack">
+        <Stack gap={6}>
           <Text as="h2" textColor="color-text-black" variant="headline">
             En 90 días, un restaurante con flujo constante
           </Text>
           <Text
             as="p"
-            className="home__measure"
+            className="u-measure-prose"
             textColor="color-on-surface-var"
             variant="subtitle"
           >
             No prometemos virales. Prometemos un sistema que puedas auditar.
           </Text>
 
-          <ul className="home__pains">
+          <Stack as="ul" gap={6}>
             {outcomes.map((outcome) => (
-              <li key={outcome} className="home__pain">
+              <Cluster
+                key={outcome}
+                align="start"
+                as="li"
+                className="home__pain"
+                gap={3}
+                wrap={false}
+              >
                 <Text
                   as="p"
-                  className="home__measure"
+                  className="u-measure-prose"
                   textColor="color-text-black"
                   variant="body"
                 >
                   {outcome}
                 </Text>
-              </li>
+              </Cluster>
             ))}
-          </ul>
-        </div>
+          </Stack>
+        </Stack>
       </Col>
 
       <Col cols={{ sm: 4, md: 6, lg: 6 }}>
-        <div className="home__media home__media--wide">
+        <Media ratio="16/10">
           <Image
             fill
             alt="Mesa de restaurante llena de platos servidos, vista desde arriba"
@@ -56,10 +65,10 @@ const Resultados = () => (
             sizes="(max-width: 1024px) 100vw, 50vw"
             src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1200&q=80"
           />
-        </div>
+        </Media>
       </Col>
     </Container>
-  </section>
+  </Section>
 );
 
 export default Resultados;

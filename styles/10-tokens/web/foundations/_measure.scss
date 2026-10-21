@@ -1,0 +1,10 @@
+// ============================================
+// MEASURE TOKENS - WEB
+// ============================================
+// Ancho máximo de línea para prosa. `ch` es relativo al font-size del
+// elemento: aplícalo al texto, no a su contenedor.
+
+@mixin measure-tokens {
+  --measure-prose: 68ch;
+  --measure-narrow: 52ch;
+}

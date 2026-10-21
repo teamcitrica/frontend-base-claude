@@ -1,7 +1,6 @@
 // Organism components specific to this project
 // Atoms and molecules are available from citrica-ui-toolkit
 
-export { default as Video } from "./video";
 export { default as Footer } from "./footer";
 export { default as Navbar } from "./navbar";
 export { default as SidebarNav } from "./sidebar-nav";

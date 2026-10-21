@@ -592,27 +592,27 @@ El componente Text tiene las siguientes variantes que debes usar según el tipo 
 ```tsx
 // Hero Title
 <Text variant="display" as="h1" weight="bold">
-  MASTERCLASS: Introducción a la Fotografía
+  Deja de adivinar si tu marketing funciona
 </Text>
 
 // Section Title
-<Text variant="headline" as="h2" weight="bold" className="section-title">
-  Contenido del Taller
+<Text variant="headline" as="h2">
+  El Sistema Mesa Activa
 </Text>
 
 // Card Title
-<Text variant="title" as="h3" weight="bold" className="card-title">
-  Pre-Producción
+<Text variant="title" as="h3">
+  Diagnóstico de visibilidad
 </Text>
 
 // Description
-<Text variant="body" as="p" className="description">
-  Aprende a planificar sesiones desde cero...
+<Text variant="body" as="p">
+  Medimos dónde apareces hoy y qué buscan tus comensales.
 </Text>
 
 // Label or Badge
-<Text variant="label" as="p" className="badge">
-  EDICIÓN LIMITADA
+<Text variant="label" as="p">
+  Estudio gratuito
 </Text>
 
 // Stats or Numbers
@@ -866,13 +866,13 @@ import { Container, Col, Text } from 'citrica-ui-toolkit';
   <Col cols={{ sm: 4, md: 6, lg: 12 }}>
     <section className="content-section">
       {/* Section Title */}
-      <Text variant="headline" as="h2" weight="bold" className="section-title">
-        Contenido del Taller
+      <Text variant="headline" as="h2">
+        El Sistema Mesa Activa
       </Text>
 
       {/* Section Description */}
       <Text variant="body" as="p" className="section-description">
-        Aprende las mejores técnicas de fotografía gastronómica
+        Cuatro pasos en orden para convertir pauta en mesas llenas
       </Text>
     </section>
   </Col>
@@ -880,13 +880,13 @@ import { Container, Col, Text } from 'citrica-ui-toolkit';
   <Col cols={{ sm: 4, md: 2, lg: 4 }}>
     <div className="card">
       {/* Card Title */}
-      <Text variant="title" as="h3" weight="bold" className="card-title">
-        Pre-Producción
+      <Text variant="title" as="h3">
+        Diagnóstico de visibilidad
       </Text>
 
       {/* Card Description */}
       <Text variant="body" as="p" className="card-description">
-        Planificación de sesiones desde cero
+        Medimos dónde apareces hoy y qué buscan tus comensales
       </Text>
     </div>
   </Col>

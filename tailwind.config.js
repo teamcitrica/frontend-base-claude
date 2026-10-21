@@ -29,30 +29,7 @@ module.exports = {
   },
   darkMode: "class",
   plugins: [
-    heroui({
-      themes: {
-        dark: {
-          colors: {
-            background: "white",
-            primary: {
-              DEFAULT: "#BEF264",
-              foreground: "#000000",
-            },
-            focus: "#3b82f6",
-          },
-        },
-        light: {
-          colors: {
-            background: "white",
-            primary: {
-              DEFAULT: "#BEF264",
-              foreground: "#000000",
-            },
-            focus: "#3b82f6",
-          },
-        },
-      },
-    }),
+    heroui(),
     require('tailwindcss-animated')
   ],
 }

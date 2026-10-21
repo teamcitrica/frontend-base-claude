@@ -47,7 +47,7 @@ const HomePage = () => (
           width={175}
         />
       }
-      navItems={siteConfig.impulsoNavLinks}
+      navItems={siteConfig.navLinks}
       variant="basic"
       onButtonClick={() => scrollToSection("agenda")}
     />
