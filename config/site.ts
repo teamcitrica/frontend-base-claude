@@ -30,32 +30,8 @@ export const siteConfig = {
     indexable: true,
   },
 
+  // Navegación de la landing: anclas a los `id` de sus secciones.
   navLinks: [
-    {
-      title: "CURSO",
-      href: "#hero",
-    },
-    {
-      title: "EXÁMEN",
-      href: "#contenido",
-    },
-    {
-      title: "REDDI",
-      href: "#galeria",
-    },
-    {
-      title: "NOSOTROS",
-      href: "#instructor",
-    },
-  ],
-  laMagentaNavLinks: [
-    { title: "Favoritos", href: "#favoritos" },
-    { title: "Historia", href: "#historia" },
-    { title: "Testimonios", href: "#testimonios" },
-    { title: "Portafolio", href: "#portafolio" },
-    { title: "Pedido", href: "#pedido" },
-  ],
-  impulsoNavLinks: [
     { title: "El problema", href: "#problema" },
     { title: "Cómo funciona", href: "#metodo" },
     { title: "Resultados", href: "#resultados" },
