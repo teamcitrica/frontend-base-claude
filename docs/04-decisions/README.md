@@ -15,6 +15,7 @@ repo de ahora en adelante".
 | [0003](0003-impeccable-obligatorio.md) | `impeccable` es obligatorio en el ciclo SDD, y el contrato le gana | Aceptada | 2026-08-01 |
 | [0004](0004-verificacion-visual-y-assets.md) | La verificación visual es obligatoria, y ningún placeholder ajeno se envía | Aceptada | 2026-08-01 |
 | [0005](0005-arranque-de-marca.md) | Arranque de marca: se borra la anterior, y la paleta cambia valores, nunca nombres | Aceptada | 2026-08-01 |
+| [0006](0006-documentacion-refleja-render.md) | La documentación de diseño describe lo que se renderiza; escala de 4px con tokens globales | Aceptada | 2026-10-20 |
 
 ## Cuándo escribir uno
 
