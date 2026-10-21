@@ -32,17 +32,17 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 **Comprobación visual**
 
-- [ ] T-14 · `SHOT_DIR=.shots/after npm run shot -- --cta "#hero button"`. Código de salida 0. Comparar `before` contra `after` con `cmp`; si difieren, inspección visual de los pares y registro → **AC-5**
-- [ ] T-15 · Recorrer las 7 rutas de AC-6 y comparar la consola con la de T-02 → **AC-6**
+- [x] T-14 · `SHOT_DIR=.shots/after npm run shot -- --cta "#hero button"`. Código de salida 0. Comparar `before` contra `after` con `cmp`; si difieren, inspección visual de los pares y registro → **AC-5**
+- [x] T-15 · Recorrer las 7 rutas de AC-6 y comparar la consola con la de T-02 → **AC-6**
 
 ## Cierre
 
-- [ ] T-90 · Correr greps del contrato sobre los archivos tocados → *(DoD B)*
-- [ ] T-91 · `npm run typecheck`, `npm run lint:check`, `npm run contract` contra la baseline de T-01 (`npm run build` no verifica: ver CLAUDE.md) → *(DoD A, AC-3, AC-4)*
-- [ ] T-92 · Revisar responsive en sm/md/lg (cubierto por T-14) → *(DoD D)*
-- [ ] T-93 · Revisar contraste y foco visible: sin cambios esperados, se confirma en las capturas → *(DoD E)*
-- [ ] T-94 · Pegar bloque de verificación en `spec.md` → *(DoD F)*
-- [ ] T-95 · Mover estado de la spec a `done` en [el índice](../README.md) → *(DoD F)*
+- [x] T-90 · Correr greps del contrato sobre los archivos tocados → *(DoD B)*
+- [x] T-91 · `npm run typecheck`, `npm run lint:check`, `npm run contract` contra la baseline de T-01 (`npm run build` no verifica: ver CLAUDE.md) → *(DoD A, AC-3, AC-4)*
+- [x] T-92 · Revisar responsive en sm/md/lg (cubierto por T-14) → *(DoD D)*
+- [x] T-93 · Revisar contraste y foco visible: sin cambios esperados, se confirma en las capturas → *(DoD E)*
+- [x] T-94 · Pegar bloque de verificación en `spec.md` → *(DoD F)*
+- [x] T-95 · Mover estado de la spec a `done` en [el índice](../README.md) → *(DoD F)*
 
 ---
 
@@ -62,3 +62,5 @@ antes de seguir — no se improvisa.
 | 2026-10-20 | Consecuencia de D-1: `shared/components/organisms/navbar.tsx` (el `Navbar` del admin) también lee `siteConfig.navLinks` en su cajón móvil. Antes mostraba los enlaces de la masterclass y ahora los de ImPulso; en los dos casos son anclas de la landing que no existen en `/admin` | Sin cambio de código en el admin (fuera de alcance). Se reporta en la verificación |
 | 2026-10-20 | Pasada 1 terminada: typecheck 0; `shot` de la landing idéntico byte a byte con la baseline (6/6) | — |
 | 2026-10-20 | En T-12 aparecieron restos de dos proyectos más en los docs de referencia: "Taller / fotografía" (`web-guide.md:870`) y "Tatuajes / Piercings" (`layout-examples.md`, `tokens-examples.md`) | Cubiertos por la decisión del usuario en P-1 ("todos los proyectos anteriores hay que limpiarlos"). Reemplazados por copy ImPulso o neutro; spec (alcance y AC-8) ampliada |
+| 2026-10-20 | T-14: landing `before` contra `after` idéntica byte a byte (6/6), `shot` con código 0. `/admin/clientes`: `md`/`lg` idénticos; `sm` difiere, pero dos tomas `after` sin cambios también difieren entre sí (no determinista, aviso animado de Next). A la vista, iguales. El `Spinner` (posible efecto HeroUI) no aparece en las capturas porque la carga termina antes | Sin evidencia de cambio visual. Efecto HeroUI en el admin: **no comprobado** visualmente |
+| 2026-10-20 | T-15: consola de las 7 rutas idéntica a la de T-02 (`diff` vacío) | — |

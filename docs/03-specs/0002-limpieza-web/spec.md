@@ -2,7 +2,7 @@
 id: 0002
 slug: limpieza-web
 titulo: Limpieza de residuos de proyectos anteriores (web)
-estado: in-progress  # draft | approved | in-progress | done | dropped
+estado: done         # draft | approved | in-progress | done | dropped
 creada: 2026-10-20
 superficie: infra    # sin cambio visual: ver "Superficie" abajo
 ---
@@ -195,7 +195,51 @@ Además (P-1):
 - [x] ~~**P-3 — ¿`hero.ts` tiene consumidor?**~~ Resuelta: grep en todo el repo sin
       resultados y Tailwind es v3.4 (sin `@plugin`). Pasa al alcance.
 
-## Verificación
+## Verificación — 2026-10-20
 
-> Se llena en la fase VERIFY. Salidas reales, no checks optimistas.
-> Formato en [definition-of-done.md](../../00-harness/definition-of-done.md#bloque-de-reporte).
+Rama `chore/spec-0002-limpieza-web`, 4 commits (`21428c1` spec · `9973e33` estilos y config
+· `004361f` TS huérfano · `0fb8054` docs). Superficie `infra`: `/impeccable audit` no aplica
+(ADR-0003).
+
+| Punto | Resultado |
+|---|---|
+| A. typecheck | ✅ 0 errores (igual a la baseline) |
+| A. lint:check | ✅ 7 errores / 733 warnings (baseline: 8 / 751) |
+| A. build | ⚠️ **falla, pero ya fallaba antes de esta spec**: `Failed to collect page data for /api/s3/presigned`, por falta de variables de AWS en `.env.local`. Se reprodujo idéntico sobre `main` (`6e05601`) en un worktree aparte. Compila (`✓ Compiled successfully`); falla en la recolección de datos de una ruta S3, que está fuera de alcance |
+| B. npm run contract | ✅ 35 `hex-en-tsx` (baseline 36; −1 al borrar `section-typography.tsx`). 0 añadidas; las otras 6 reglas en 0 |
+| B. revisión visual | ✅ N/A: no se escribió UI. Solo se editaron `app/page.tsx` (1 línea) y el barrel de organisms |
+| C. criterios | 8/8 ✅ (detalle abajo) |
+| C. fuera de alcance | ✅ S3, demo, `layout.tsx`, `/fonts`, admin y ImPulso intactos. `package.json` solo `+playwright` (excepción D-2) |
+| D. responsive | ✅ `npm run shot -- / --cta "#hero button"`: código 0, sin scroll horizontal, imágenes rotas ni errores de consola. Capturas `lg-fold` y `sm-fold` **abiertas y revisadas**. Las 6 idénticas byte a byte a la baseline |
+| D. dark mode | N/A: la web solo usa el tema light (`defaultTheme: "light"`, sin conmutador tras borrar `section-typography`) |
+| D. placeholders | ✅ Ningún placeholder ajeno en el render; el Header muestra el logo y los enlaces de ImPulso |
+| E. a11y | ⚪ **No comprobado con teclado.** Sin cambios de UI y con capturas idénticas byte a byte no hay vía de regresión visual, pero no se tabuló |
+| F. docs | ✅ `02-architecture/overview.md` actualizado; `CLAUDE.md` sin enlaces rotos. Sin ADR: no cambió ninguna regla de la constitución |
+| G. impeccable audit | N/A (`infra`) |
+
+**Criterios de aceptación**
+
+- **AC-1** ✅ grep sin resultados (código 1); `grep -c "navLinks:" config/site.ts` → `1`.
+- **AC-2** ✅ 20/20 rutas ausentes; `styles/custom.scss` con 0 líneas que no sean `@import` o comentario.
+- **AC-3** ✅ `npm run typecheck` → código 0.
+- **AC-4** ✅ lint 7 ≤ 8; contrato 35 ≤ 36, sin reglas nuevas.
+- **AC-5** ✅ `before` contra `after` con `cmp`: 6/6 idénticas. La determinación se comprobó antes (dos tomas sin cambios son idénticas).
+- **AC-6** ✅ status y consola de las 7 rutas idénticos a la baseline (`diff` vacío). El único error, en `/admin` (`Error fetching month stats`, sin Supabase), ya existía.
+- **AC-7** ✅ 0 referencias a archivos borrados (solo falsos positivos: `_light-theme.scss`/`_dark-theme.scss` casan con `theme\.scss` y son tokens vivos).
+- **AC-8** ✅ todas las rutas citadas en `CLAUDE.md`/`README.md` existen; 0 coincidencias de `masterclass|carrito|tatuaj|piercing|taller`.
+
+**Efectos fuera de la landing (aceptados en el plan)**
+
+- Tema HeroUI: `<Spinner color="primary">` (`/admin/clientes`) y `color="primary"` en
+  `weekly-schedule-manager.tsx` pasan del lima al azul por defecto. **No comprobado
+  visualmente:** el spinner no aparece en las capturas porque la carga termina antes. En
+  `/admin/clientes`, `md`/`lg` son idénticas; `sm` difiere, pero dos tomas sin cambios
+  también difieren entre sí (no determinista) y a la vista son iguales.
+- El cajón móvil del `Navbar` del admin pasa de los enlaces de la masterclass a los de
+  ImPulso (consecuencia de D-1; anclas de la landing en ambos casos).
+
+Pendiente:
+1. Build roto por S3 sin `.env.local` (previo a esta spec) → spec de S3/demo.
+2. Dependencias que quedaron sin uso: `gsap`, `video.js` (y revisar `@heroui/skeleton`, `react-hot-toast`) → spec de dependencias.
+3. Las baselines escritas en `CLAUDE.md` y la DoD (8 lint / 36 contrato) quedan desfasadas: hoy son 7 / 35.
+4. Foco con teclado no tabulado (sin cambios de UI).
