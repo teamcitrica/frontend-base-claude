@@ -117,6 +117,7 @@ cambia la pantalla.
 | Fonts (Anton/Lato) | `styles/01-settings/settings.scss` |
 | Button render | `styles/10-tokens/web/components/_button.scss` |
 | Button/form radius | `styles/10-tokens/web/components/_form.scss` |
+| Spacing (`--space-N` = N×4px = Tailwind), section rhythm, radius, motion, measure | `styles/10-tokens/web/foundations/` |
 | Landing layout only | `styles/webpages-styles/home.scss` |
 
 ## SEO / Open Graph

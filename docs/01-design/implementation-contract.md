@@ -82,6 +82,7 @@ Nunca `<div>` crudo para layout: siempre `Container` + `Col`.
 | Fuentes (Anton / Lato) | `styles/01-settings/settings.scss` |
 | Render de botón | `styles/10-tokens/web/components/_button.scss` |
 | Radio de botón / form | `styles/10-tokens/web/components/_form.scss` |
+| Espaciado, ritmo de sección, radios, motion, medida | `styles/10-tokens/web/foundations/` — `--space-N` = N×4px, igual que Tailwind ([ADR-0006](../04-decisions/0006-documentacion-refleja-render.md)) |
 | Layout de la landing (solo layout) | `styles/webpages-styles/home.scss` — ya importado |
 | Layout de otra página (solo layout) | `styles/webpages-styles/<pagina>.scss` + su `@import` en `styles/custom.scss` |
 

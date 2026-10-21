@@ -31,8 +31,8 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 **Paso 4: documentación de referencia** (commit `docs: document foundation tokens`)
 
-- [ ] T-13 · Mapa de archivos del contrato, `tokens-system.md`, `rebranding.md` (Paso 5) y `CLAUDE.md` → **AC-4**
-- [ ] T-14 · AC-4: cada `--space-*`, `--radius-*`, `--duration-*`, `--ease-out`, `--measure-*` y `--section-y*` citado en `docs/` (fuera de `03-specs` y `04-decisions`) existe en `styles/` → **AC-4**
+- [x] T-13 · Mapa de archivos del contrato, `tokens-system.md`, `rebranding.md` (Paso 5) y `CLAUDE.md` → **AC-4**
+- [x] T-14 · AC-4: cada `--space-*`, `--radius-*`, `--duration-*`, `--ease-out`, `--measure-*` y `--section-y*` citado en `docs/` (fuera de `03-specs` y `04-decisions`) existe en `styles/` → **AC-4**
 
 ## Cierre
 
@@ -59,3 +59,5 @@ antes de seguir — no se improvisa.
 | 2026-10-20 | La transición de hover usaba la palabra clave CSS `ease-out`, que **no** es la curva del token `--ease-out` (`cubic-bezier(0.25, 1, 0.5, 1)`). Reemplazarla cambiaría el hover, y una captura estática no lo detectaría | Solo se migró la duración (`var(--duration-fast)`); la palabra clave se conserva, con un comentario que lo explica. Verificado en el navegador: `opacity 0.2s ease-out` |
 | 2026-10-20 | T-09/T-10: 32 sustituciones de escala y 3 de ritmo de sección; radios, medidas, duraciones y curva a tokens; 18 literales marcados `// gesto:`. Sin marcar quedan solo los grosores de borde y de outline (1px/2px): los bordes no son una familia de esta spec | Pendiente para una futura familia de bordes |
 | 2026-10-20 | T-12: `shot` código 0; `s3-before` contra `s3-after` idénticas byte a byte (6/6). Como una captura estática no prueba la animación, se verificó en el navegador: `home-rise 0.46s cubic-bezier(.25,1,.5,1)`, `home-draw 0.4s … delay .38s`, `#problema` padding 40px, `#metodo` 96px, media 12px, medida 756px (68ch) | — |
+| 2026-10-20 | T-14: el primer chequeo dio un falso negativo (zsh no parte en palabras una variable sin comillas, así que el bucle corrió una vez). Rehecho con `while read`: 22 tokens citados en docs, 0 inexistentes (`brand.md` excluido). `--radius-card` solo existe en el bloque conceptual de `brand.md` | Pendiente conocido (brand.md) |
+| 2026-10-20 | La skill `.claude/skills/citrica-ui/SKILL.md` (lo que lee la IA al construir UI) aún no menciona los tokens de fundamentos. No estaba en el alcance | Se deja para SPEC-0005 (tooling de IA), que reescribe la skill |

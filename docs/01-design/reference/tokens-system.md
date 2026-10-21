@@ -7,6 +7,12 @@ Esta carpeta contiene el sistema de tokens de diseno para componentes de la apli
 ```
 styles/10-tokens/
 ├── web/                         # Tokens para aplicacion cliente/publica
+│   ├── foundations/             # Espaciado, radios, motion, medida (ADR-0006)
+│   │   ├── _space.scss          # --space-1…32 (N×4px) y --section-y*
+│   │   ├── _radius.scss         # --radius-md, --radius-pill
+│   │   ├── _motion.scss         # --ease-out, --duration-fast/base/slow
+│   │   ├── _measure.scss        # --measure-prose, --measure-narrow
+│   │   └── _index.scss          # @mixin foundation-tokens → :root
 │   ├── colors/
 │   │   ├── _palette.scss        # Variables SCSS de colores ($color-light-*, $color-dark-*)
 │   │   ├── _light-theme.scss    # Mixin light-theme (CSS custom properties)
@@ -38,6 +44,56 @@ styles/10-tokens/
 │
 └── tokens.scss                  # Archivo principal que importa todos los tokens
 ```
+
+## Fundamentos (web)
+
+Tokens globales en `:root`, disponibles en cualquier página. Fuente:
+`styles/10-tokens/web/foundations/`. Decisión: [ADR-0006](../../04-decisions/0006-documentacion-refleja-render.md).
+
+### Espaciado — `--space-N` = N × 4px
+
+La escala coincide con la de Tailwind, así que `gap-6` y `var(--space-6)` valen lo mismo.
+
+| Token | Valor | Tailwind |
+|---|---|---|
+| `--space-1` | 4px | `*-1` |
+| `--space-2` | 8px | `*-2` |
+| `--space-3` | 12px | `*-3` |
+| `--space-4` | 16px | `*-4` |
+| `--space-6` | 24px | `*-6` |
+| `--space-8` | 32px | `*-8` |
+| `--space-10` | 40px | `*-10` |
+| `--space-12` | 48px | `*-12` |
+| `--space-16` | 64px | `*-16` |
+| `--space-24` | 96px | `*-24` |
+| `--space-32` | 128px | `*-32` |
+
+Ritmo vertical de sección: `--section-y` (64px), `--section-y-tight` (40px) y
+`--section-y-airy` (96px).
+
+### Radios, motion y medida
+
+| Token | Valor | Uso |
+|---|---|---|
+| `--radius-md` | 12px | Cards, media, superficies |
+| `--radius-pill` | 999px | Botones (vía `--form-radius-btn`), badges |
+| `--ease-out` | `cubic-bezier(0.25, 1, 0.5, 1)` | Toda entrada y salida |
+| `--duration-fast` | 200ms | Hovers |
+| `--duration-base` | 400ms | Trazos, reveals cortos |
+| `--duration-slow` | 460ms | Entrada orquestada del hero |
+| `--measure-prose` | 68ch | Ancho máximo de párrafos |
+| `--measure-narrow` | 52ch | Bajadas cortas |
+
+```scss
+.pricing__card {
+  padding: var(--space-8);
+  border-radius: var(--radius-md);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+```
+
+Un valor de espaciado, radio o duración escrito a mano en un SCSS de página es un
+**gesto de página**, y va marcado `// gesto:` con su motivo.
 
 ## Uso
 
