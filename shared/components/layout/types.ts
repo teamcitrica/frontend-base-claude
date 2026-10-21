@@ -31,7 +31,10 @@ export type LayoutElement =
  * estilos inline (ADR-0007).
  */
 export interface LayoutProps
-  extends Omit<HTMLAttributes<HTMLElement>, "style" | "className" | "children"> {
+  extends Omit<
+    HTMLAttributes<HTMLElement>,
+    "style" | "className" | "children"
+  > {
   as?: LayoutElement;
   className?: string;
   children?: ReactNode;

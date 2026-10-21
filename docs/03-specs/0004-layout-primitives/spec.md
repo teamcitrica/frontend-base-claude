@@ -2,7 +2,7 @@
 id: 0004
 slug: layout-primitives
 titulo: Primitivas de layout para la web
-estado: in-progress  # draft | approved | in-progress | done | dropped
+estado: done         # draft | approved | in-progress | done | dropped
 creada: 2026-10-20
 superficie: landing  # | admin | panel | auth | api | infra
 ---
@@ -185,7 +185,85 @@ menos un uso real en la landing.
 - [x] ~~**P-2 — Footer.**~~ Resuelta (2026-10-20): conserva `home__footer` como gesto y usa
       `Cluster` dentro. Ver Fuera de alcance.
 
-## Verificación
+## Verificación — 2026-10-20
 
-> Se llena en la fase VERIFY. Salidas reales, no checks optimistas.
-> Formato en [definition-of-done.md](../../00-harness/definition-of-done.md#bloque-de-reporte).
+Rama `develop` (sin push). Commits: `08e6ebe` spec · `59af607` ADR-0007 · `f4f160a`
+primitivas · `af140ee` migración de la landing · `2bc21bd` `/dev/layout` + arreglo de `Cell` ·
+`2ed4071` docs · (+ cierre).
+
+| Punto | Resultado |
+|---|---|
+| A. typecheck | ✅ 0 errores |
+| A. lint:check | ✅ 7 errores / 733 warnings (igual a la baseline). Antes del cierre eran 852 warnings: 119 de formato (`prettier`, `import/order`) en archivos de esta spec, corregidos con `eslint --fix` limitado a esos archivos |
+| A. build | ⚠️ **falla por una causa previa**: `Failed to collect page data for /api/s3/video` (faltan variables de AWS en `.env.local`; ver SPEC-0002). La app compila: `✓ Compiled successfully` |
+| B. npm run contract | ✅ 35 `hex-en-tsx` (igual a la baseline); 0 añadidas |
+| B. revisión visual | ✅ Texto con `Text`; layout con `Container`/`Col` + primitivas; `Icon` con `name`. Los únicos `<div>` propios: el scrim del hero y las cajas de muestra de `/dev/layout` (gestos con clase de página) |
+| C. criterios | 9/9 ✅ (detalle abajo) |
+| C. fuera de alcance | ✅ Admin, panel, toolkit, `Container`/`Col`, `settings.scss` y Tailwind sin tocar. La skill `citrica-ui` no se tocó (pendiente) |
+| D. responsive | ✅ `npm run shot -- / --cta "#hero button"` y `npm run shot -- /dev/layout`: código 0, sin scroll horizontal, imágenes rotas ni errores de consola. Capturas **abiertas y revisadas**: fold del hero en `lg`; `/dev/layout` completa en escritorio; zona de `Grid` en `lg`; tabla, `Stack`, superposición y salida parcial en `sm` |
+| D. dark mode | N/A: la web solo usa el tema light |
+| D. placeholders | ✅ Ninguno ajeno. Las cajas "media" de `/dev/layout` son representaciones rotuladas, no sustitutos de contenido |
+| E. a11y | ✅ Foco **tabulando con Playwright** (`keyboard.press('Tab')`): `/dev/layout` con outline de 2px carbón; landing sin cambios (carbón en el header, blanco sobre el hero, borde propio en campos). Contraste medido: peor caso real 8.21:1. Áreas táctiles: 8 enlaces de 16px en `/dev/layout`, corregidos a 44px. `prefers-reduced-motion`: el subrayado del hero se ve (medido) |
+| F. docs | ✅ ADR-0007; contrato (regla 4 y mapa), `conventions.md`, `design.md` §5, `layout-system.md`, `product.md`, `CLAUDE.md` y `02-architecture/overview.md` (ruta `/dev/layout` y carpetas nuevas) |
+| G. impeccable audit | ✅ 16/20 (Good); 4 hallazgos: 1 atendido, 3 pendientes (abajo) |
+
+**Criterios de aceptación**
+
+- **AC-1** ✅ Capturas de layout contra la referencia (imágenes ocultas, umbral ≤ 32 px / ≤ 16):
+  sm 18 px · md 0 · lg 0, máx. 11; cajas de imagen idénticas. Folds reales con foto: 0 px de
+  diferencia en sm/md/lg tras migrar el hero. Estado de éxito del formulario: 0 px. `shot` código 0.
+- **AC-2** ✅ `<div>` en la landing: de 24 a 1 (`home__hero-scrim`, gesto). Grep de utilidades
+  Tailwind de layout (expresión corregida, validada con un control): sin coincidencias.
+- **AC-3** ✅ Ninguna de las clases listadas existe en `styles/` ni en `app/`. `home.scss`: 433 → 288
+  líneas, sin `flex`, `grid` ni `gap`.
+- **AC-4** ✅ Archivo temporal: `tsc` rechaza `gap={5}`, `rhythm="huge"`, `span={13}` y `style`
+  inline (4/4); borrado → typecheck 0.
+- **AC-5** ✅ `/dev/layout`, `Col` contra `Cell`: sm Δx 0 / Δw 0 · md Δx 0 / Δw 0.02px · lg Δx 0 / Δw 0.
+- **AC-6** ✅ Semántica idéntica: 10 `section`, 1 `footer`, 4 `ul`, 1 `ol`, 16 `li`, 1 `h1`, 8 `h2`,
+  7 `h3`, mismos ids de ancla.
+- **AC-7** ✅ typecheck 0 · lint 7 · contrato 35.
+- **AC-8** ✅ `/dev/layout`: 200, `<meta name="robots" content="noindex, nofollow, nocache">`, `shot`
+  código 0. Seis secciones cubren las siete primitivas (`Grid` y `Cell` comparten sección: una `Cell`
+  no existe fuera de un `Grid`), cada una con qué es, analogía, cuándo sí, cuándo no, props, snippet
+  y demo. `Grid` muestra la guía de columnas, `Col` contra `Cell` y los cuatro gestos con su
+  comportamiento en móvil.
+- **AC-9** ✅ `plan.md` incorpora el brief de `/impeccable shape`; audit registrado abajo.
+
+**`/impeccable audit`: 16/20 (Good)**
+
+| # | Dimensión | Puntaje | Hallazgo principal |
+|---|---|---|---|
+| 1 | Accesibilidad | 3 | Áreas táctiles de 16px en `/dev/layout` (corregido) |
+| 2 | Rendimiento | 3 | `/dev/layout` se renderiza en cliente porque el toolkit no declara `"use client"` |
+| 3 | Responsive | 4 | Sin scroll horizontal; los gestos se degradan como se documenta |
+| 4 | Theming | 3 | Tokens en todo lo nuevo; la web no tiene modo oscuro (previo) |
+| 5 | Anti-patrones | 3 | Etiqueta "En vivo" repetida sobre cada demo |
+
+Veredicto de anti-patrones: no parece generado por IA. No hay eyebrows sobre los encabezados,
+numeración por sección, rejilla de tarjetas idénticas ni estética editorial. La landing no cambió.
+
+Hallazgos:
+- **[P2, atendido]** Enlaces de 16px de alto en `/dev/layout` (tabla "¿Qué uso?" y enlace final):
+  gesto de 44px como el del hero.
+- **[P2, pendiente]** `/dev/layout` es un Client Component entero, porque `citrica-ui-toolkit` no
+  declara `"use client"` y su barrel importa HeroUI. Es sistémico: afecta igual a la landing →
+  SPEC-0006 o al toolkit.
+- **[P3, pendiente]** El detector marca `border-radius: 2px` del anillo de foco como fuera de la
+  escala (en `home.scss` y `dev-layout.scss`). Es la esquina del outline, no de una superficie: se
+  mantiene como gesto.
+- **[P3, pendiente]** La etiqueta "En vivo" se repite sobre cada demo. En una página de
+  documentación orienta; no se repite en ningún encabezado.
+
+**Encontrado y corregido durante el build** (detalle en la bitácora de `tasks.md`):
+1. `npm run shot` dejó de ser determinista por las fotos remotas y el indicador de Next: AC-1 pasó a
+   capturas de layout con umbral medido.
+2. Regresión propia: con `prefers-reduced-motion`, el subrayado del hero quedaba debajo de la foto.
+   Arreglado y medido.
+3. Bug de `Cell`: los números sueltos solo aplicaban a `sm`. Arreglado; la landing no se veía afectada.
+
+Pendiente:
+1. Skill `.claude/skills/citrica-ui/SKILL.md`: no menciona las primitivas (ver desvío en la bitácora).
+2. Render en cliente por el toolkit sin `"use client"` (P2 del audit).
+3. Dos copias de la escala (`$space-steps` en Sass y `Space` en TS) y de las columnas
+   (`$total-columns__*` y `COLUMNS_AT`): chequeo automático → SPEC-0005.
+4. Build roto por S3 sin `.env.local` (previo).

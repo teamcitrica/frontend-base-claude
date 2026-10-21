@@ -104,18 +104,18 @@ const Agenda = () => {
         <Col cols={{ sm: 4, md: 6, lg: 7 }}>
           {sent ? (
             <Stack className="home__form-status" gap={2} role="status">
-                <Text as="p" textColor="color-primary" variant="title">
-                  ¡Listo!
-                </Text>
-                <Text as="p" textColor="color-on-surface-var" variant="body">
-                  Gracias. Te contactamos esta semana para agendar tu estudio
-                  gratuito.
-                </Text>
-                <Button
-                  label="Enviar otra solicitud"
-                  variant="flat"
-                  onPress={() => setSent(false)}
-                />
+              <Text as="p" textColor="color-primary" variant="title">
+                ¡Listo!
+              </Text>
+              <Text as="p" textColor="color-on-surface-var" variant="body">
+                Gracias. Te contactamos esta semana para agendar tu estudio
+                gratuito.
+              </Text>
+              <Button
+                label="Enviar otra solicitud"
+                variant="flat"
+                onPress={() => setSent(false)}
+              />
             </Stack>
           ) : (
             <Stack gap={6}>

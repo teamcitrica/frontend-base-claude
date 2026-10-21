@@ -21,7 +21,13 @@ import {
 } from "./demos";
 import { PrimitiveDoc, Snippet } from "./primitive-doc";
 
-import { Cell, Cluster, Grid, Section, Stack } from "@/shared/components/layout";
+import {
+  Cell,
+  Cluster,
+  Grid,
+  Section,
+  Stack,
+} from "@/shared/components/layout";
 
 // Client Component porque citrica-ui-toolkit no declara "use client" y su
 // barrel importa HeroUI: no es seguro dentro de un Server Component.
@@ -47,7 +53,12 @@ const PrimitiveSection = ({ id }: { id: string }) => {
         </Cell>
         <Cell align="start" span={{ lg: 6 }} start={{ lg: 7 }}>
           <Stack gap={3}>
-            <Text as="p" textColor="color-on-surface-var" variant="label" weight="bold">
+            <Text
+              as="p"
+              textColor="color-on-surface-var"
+              variant="label"
+              weight="bold"
+            >
               En vivo
             </Text>
             <div className="devlayout__frame">
@@ -61,7 +72,13 @@ const PrimitiveSection = ({ id }: { id: string }) => {
 };
 
 /** Cada gesto de Grid: explicación en la retícula y demo a ancho completo. */
-const Gesture = ({ gesture, children }: { gesture: (typeof gestures)[keyof typeof gestures]; children: ReactNode }) => (
+const Gesture = ({
+  gesture,
+  children,
+}: {
+  gesture: (typeof gestures)[keyof typeof gestures];
+  children: ReactNode;
+}) => (
   <Stack gap={6}>
     <Grid rowGap={4}>
       <Cell span={{ lg: 6 }}>
@@ -69,10 +86,20 @@ const Gesture = ({ gesture, children }: { gesture: (typeof gestures)[keyof typeo
           <Text as="h3" textColor="color-text-black" variant="title">
             {gesture.title}
           </Text>
-          <Text as="p" className="u-measure-prose" textColor="color-text-black" variant="body">
+          <Text
+            as="p"
+            className="u-measure-prose"
+            textColor="color-text-black"
+            variant="body"
+          >
             {gesture.body}
           </Text>
-          <Text as="p" className="u-measure-prose" textColor="color-on-surface-var" variant="label">
+          <Text
+            as="p"
+            className="u-measure-prose"
+            textColor="color-on-surface-var"
+            variant="label"
+          >
             {gesture.mobile}
           </Text>
         </Stack>
@@ -97,13 +124,28 @@ const LayoutGuide = () => {
               <Text as="h1" textColor="color-text-black" variant="display">
                 {intro.title}
               </Text>
-              <Text as="p" className="u-measure-prose" textColor="color-text-black" variant="subtitle">
+              <Text
+                as="p"
+                className="u-measure-prose"
+                textColor="color-text-black"
+                variant="subtitle"
+              >
                 {intro.lead}
               </Text>
-              <Text as="p" className="u-measure-prose" textColor="color-text-black" variant="body">
+              <Text
+                as="p"
+                className="u-measure-prose"
+                textColor="color-text-black"
+                variant="body"
+              >
                 {intro.rule}
               </Text>
-              <Text as="p" className="u-measure-prose" textColor="color-on-surface-var" variant="label">
+              <Text
+                as="p"
+                className="u-measure-prose"
+                textColor="color-on-surface-var"
+                variant="label"
+              >
                 {intro.source}
               </Text>
             </Stack>
@@ -122,11 +164,25 @@ const LayoutGuide = () => {
             {/* Lista en flujo normal: las filas se separan con su regla, no con gap. */}
             <ul>
               {decisions.map((d) => (
-                <Cluster key={d.need} align="center" as="li" className="devlayout__row" gap={4} justify="between">
+                <Cluster
+                  key={d.need}
+                  align="center"
+                  as="li"
+                  className="devlayout__row"
+                  gap={4}
+                  justify="between"
+                >
                   <Text as="span" textColor="color-text-black" variant="body">
                     {d.need}
                   </Text>
-                  <Text as="a" href={d.href} textColor="color-text-black" textDecoration="underline" variant="label" weight="bold">
+                  <Text
+                    as="a"
+                    href={d.href}
+                    textColor="color-text-black"
+                    textDecoration="underline"
+                    variant="label"
+                    weight="bold"
+                  >
                     {d.use}
                   </Text>
                 </Cluster>
@@ -148,13 +204,25 @@ const LayoutGuide = () => {
             </Cell>
             <Cell align="start" span={{ lg: 6 }} start={{ lg: 7 }}>
               <Stack gap={3}>
-                <Text as="p" textColor="color-text-black" variant="label" weight="bold">
-                  Un Grid se alinea con la retícula solo si su padre ocupa todo el ancho
+                <Text
+                  as="p"
+                  textColor="color-text-black"
+                  variant="label"
+                  weight="bold"
+                >
+                  Un Grid se alinea con la retícula solo si su padre ocupa todo
+                  el ancho
                 </Text>
-                <Text as="p" className="u-measure-prose" textColor="color-on-surface-var" variant="body">
-                  Calcula sus márgenes laterales a partir del padding del Container. Ponlo como
-                  hijo directo de una Section (o de un Stack a ancho completo), nunca dentro de
-                  una Cell o de un Col: ahí quedaría desplazado.
+                <Text
+                  as="p"
+                  className="u-measure-prose"
+                  textColor="color-on-surface-var"
+                  variant="body"
+                >
+                  Calcula sus márgenes laterales a partir del padding del
+                  Container. Ponlo como hijo directo de una Section (o de un
+                  Stack a ancho completo), nunca dentro de una Cell o de un Col:
+                  ahí quedaría desplazado.
                 </Text>
               </Stack>
             </Cell>
@@ -172,7 +240,8 @@ const LayoutGuide = () => {
             <Grid>
               <Cell>
                 <Text as="p" textColor="color-on-surface-var" variant="label">
-                  12 en escritorio, 6 en tablet, 4 en móvil. Mismo gutter y mismos márgenes que Container.
+                  12 en escritorio, 6 en tablet, 4 en móvil. Mismo gutter y
+                  mismos márgenes que Container.
                 </Text>
               </Cell>
             </Grid>
@@ -204,7 +273,14 @@ const LayoutGuide = () => {
 
           <Grid>
             <Cell>
-              <Text as="a" href="/#hero" textColor="color-text-black" textDecoration="underline" variant="label" weight="bold">
+              <Text
+                as="a"
+                href="/#hero"
+                textColor="color-text-black"
+                textDecoration="underline"
+                variant="label"
+                weight="bold"
+              >
                 Ver el gesto con una foto real: el hero de la landing
               </Text>
             </Cell>

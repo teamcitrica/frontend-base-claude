@@ -1,17 +1,35 @@
 "use client";
 
 import type { ReactNode } from "react";
+import type { Column, Space } from "@/shared/components/layout";
 
 import { Col, Container, Icon, Text } from "citrica-ui-toolkit";
 
-import type { Column, Space } from "@/shared/components/layout";
-import { AutoGrid, Cell, Cluster, Grid, Media, Section, Stack } from "@/shared/components/layout";
+import {
+  AutoGrid,
+  Cell,
+  Cluster,
+  Grid,
+  Media,
+  Section,
+  Stack,
+} from "@/shared/components/layout";
 
 // Cajas de muestra. Son el único <div> propio de la página: un gesto de
 // documentación (`devlayout__box`), no layout.
-const Box = ({ children, tone = "plain" }: { children: ReactNode; tone?: "plain" | "accent" | "media" }) => (
+const Box = ({
+  children,
+  tone = "plain",
+}: {
+  children: ReactNode;
+  tone?: "plain" | "accent" | "media";
+}) => (
   <div className={`devlayout__box devlayout__box--${tone}`}>
-    <Text as="span" textColor={tone === "media" ? "color-text-white" : "color-text-black"} variant="label">
+    <Text
+      as="span"
+      textColor={tone === "media" ? "color-text-white" : "color-text-black"}
+      variant="label"
+    >
       {children}
     </Text>
   </div>
@@ -35,14 +53,19 @@ const Caption = ({ children }: { children: ReactNode }) => (
 export const SectionDemo = () => (
   <Stack gap={3}>
     <Section as="div" className="devlayout__band" rhythm="tight">
-      <Caption>rhythm=&quot;tight&quot; · tone=&quot;base&quot; — 40px arriba y abajo</Caption>
+      <Caption>
+        rhythm=&quot;tight&quot; · tone=&quot;base&quot; — 40px arriba y abajo
+      </Caption>
     </Section>
     <Section as="div" className="devlayout__band" tone="surface">
-      <Caption>rhythm=&quot;default&quot; · tone=&quot;surface&quot; — 64px</Caption>
+      <Caption>
+        rhythm=&quot;default&quot; · tone=&quot;surface&quot; — 64px
+      </Caption>
     </Section>
     <Section as="div" className="devlayout__band" rhythm="airy" tone="inverse">
       <Text as="p" textColor="color-text-white" variant="label">
-        rhythm=&quot;airy&quot; · tone=&quot;inverse&quot; — 96px, un solo carbón por página
+        rhythm=&quot;airy&quot; · tone=&quot;inverse&quot; — 96px, un solo
+        carbón por página
       </Text>
     </Section>
   </Stack>
@@ -67,7 +90,17 @@ export const StackDemo = () => (
   </Cluster>
 );
 
-const WORDS = ["Reservas", "Pauta", "Ficha", "Reseñas", "Carta", "Redes", "Informe semanal", "WhatsApp", "Diagnóstico"];
+const WORDS = [
+  "Reservas",
+  "Pauta",
+  "Ficha",
+  "Reseñas",
+  "Carta",
+  "Redes",
+  "Informe semanal",
+  "WhatsApp",
+  "Diagnóstico",
+];
 
 export const ClusterDemo = () => (
   <Stack gap={8}>
@@ -87,7 +120,9 @@ export const ClusterDemo = () => (
       </Cluster>
     </Stack>
     <Stack gap={3}>
-      <Caption>wrap={"{false}"} · align=&quot;start&quot; — icono y texto en una línea</Caption>
+      <Caption>
+        wrap={"{false}"} · align=&quot;start&quot; — icono y texto en una línea
+      </Caption>
       <Cluster align="start" gap={3} wrap={false}>
         <span className="devlayout__mark">
           <Icon color="var(--color-primary)" name="Clock" size={20} />
@@ -119,9 +154,17 @@ export const MediaDemo = () => (
 
 export const AutoGridDemo = () => (
   <Stack gap={3}>
-    <Caption>minItemWidth={"{240}"} · gap={"{6}"} — cambia el ancho de la ventana</Caption>
+    <Caption>
+      minItemWidth={"{240}"} · gap={"{6}"} — cambia el ancho de la ventana
+    </Caption>
     <AutoGrid gap={6} minItemWidth={240}>
-      {["Diagnóstico", "Posicionamiento", "Adquisición", "Optimización", "Informe"].map((step) => (
+      {[
+        "Diagnóstico",
+        "Posicionamiento",
+        "Adquisición",
+        "Optimización",
+        "Informe",
+      ].map((step) => (
         <Box key={step}>{step}</Box>
       ))}
     </AutoGrid>
@@ -136,7 +179,13 @@ export const ColumnGuide = () => (
     {COLUMNS.map((n) => (
       <Cell
         key={n}
-        className={n > 6 ? "devlayout__guide-lg" : n > 4 ? "devlayout__guide-md" : undefined}
+        className={
+          n > 6
+            ? "devlayout__guide-lg"
+            : n > 4
+              ? "devlayout__guide-md"
+              : undefined
+        }
         row={1}
         span={1}
         start={n}
@@ -161,7 +210,10 @@ export const ColVsCell = () => (
     </Container>
     <Grid>
       <Cell span={{ sm: 4, md: 4, lg: 8 }}>
-        <div className="devlayout__box devlayout__box--accent" data-probe="cell">
+        <div
+          className="devlayout__box devlayout__box--accent"
+          data-probe="cell"
+        >
           <Text as="span" textColor="color-text-black" variant="label">
             Cell · span sm 4 · md 4 · lg 8
           </Text>
@@ -174,9 +226,14 @@ export const ColVsCell = () => (
 export const BleedDemo = () => (
   <Grid className="devlayout__stage">
     <Cell breakout="full" className="devlayout__stage-media" row={1}>
-      <MediaFill label="foto a sangre · breakout=&quot;full&quot;" />
+      <MediaFill label='foto a sangre · breakout="full"' />
     </Cell>
-    <Cell align="end" className="devlayout__stage-content" row={1} span={{ lg: 6 }}>
+    <Cell
+      align="end"
+      className="devlayout__stage-content"
+      row={1}
+      span={{ lg: 6 }}
+    >
       <Stack gap={3}>
         <Text as="p" textColor="color-text-white" variant="headline">
           El texto vive en la retícula
@@ -210,13 +267,20 @@ export const OverlapDemo = () => (
         <MediaFill label="imagen · columnas 1–7" />
       </Media>
     </Cell>
-    <Cell align="center" className="devlayout__lift" row={{ sm: 2, lg: 1 }} span={{ lg: 7 }} start={{ lg: 6 }}>
+    <Cell
+      align="center"
+      className="devlayout__lift"
+      row={{ sm: 2, lg: 1 }}
+      span={{ lg: 7 }}
+      start={{ lg: 6 }}
+    >
       <Stack className="devlayout__card" gap={3}>
         <Text as="p" textColor="color-text-black" variant="title">
           Texto · columnas 6–12
         </Text>
         <Text as="p" textColor="color-on-surface-var" variant="body">
-          Comparte las columnas 6 y 7 con la imagen y queda encima por orden del DOM.
+          Comparte las columnas 6 y 7 con la imagen y queda encima por orden del
+          DOM.
         </Text>
       </Stack>
     </Cell>
@@ -231,13 +295,14 @@ export const WideDemo = () => (
           El texto se queda en la retícula
         </Text>
         <Text as="p" textColor="color-on-surface-var" variant="body">
-          La imagen empieza en la columna 7 y llega al borde derecho de la pantalla.
+          La imagen empieza en la columna 7 y llega al borde derecho de la
+          pantalla.
         </Text>
       </Stack>
     </Cell>
     <Cell breakout="wide-end" row={{ sm: 2, lg: 1 }} start={{ lg: 7 }}>
       <Media radius="none" ratio="16/10">
-        <MediaFill label="breakout=&quot;wide-end&quot;" />
+        <MediaFill label='breakout="wide-end"' />
       </Media>
     </Cell>
   </Grid>

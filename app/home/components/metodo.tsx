@@ -2,7 +2,13 @@
 
 import { Text } from "citrica-ui-toolkit";
 
-import { AutoGrid, Cell, Grid, Section, Stack } from "@/shared/components/layout";
+import {
+  AutoGrid,
+  Cell,
+  Grid,
+  Section,
+  Stack,
+} from "@/shared/components/layout";
 
 /**
  * Sistema Mesa Activa — los 4 pasos.

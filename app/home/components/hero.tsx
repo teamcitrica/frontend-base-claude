@@ -3,9 +3,15 @@
 import Image from "next/image";
 import { Button, Text } from "citrica-ui-toolkit";
 
-import { Cell, Cluster, Grid, Section, Stack } from "@/shared/components/layout";
-
 import { scrollToSection } from "./scroll-to";
+
+import {
+  Cell,
+  Cluster,
+  Grid,
+  Section,
+  Stack,
+} from "@/shared/components/layout";
 
 /**
  * Hero — único bloque carbón de la página.

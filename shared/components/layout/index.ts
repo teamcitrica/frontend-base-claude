@@ -13,4 +13,10 @@ export type { ClusterProps } from "./cluster";
 export type { MediaProps } from "./media";
 export type { AutoGridProps } from "./auto-grid";
 export type { GridProps, CellProps, Column, Row } from "./grid";
-export type { Space, Breakpoint, Responsive, LayoutElement, LayoutProps } from "./types";
+export type {
+  Space,
+  Breakpoint,
+  Responsive,
+  LayoutElement,
+  LayoutProps,
+} from "./types";

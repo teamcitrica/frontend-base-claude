@@ -44,12 +44,12 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 ## Cierre
 
-- [ ] T-90 · Greps del contrato sobre los archivos tocados → *(DoD B)*
-- [ ] T-91 · `typecheck`, `lint:check`, `contract` contra T-01. El build falla por S3 desde antes; se reporta → *(DoD A, AC-7)*
-- [ ] T-92 · Responsive sm/md/lg de `/` y `/dev/layout` → *(DoD D)*
-- [ ] T-93 · Foco tabulando con teclado en `/dev/layout` (página nueva) y en el hero → *(DoD E)*
-- [ ] T-94 · `/impeccable audit` y bloque de verificación en `spec.md` → *(DoD F, G, AC-9)*
-- [ ] T-95 · Estado `done` en [el índice](../README.md) → *(DoD F)*
+- [x] T-90 · Greps del contrato sobre los archivos tocados → *(DoD B)*
+- [x] T-91 · `typecheck`, `lint:check`, `contract` contra T-01. El build falla por S3 desde antes; se reporta → *(DoD A, AC-7)*
+- [x] T-92 · Responsive sm/md/lg de `/` y `/dev/layout` → *(DoD D)*
+- [x] T-93 · Foco tabulando con teclado en `/dev/layout` (página nueva) y en el hero → *(DoD E)*
+- [x] T-94 · `/impeccable audit` y bloque de verificación en `spec.md` → *(DoD F, G, AC-9)*
+- [x] T-95 · Estado `done` en [el índice](../README.md) → *(DoD F)*
 
 ---
 
@@ -69,3 +69,4 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 | 2026-10-20 | T-18: `/dev/layout` responde 200 con `<meta name="robots" content="noindex, nofollow, nocache">`; `shot` sin hallazgos en sm/md/lg; sin scroll horizontal en móvil. AC-5: `Col` contra `Cell` → sm Δx 0 / Δw 0, md Δx 0 / Δw 0.02px, lg Δx 0 / Δw 0. Guía: 4/6/12 columnas en una fila. Capturas revisadas: escritorio completo, zona de `Grid`, tabla y `Stack` en móvil, y superposición y salida parcial en móvil | — |
 | 2026-10-20 | AC-8 pide "una sección por cada una de las 7 primitivas": `Grid` y `Cell` comparten sección porque una `Cell` no existe fuera de un `Grid`. Son 6 secciones que cubren las 7 | Se reporta así en la verificación |
 | 2026-10-20 | T-19: `conventions.md` (estructura de una página con primitivas, fila en "Dónde va cada cosa"), `design.md` §5 (composición), `layout-system.md` (nota inicial), y la regla de una línea en `CLAUDE.md` y `product.md`. **La skill `.claude/skills/citrica-ui/SKILL.md` sigue sin mencionar las primitivas**: no las contradice ("nunca `<div>` con flex/grid"), pero un agente que la siga puede volver a crear clases tipo `pagina__stack` | Fuera del alcance (SPEC-0005). Se consulta al usuario si adelantarlo |
+| 2026-10-20 | Cierre: los warnings de lint habían subido de 733 a 852 (119 de formato en archivos de esta spec). `eslint --fix` limitado a esos archivos → 733. Capturas y AC-5 repetidos después: sin cambios. Audit: áreas táctiles de 16px en `/dev/layout` → 44px | — |

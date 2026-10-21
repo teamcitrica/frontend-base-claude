@@ -1,25 +1,40 @@
 "use client";
 
-import { Icon, Text } from "citrica-ui-toolkit";
-
 import type { PrimitiveDoc as Doc } from "../content";
+
+import { Icon, Text } from "citrica-ui-toolkit";
 
 import { Cluster, Stack } from "@/shared/components/layout";
 
 /** Bloque de código. `Text` no trae variante de código: el gesto conserva saltos de línea. */
 export const Snippet = ({ code }: { code: string }) => (
-  <Text as="div" className="devlayout__code" textColor="color-text-black" variant="label">
+  <Text
+    as="div"
+    className="devlayout__code"
+    textColor="color-text-black"
+    variant="label"
+  >
     {code}
   </Text>
 );
 
-const Checklist = ({ items, kind }: { items: string[]; kind: "yes" | "no" }) => (
+const Checklist = ({
+  items,
+  kind,
+}: {
+  items: string[];
+  kind: "yes" | "no";
+}) => (
   <Stack as="ul" gap={2}>
     {items.map((item) => (
       <Cluster key={item} align="start" as="li" gap={2} wrap={false}>
         <span className="devlayout__mark">
           <Icon
-            color={kind === "yes" ? "var(--color-primary)" : "var(--color-on-surface-var)"}
+            color={
+              kind === "yes"
+                ? "var(--color-primary)"
+                : "var(--color-on-surface-var)"
+            }
             name={kind === "yes" ? "Check" : "X"}
             size={18}
           />
@@ -39,10 +54,20 @@ export const PrimitiveDoc = ({ doc }: { doc: Doc }) => (
       <Text as="h2" textColor="color-text-black" variant="headline">
         {doc.name}
       </Text>
-      <Text as="p" className="u-measure-prose" textColor="color-text-black" variant="subtitle">
+      <Text
+        as="p"
+        className="u-measure-prose"
+        textColor="color-text-black"
+        variant="subtitle"
+      >
         {doc.oneLiner}
       </Text>
-      <Text as="p" className="u-measure-prose" textColor="color-on-surface-var" variant="body">
+      <Text
+        as="p"
+        className="u-measure-prose"
+        textColor="color-on-surface-var"
+        variant="body"
+      >
         {doc.analogy}
       </Text>
     </Stack>
@@ -68,7 +93,12 @@ export const PrimitiveDoc = ({ doc }: { doc: Doc }) => (
       <Stack as="ul" gap={1}>
         {doc.props.map((prop) => (
           <Cluster key={prop.name} as="li" className="devlayout__prop" gap={3}>
-            <Text as="span" textColor="color-text-black" variant="label" weight="bold">
+            <Text
+              as="span"
+              textColor="color-text-black"
+              variant="label"
+              weight="bold"
+            >
               {prop.name}
             </Text>
             <Text as="span" textColor="color-on-surface-var" variant="label">

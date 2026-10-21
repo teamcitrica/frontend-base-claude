@@ -1,6 +1,6 @@
-import clsx from "clsx";
-
 import type { LayoutProps, Space } from "./types";
+
+import clsx from "clsx";
 
 export interface AutoGridProps extends LayoutProps {
   /** Ancho mínimo de cada elemento, en px. Caben tantas columnas como permita el ancho. */
@@ -10,6 +10,20 @@ export interface AutoGridProps extends LayoutProps {
 }
 
 /** Columnas que se reparten solas según el ancho disponible. Ver /dev/layout. */
-export const AutoGrid = ({ as: Tag = "div", minItemWidth, gap, className, ...rest }: AutoGridProps) => (
-  <Tag className={clsx("o-autogrid", `o-autogrid--min-${minItemWidth}`, `o-autogrid--gap-${gap}`, className)} {...rest} />
+export const AutoGrid = ({
+  as: Tag = "div",
+  minItemWidth,
+  gap,
+  className,
+  ...rest
+}: AutoGridProps) => (
+  <Tag
+    className={clsx(
+      "o-autogrid",
+      `o-autogrid--min-${minItemWidth}`,
+      `o-autogrid--gap-${gap}`,
+      className,
+    )}
+    {...rest}
+  />
 );
