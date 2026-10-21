@@ -59,17 +59,35 @@ Usar `<Button variant="primary|secondary|flat">`.
 
 No se re-estilan botones desde el SCSS de la landing.
 
-## 4. Componentes — el toolkit primero
+## 4. Componentes y layout — el toolkit y las primitivas primero
 
 Antes de escribir markup a mano, buscar en `citrica-ui-toolkit`:
 `Button`, `Input`, `Select`, `Textarea`, `Text`, `Icon`, `Card`, `Modal`,
 `Carousel`, `Header`, y el grid `Container` / `Col`.
 
-El SCSS propio de página (`.<pagina>__*`) se reserva para **layout, ritmo de sección y
-gestos de marca** que el toolkit no cubre — y aun ahí, los colores son tokens. Muchas
-páginas no lo necesitan: `Container`/`Col` más utilidades de Tailwind alcanzan.
+**El layout se compone con `Container`/`Col` y las primitivas de
+[`shared/components/layout/`](../../shared/components/layout/)**
+([ADR-0007](../04-decisions/0007-layout-con-primitivas.md)):
 
-Nunca `<div>` crudo para layout: siempre `Container` + `Col`.
+| Necesitas… | Usa |
+|---|---|
+| Una banda de página con su ritmo y su fondo | `Section` |
+| Columnas de la retícula | `Container` + `Col` |
+| Apilar en vertical | `Stack` |
+| Poner en fila, que se envuelva | `Cluster` |
+| Una imagen con proporción fija | `Media` |
+| Tarjetas o campos que se reparten solos | `AutoGrid` |
+| Superponer, salir a sangre, componer en asimetría | `Grid` + `Cell` |
+
+- ❌ Nunca `<div>` crudo para layout. Un `<div>` solo existe para un **gesto de página**, con su
+  clase `.<pagina>__*`.
+- ❌ Nunca Tailwind para layout (`flex`, `grid`, `gap-*`, márgenes o paddings de composición).
+  Tailwind queda para ajustes sin primitiva (`sr-only`, `w-full`, `object-cover`).
+- ✅ El espaciado de las primitivas son pasos de `--space-N` (`gap={6}` = 24px).
+
+El SCSS propio de página (`.<pagina>__*`) se reserva para **gestos de marca** que ni el toolkit
+ni las primitivas cubren, y aun ahí los colores y medidas son tokens. Ejemplos vivos de cada
+primitiva: `/dev/layout`.
 
 ---
 
@@ -83,8 +101,11 @@ Nunca `<div>` crudo para layout: siempre `Container` + `Col`.
 | Render de botón | `styles/10-tokens/web/components/_button.scss` |
 | Radio de botón / form | `styles/10-tokens/web/components/_form.scss` |
 | Espaciado, ritmo de sección, radios, motion, medida | `styles/10-tokens/web/foundations/` — `--space-N` = N×4px, igual que Tailwind ([ADR-0006](../04-decisions/0006-documentacion-refleja-render.md)) |
-| Layout de la landing (solo layout) | `styles/webpages-styles/home.scss` — ya importado |
-| Layout de otra página (solo layout) | `styles/webpages-styles/<pagina>.scss` + su `@import` en `styles/custom.scss` |
+| Primitivas de layout (componentes) | `shared/components/layout/` |
+| Primitivas de layout (CSS `o-*`) | `styles/07-objects/` |
+| Medida de lectura de un texto | `u-measure-prose` / `u-measure-narrow` en `styles/09-utilities/` |
+| Gestos de marca de la landing | `styles/webpages-styles/home.scss` — ya importado |
+| Gestos de marca de otra página | `styles/webpages-styles/<pagina>.scss` + su `@import` en `styles/custom.scss` |
 
 ## Precedencia sobre `impeccable`
 
@@ -99,7 +120,7 @@ reglas. Donde su guía choque con este documento, **manda este documento**:
 |---|---|
 | `clamp()` en titulares de hero | La escala vive en `_text.scss`. Cero `clamp()` en `styles/webpages-styles/` |
 | Componer paleta (OKLCH) | El color vive en `_palette.scss`. Si falta un tono, se crea el token |
-| Markup propio bien resuelto | `Text`, `Container`/`Col` y el toolkit primero |
+| Markup propio bien resuelto | `Text`, `Container`/`Col`, las primitivas y el toolkit primero |
 
 Si una propuesta suya es lo bastante buena como para justificar romper una de las cuatro
 reglas, **el ADR va primero** y después el código. Nunca al revés.

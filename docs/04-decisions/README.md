@@ -16,6 +16,7 @@ repo de ahora en adelante".
 | [0004](0004-verificacion-visual-y-assets.md) | La verificación visual es obligatoria, y ningún placeholder ajeno se envía | Aceptada | 2026-08-01 |
 | [0005](0005-arranque-de-marca.md) | Arranque de marca: se borra la anterior, y la paleta cambia valores, nunca nombres | Aceptada | 2026-08-01 |
 | [0006](0006-documentacion-refleja-render.md) | La documentación de diseño describe lo que se renderiza; escala de 4px con tokens globales | Aceptada | 2026-10-20 |
+| [0007](0007-layout-con-primitivas.md) | Layout con primitivas: `Container`/`Col` + `shared/components/layout/`; Tailwind fuera del layout | Aceptada | 2026-10-20 |
 
 ## Cuándo escribir uno
 

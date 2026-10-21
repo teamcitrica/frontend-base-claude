@@ -13,7 +13,7 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 **Paso 1: ADR** (commit `docs(adr): add 0007 layout with primitives`)
 
-- [ ] T-04 · ADR-0007, fila en el índice y regla 4 y mapa del contrato → *(prerrequisito de todo commit en `styles/` o `shared/`)*
+- [x] T-04 · ADR-0007, fila en el índice y regla 4 y mapa del contrato → *(prerrequisito de todo commit en `styles/` o `shared/`)*
 
 **Paso 2: primitivas** (commit `feat(layout): add layout primitives`)
 
