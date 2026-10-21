@@ -36,12 +36,12 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 ## Cierre
 
-- [ ] T-90 · Correr greps del contrato sobre los archivos tocados → *(DoD B)*
-- [ ] T-91 · `npm run typecheck`, `lint:check` y `contract` contra T-01. `npm run build` falla por S3 desde antes (SPEC-0002); se reporta igual → *(DoD A, AC-5)*
-- [ ] T-92 · Revisar responsive en sm/md/lg (cubierto por T-12) → *(DoD D)*
-- [ ] T-93 · Contraste y foco: sin cambios esperados, confirmado por `cmp` → *(DoD E)*
-- [ ] T-94 · Pegar bloque de verificación en `spec.md` → *(DoD F)*
-- [ ] T-95 · Mover estado de la spec a `done` en [el índice](../README.md) → *(DoD F)*
+- [x] T-90 · Correr greps del contrato sobre los archivos tocados → *(DoD B)*
+- [x] T-91 · `npm run typecheck`, `lint:check` y `contract` contra T-01. `npm run build` falla por S3 desde antes (SPEC-0002); se reporta igual → *(DoD A, AC-5)*
+- [x] T-92 · Revisar responsive en sm/md/lg (cubierto por T-12) → *(DoD D)*
+- [x] T-93 · Contraste y foco: sin cambios esperados, confirmado por `cmp` → *(DoD E)*
+- [x] T-94 · Pegar bloque de verificación en `spec.md` → *(DoD F)*
+- [x] T-95 · Mover estado de la spec a `done` en [el índice](../README.md) → *(DoD F)*
 
 ---
 

@@ -2,7 +2,7 @@
 id: 0003
 slug: foundations-web
 titulo: Tokens de fundamentos para la web (espaciado, radios, motion, medida)
-estado: in-progress  # draft | approved | in-progress | done | dropped
+estado: done         # draft | approved | in-progress | done | dropped
 creada: 2026-10-20
 superficie: infra    # sin cambio visual: ver "Superficie" abajo
 ---
@@ -155,7 +155,55 @@ comparte con Tailwind, aunque hoy no se usen todos los pasos.
       (64/40/96px en los tres breakpoints). Hacerlo responsive es una mejora de diseño para
       otra spec, con `impeccable`.
 
-## Verificación
+## Verificación — 2026-10-20
 
-> Se llena en la fase VERIFY. Salidas reales, no checks optimistas.
-> Formato en [definition-of-done.md](../../00-harness/definition-of-done.md#bloque-de-reporte).
+Rama `develop` (sin push), 6 commits: `77c721f` spec · `b455ab9` ADR-0006 + `design.md`
+· `3c28d54` tokens · `a855d2e` migración de `home.scss` · `7936e63` docs de referencia
+(+ cierre). Superficie `infra`: `/impeccable audit` no aplica (ADR-0003).
+
+| Punto | Resultado |
+|---|---|
+| A. typecheck | ✅ 0 errores (igual a la baseline) |
+| A. lint:check | ✅ 7 errores / 733 warnings (igual a la baseline de T-01) |
+| A. build | ⚠️ **falla por una causa previa a esta spec**: `Failed to collect page data for /api/s3/video`, por falta de variables de AWS en `.env.local`. Es la misma causa registrada en SPEC-0002 (allí la reportó sobre `/api/s3/presigned`; ambas rutas fallan y el orden varía). Sass y la app compilan: `✓ Compiled successfully` |
+| B. npm run contract | ✅ 35 `hex-en-tsx` (igual a la baseline); 0 añadidas; las demás reglas en 0 |
+| B. revisión visual | ✅ N/A: no se tocó markup (`.tsx`) |
+| C. criterios | 6/6 ✅ (detalle abajo) |
+| C. fuera de alcance | ✅ Sin cambios en `app/`, grid, Tailwind, admin, `_palette.scss`, `_text.scss` ni `brand.md`. `_form.scss`: solo la línea aprobada de `--form-radius-btn` |
+| D. responsive | ✅ `npm run shot -- / --cta "#hero button"`: código 0, sin scroll horizontal, imágenes rotas ni errores de consola. Captura `md-fold` **abierta y revisada**. 6/6 idénticas byte a byte a la baseline |
+| D. dark mode | N/A: la web solo usa el tema light |
+| D. placeholders | ✅ Ninguno: header con el logo y los enlaces de ImPulso |
+| E. a11y | ⚪ **No tabulado con teclado.** Sin cambios de markup ni de render (`cmp` byte a byte); el anillo de foco (`outline 2px`, offset 2px) no se tocó |
+| F. docs | ✅ ADR-0006 aceptado; `design.md`, contrato, `tokens-system.md`, `rebranding.md` y `CLAUDE.md` actualizados. Sin cambios de rutas ni comandos: `02-architecture/overview.md` no aplica |
+| G. impeccable audit | N/A (`infra`) |
+
+**Criterios de aceptación**
+
+- **AC-1** ✅ En el navegador (Playwright, `getComputedStyle(document.documentElement)`):
+  `--space-1` 4px · `--space-6` 24px · `--space-32` 128px · `--section-y` 64px ·
+  `--measure-prose` 68ch · `--radius-md` 12px · `--duration-fast` .2s · `--ease-out`
+  `cubic-bezier(.25, 1, .5, 1)`. Ninguno declarado en `.home`.
+- **AC-2** ✅ `grep -rnE -e "--home-(space|section)" styles app`: sin coincidencias.
+  `grep -nE "cubic-bezier|border-radius: [0-9]+px|[0-9]+ms" home.scss`: 6 líneas, todas
+  marcadas `// gesto:`.
+- **AC-3** ✅ `s3-before` contra `s3-after`: 6/6 idénticas (`cmp`), con determinismo
+  comprobado antes. Como una captura estática no prueba la animación, se leyó en el
+  navegador: `home-rise 0.46s cubic-bezier(0.25,1,0.5,1)` y `home-draw 0.4s … delay 0.38s`.
+  La transición conserva `opacity 0.2s ease-out`; los paddings de `#problema` (40px) y
+  `#metodo` (96px) y el radio de media (12px) se mantienen.
+- **AC-4** ✅ `design.md` dice 4pt, 12px de card y media, y grid de 1366px con gutter de
+  56px y padding de 112px; frontmatter YAML válido (`js-yaml`) y leído por el `context.mjs`
+  de `impeccable`. 22 tokens citados en `docs/` + `CLAUDE.md` (sin `03-specs`,
+  `04-decisions` ni `brand.md`): 0 inexistentes.
+- **AC-5** ✅ typecheck 0 · lint 7 ≤ 7 · contrato 35 ≤ 35.
+- **AC-6** ✅ `b455ab9` (ADR) es anterior a `3c28d54` y `a855d2e`, los únicos commits de esta
+  spec que tocan `styles/`.
+
+Pendiente:
+1. `docs/01-design/brand.md` §8 sigue con un bloque conceptual de `--space-1: 8px` y
+   `--radius-card: 8px` que contradice los tokens reales (decisión: se revisa con el brand book).
+2. `.claude/skills/citrica-ui/SKILL.md` no menciona los tokens de fundamentos → SPEC-0005.
+3. Grosores de borde y de outline (1px y 2px) siguen literales en `home.scss`: no había
+   familia de bordes en esta spec.
+4. Build roto por S3 sin `.env.local` (previo, ver SPEC-0002).
+5. Foco con teclado no tabulado (sin cambios de render).
