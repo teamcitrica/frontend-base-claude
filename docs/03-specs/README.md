@@ -8,6 +8,7 @@
 | # | Spec | Superficie | Estado | Creada |
 |---|---|---|---|---|
 | 0001 | [Landing de conversión ImPulso](0001-landing-impulso/spec.md) | landing | done | 2026-08-01 |
+| 0002 | [Limpieza de residuos de proyectos anteriores (web)](0002-limpieza-web/spec.md) | infra | in-progress | 2026-10-20 |
 
 <!-- Al crear una spec, agregar aquí una fila:
 | 0002 | Titulo -> 0002-slug/spec.md | landing | draft | 2026-08-01 |
