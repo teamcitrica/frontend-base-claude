@@ -43,7 +43,9 @@ Lectura obligatoria, en este orden:
 2. **[docs/00-harness/conventions.md](docs/00-harness/conventions.md)** — dónde va cada archivo
 
 El contrato en una línea: **color solo desde tokens, texto solo con `Text`, layout solo
-con `Container`/`Col`, componente del toolkit antes que markup propio.**
+con `Container`/`Col` y las primitivas de `shared/components/layout/`, componente del
+toolkit antes que markup propio.** Qué primitiva usar y cuándo: `/dev/layout`
+([ADR-0007](docs/04-decisions/0007-layout-con-primitivas.md)).
 El detalle, el mapa de archivos y los comandos de verificación están en ese documento
 y en ningún otro — ver [ADR-0001](docs/04-decisions/0001-contrato-fuente-unica.md).
 
@@ -118,7 +120,8 @@ cambia la pantalla.
 | Button render | `styles/10-tokens/web/components/_button.scss` |
 | Button/form radius | `styles/10-tokens/web/components/_form.scss` |
 | Spacing (`--space-N` = N×4px = Tailwind), section rhythm, radius, motion, measure | `styles/10-tokens/web/foundations/` |
-| Landing layout only | `styles/webpages-styles/home.scss` |
+| Layout primitives (`Section`, `Stack`, `Cluster`, `Media`, `AutoGrid`, `Grid`+`Cell`) | `shared/components/layout/` · CSS in `styles/07-objects/` · live guide at `/dev/layout` |
+| Landing brand gestures only | `styles/webpages-styles/home.scss` |
 
 ## SEO / Open Graph
 Social card metadata is centralized so a cloned project only edits one block.

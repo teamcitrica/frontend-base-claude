@@ -25,35 +25,52 @@ Locale de la app: `es-ES` en el provider de HeroUI.
 | Si estás creando… | Va en… |
 |---|---|
 | Atom o molecule genérico | ⛔ no aquí — vive en `citrica-ui-toolkit` |
+| Primitiva de layout (`Section`, `Stack`, `Grid`…) | `shared/components/layout/` + su CSS en `styles/07-objects/` — ver `/dev/layout` |
 | Organismo reutilizable | `shared/components/organisms/` |
 | Componente atado al dominio | `shared/project-components/` |
 | Sección de una sola página | `app/<ruta>/components/` |
 | Acceso a datos | `app/hooks/` (nunca Supabase directo en un componente) |
 | Estado global | `shared/context/` |
 | Token de color o de componente | `styles/10-tokens/` |
-| Estilos de la landing | `styles/webpages-styles/home.scss` — ya existe y ya está importado |
-| Estilos de otra página | `styles/webpages-styles/<pagina>.scss` — **y su `@import` en `styles/custom.scss`**, o no se carga |
+| Gestos de marca de la landing | `styles/webpages-styles/home.scss` — ya existe y ya está importado |
+| Gestos de marca de otra página | `styles/webpages-styles/<pagina>.scss` — **y su `@import` en `styles/custom.scss`**, o no se carga |
 
 ## Estructura de una página
 
-```tsx
-import { Container, Col, Text, Button } from 'citrica-ui-toolkit';
+Cada bloque es una `Section`; dentro, columnas con `Container`/`Col` y composición con
+las primitivas. Ningún `<div>` de layout, ningún `flex`/`gap` de Tailwind.
 
-<Container>
-  <Col cols={{ sm: 4, md: 6, lg: 12 }}>
-    <Text variant="headline">Título</Text>
-  </Col>
-</Container>
+```tsx
+import { Button, Col, Container, Text } from "citrica-ui-toolkit";
+
+import { Cluster, Section, Stack } from "@/shared/components/layout";
+
+<Section id="problema" rhythm="tight" tone="surface">
+  <Container>
+    <Col cols={{ sm: 4, md: 6, lg: 6 }}>
+      <Stack gap={6}>
+        <Text as="h2" variant="headline">Título</Text>
+        <Text as="p" className="u-measure-prose" variant="subtitle">Bajada</Text>
+        <Cluster align="center" gap={6}>
+          <Button label="Acción" variant="primary" />
+        </Cluster>
+      </Stack>
+    </Col>
+  </Container>
+</Section>
 ```
 
-`sm` = 4 columnas · `md` = 6 · `lg` = 12. Detalle en
-[layout-system.md](../01-design/reference/layout-system.md).
+- `sm` = 4 columnas · `md` = 6 · `lg` = 12.
+- `gap={6}` = `var(--space-6)` = 24px, igual que `gap-6` en Tailwind.
+- Para superponer, salir a sangre o componer en asimetría: `Grid` + `Cell`, como hijo
+  directo de la `Section`.
+- Qué es cada primitiva, cuándo usarla y ejemplos vivos: **`/dev/layout`** (con `npm run dev`).
 
 ## Reglas que no se negocian
 
 Viven en el [contrato de implementación](../01-design/implementation-contract.md).
 En una línea: **color solo desde tokens, texto solo con `Text`, layout solo con
-`Container`/`Col`, componente del toolkit antes que markup propio.**
+`Container`/`Col` y las primitivas, componente del toolkit antes que markup propio.**
 
 ## Commits
 

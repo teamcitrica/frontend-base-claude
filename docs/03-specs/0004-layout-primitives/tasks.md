@@ -40,7 +40,7 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 **Paso 5: documentación** (commit `docs: document layout primitives`)
 
-- [ ] T-19 · `conventions.md` (estructura de una página), `design.md` §5, `layout-system.md`, `CLAUDE.md` → **AC-9**
+- [x] T-19 · `conventions.md` (estructura de una página), `design.md` §5, `layout-system.md`, `CLAUDE.md` → **AC-9**
 
 ## Cierre
 
@@ -68,3 +68,4 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 | 2026-10-20 | **Bug de `Cell` encontrado al mirar `/dev/layout`**: un número suelto (`start={7}`) solo se emitía para `sm`, que tiene 4 columnas y no genera clases para la 5 en adelante; la guía de 12 columnas salía como una sola barra. Cualquier `Cell` con `start`/`span` numérico mayor que 4 lo habría sufrido | Un valor suelto aplica a todos los breakpoints, y en cada uno solo se emite la clase si la celda cabe (si no, ancho completo). La landing no usaba números sueltos en `start`/`span`: sigue dentro del umbral |
 | 2026-10-20 | T-18: `/dev/layout` responde 200 con `<meta name="robots" content="noindex, nofollow, nocache">`; `shot` sin hallazgos en sm/md/lg; sin scroll horizontal en móvil. AC-5: `Col` contra `Cell` → sm Δx 0 / Δw 0, md Δx 0 / Δw 0.02px, lg Δx 0 / Δw 0. Guía: 4/6/12 columnas en una fila. Capturas revisadas: escritorio completo, zona de `Grid`, tabla y `Stack` en móvil, y superposición y salida parcial en móvil | — |
 | 2026-10-20 | AC-8 pide "una sección por cada una de las 7 primitivas": `Grid` y `Cell` comparten sección porque una `Cell` no existe fuera de un `Grid`. Son 6 secciones que cubren las 7 | Se reporta así en la verificación |
+| 2026-10-20 | T-19: `conventions.md` (estructura de una página con primitivas, fila en "Dónde va cada cosa"), `design.md` §5 (composición), `layout-system.md` (nota inicial), y la regla de una línea en `CLAUDE.md` y `product.md`. **La skill `.claude/skills/citrica-ui/SKILL.md` sigue sin mencionar las primitivas**: no las contradice ("nunca `<div>` con flex/grid"), pero un agente que la siga puede volver a crear clases tipo `pagina__stack` | Fuera del alcance (SPEC-0005). Se consulta al usuario si adelantarlo |

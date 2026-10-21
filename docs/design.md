@@ -187,6 +187,7 @@ A thick, slightly irregular highlighter stroke (`#F5DE4B`) under 1–3 key words
 > Source: `styles/10-tokens/web/foundations/`.
 
 - **Grid:** `Container`/`Col` — 12 / 6 / 4 columns (lg / md / sm), container 1366px, gutter 56 / 20 / 20px, side padding 112 / 56 / 24px.
+- **Composition:** layout primitives in `shared/components/layout/` ([ADR-0007](04-decisions/0007-layout-con-primitivas.md)) — `Section` (rhythm + tone), `Stack`, `Cluster`, `Media`, `AutoGrid`, and `Grid` + `Cell` for the bold moves the poster register asks for: text over full-bleed photography, asymmetric offsets, overlapping blocks, partial breakouts. Live reference: `/dev/layout`.
 - **Spacing:** 4px scale, `--space-N` = N × 4px, identical to Tailwind (`gap-6` = `var(--space-6)` = 24px). Steps: 1, 2, 3, 4, 6, 8, 10, 12, 16, 24, 32. Vary for rhythm — generous between sections, tight within groups.
 - **Section rhythm:** vertical padding `--section-y` (64px), `--section-y-tight` (40px) for pain/urgency, `--section-y-airy` (96px) for sections that breathe. Alternate white / `neutral-50` / carbón. At least one carbón section per page (the poster moment).
 - **Reading measure:** prose capped at `--measure-prose` (68ch); short leads at `--measure-narrow` (52ch).
