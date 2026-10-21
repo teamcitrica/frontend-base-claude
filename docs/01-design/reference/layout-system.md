@@ -558,7 +558,6 @@ Ejemplos:
 - **Container**: `styles/07-objects/container/container.scss`
 - **Col**: `styles/07-objects/col/col.scss`
 - **Ejemplo Home**: `app/page.tsx`
-- **Ejemplo Typography**: `app/home/components/section-typography.tsx`
 
 ---
 

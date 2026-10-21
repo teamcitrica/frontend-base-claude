@@ -45,13 +45,13 @@ styles/                       # Sistema de estilos ITCSS (ver 01-design/referenc
 │   ├── web/colors/_palette.scss
 │   ├── web/components/*.scss
 │   └── admin/…
-├── webpages-styles/          # SCSS por página (home = landing, panel, sections)
+├── webpages-styles/          # SCSS por página (home = landing, panel)
 └── globals.scss              # Punto de entrada
 
 shared/
-├── components/organisms/     # Organismos propios (header, footer, navbar, sidebar…)
-├── project-components/       # Componentes de dominio (calendar, quote-form)
-├── context/                  # auth-context, cart-context, supabase-context
+├── components/organisms/     # Organismos propios (footer, navbar, sidebar-nav, login…)
+├── project-components/       # Componentes de dominio (s3-video)
+├── context/                  # auth-context, supabase-context
 ├── types/  utils/
 └── providers.tsx
 
@@ -70,7 +70,7 @@ Atoms y molecules (`Button`, `Input`, `Sidebar`, `Select`, `Text`, `Icon`, `Card
 - Sesión y usuario vía `shared/context/auth-context.tsx`; pantallas de login,
   signup, recuperación y cambio de contraseña bajo `app/`.
 - Acceso a datos encapsulado en hooks bajo `app/hooks/`
-  (`useAdminBookings`, `useCustomers`, `useStudioBooking`, `useQuoteForm`, …).
+  (`useAdminBookings`, `useCustomers`, `useStudioConfig`, …).
   Los componentes no llaman a Supabase directamente: consumen un hook.
 - Uploads a S3 vía `app/api/s3/` con presigned URLs (`@aws-sdk/s3-request-presigner`).
 

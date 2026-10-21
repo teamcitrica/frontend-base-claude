@@ -103,7 +103,11 @@ Además (P-1):
 - **Ejemplos de proyectos anteriores en la documentación:** "MASTERCLASS: Introducción a
   la Fotografía" (`docs/01-design/reference/web-guide.md`) y "Agregar al Carrito"
   (`docs/01-design/reference/layout-examples.md`). Se reemplazan por ejemplos de ImPulso
-  o neutros.
+  o neutros. Ampliado en el build (2026-10-20): también "Contenido del Taller / fotografía"
+  (`web-guide.md`) y "Tatuajes / Piercings" (`layout-examples.md`, `tokens-examples.md`),
+  restos de otros dos proyectos, y las `className` a clases borradas en esos ejemplos.
+  "Gáliz" y "Flowblox" en `citrica-ui-toolkit.md` se quedan: son defaults y nombres reales
+  del toolkit, igual que "Matour".
 - Las menciones a "Matour" **se quedan**: documentan un comportamiento real del `Header`
   del toolkit sin `logo`, no son residuo.
 
@@ -173,7 +177,7 @@ Además (P-1):
 - **Cuando** se extrae cada ruta `docs/…`, `styles/…` y `.claude/…` citada en `CLAUDE.md` y
   `README.md` y se comprueba con `test -e`
 - **Entonces** todas existen, y `grep -rniE "masterclass|carrito" docs .claude CLAUDE.md`
-  (excluyendo `docs/03-specs/` y `docs/04-decisions/`) no devuelve nada.
+  (excluyendo `docs/03-specs/` y `docs/04-decisions/`) no devuelve nada; tampoco `grep -rniE "tatuaj|piercing|taller"` con las mismas exclusiones.
 
 ## Restricciones heredadas
 

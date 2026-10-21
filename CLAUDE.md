@@ -117,7 +117,7 @@ cambia la pantalla.
 | Fonts (Anton/Lato) | `styles/01-settings/settings.scss` |
 | Button render | `styles/10-tokens/web/components/_button.scss` |
 | Button/form radius | `styles/10-tokens/web/components/_form.scss` |
-| Landing layout only | `styles/webpages-styles/impulso.scss` |
+| Landing layout only | `styles/webpages-styles/home.scss` |
 
 ## SEO / Open Graph
 Social card metadata is centralized so a cloned project only edits one block.
@@ -134,13 +134,13 @@ Full guide and checklist: `docs/opengraph.md`.
 ## Documentation
 Detailed documentation is available in the `docs/` folder:
 - `docs/opengraph.md` - Open Graph / SEO metadata structure
-- `docs/styles-overview.md` - Complete styles system overview
-- `docs/tokens-system.md` - Design tokens architecture
-- `docs/tokens-examples.md` - Token usage examples
-- `docs/citrica-ui-toolkit.md` - Component documentation
-- `docs/layout-system.md` - Grid system documentation
-- `docs/layout-examples.md` - Layout code examples
-- `docs/layout-visual-guide.md` - Visual grid diagrams
+- `docs/01-design/reference/styles-overview.md` - Complete styles system overview
+- `docs/01-design/reference/tokens-system.md` - Design tokens architecture
+- `docs/01-design/reference/tokens-examples.md` - Token usage examples
+- `docs/01-design/reference/citrica-ui-toolkit.md` - Component documentation
+- `docs/01-design/reference/layout-system.md` - Grid system documentation
+- `docs/01-design/reference/layout-examples.md` - Layout code examples
+- `docs/01-design/reference/layout-visual-guide.md` - Visual grid diagrams
 
 ## Key Features & Patterns
 - **Responsive Navbar**: Auto-changing colors on scroll, mobile drawer menu

@@ -60,8 +60,8 @@ Lee siempre, antes de auditar:
    violación hasta que lees la línea en contexto. `font-family: var(--font-family-a)`
    hace match con `font-family` y es **correcto**. Un hex dentro de un comentario no es
    una violación.
-3. **Separa lo nuevo de la deuda.** El repo tiene 36 hex preexistentes y 72 tokens
-   pelados en la prop `color` (5 archivos del panel admin y `quote-form.tsx`). Si la
+3. **Separa lo nuevo de la deuda.** El repo tiene 36 hex preexistentes y tokens
+   pelados en la prop `color` en archivos del panel admin. Si la
    violación ya estaba antes del cambio, va en una sección aparte marcada como deuda —
    no la mezcles con lo que introdujo este trabajo.
 4. **No arregles nada.** Solo reportas. Tu salida es un diagnóstico.

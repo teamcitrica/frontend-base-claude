@@ -58,8 +58,8 @@ import { Select, SelectItem } from '@heroui/react';
   className="select-citrica-ui select-primary"
   label="Servicio"
 >
-  <SelectItem key="1">Tatuaje</SelectItem>
-  <SelectItem key="2">Piercing</SelectItem>
+  <SelectItem key="1">Estudio gratuito</SelectItem>
+  <SelectItem key="2">Gestión de pauta</SelectItem>
 </Select>
 
 // ✅ ADMIN
@@ -151,8 +151,8 @@ import { Textarea } from '@heroui/react';
   />
 
   <Select className="select-citrica-ui select-primary" label="Servicio">
-    <SelectItem key="tattoo">Tatuaje</SelectItem>
-    <SelectItem key="piercing">Piercing</SelectItem>
+    <SelectItem key="estudio">Estudio gratuito</SelectItem>
+    <SelectItem key="pauta">Gestión de pauta</SelectItem>
   </Select>
 
   <Textarea

@@ -14,7 +14,7 @@ Locale de la app: `es-ES` en el provider de HeroUI.
 
 ## Nombres de archivo
 
-- Componentes y páginas: `kebab-case.tsx` (`login-container.tsx`, `quote-form.tsx`)
+- Componentes y páginas: `kebab-case.tsx` (`login-container.tsx`, `site-footer.tsx`)
 - Hooks: `camelCase.ts` con prefijo `use` (`useAdminBookings.ts`)
 - Parciales SCSS: `_kebab-case.scss` (`_palette.scss`, `_button.scss`)
 - Specs: `docs/03-specs/NNNN-slug-en-kebab/`

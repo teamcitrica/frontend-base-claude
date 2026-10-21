@@ -229,8 +229,8 @@ const ProductosPage = () => {
           <Text variant="title">Filtros</Text>
           <div className="filters">
             <Text variant="subtitle">Categoría</Text>
-            <Checkbox label="Tatuajes" />
-            <Checkbox label="Piercings" />
+            <Checkbox label="Categoría A" />
+            <Checkbox label="Categoría B" />
 
             <Text variant="subtitle">Precio</Text>
             <Checkbox label="$0 - $100" />
@@ -252,7 +252,7 @@ const ProductosPage = () => {
                 <Text variant="title">{producto.nombre}</Text>
                 <Text variant="headline">{producto.precio}</Text>
                 <Button variant="primary" fullWidth>
-                  Agregar al Carrito
+                  Ver detalle
                 </Button>
               </Card>
             </Col>

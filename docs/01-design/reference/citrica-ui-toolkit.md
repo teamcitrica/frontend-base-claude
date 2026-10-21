@@ -949,8 +949,5 @@ const menuItems = [
 - Automatic scroll on mobile drawer
 - Overlay backdrop on mobile
 
-**CSS Classes Applied:**
-- `bg-sidebar` - Background color class for sidebar
-- Uses custom classes defined in consuming app
 
 ---

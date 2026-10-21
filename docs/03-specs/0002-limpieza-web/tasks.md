@@ -19,16 +19,16 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 **Pasada 2: TS huérfano** (commit `chore: remove orphan components, hooks and types`)
 
-- [ ] T-07 · Borrar la cadena de `quote-form`: `quote-form.tsx`, `useQuoteForm.ts`, `useBookingManagement.ts`, `calendar.tsx`, `animated-content.tsx`, `phone-codes.ts` → **AC-2**
-- [ ] T-08 · Borrar `cart-context.tsx`, `examples/`, `video.tsx` (y su export en `organisms/index.ts`), `useCalendarAvailability.ts`, `general.tsx`, `types.ts`, `types/components/`, `types/index.ts`, `section-typography.tsx`, `section-skeleton.tsx`. Borrar las carpetas que queden vacías → **AC-2**
-- [ ] T-09 · `npm run typecheck` en 0, y grep de AC-1 sin resultados → **AC-1**, **AC-3**
+- [x] T-07 · Borrar la cadena de `quote-form`: `quote-form.tsx`, `useQuoteForm.ts`, `useBookingManagement.ts`, `calendar.tsx`, `animated-content.tsx`, `phone-codes.ts` → **AC-2**
+- [x] T-08 · Borrar `cart-context.tsx`, `examples/`, `video.tsx` (y su export en `organisms/index.ts`), `useCalendarAvailability.ts`, `general.tsx`, `types.ts`, `types/components/`, `types/index.ts`, `section-typography.tsx`, `section-skeleton.tsx`. Borrar las carpetas que queden vacías → **AC-2**
+- [x] T-09 · `npm run typecheck` en 0, y grep de AC-1 sin resultados → **AC-1**, **AC-3**
 
 **Pasada 3: documentación** (commit `docs: drop references to removed files and previous projects`)
 
-- [ ] T-10 · `CLAUDE.md`: `impulso.scss` pasa a `home.scss`, y los 7 enlaces `docs/*.md` pasan a `docs/01-design/reference/*.md` → **AC-8**
-- [ ] T-11 · Editar `rebranding.md`, `02-architecture/overview.md`, `conventions.md`, `styles-overview.md`, `layout-system.md`, `citrica-ui-toolkit.md` y `.claude/agents/design-guardian.md` (líneas del plan) → **AC-7**
-- [ ] T-12 · Reemplazar los ejemplos "MASTERCLASS" (`web-guide.md`) y "Agregar al Carrito" (`layout-examples.md`) → **AC-8**
-- [ ] T-13 · Script de verificación: cada ruta citada en `CLAUDE.md`/`README.md` con `test -e`, y grep de nombres borrados en `docs/` (sin `03-specs/0001-*` ni `04-decisions`), `.claude/` y `CLAUDE.md` → **AC-7**, **AC-8**
+- [x] T-10 · `CLAUDE.md`: `impulso.scss` pasa a `home.scss`, y los 7 enlaces `docs/*.md` pasan a `docs/01-design/reference/*.md` → **AC-8**
+- [x] T-11 · Editar `rebranding.md`, `02-architecture/overview.md`, `conventions.md`, `styles-overview.md`, `layout-system.md`, `citrica-ui-toolkit.md` y `.claude/agents/design-guardian.md` (líneas del plan) → **AC-7**
+- [x] T-12 · Reemplazar los ejemplos "MASTERCLASS" (`web-guide.md`) y "Agregar al Carrito" (`layout-examples.md`) → **AC-8**
+- [x] T-13 · Script de verificación: cada ruta citada en `CLAUDE.md`/`README.md` con `test -e`, y grep de nombres borrados en `docs/` (sin `03-specs/0001-*` ni `04-decisions`), `.claude/` y `CLAUDE.md` → **AC-7**, **AC-8**
 
 **Comprobación visual**
 
@@ -61,3 +61,4 @@ antes de seguir — no se improvisa.
 | 2026-10-20 | T-02: `playwright@1.64.1` instalado (D-2). `shot` determinista: dos tomas sin cambios dan bytes idénticos (`cmp`), así que AC-5 se puede comprobar byte a byte. Consola previa: solo `/admin` da 1 error (`Error fetching month stats`, sin Supabase). Capturas también de `/admin/clientes` para registrar el efecto HeroUI | Capturas en `.shots/before/` (gitignored) |
 | 2026-10-20 | Consecuencia de D-1: `shared/components/organisms/navbar.tsx` (el `Navbar` del admin) también lee `siteConfig.navLinks` en su cajón móvil. Antes mostraba los enlaces de la masterclass y ahora los de ImPulso; en los dos casos son anclas de la landing que no existen en `/admin` | Sin cambio de código en el admin (fuera de alcance). Se reporta en la verificación |
 | 2026-10-20 | Pasada 1 terminada: typecheck 0; `shot` de la landing idéntico byte a byte con la baseline (6/6) | — |
+| 2026-10-20 | En T-12 aparecieron restos de dos proyectos más en los docs de referencia: "Taller / fotografía" (`web-guide.md:870`) y "Tatuajes / Piercings" (`layout-examples.md`, `tokens-examples.md`) | Cubiertos por la decisión del usuario en P-1 ("todos los proyectos anteriores hay que limpiarlos"). Reemplazados por copy ImPulso o neutro; spec (alcance y AC-8) ampliada |

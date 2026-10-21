@@ -162,7 +162,6 @@ se reserva para ritmo de sección y gestos de marca que el toolkit no da; el gri
 >
 > ```scss
 > // styles/custom.scss
-> @import './webpages-styles/sections.scss';
 > @import './webpages-styles/home.scss';
 > @import './webpages-styles/<marca>.scss';   // ← agrega esta línea
 > ```
