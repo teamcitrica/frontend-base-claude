@@ -1,0 +1,13 @@
+// ============================================
+// MOTION TOKENS - WEB
+// ============================================
+// Ease-out exponencial, sin rebote. Toda animación necesita su
+// alternativa con prefers-reduced-motion.
+
+@mixin motion-tokens {
+  --ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --duration-fast: 200ms; // hovers
+  --duration-base: 400ms; // trazos, reveals cortos
+  --duration-slow: 460ms; // entrada orquestada del hero
+}

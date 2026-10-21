@@ -1,0 +1,10 @@
+// ============================================
+// RADIUS TOKENS - WEB
+// ============================================
+// Radios de superficie. Los de campos de formulario viven en
+// components/_form.scss (--form-radius-*).
+
+@mixin radius-tokens {
+  --radius-md: 12px;    // cards, media, superficies
+  --radius-pill: 999px; // botones, badges
+}

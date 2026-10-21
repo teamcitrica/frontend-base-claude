@@ -6,6 +6,8 @@
 @import '../10-tokens/admin/colors/_palette.scss';
 @import '../10-tokens/admin/colors/_dark-theme.scss';
 @import '../10-tokens/admin/colors/_light-theme.scss';
+// Fundamentos web: espaciado, radios, motion, medida (ADR-0006)
+@import '../10-tokens/web/foundations/_index.scss';
 @import '../10-tokens/web/components/_form.scss';
 @import '../10-tokens/admin/components/_form.scss';
 
@@ -14,6 +16,7 @@
   @include light-theme;
   @include admin-light-theme;
   @include a-set($root-vars);
+  @include foundation-tokens;
   @include form-tokens;
   @include form-admin-tokens;
 
