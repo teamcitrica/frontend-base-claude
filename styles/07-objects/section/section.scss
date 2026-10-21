@@ -1,0 +1,29 @@
+// SECTION — banda de página: ritmo vertical y tono de fondo.
+// Componente: shared/components/layout/section.tsx
+
+.o-section {
+  padding-block: var(--section-y);
+  // El Header del toolkit es fijo: sin esto, saltar a un ancla mete el
+  // título debajo de la barra.
+  scroll-margin-block-start: var(--space-16);
+
+  &--tight {
+    padding-block: var(--section-y-tight);
+  }
+
+  &--airy {
+    padding-block: var(--section-y-airy);
+  }
+
+  &--flush {
+    padding-block: 0;
+  }
+
+  &--surface {
+    background-color: var(--color-surface);
+  }
+
+  &--inverse {
+    background-color: var(--color-text-black);
+  }
+}

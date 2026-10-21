@@ -140,6 +140,16 @@ $only-sm-md-flex:(
   )
 );
 
+// MEDIDA DE LECTURA — ancho máximo de línea de un texto. Va en el Text,
+// no en su contenedor: `ch` es relativo al font-size del elemento.
+.u-measure-prose {
+  max-width: var(--measure-prose);
+}
+
+.u-measure-narrow {
+  max-width: var(--measure-narrow);
+}
+
 .only-sm-md-flex{
   @include a-set($only-sm-md-flex);
 }

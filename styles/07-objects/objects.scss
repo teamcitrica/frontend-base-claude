@@ -1,2 +1,9 @@
 @import './container/container.scss';
 @import './col/col.scss';
+// Primitivas de layout (ADR-0007). Componentes en shared/components/layout/
+@import './section/section.scss';
+@import './stack/stack.scss';
+@import './cluster/cluster.scss';
+@import './media/media.scss';
+@import './auto-grid/auto-grid.scss';
+@import './grid/grid.scss';

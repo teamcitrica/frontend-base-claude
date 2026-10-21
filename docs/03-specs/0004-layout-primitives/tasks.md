@@ -17,11 +17,11 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 **Paso 2: primitivas** (commit `feat(layout): add layout primitives`)
 
-- [ ] T-05 · `$space-steps` en `_space.scss` (misma salida: verificar `--space-*` en el navegador) y `types.ts` → **AC-4**
-- [ ] T-06 · `Section`, `Stack`, `Cluster` + su SCSS en `07-objects` → **AC-2**
-- [ ] T-07 · `Media`, `AutoGrid` + SCSS; `u-measure-*` en `09-utilities` → **AC-2**
-- [ ] T-08 · `Grid` + `Cell` + SCSS (líneas con nombre, clases `start`/`end`/`row` por breakpoint, `breakout`) → **AC-5**
-- [ ] T-09 · Barrel `index.ts`. AC-4: archivo temporal con `gap={5}` y `rhythm="huge"` → typecheck falla → borrar → 0. `shot` sin cambios (6/6) → **AC-4**, **AC-1**
+- [x] T-05 · `$space-steps` en `_space.scss` (misma salida: verificar `--space-*` en el navegador) y `types.ts` → **AC-4**
+- [x] T-06 · `Section`, `Stack`, `Cluster` + su SCSS en `07-objects` → **AC-2**
+- [x] T-07 · `Media`, `AutoGrid` + SCSS; `u-measure-*` en `09-utilities` → **AC-2**
+- [x] T-08 · `Grid` + `Cell` + SCSS (líneas con nombre, clases `start`/`end`/`row` por breakpoint, `breakout`) → **AC-5**
+- [x] T-09 · Barrel `index.ts`. AC-4: archivo temporal con `gap={5}` y `rhythm="huge"` → typecheck falla → borrar → 0. `shot` sin cambios (6/6) → **AC-4**, **AC-1**
 
 **Paso 3: migración de la landing** (commit `refactor(home): compose sections with layout primitives`)
 
@@ -60,3 +60,4 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 | 2026-10-20 | Baseline T-01: typecheck 0 · lint 7 · contrato 35. Semántica: 10 `section`, 1 `footer`, 4 `ul`, 1 `ol`, 16 `li`, 1 `h1`, 8 `h2`, 7 `h3`; ids `hero,prueba,problema,sistema,solucion,metodo,resultados,confianza,garantia,agenda`; hijos del hero `home-rise 0.46s` con delay 0.04/0.11/0.18/0.25s. El estado de éxito del formulario es determinista (`cmp`) | Referencias en `.shots/s4-before/` |
 | 2026-10-20 | **`npm run shot` dejó de ser determinista**: de tres tomas sin cambios, `md`, `sm` y `sm-fold` difirieron entre la 1 y la 2, y `lg` entre la 2 y la 3. Con el comparador de píxeles: fotos de Unsplash a medio cargar en la primera toma tras reiniciar (hasta 205 por canal), ruido de recodificación después (≤ 11) y el indicador "N" de Next en `sm` | AC-1 pasa a comparar capturas de layout con imágenes ocultas (`visibility: hidden`) y sin el indicador, más las cajas de cada imagen. Piso de ruido medido en tres tomas: 7–18 píxeles y ≤ 11 por canal (antialiasing de iconos SVG); cajas idénticas. Umbral: ≤ 32 px y ≤ 16. `shot` se sigue corriendo para sus chequeos. Spec actualizada (AC-1) |
 | 2026-10-20 | T-03 aplicado: AC-1 (método y estado de éxito), AC-3 (`home__hero-actions` se queda como gesto), AC-5 (se mide en `/dev/layout`) y alcance (`u-measure-*`) | — |
+| 2026-10-20 | Paso 2: AC-4 probado con un archivo temporal → `tsc` rechaza `gap={5}`, `rhythm="huge"`, `span={13}` y `style` inline (4/4); borrado → typecheck 0. Landing tras añadir el CSS: sm 18 px / md 0 / lg 7 px (≤ 11), cajas de imagen idénticas. Reglas cargadas verificadas en el navegador (Turbopack inyecta el CSS por JS, no hay `.css` que descargar) | — |

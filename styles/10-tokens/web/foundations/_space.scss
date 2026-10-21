@@ -3,19 +3,17 @@
 // ============================================
 // Escala de 4px: --space-N = N × 4px. Coincide con Tailwind
 // (gap-6 = var(--space-6) = 24px). Ver ADR-0006.
+//
+// Fuente única de los pasos. De esta lista salen las variables --space-N
+// y las clases de gap de las primitivas (styles/07-objects/).
+// Su gemelo en TypeScript es `Space` en shared/components/layout/types.ts:
+// si añades un paso aquí, añádelo allí.
+$space-steps: 1, 2, 3, 4, 6, 8, 10, 12, 16, 24, 32;
 
 @mixin space-tokens {
-  --space-1: 4px;
-  --space-2: 8px;
-  --space-3: 12px;
-  --space-4: 16px;
-  --space-6: 24px;
-  --space-8: 32px;
-  --space-10: 40px;
-  --space-12: 48px;
-  --space-16: 64px;
-  --space-24: 96px;
-  --space-32: 128px;
+  @each $n in $space-steps {
+    --space-#{$n}: #{$n * 4}px;
+  }
 
   // Ritmo vertical de sección. Varía a propósito: el dolor va apretado,
   // lo que da confianza respira. Espaciado uniforme = sin jerarquía.

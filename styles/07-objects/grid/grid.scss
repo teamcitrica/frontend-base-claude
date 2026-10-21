@@ -1,0 +1,99 @@
+// GRID + CELL — retícula de 12/6/4 columnas alineada con Container/Col,
+// con superposición de celdas y salida a sangre.
+// Componente: shared/components/layout/grid.tsx
+//
+// Pistas con nombre:
+//   [full-start] lateral [content-start] N columnas [content-end] lateral [full-end]
+//
+// La lateral mide `padding − gutter`; el column-gap le suma el gutter, así
+// que el contenido empieza a --container-padding del borde, igual que el
+// primer Col. Las columnas crecen hasta su máximo antes que las laterales
+// (1fr), así que el ancho máximo de contenido es --container-width, igual
+// que en el Container. Requiere padding ≥ gutter en cada breakpoint.
+
+$cell-rows: 6;
+
+.o-grid {
+  display: grid;
+  column-gap: var(--grid-gutter);
+  grid-template-columns:
+    [full-start] minmax(calc(var(--container-padding) - var(--grid-gutter)), 1fr)
+    [content-start] repeat(
+      var(--total-columns),
+      minmax(
+        0,
+        calc(
+          (var(--container-width) - (var(--total-columns) - 1) * var(--grid-gutter)) /
+            var(--total-columns)
+        )
+      )
+    )
+    [content-end] minmax(calc(var(--container-padding) - var(--grid-gutter)), 1fr)
+    [full-end];
+
+  @each $n in $space-steps {
+    &--row-gap-#{$n} {
+      row-gap: var(--space-#{$n});
+    }
+  }
+}
+
+.o-cell {
+  grid-column: content-start / content-end;
+  min-width: 0;
+}
+
+// La columna N de contenido va de la línea N+1 a la N+2 (la línea 1 es
+// full-start). Mobile-first, como col.scss.
+@mixin cell-placement($bp, $columns) {
+  @for $i from 1 through $columns {
+    .o-cell-start-#{$i}\@#{$bp} {
+      grid-column-start: $i + 1;
+    }
+    .o-cell-end-#{$i}\@#{$bp} {
+      grid-column-end: $i + 2;
+    }
+  }
+  @for $i from 1 through $cell-rows {
+    .o-cell-row-#{$i}\@#{$bp} {
+      grid-row-start: $i;
+    }
+  }
+}
+
+@include sm {
+  @include cell-placement(sm, $total-columns__sm);
+}
+
+@include md {
+  @include cell-placement(md, $total-columns__md);
+}
+
+@include lg {
+  @include cell-placement(lg, $total-columns__lg);
+}
+
+// Salidas: van después de las posiciones para ganarles en la cascada.
+.o-cell--full {
+  grid-column: full-start / full-end;
+}
+
+.o-cell--wide-start {
+  grid-column-start: full-start;
+}
+
+.o-cell--wide-end {
+  grid-column-end: full-end;
+}
+
+.o-cell--align-start {
+  align-self: start;
+}
+
+.o-cell--align-center {
+  align-self: center;
+}
+
+.o-cell--align-end {
+  align-self: end;
+}
