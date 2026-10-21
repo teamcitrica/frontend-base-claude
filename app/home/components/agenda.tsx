@@ -11,6 +11,8 @@ import {
   Textarea,
 } from "citrica-ui-toolkit";
 
+import { AutoGrid, Cluster, Section, Stack } from "@/shared/components/layout";
+
 /**
  * CTA final + formulario. Único evento de conversión de la página.
  *
@@ -72,37 +74,36 @@ const Agenda = () => {
   };
 
   return (
-    <section className="home__section home__section--airy" id="agenda">
+    <Section id="agenda" rhythm="airy">
       <Container>
         <Col cols={{ sm: 4, md: 6, lg: 5 }}>
-          <div className="home__stack">
+          <Stack gap={6}>
             <Text as="h2" textColor="color-text-black" variant="headline">
               ¿Hablamos esta semana?
             </Text>
             <Text
               as="p"
-              className="home__measure"
+              className="u-measure-prose"
               textColor="color-on-surface-var"
               variant="subtitle"
             >
               El estudio gratuito son 45 minutos. Salimos con tu diagnóstico de
               visibilidad y una estimación de cuántas mesas puedes llenar.
             </Text>
-            <div className="home__form-note">
+            <Cluster align="start" gap={2} wrap={false}>
               <span className="home__pain-icon">
                 <Icon color="var(--color-primary)" name="Clock" size={20} />
               </span>
               <Text as="p" textColor="color-on-surface-var" variant="label">
                 Te respondemos dentro de las siguientes 24 horas hábiles.
               </Text>
-            </div>
-          </div>
+            </Cluster>
+          </Stack>
         </Col>
 
         <Col cols={{ sm: 4, md: 6, lg: 7 }}>
           {sent ? (
-            <div className="home__form-status" role="status">
-              <div className="home__stack home__stack--tight">
+            <Stack className="home__form-status" gap={2} role="status">
                 <Text as="p" textColor="color-primary" variant="title">
                   ¡Listo!
                 </Text>
@@ -115,11 +116,10 @@ const Agenda = () => {
                   variant="flat"
                   onPress={() => setSent(false)}
                 />
-              </div>
-            </div>
+            </Stack>
           ) : (
-            <div className="home__form">
-              <div className="home__form-row">
+            <Stack gap={6}>
+              <AutoGrid gap={6} minItemWidth={220}>
                 <Input
                   errorMessage={errors.nombre}
                   isInvalid={Boolean(errors.nombre)}
@@ -136,9 +136,9 @@ const Agenda = () => {
                   value={form.restaurante}
                   onValueChange={setField("restaurante")}
                 />
-              </div>
+              </AutoGrid>
 
-              <div className="home__form-row">
+              <AutoGrid gap={6} minItemWidth={220}>
                 <Input
                   errorMessage={errors.email}
                   isInvalid={Boolean(errors.email)}
@@ -157,7 +157,7 @@ const Agenda = () => {
                   value={form.whatsapp}
                   onValueChange={setField("whatsapp")}
                 />
-              </div>
+              </AutoGrid>
 
               <Textarea
                 label="¿Qué has probado hasta ahora?"
@@ -175,11 +175,11 @@ const Agenda = () => {
                 variant="primary"
                 onPress={submit}
               />
-            </div>
+            </Stack>
           )}
         </Col>
       </Container>
-    </section>
+    </Section>
   );
 };
 

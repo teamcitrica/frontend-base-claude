@@ -2,6 +2,8 @@
 
 import { Col, Container, Icon, Text } from "citrica-ui-toolkit";
 
+import { Cluster, Section, Stack } from "@/shared/components/layout";
+
 /**
  * Garantía. Baja el riesgo percibido justo antes del CTA.
  * Sección con aire: después del tramo denso, aquí se respira.
@@ -13,43 +15,50 @@ const terms = [
 ];
 
 const Garantia = () => (
-  <section className="home__section home__section--airy" id="garantia">
+  <Section id="garantia" rhythm="airy">
     <Container>
       <Col cols={{ sm: 4, md: 6, lg: 8, lgPush: 2 }}>
-        <div className="home__guarantee">
+        <Stack className="home__guarantee" gap={6}>
           <Text as="h2" textColor="color-text-black" variant="headline">
             90 días, sin letras pequeñas
           </Text>
           <Text
             as="p"
-            className="home__measure"
+            className="u-measure-prose"
             textColor="color-on-surface-var"
             variant="subtitle"
           >
             Te dieron promesas antes. Esta viene por escrito y con fecha.
           </Text>
 
-          <ul className="home__pains">
+          <Stack as="ul" gap={6}>
             {terms.map((term) => (
-              <li key={term} className="home__pain">
+              <Cluster
+                key={term}
+                align="start"
+                as="li"
+                className="home__pain"
+                gap={3}
+                wrap={false}
+              >
                 <span className="home__pain-icon">
                   <Icon color="var(--color-primary)" name="Check" size={22} />
                 </span>
                 <Text
                   as="p"
-                  className="home__measure"
+                  className="u-measure-prose"
                   textColor="color-text-black"
                   variant="body"
                 >
                   {term}
                 </Text>
-              </li>
+              </Cluster>
             ))}
-          </ul>
-        </div>
+          </Stack>
+        </Stack>
       </Col>
     </Container>
-  </section>
+  </Section>
 );
 
 export default Garantia;

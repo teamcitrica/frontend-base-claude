@@ -123,8 +123,9 @@ menos un uso real en la landing.
 - **Dado** `app/home/components/` después del build
 - **Cuando** se corre `grep -rnE '<div' app/home/components`
 - **Entonces** cada `<div>` restante lleva una clase `home__*` de gesto de marca listada en el
-  plan, y `grep -rnE 'className="[^"]*\b(flex|grid|gap-|m[tbxy]?-[0-9]|p[tbxy]?-[0-9])' app/home/components`
-  no devuelve nada.
+  plan, y `grep -rnE 'className="([^"]* )?(flex|grid|gap-[0-9]+|m[tbxy]?-[0-9]+|p[tbxy]?-[0-9]+)( [^"]*)?"' app/home/components`
+  no devuelve nada. (Corregido en el build: la versión anterior usaba `\b`, que da falso positivo
+  con `home__hero-grid` porque el guion cuenta como límite de palabra.)
 
 ### AC-3 — `home.scss` sin patrones genéricos
 - **Dado** `styles/webpages-styles/home.scss` después del build

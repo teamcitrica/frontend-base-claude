@@ -1,6 +1,7 @@
 // ============================================================
 // HOME — Landing de conversión ImPulso (SPEC-0001)
-// Solo layout, ritmo de sección y gestos de marca.
+// Solo gestos de marca. El layout lo componen las primitivas
+// (shared/components/layout/, ADR-0007): aquí no va flex, grid ni gap.
 // Color, espaciado, radios, motion y medida salen de tokens
 // (styles/10-tokens/web/); la escala tipográfica, de _text.scss.
 // Un valor literal aquí es un gesto de página y va marcado `// gesto:`.
@@ -12,64 +13,35 @@
   overflow-x: hidden;
 }
 
-// ---------- Ritmo de sección ----------
-
-.home__section {
-  padding-block: var(--section-y);
-}
-
-// El Header del toolkit es `fixed`: sin esto, saltar a un ancla mete el
-// título debajo de la barra.
-.home__section,
-.home__hero {
-  scroll-margin-block-start: var(--space-16);
-}
-
-.home__section--tight {
-  padding-block: var(--section-y-tight);
-}
-
-.home__section--airy {
-  padding-block: var(--section-y-airy);
-}
-
-// Alternancia de fondo. El carbón se reserva al hero: un segundo bloque
-// oscuro le restaría fuerza al primero.
-.home__section--surface {
-  background-color: var(--color-surface);
-}
-
-// ---------- Medida de lectura ----------
-// Tope de línea para prosa. Sin esto los párrafos se estiran a 12 columnas
-// y dejan de leerse.
-
-.home__measure {
-  max-width: var(--measure-prose);
-}
-
-.home__measure--narrow {
-  max-width: var(--measure-narrow);
-}
-
 // ---------- Hero ----------
-// Full-bleed carbón con foto y capa de contraste. El toolkit no tiene
-// una sección a sangre con overlay, por eso vive aquí.
+// Foto a sangre y contenido en la misma fila del Grid (hero.tsx): la
+// superposición la da el Grid y el orden de apilado, el DOM (foto, scrim,
+// contenido). Aquí solo quedan los gestos.
 
 .home__hero {
-  position: relative;
-  display: flex;
-  align-items: flex-end;
-  min-height: 92svh; // gesto: el hero ocupa casi todo el primer viewport
-  padding-block: var(--space-24) var(--space-16);
-  background-color: var(--color-text-black);
   isolation: isolate;
 }
 
+.home__hero-grid {
+  min-height: 92svh; // gesto: el hero ocupa casi todo el primer viewport
+}
+
+// Celda de la foto: estira a toda la fila y recorta la imagen. Va al fondo
+// del hero (z-index -1 dentro de su `isolation`) para que el subrayado del
+// titular, también en -1, quede encima por orden del DOM. Sin esto, con
+// `prefers-reduced-motion` (sin la animación que lo aísla) el subrayado
+// quedaría debajo de la foto.
 .home__hero-media {
-  position: absolute;
-  inset: 0;
-  z-index: -2;
+  position: relative;
+  z-index: -1;
   overflow: hidden;
+}
+
+// Celda del contenido: se posiciona para pintar encima de la foto, y su
+// aire empuja el titular hacia abajo del primer viewport.
+.home__hero-content {
+  position: relative;
+  padding-block: var(--space-24) var(--space-16);
 }
 
 .home__hero-media img {
@@ -84,7 +56,6 @@
 .home__hero-scrim {
   position: absolute;
   inset: 0;
-  z-index: -1;
   background: linear-gradient(
     to top,
     color-mix(in srgb, var(--color-text-black) 88%, transparent) 0%,
@@ -93,20 +64,14 @@
   );
 }
 
-// Sin medida propia en el contenedor: `ch` es relativo al font-size del
-// elemento, así que una sola medida aquí parte el titular de 92px en seis
-// líneas y empuja el CTA fuera del fold. Cada hijo lleva la suya.
-.home__hero-body {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
+// `home__hero-body` es un Stack: la clase solo existe para el stagger de
+// entrada, que apunta a sus hijos directos (ver Motion). Sin medida propia
+// en el contenedor: `ch` es relativo al font-size del elemento, así que una
+// sola medida aquí parte el titular de 92px en seis líneas. Cada hijo lleva
+// la suya.
 
+// Las acciones son un Cluster; el gesto es el aire extra sobre el CTA.
 .home__hero-actions {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: var(--space-6);
   margin-top: var(--space-2);
 }
 
@@ -154,38 +119,18 @@
 }
 
 // ---------- Prueba social ----------
-// Métricas sueltas, sin cards. Las rejillas de cards idénticas están
-// prohibidas y aquí además restarían fuerza al número.
-
-.home__metrics {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-10) var(--space-24);
-  align-items: flex-start;
-}
+// Métricas sueltas, sin cards: la rejilla de cards idénticas restaría
+// fuerza al número.
 
 .home__metric {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
   min-width: 12ch; // gesto: ancho mínimo de una métrica
 }
 
-// ---------- Lista de dolores ----------
-
-.home__pains {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
+// ---------- Listas con regla ----------
+// Dolores, resultados y términos de la garantía: cada ítem lleva una
+// regla fina arriba. El layout del ítem es un Cluster.
 
 .home__pain {
-  display: flex;
-  gap: var(--space-3);
-  align-items: flex-start;
   padding-block: var(--space-3);
   border-top: 1px solid var(--color-outline-variant);
 }
@@ -200,19 +145,7 @@
 // Numerados porque SON una secuencia real. Es la única numeración
 // de la página.
 
-.home__steps {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); // gesto: ancho mínimo de un paso
-  gap: var(--space-10);
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
 .home__step {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
   padding-top: var(--space-3);
   border-top: 2px solid var(--color-primary); // gesto: regla naranja del paso
 }
@@ -222,34 +155,9 @@
   line-height: 1;
 }
 
-// ---------- Media de secciones ----------
-
-.home__media {
-  position: relative;
-  overflow: hidden;
-  border-radius: var(--radius-md);
-}
-
-.home__media--wide {
-  aspect-ratio: 16 / 10;
-}
-
-.home__media--tall {
-  aspect-ratio: 4 / 3;
-}
-
-.home__media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
 // ---------- Garantía ----------
 
 .home__guarantee {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
   padding: var(--space-10);
   border: 2px solid var(--color-text-black);
   border-radius: var(--radius-md);
@@ -257,24 +165,6 @@
 }
 
 // ---------- Formulario ----------
-
-.home__form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.home__form-row {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); // gesto: ancho mínimo de un campo
-  gap: var(--space-6);
-}
-
-.home__form-note {
-  display: flex;
-  gap: var(--space-2);
-  align-items: flex-start;
-}
 
 .home__form-status {
   padding: var(--space-6);
@@ -290,22 +180,13 @@
   background-color: var(--color-text-black);
 }
 
-.home__footer-top {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: var(--space-6);
-  padding-bottom: var(--space-6);
-  border-bottom: 1px solid
+// Gesto: la línea que separa la firma de los créditos. Es un <hr> porque
+// separa dos grupos de contenido; el aire alrededor lo pone el Stack.
+.home__footer-rule {
+  margin: 0;
+  border: 0;
+  border-top: 1px solid
     color-mix(in srgb, var(--color-text-white) 22%, transparent);
-}
-
-.home__footer-bottom {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  gap: var(--space-2);
-  padding-top: var(--space-6);
 }
 
 // ---------- Foco visible ----------
@@ -404,20 +285,4 @@
   .home__step {
     transition: none;
   }
-}
-
-// ---------- Utilidades de composición ----------
-
-.home__stack {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-6);
-}
-
-.home__stack--tight {
-  gap: var(--space-2);
-}
-
-.home__stack--loose {
-  gap: var(--space-10);
 }

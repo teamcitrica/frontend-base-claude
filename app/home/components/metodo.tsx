@@ -1,6 +1,8 @@
 "use client";
 
-import { Col, Container, Text } from "citrica-ui-toolkit";
+import { Text } from "citrica-ui-toolkit";
+
+import { AutoGrid, Cell, Grid, Section, Stack } from "@/shared/components/layout";
 
 /**
  * Sistema Mesa Activa — los 4 pasos.
@@ -31,29 +33,29 @@ const steps = [
 ];
 
 const Metodo = () => (
-  <section className="home__section home__section--airy" id="metodo">
-    <Container>
-      <Col cols={{ sm: 4, md: 6, lg: 8 }}>
-        <div className="home__stack mb-4">
+  <Section id="metodo" rhythm="airy">
+    <Grid rowGap={4}>
+      <Cell span={{ lg: 8 }}>
+        <Stack gap={6}>
           <Text as="h2" textColor="color-text-black" variant="headline">
             El Sistema Mesa Activa
           </Text>
           <Text
             as="p"
-            className="home__measure"
+            className="u-measure-prose"
             textColor="color-on-surface-var"
             variant="subtitle"
           >
             Cuatro pasos en orden. Cada uno se apoya en el anterior, y ninguno
             se salta.
           </Text>
-        </div>
-      </Col>
+        </Stack>
+      </Cell>
 
-      <Col cols={{ sm: 4, md: 6, lg: 12 }}>
-        <ol className="home__steps">
+      <Cell>
+        <AutoGrid as="ol" gap={10} minItemWidth={240}>
           {steps.map((step) => (
-            <li key={step.index} className="home__step">
+            <Stack key={step.index} as="li" className="home__step" gap={2}>
               <Text
                 as="span"
                 className="home__step-index"
@@ -68,12 +70,12 @@ const Metodo = () => (
               <Text as="p" textColor="color-on-surface-var" variant="body">
                 {step.body}
               </Text>
-            </li>
+            </Stack>
           ))}
-        </ol>
-      </Col>
-    </Container>
-  </section>
+        </AutoGrid>
+      </Cell>
+    </Grid>
+  </Section>
 );
 
 export default Metodo;

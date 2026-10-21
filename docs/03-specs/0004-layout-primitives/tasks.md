@@ -25,11 +25,11 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 **Paso 3: migración de la landing** (commit `refactor(home): compose sections with layout primitives`)
 
-- [ ] T-10 · `prueba-social`, `problema`, `sistema`, `solucion` → `cmp` → **AC-1**, **AC-2**
-- [ ] T-11 · `metodo` (`Grid` + `AutoGrid`), `resultados`, `confianza`, `garantia` → `cmp` → **AC-1**, **AC-2**
-- [ ] T-12 · `agenda` (formulario) y `site-footer` → `cmp` + estado de éxito del formulario → **AC-1**, **AC-2**
-- [ ] T-13 · Hero a `Grid` + `Cell` → `cmp`, CTA en el fold, `animationDelay` → **AC-1**
-- [ ] T-14 · `home.scss`: borrar patrones migrados, conservar gestos. Greps de AC-2 y AC-3. Conteo semántico de AC-6 → **AC-2**, **AC-3**, **AC-6**
+- [x] T-10 · `prueba-social`, `problema`, `sistema`, `solucion` → `cmp` → **AC-1**, **AC-2**
+- [x] T-11 · `metodo` (`Grid` + `AutoGrid`), `resultados`, `confianza`, `garantia` → `cmp` → **AC-1**, **AC-2**
+- [x] T-12 · `agenda` (formulario) y `site-footer` → `cmp` + estado de éxito del formulario → **AC-1**, **AC-2**
+- [x] T-13 · Hero a `Grid` + `Cell` → `cmp`, CTA en el fold, `animationDelay` → **AC-1**
+- [x] T-14 · `home.scss`: borrar patrones migrados, conservar gestos. Greps de AC-2 y AC-3. Conteo semántico de AC-6 → **AC-2**, **AC-3**, **AC-6**
 
 **Paso 4: `/dev/layout`** (commit `feat(dev): add /dev/layout primitives guide`)
 
@@ -61,3 +61,7 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 | 2026-10-20 | **`npm run shot` dejó de ser determinista**: de tres tomas sin cambios, `md`, `sm` y `sm-fold` difirieron entre la 1 y la 2, y `lg` entre la 2 y la 3. Con el comparador de píxeles: fotos de Unsplash a medio cargar en la primera toma tras reiniciar (hasta 205 por canal), ruido de recodificación después (≤ 11) y el indicador "N" de Next en `sm` | AC-1 pasa a comparar capturas de layout con imágenes ocultas (`visibility: hidden`) y sin el indicador, más las cajas de cada imagen. Piso de ruido medido en tres tomas: 7–18 píxeles y ≤ 11 por canal (antialiasing de iconos SVG); cajas idénticas. Umbral: ≤ 32 px y ≤ 16. `shot` se sigue corriendo para sus chequeos. Spec actualizada (AC-1) |
 | 2026-10-20 | T-03 aplicado: AC-1 (método y estado de éxito), AC-3 (`home__hero-actions` se queda como gesto), AC-5 (se mide en `/dev/layout`) y alcance (`u-measure-*`) | — |
 | 2026-10-20 | Paso 2: AC-4 probado con un archivo temporal → `tsc` rechaza `gap={5}`, `rhythm="huge"`, `span={13}` y `style` inline (4/4); borrado → typecheck 0. Landing tras añadir el CSS: sm 18 px / md 0 / lg 7 px (≤ 11), cajas de imagen idénticas. Reglas cargadas verificadas en el navegador (Turbopack inyecta el CSS por JS, no hay `.css` que descargar) | — |
+| 2026-10-20 | T-10 a T-12: tras cada tanda, layout dentro del umbral (sm 0–18 px, md 0, lg 0–7, ≤ 11 por canal) y cajas de imagen idénticas. `metodo` sobre `Grid` quedó idéntico al `Col` que reemplaza. Estado de éxito del formulario: 0 px de diferencia | — |
+| 2026-10-20 | T-13 (hero): layout 0 px en sm/md/lg y **también con la foto real**: los tres folds de `npm run shot` dan 0 px contra la referencia; stagger intacto (`0.46s`, delays 0.04/0.11/0.18/0.25s) | — |
+| 2026-10-20 | **Regresión encontrada al revisar el apilado del hero**: con `prefers-reduced-motion` (sin la animación que crea un contexto de apilado en el titular), el subrayado amarillo (`::after`, `z-index: -1`) quedaba debajo de la celda de la foto. Las capturas no lo detectan porque se toman con animación. Comprobado inyectando la variante: franja del subrayado (67,55,49) = foto | `home__hero-media` lleva `z-index: -1` (equivale al -2 original). Con el arreglo, la franja mide (186,166,66) = amarillo; capturas siguen en 0 px |
+| 2026-10-20 | T-14: `home.scss` de 433 a 288 líneas, sin `flex`/`grid`/`gap`. AC-3 sin coincidencias. `<div>` en la landing: de 24 a 1 (el scrim, gesto). AC-6: semántica idéntica (10 `section`, 1 `footer`, 4 `ul`, 1 `ol`, 16 `li`, mismos ids y encabezados). El grep de AC-2 daba un falso positivo (`\bgrid` casa con `home__hero-grid`): expresión corregida y validada contra un control (`mb-4` → 1, `home__hero-grid` → 0) | Spec actualizada (AC-2) |

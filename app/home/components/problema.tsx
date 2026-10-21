@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { Col, Container, Icon, Text } from "citrica-ui-toolkit";
 
+import { Cluster, Media, Section, Stack } from "@/shared/components/layout";
+
 /**
  * El problema. Aquí el visitante se reconoce.
  * Tramo apretado a propósito: el dolor no respira.
@@ -26,19 +28,16 @@ const pains = [
 ];
 
 const Problema = () => (
-  <section
-    className="home__section home__section--surface home__section--tight"
-    id="problema"
-  >
+  <Section id="problema" rhythm="tight" tone="surface">
     <Container>
       <Col cols={{ sm: 4, md: 6, lg: 6 }}>
-        <div className="home__stack">
+        <Stack gap={6}>
           <Text as="h2" textColor="color-text-black" variant="headline">
             ¿Tu marketing es una caja negra?
           </Text>
           <Text
             as="p"
-            className="home__measure"
+            className="u-measure-prose"
             textColor="color-on-surface-var"
             variant="subtitle"
           >
@@ -46,9 +45,16 @@ const Problema = () => (
             no tienes marketing: tienes gasto.
           </Text>
 
-          <ul className="home__pains">
+          <Stack as="ul" gap={6}>
             {pains.map((pain) => (
-              <li key={pain.title} className="home__pain">
+              <Cluster
+                key={pain.title}
+                align="start"
+                as="li"
+                className="home__pain"
+                gap={3}
+                wrap={false}
+              >
                 <span className="home__pain-icon">
                   <Icon
                     color="var(--color-primary)"
@@ -56,27 +62,27 @@ const Problema = () => (
                     size={22}
                   />
                 </span>
-                <span className="home__stack home__stack--tight">
+                <Stack as="span" gap={2}>
                   <Text as="h3" textColor="color-text-black" variant="title">
                     {pain.title}
                   </Text>
                   <Text
                     as="p"
-                    className="home__measure"
+                    className="u-measure-prose"
                     textColor="color-on-surface-var"
                     variant="body"
                   >
                     {pain.body}
                   </Text>
-                </span>
-              </li>
+                </Stack>
+              </Cluster>
             ))}
-          </ul>
-        </div>
+          </Stack>
+        </Stack>
       </Col>
 
       <Col cols={{ sm: 4, md: 6, lg: 6 }}>
-        <div className="home__media home__media--tall">
+        <Media ratio="4/3">
           <Image
             fill
             alt="Comedor de restaurante con la mayoría de las mesas vacías"
@@ -84,10 +90,10 @@ const Problema = () => (
             sizes="(max-width: 1024px) 100vw, 50vw"
             src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?auto=format&fit=crop&w=1200&q=80"
           />
-        </div>
+        </Media>
       </Col>
     </Container>
-  </section>
+  </Section>
 );
 
 export default Problema;

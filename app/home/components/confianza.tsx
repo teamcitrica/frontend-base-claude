@@ -2,22 +2,24 @@
 
 import { Col, Container, Text } from "citrica-ui-toolkit";
 
+import { Section, Stack } from "@/shared/components/layout";
+
 /**
  * Por qué confiar. Credibilidad de operador, que es el argumento que
  * desarma al visitante quemado por agencias: no somos consultores, somos
  * dueños de restaurante.
  */
 const Confianza = () => (
-  <section className="home__section home__section--surface" id="confianza">
+  <Section id="confianza" tone="surface">
     <Container>
       <Col cols={{ sm: 4, md: 6, lg: 7 }}>
-        <div className="home__stack">
+        <Stack gap={6}>
           <Text as="h2" textColor="color-text-black" variant="headline">
             Entendemos tu negocio porque lo vivimos
           </Text>
           <Text
             as="p"
-            className="home__measure"
+            className="u-measure-prose"
             textColor="color-on-surface-var"
             variant="subtitle"
           >
@@ -28,22 +30,22 @@ const Confianza = () => (
           </Text>
           <Text
             as="p"
-            className="home__measure"
+            className="u-measure-prose"
             textColor="color-on-surface-var"
             variant="body"
           >
             Nada de contratos de doce meses para &laquo;construir marca&raquo;.
             Empezamos por el estudio gratuito y decides con datos en la mano.
           </Text>
-        </div>
+        </Stack>
       </Col>
 
       <Col cols={{ sm: 4, md: 6, lg: 5 }}>
-        <div className="home__stack home__stack--tight">
+        <Stack gap={2}>
           {/* ILUSTRATIVO — reemplazar por testimonio real antes de publicar */}
           <Text
             as="p"
-            className="home__measure--narrow"
+            className="u-measure-narrow"
             textColor="color-text-black"
             variant="title"
           >
@@ -52,10 +54,10 @@ const Confianza = () => (
           <Text as="p" textColor="color-on-surface-var" variant="label">
             Equipo ImPulso · dueños de restaurante
           </Text>
-        </div>
+        </Stack>
       </Col>
     </Container>
-  </section>
+  </Section>
 );
 
 export default Confianza;
