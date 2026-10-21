@@ -37,34 +37,46 @@ export interface CellProps extends LayoutProps {
 }
 
 const BREAKPOINTS: Breakpoint[] = ["sm", "md", "lg"];
+/** Columnas por breakpoint. Gemelo de $total-columns__* en styles/01-settings/settings.scss. */
+const COLUMNS_AT: Record<Breakpoint, number> = { sm: 4, md: 6, lg: 12 };
 
+/** Valor en un breakpoint. Un valor suelto aplica a todos; un objeto, solo a los que nombra. */
 const pick = <T,>(value: Responsive<T> | undefined, bp: Breakpoint): T | undefined =>
-  value === undefined ? undefined : typeof value === "object" ? (value as Partial<Record<Breakpoint, T>>)[bp] : bp === "sm" ? value : undefined;
+  value === undefined ? undefined : typeof value === "object" ? (value as Partial<Record<Breakpoint, T>>)[bp] : value;
 
+/**
+ * Clases de columna por breakpoint. Si la celda no cabe en las columnas de
+ * ese breakpoint (p. ej. `start={7}` en las 4 de sm), no se emite nada y
+ * ocupa todo el ancho de contenido.
+ */
 const placement = (start: CellProps["start"], span: CellProps["span"]) =>
   BREAKPOINTS.flatMap((bp) => {
     const s = pick(start, bp);
     const n = pick(span, bp);
     if (s === undefined && n === undefined) return [];
     const from = s ?? 1;
+    const to = n === undefined ? from : from + n - 1;
+    if (to > COLUMNS_AT[bp]) return [];
     const classes = [`o-cell-start-${from}@${bp}`];
-    if (n !== undefined) classes.push(`o-cell-end-${from + n - 1}@${bp}`);
+    if (n !== undefined) classes.push(`o-cell-end-${to}@${bp}`);
     return classes;
   });
 
 /**
- * Una celda del `Grid`. `start` y `span` se leen juntos en cada breakpoint y
- * se heredan hacia arriba, como en `Col`: si cambias uno en un breakpoint,
- * pasa los dos. Una celda que no cabe en las columnas del breakpoint llega
- * hasta el final del contenido. Ver /dev/layout.
+ * Una celda del `Grid`. Un número suelto (`span={8}`) vale para todos los
+ * breakpoints; un objeto (`span={{ lg: 8 }}`) solo para los que nombra, y se
+ * hereda hacia arriba como en `Col`. `start` y `span` se leen juntos: si
+ * cambias uno en un breakpoint, pasa los dos. Una celda que no cabe en las
+ * columnas del breakpoint ocupa todo el ancho de contenido. Ver /dev/layout.
  */
 export const Cell = ({ as: Tag = "div", start, span, row, breakout, align, className, ...rest }: CellProps) => (
   <Tag
     className={clsx(
       "o-cell",
       placement(start, span),
+      // Un `row` suelto basta emitirlo en sm: mobile-first, se hereda hacia arriba.
       BREAKPOINTS.map((bp) => {
-        const r = pick(row, bp);
+        const r = typeof row === "object" ? row[bp] : bp === "sm" ? row : undefined;
         return r && `o-cell-row-${r}@${bp}`;
       }),
       breakout && `o-cell--${breakout}`,

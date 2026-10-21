@@ -33,10 +33,10 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 
 **Paso 4: `/dev/layout`** (commit `feat(dev): add /dev/layout primitives guide`)
 
-- [ ] T-15 · `page.tsx` (`noIndex`), `layout-guide.tsx`, `content.ts` (explicaciones y snippets de las 7 primitivas) → **AC-8**
-- [ ] T-16 · Demos: `Section` (ritmos y tonos), `Stack`, `Cluster`, `Media`, `AutoGrid` → **AC-8**
-- [ ] T-17 · `Grid`: guía de 12 columnas, `Col` contra `Cell`, y los 4 gestos (foto a sangre, asimetría, superposición, salida parcial) con su comportamiento en `sm` → **AC-5**, **AC-8**
-- [ ] T-18 · `shot -- /dev/layout`, abrir capturas, medir AC-5 en `sm`/`md`/`lg`, comprobar `noindex` en el HTML → **AC-5**, **AC-8**
+- [x] T-15 · `page.tsx` (`noIndex`), `layout-guide.tsx`, `content.ts` (explicaciones y snippets de las 7 primitivas) → **AC-8**
+- [x] T-16 · Demos: `Section` (ritmos y tonos), `Stack`, `Cluster`, `Media`, `AutoGrid` → **AC-8**
+- [x] T-17 · `Grid`: guía de 12 columnas, `Col` contra `Cell`, y los 4 gestos (foto a sangre, asimetría, superposición, salida parcial) con su comportamiento en `sm` → **AC-5**, **AC-8**
+- [x] T-18 · `shot -- /dev/layout`, abrir capturas, medir AC-5 en `sm`/`md`/`lg`, comprobar `noindex` en el HTML → **AC-5**, **AC-8**
 
 **Paso 5: documentación** (commit `docs: document layout primitives`)
 
@@ -65,3 +65,6 @@ aceptación de la spec. Se marca al completarla, no al empezarla.
 | 2026-10-20 | T-13 (hero): layout 0 px en sm/md/lg y **también con la foto real**: los tres folds de `npm run shot` dan 0 px contra la referencia; stagger intacto (`0.46s`, delays 0.04/0.11/0.18/0.25s) | — |
 | 2026-10-20 | **Regresión encontrada al revisar el apilado del hero**: con `prefers-reduced-motion` (sin la animación que crea un contexto de apilado en el titular), el subrayado amarillo (`::after`, `z-index: -1`) quedaba debajo de la celda de la foto. Las capturas no lo detectan porque se toman con animación. Comprobado inyectando la variante: franja del subrayado (67,55,49) = foto | `home__hero-media` lleva `z-index: -1` (equivale al -2 original). Con el arreglo, la franja mide (186,166,66) = amarillo; capturas siguen en 0 px |
 | 2026-10-20 | T-14: `home.scss` de 433 a 288 líneas, sin `flex`/`grid`/`gap`. AC-3 sin coincidencias. `<div>` en la landing: de 24 a 1 (el scrim, gesto). AC-6: semántica idéntica (10 `section`, 1 `footer`, 4 `ul`, 1 `ol`, 16 `li`, mismos ids y encabezados). El grep de AC-2 daba un falso positivo (`\bgrid` casa con `home__hero-grid`): expresión corregida y validada contra un control (`mb-4` → 1, `home__hero-grid` → 0) | Spec actualizada (AC-2) |
+| 2026-10-20 | **Bug de `Cell` encontrado al mirar `/dev/layout`**: un número suelto (`start={7}`) solo se emitía para `sm`, que tiene 4 columnas y no genera clases para la 5 en adelante; la guía de 12 columnas salía como una sola barra. Cualquier `Cell` con `start`/`span` numérico mayor que 4 lo habría sufrido | Un valor suelto aplica a todos los breakpoints, y en cada uno solo se emite la clase si la celda cabe (si no, ancho completo). La landing no usaba números sueltos en `start`/`span`: sigue dentro del umbral |
+| 2026-10-20 | T-18: `/dev/layout` responde 200 con `<meta name="robots" content="noindex, nofollow, nocache">`; `shot` sin hallazgos en sm/md/lg; sin scroll horizontal en móvil. AC-5: `Col` contra `Cell` → sm Δx 0 / Δw 0, md Δx 0 / Δw 0.02px, lg Δx 0 / Δw 0. Guía: 4/6/12 columnas en una fila. Capturas revisadas: escritorio completo, zona de `Grid`, tabla y `Stack` en móvil, y superposición y salida parcial en móvil | — |
+| 2026-10-20 | AC-8 pide "una sección por cada una de las 7 primitivas": `Grid` y `Cell` comparten sección porque una `Cell` no existe fuera de un `Grid`. Son 6 secciones que cubren las 7 | Se reporta así en la verificación |

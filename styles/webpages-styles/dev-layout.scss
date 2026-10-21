@@ -1,0 +1,135 @@
+// ============================================================
+// DEV / LAYOUT — referencia viva de las primitivas (SPEC-0004)
+// Solo gestos de documentación: cajas de muestra, marcos, código y la
+// guía de columnas. El layout lo componen las primitivas.
+// ============================================================
+
+.devlayout {
+  background-color: var(--color-text-white);
+  overflow-x: hidden;
+}
+
+// Una regla fina entre primitivas: separa sin cambiar de fondo.
+.devlayout__section {
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+// Filas de la tabla "¿Qué uso?".
+.devlayout__row {
+  padding-block: var(--space-3);
+  border-top: 1px solid var(--color-outline-variant);
+}
+
+.devlayout__prop {
+  padding-block: var(--space-1);
+}
+
+// Código: `Text` no trae variante de código, así que el gesto conserva los
+// saltos de línea y deja desplazar en horizontal en móvil.
+.devlayout__code {
+  white-space: pre;
+  overflow-x: auto;
+  padding: var(--space-4);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+// Marco punteado de cada demo: "aquí adentro es un ejemplo".
+.devlayout__frame {
+  padding: var(--space-6);
+  border: 1px dashed var(--color-outline-variant);
+  border-radius: var(--radius-md);
+}
+
+// Cajas de muestra. El naranja solo marca columnas activas.
+.devlayout__box {
+  padding: var(--space-3);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  background-color: var(--color-surface);
+}
+
+.devlayout__box--accent {
+  border-color: var(--color-primary);
+  background-color: var(--color-primary-container);
+}
+
+.devlayout__box--media {
+  border-color: var(--color-text-black);
+  background-color: var(--color-text-black);
+}
+
+// Relleno de un Media o de una celda a sangre: ocupa el marco como una foto.
+.devlayout__fill {
+  position: absolute;
+  inset: 0;
+  padding: var(--space-3);
+  background-color: var(--color-text-black);
+}
+
+// Bandas de la demo de Section: sin Container, necesitan aire lateral.
+.devlayout__band {
+  padding-inline: var(--space-4);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+}
+
+.devlayout__mark {
+  flex: 0 0 auto;
+  margin-top: var(--space-1);
+  line-height: 0;
+}
+
+// Guía de columnas: solo se ven las del breakpoint actual (4, 6 o 12).
+.devlayout__guide-md,
+.devlayout__guide-lg {
+  display: none;
+}
+
+@include md {
+  .devlayout__guide-md {
+    display: block;
+  }
+}
+
+@include lg {
+  .devlayout__guide-lg {
+    display: block;
+  }
+}
+
+// Demo "texto sobre foto a sangre": misma mecánica que el hero.
+.devlayout__stage {
+  min-height: 420px; // gesto: altura de la demo
+  isolation: isolate;
+}
+
+.devlayout__stage-media {
+  position: relative;
+  z-index: -1;
+}
+
+.devlayout__stage-content {
+  position: relative;
+  padding-block: var(--space-10);
+}
+
+// Demo de superposición: la tarjeta pinta encima del Media, que está posicionado.
+.devlayout__lift {
+  position: relative;
+}
+
+.devlayout__card {
+  padding: var(--space-8);
+  border: 2px solid var(--color-text-black);
+  border-radius: var(--radius-md);
+  background-color: var(--color-text-white);
+}
+
+// Foco visible: el reset global lo quita, así que la página lo devuelve.
+.devlayout :is(a, button):focus-visible {
+  outline: 2px solid var(--color-text-black) !important;
+  outline-offset: 2px;
+  border-radius: 2px; // gesto: esquina del anillo de foco
+}
