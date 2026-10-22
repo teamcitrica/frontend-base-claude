@@ -13,7 +13,7 @@ estables del repo) y las **specs** (unidades de trabajo).
 | **Entender el repo** | [arquitectura](02-architecture/overview.md) |
 | **Entender el porqué** | [producto](product.md) → [marca](01-design/brand.md) |
 | **Crear una web nueva** | [playbook](01-design/reference/new-web-playbook.md) |
-| **Levantar una marca nueva** | [rebranding](rebranding.md) |
+| **Levantar una marca nueva** | `/citrica-landing <marca>` (camino rápido, [ADR-0008](04-decisions/0008-catalogo-de-estilos-landing.md)) · [rebranding](rebranding.md) (detalle) |
 
 ## Estructura
 

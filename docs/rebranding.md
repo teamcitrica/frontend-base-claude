@@ -18,8 +18,13 @@ Cambiar solo `docs/product.md` **no rebrandea nada visualmente**. Hay que bajar 
 
 ## Paso 0 — ¿Marca nueva sobre una base usada? Empieza limpio
 
-Si el repo ya tiene una marca encima —landing construida, specs cerradas— no rebrandees
-por encima: **arranca de cero** con
+**Camino rápido:** `/citrica-landing <marca>` pregunta brief, paleta y estilo (catálogo de
+9 o dirección de impeccable), propone 2–3 tarjetas de dirección, ejecuta los pasos de abajo
+desde la elegida y deja la spec 0001 lista para `/spec-build`. Ver
+[ADR-0008](04-decisions/0008-catalogo-de-estilos-landing.md).
+
+**Camino manual:** si el repo ya tiene una marca encima —landing construida, specs
+cerradas— no rebrandees por encima: **arranca de cero** con
 
 ```
 /brand-new <nombre-de-la-marca>

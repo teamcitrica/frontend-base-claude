@@ -93,7 +93,11 @@ tuyo. No hay margen contra el que compararse.
 
 Este repo es una base para proyectos.
 
-**¿Marca nueva sobre una base ya usada?** `/brand-new <marca>` — borra la superficie
+**¿Landing de marca nueva?** `/citrica-landing <marca>` — pregunta brief, paleta y estilo
+(catálogo de 9 o impeccable), propone 2–3 direcciones, rebrandea y deja la spec 0001 lista
+para `/spec-build`. Ver [ADR-0008](docs/04-decisions/0008-catalogo-de-estilos-landing.md).
+
+**¿Solo reiniciar a mano?** `/brand-new <marca>` — borra la superficie
 anterior y todas las specs, y rebrandea de cero. Es destructivo y confirma antes.
 El orden completo está en **[docs/rebranding.md](docs/rebranding.md)**.
 
