@@ -1,6 +1,6 @@
 ---
 name: Glassmorphism
-cliche_risk: alto — vidrio sobre manchas de color es plantilla de 2021; se diferencia con una sola capa de vidrio con función
+comp: 03-glassmorphism.png
 ---
 
 # Glassmorphism
@@ -24,17 +24,16 @@ por capas. Encaja con **C** (producto) y **A**.
 - `outline-variant`: blanco al 10–20 % sobre el fondo (borde de vidrio).
 
 ## 3. Tipografía
-- **a (display):** Sora · Urbanist (400–500, nada pesado).
-- **b/c:** Figtree · Manrope.
-- **d:** igual a b.
-- `_text.scss`: sin mayúsculas forzadas en headline/title (display puede ir en mayúsculas
-  con `letter-spacing: 0.02em`); pesos medios.
-- No Outfit ni SF Pro (lista de impeccable / no disponible en Google Fonts).
-
+- **a (display/headline/title):** Sora · Urbanist, 400–500 (nada pesado).
+- **b (base) y d (body/subtitle):** Figtree · Manrope.
+- **c (label, botones):** la de b, 500.
+- `_text.scss`: display en mayúsculas con `letter-spacing: 0.02em`; headline/title sin
+  mayúsculas; pesos medios.
+- No Outfit (lista de impeccable); SF Pro no está en Google Fonts.
 ## 4. Forma
 `--radius-md: 20px` · `--form-radius-btn: 12px` · campos `12px`.
 
-## 5. Gestos permitidos en `home.scss`
+## 5. Gestos permitidos en `<slug>.scss`
 - `.home__glass`: panel translúcido con `backdrop-filter` y borde claro tenue.
 - Fondo de luz ambiental con `radial-gradient` de 2–3 tokens (estático o muy lento).
 - Halo difuso del `primary` bajo el CTA.
@@ -43,16 +42,27 @@ por capas. Encaja con **C** (producto) y **A**.
 `Section tone="base"` con fondo `.home__ambient` · `Grid`+`Cell` con misma `row` para
 apilar paneles desplazados · `Stack` dentro del panel · `Media` para el mock flotante.
 
-## 7. Anti-patrones
+## 7. Qué muestra la imagen y cómo se construye
+
+La imagen es el **comp aprobado** cuando el usuario la elige: se reproduce su composición
+región por región ([comp-led.md](../comp-led.md)). El copy se reescribe para la marca; la
+posición, la escala y el material se respetan.
+
+![Glassmorphism](03-glassmorphism.png)
+
+| Región de la imagen | Kind | En este repo |
+|---|---|---|
+| Fondo pizarra con luces rosa y cian fuera de foco | `texture` | `Section tone="base"` con `.<slug>__ambient` (2 `radial-gradient` con `color-mix`) |
+| Tres paneles de vidrio apilados y desplazados | `chrome` | `Grid` con 3 `Cell` en la misma `row`, `start` distinto, `.<slug>__glass` (blur, borde 10 %) |
+| Titular 2 líneas blanco, centrado | `text` | `Text variant="display"` en `Stack` centrado |
+| Bajada clara | `text` | `Text variant="subtitle" textColor="color-text-white"` |
+| CTA violeta con halo | `control` | `Button variant="primary"` + `.<slug>__glow` (halo de `primary`) |
+| Dos mocks de móvil en vidrio (derecha) | `plate` | foto de stock de móvil con la app, o `Media ratio="3/4"` con panel `.<slug>__glass` vacío que contenga una `Card` del toolkit |
+| Badge "powered by" arriba a la derecha | `chrome` | `Cluster` en `Cell start={{lg:10}} span={{lg:3}}`, `.<slug>__glass` pequeño |
+
+Los mocks son plates: sin producto real, se sustituyen por paneles de vidrio con componentes del toolkit dentro (una `Card`, un `Input`), que es honesto y se parece.
+
+## 8. Anti-patrones
 - Vidrio sobre vidrio sobre vidrio: legibilidad cero.
 - Texto pequeño sobre el blur sin comprobar contraste (debe pasar 4.5:1 en el punto más
-  claro del fondo).
 - `backdrop-filter` en elementos que hacen scroll largo (coste de rendimiento).
-- **Romper el cliché:** un solo panel de vidrio con función (el formulario, el precio) y el
-  resto sólido; o luces con el hue de la marca, no el violeta/cian por defecto.
-
-## 8. Imagen de referencia
-![Glassmorphism](03-glassmorphism.png)
-- Capas de vidrio apiladas con desplazamiento: profundidad sin sombras duras.
-- Manchas de luz cian y magenta detrás, fuera de foco.
-- Un mock de app flotando a la derecha, también en vidrio.

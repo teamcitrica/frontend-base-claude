@@ -93,9 +93,11 @@ tuyo. No hay margen contra el que compararse.
 
 Este repo es una base para proyectos.
 
-**¿Landing de marca nueva?** `/citrica-landing <marca>` — pregunta brief, paleta y estilo
-(catálogo de 9 o impeccable), propone 2–3 direcciones, rebrandea y deja la spec 0001 lista
-para `/spec-build`. Ver [ADR-0008](docs/04-decisions/0008-catalogo-de-estilos-landing.md).
+**¿Landing de marca nueva?** `/citrica-landing <marca> [brief] [--ruta <slug>]` — pide
+solo el brief, enseña en el navegador el catálogo de 9 estilos con imagen (o deja que
+impeccable proponga), rebrandea y deja la spec lista para un `/spec-build` **fiel a la
+imagen elegida** (comp-led). Con `--ruta` no borra nada. Ver
+[ADR-0008](docs/04-decisions/0008-catalogo-de-estilos-landing.md).
 
 **¿Solo reiniciar a mano?** `/brand-new <marca>` — borra la superficie
 anterior y todas las specs, y rebrandea de cero. Es destructivo y confirma antes.
@@ -120,7 +122,7 @@ cambia la pantalla.
 |---|---|
 | Brand colors (hex) | `styles/10-tokens/web/colors/_palette.scss` |
 | Type scale / variants | `styles/10-tokens/web/components/_text.scss` |
-| Fonts (Anton/Lato) | `styles/01-settings/settings.scss` |
+| Fonts (Anton/Lato) | `lib/fonts.ts` (`next/font`) → slots en `styles/01-settings/settings.scss` |
 | Button render | `styles/10-tokens/web/components/_button.scss` |
 | Button/form radius | `styles/10-tokens/web/components/_form.scss` |
 | Spacing (`--space-N` = N×4px = Tailwind), section rhythm, radius, motion, measure | `styles/10-tokens/web/foundations/` |

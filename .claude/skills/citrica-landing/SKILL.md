@@ -1,212 +1,193 @@
 ---
 name: citrica-landing
-description: Levanta una landing de marca nueva sobre esta base con nuestra forma de trabajar — pregunta solo brief, paleta y estilo (catálogo de 9 estilos o dirección de impeccable), propone 2–3 tarjetas de dirección, rebrandea el render y deja la spec 0001 lista para /spec-build. Úsala para "landing nueva", "marca nueva", "opciones de landing", "dirección visual" o "catálogo de estilos".
-argument-hint: <marca>
+description: Levanta la landing de una marca nueva (o una ruta nueva) sobre esta base con nuestra forma de trabajar — pide solo el brief, enseña en el navegador el catálogo de 9 estilos con imagen o deja que impeccable proponga, y construye fiel a la imagen elegida (comp-led) dentro del contrato. Úsala para "landing nueva", "marca nueva", "opciones de landing", "dirección visual", "catálogo de estilos".
+argument-hint: <marca> [brief en una línea] [--ruta <slug>]
 allowed-tools: Bash, Read, Write, Edit, Glob, Grep, AskUserQuestion
 ---
 
-# Landing de marca nueva
+# Landing fiel a una imagen
 
-Vas a levantar la landing de la marca **$ARGUMENTS** sobre esta base. Si no hay
-argumento, pregunta la marca en la Fase 1.
+Vas a levantar la landing de **$ARGUMENTS**. El argumento trae la marca; opcionalmente
+el brief en una línea y `--ruta <slug>`.
 
-Esta skill **reemplaza la entrevista de `/brand-new`** y ejecuta sus pasos de render desde
-una dirección elegida. **No reemplaza los gates del SDD**: la spec se aprueba antes del plan,
-el plan antes del código, y el código lo escribe `/spec-build`.
+Lo que esta skill hace distinto de `/brand-new` + SDD a mano: pregunta **una** cosa, el
+usuario **elige mirando imágenes**, y la landing se construye **medida contra la imagen
+que eligió**. No reemplaza los gates del SDD: la spec se aprueba antes del plan, el plan
+antes del código, y el código lo escribe `/spec-build`.
 Ver [ADR-0008](../../../docs/04-decisions/0008-catalogo-de-estilos-landing.md).
 
-Lo que ya trae decidido —no se pregunta—:
-- El [contrato de implementación](../../../docs/01-design/implementation-contract.md):
-  color solo desde tokens, texto solo con `Text`, layout solo con `Container`/`Col` y las
-  primitivas de `shared/components/layout/`, toolkit antes que markup propio.
-- Las reglas operativas de la skill `citrica-ui` (trampas de `Text`, `Icon`, `Header`).
-- Dónde va cada archivo: [conventions.md](../../../docs/00-harness/conventions.md).
+Ya viene decidido y no se pregunta:
+- El [contrato](../../../docs/01-design/implementation-contract.md): color desde tokens,
+  texto con `Text`, layout con `Container`/`Col` y las primitivas de
+  `shared/components/layout/`, toolkit antes que markup propio.
+- Las reglas operativas de la skill `citrica-ui` y dónde va cada archivo
+  ([conventions.md](../../../docs/00-harness/conventions.md)).
+- La paleta y la tipografía salen del estilo elegido; el brief solo las ajusta.
 
-## Referencias de esta skill
+## Referencias
 
 | Archivo | Cuándo |
 |---|---|
-| [references/direction-card.md](references/direction-card.md) | Fase 2 y 5 — plantilla de tarjeta y su paso a Direction contract |
-| [references/landing-structures.md](references/landing-structures.md) | Fase 2 — los 4 esqueletos con primitivas |
-| [references/styles/](references/styles/) | Fase 2 — un archivo + imagen por estilo |
-| [references/palette-recipe.md](references/palette-recipe.md) | Fase 4 — de 3–5 hex a `_palette.scss` |
-| [references/style-to-render.md](references/style-to-render.md) | Fase 2, 4 y en el build — traducción del catálogo a tokens/primitivas |
+| [references/decision-page.md](references/decision-page.md) | Fase 2 — payload de la página de decisión, fallback a chat, ronda de impeccable |
+| [references/comp-led.md](references/comp-led.md) | Fase 4 y build — registrar el comp, regiones, fuentes, medir el hero, plates imposibles |
+| [references/styles/](references/styles/) | Fase 3 y 4 — un archivo + imagen por estilo, con la tabla región → repo |
+| [references/palette-recipe.md](references/palette-recipe.md) | Fase 3 — de la paleta de entrada a `_palette.scss` |
+| [references/style-to-render.md](references/style-to-render.md) | Fase 3 y 4 — gestos del catálogo a tokens, fuentes con `next/font`, toolkit cliente |
+| [references/direction-card.md](references/direction-card.md) | Fase 4 — de la tarjeta elegida al Direction contract |
+| [references/landing-structures.md](references/landing-structures.md) | Solo ruta "impeccable propone" sin imagen |
 
 Catálogo: `01-clean-saas` · `02-neo-brutalism` · `03-glassmorphism` · `04-swiss` ·
 `05-bento` · `06-cyberpunk` · `07-luxury-editorial` · `08-y2k` · `09-aurora`.
 
 ---
 
-## Fase 0 — Confirma antes de borrar nada
+## Fase 0 — Modo
 
-**Para y pregunta.** Esta skill destruye la superficie anterior, y parte de ella **no se
-recupera con git** porque nunca se commiteó.
+**Sin `--ruta` = marca nueva.** Destruye la superficie anterior. Copia literal del paso 0
+de [`/brand-new`](../../commands/brand-new.md):
 
 ```bash
 git status --short app/ docs/03-specs/
 ```
 
-Todo lo que salga como `??` es **irrecuperable** una vez borrado. Enséñale al usuario la
-lista concreta —no un resumen— y pídele confirmación explícita. Si hay trabajo sin
-commitear que valga la pena conservar, ofrécele commitearlo o crear una rama antes.
+Todo lo que salga como `??` es irrecuperable una vez borrado. Enséñale al usuario la
+lista concreta y pide confirmación explícita. No sigas sin un sí.
 
-No sigas sin un sí.
+**Con `--ruta <slug>` = ruta nueva, sin borrar nada.** La landing vive en `app/<slug>/`,
+el SCSS en `styles/webpages-styles/<slug>.scss` (clases `.<slug>__*`, `@import` en
+`styles/custom.scss`), la spec toma el **siguiente número libre**, `docs/product.md` y
+`docs/design.md` se **amplían** con una sección `Surface: /<slug>` en vez de reescribirse,
+y `config/site.ts` no se toca. Aviso de una línea: paleta y fuentes son globales, así que
+`/` también cambia de color y de letra.
 
-## Fase 1 — Brief en una sola ronda
+## Fase 1 — Brief
 
-Un único `AskUserQuestion` con estas cuatro preguntas (las opciones son ejemplos; el usuario
-responde en "Other" con su texto):
+Si el argumento trae el brief, **no preguntes nada**. Si no, una sola `AskUserQuestion`
+con una pregunta: "¿Qué vende, a quién, y qué debe hacer la visitante?" con tres ejemplos
+como opciones y la respuesta real en "Other". Lee antes `docs/product.md`: si ya describe
+esta marca, tampoco preguntes.
 
-1. **Negocio** — sector, público y la acción que debe hacer el visitante (CTA primario).
-2. **Voz** — tres adjetivos y lo que la marca **no** debe parecer (anti-referencias).
-3. **Paleta** — 3–5 hex (acción, estructura, acento, fondo, claro/oscuro) o "sugiere".
-4. **Estilo** — uno del catálogo (usa los nombres de arriba; muestra la imagen de
-   referencia si el usuario la pide) o **"que impeccable decida"**.
+Nada de voz, paleta, anti-referencias ni estilo por texto. Todo eso lo decide la imagen.
 
-Antes de preguntar, lee `docs/product.md` y `docs/design.md`: si ya traen datos de esta
-marca, no los vuelvas a pedir.
+## Fase 2 — Elegir mirando
 
-Lo que falte se **asume** y se marca como `Supuesto` en la tarjeta. No hay segunda ronda de
-preguntas.
-
-## Fase 2 — Genera 2–3 tarjetas de dirección
-
-Lee `references/direction-card.md` y `references/landing-structures.md`.
-
-**Con estilo de catálogo:** lee `references/styles/<estilo>.md` y mira su `.png`. Las
-tarjetas comparten estilo, tipografía y forma, y varían en esqueleto, composición del hero,
-gesto de firma y mapeo de paleta. Cada tarjeta rompe el cliché del estilo en al menos un
-eje (sección 7 del archivo del estilo).
-
-**Con "que impeccable decida":** ejecuta `/impeccable shape` con el brief de la Fase 1
-como contexto (modo Persuade, superficie landing). Convierte las direcciones que proponga
-en tarjetas con la misma plantilla. Si impeccable produce una seed key, va en el bloque
-FORM. El contrato le gana a impeccable: sin `clamp()` en SCSS de página, sin paletas
-OKLCH paralelas — la paleta baja a `_palette.scss` como en cualquier otro caso.
-
-Todas las tarjetas:
-- usan solo primitivas, componentes del toolkit y tokens existentes;
-- no proponen fuentes de la lista de impeccable (Fraunces, Playfair Display, Cormorant,
-  Lora, Crimson, Newsreader, Syne, Space Grotesk, Space Mono, IBM Plex, Inter como display,
-  DM Sans, DM Serif, Outfit, Plus Jakarta Sans, Instrument Sans) salvo razón explícita;
-- tienen el CTA primario en el primer viewport.
-
-Muestra las tarjetas en pantalla. No las escribas a disco.
-
-## Fase 3 — Elección
-
-`AskUserQuestion` con una opción por tarjeta, más "mezclar" (el usuario dice qué toma de
-cada una). Una sola iteración de ajuste; si después sigue sin convencer, vuelve a la Fase 2
-con lo aprendido, no a la Fase 1.
-
-## Fase 4 — Capa de render
-
-Ejecuta los pasos 1–5 de [`/brand-new`](../../commands/brand-new.md) usando la tarjeta
-elegida como brief. En resumen:
-
-1. **Borra la superficie anterior:** `app/home/components`, `app/home/hooks`, placeholder en
-   `app/page.tsx`, `styles/webpages-styles/home.scss` vacío (sin borrar el archivo). Revisa
-   huérfanos en `public/img/`.
-2. **Borra las specs** numeradas; conserva `_template/` y `README.md` (con la fila "sin specs
-   todavía"). La numeración vuelve a `0001` ([ADR-0005](../../../docs/04-decisions/0005-arranque-de-marca.md)).
-3. **Intención:** reescribe `docs/product.md` desde el brief (no toques el encabezado
-   `## Register` ni su formato: se parsea literal; `Register` = brand) y `docs/design.md`
-   desde la tarjeta, con una sección "Dirección vigente" que la cite. Actualiza las
-   "Restricciones heredadas" de `docs/03-specs/_template/spec.md` si mencionan la marca anterior.
-4. **Paleta:** `styles/10-tokens/web/colors/_palette.scss` con
-   [palette-recipe.md](references/palette-recipe.md). **Solo valores.** Comprueba los 10
-   pares de contraste antes de escribir.
-5. **Resto del render:**
-   - fuentes: `@import` de Google Fonts y `$font-family-a/b/c/d` en
-     `styles/01-settings/settings.scss` (no inventes `--font-<nombre>`);
-   - escala y casing: `styles/10-tokens/web/components/_text.scss` según la sección 3 del
-     estilo;
-   - forma: `foundations/_radius.scss`, `components/_form.scss`, `components/_button.scss`;
-   - identidad: `config/site.ts` (`name`, `navLinks` del esqueleto, `seo.*`, `seo.colors`
-     sincronizado con la paleta);
-   - logo en `public/img/`; si no existe, pídelo, y si no puede parar el trabajo, wordmark
-     de texto marcado `TEMPORAL`. Nunca el default del `Header` ("Matour").
-
-Cierra la fase:
+Sigue [decision-page.md](references/decision-page.md): escribe el payload de las 10
+tarjetas (9 estilos con su PNG en `comp` + "Que impeccable proponga") en el scratchpad y
+sirve la página:
 
 ```bash
-npm run typecheck && npm run lint:check && npm run contract
+node ~/.claude/skills/impeccable/scripts/serve-question.mjs --payload <payload.json> --timeout 900
 ```
 
-Typecheck en cero, lint y contrato sin violaciones nuevas, sin aviso de deriva de la
-paleta. Después, `/impeccable document` para regenerar `.impeccable/design.json`.
+Lee `ANSWER: {...}` de stdout. Exit 2 → no hay navegador: muestra los PNG en el chat con
+`Read` y pregunta con `AskUserQuestion`. Exit 4 → cerró sin elegir: pregunta si repite.
 
-## Fase 5 — Spec 0001 y Direction contract
+- **Estilo del catálogo:** su PNG es el **comp aprobado**. No hay más rondas. El `steer`
+  que haya escrito es un ajuste puntual y se anota.
+- **"Que impeccable proponga":** ronda 2 de `decision-page.md` (`concept-seed.mjs
+  --scope surface`, tres estructuras con `wireframe` + foto buscada; comps generados solo
+  si existe `OPENAI_API_KEY`, avisando el coste). Lo que elija es el comp aprobado, o el
+  wireframe si no hubo imagen (build code-led).
+
+## Fase 3 — Render desde la imagen
+
+Lee `references/styles/<estilo>.md` entero y mira su PNG.
+
+1. **Superficie** (solo marca nueva): pasos 1–2 de `/brand-new` — borrar
+   `app/home/{components,hooks}`, placeholder en `app/page.tsx`, vaciar `home.scss`,
+   borrar specs numeradas conservando `_template/` y `README.md`.
+2. **Intención:** `docs/product.md` (header `## Register` literal; `Register` = brand) y
+   `docs/design.md` con una sección "Dirección vigente" que nombre el estilo, la imagen
+   (`comp:`) y la tabla región → repo del archivo del estilo. En modo ruta, ampliar en vez
+   de reescribir.
+3. **Paleta:** "Paleta de entrada" del estilo → `_palette.scss` con
+   [palette-recipe.md](references/palette-recipe.md). Solo valores. Comprobar los 10
+   pares de contraste antes de escribir. Ajustar al brief solo si choca (color propio de
+   la marca, claro/oscuro).
+4. **Fuentes:** `lib/fonts.ts` con `next/font/google` (familias de la sección 3 del
+   estilo; `font-match.mjs` afina cuando ya hay `spec.json`), variables `--font-brand-*`
+   en `<html>` (`app/layout.tsx`), slots `$font-family-a/b/c/d` en `settings.scss`.
+   **Nunca `@import url()`** en SCSS. Slots: `a` display/headline/title · `b` base ·
+   `c` label y botones · `d` body y subtitle.
+5. **Escala y forma:** `_text.scss` (casing, tracking, tamaños del estilo),
+   `foundations/_radius.scss`, `components/_form.scss`, `components/_button.scss`.
+6. **Identidad** (solo marca nueva): `config/site.ts` (`name`, `navLinks`, `seo.*`,
+   `seo.colors` en sincronía con la paleta), logo en `public/img/` o wordmark `TEMPORAL`.
+
+Cierre: `npm run typecheck && npm run lint:check && npm run contract`. Typecheck en cero,
+sin violaciones nuevas, sin deriva de nombres en la paleta. Luego `/impeccable document`.
+
+## Fase 4 — Spec y comp
 
 ```bash
-cp -r docs/03-specs/_template docs/03-specs/0001-landing-<marca-en-kebab>
+cp -r docs/03-specs/_template docs/03-specs/<NNNN>-landing-<marca>
 ```
 
-- **`spec.md`** — frontmatter (`id: 0001`, `superficie: landing`, `estado: draft`,
-  `creada` = hoy). Problema y Por qué ahora desde el brief, en términos del visitante.
-  Alcance = las secciones del esqueleto elegido. Fuera de alcance: admin, panel, páginas
-  internas, contenido real que no se tenga (fotos, testimonios, cifras: se marcan como
-  sintéticos). Criterios: un AC por sección + CTA dentro del fold en sm/md/lg + sin scroll
-  horizontal + contraste. Restricciones heredadas: las que aplican.
-- **`/impeccable shape`** — obligatorio en PLAN ([ADR-0003](../../../docs/04-decisions/0003-impeccable-obligatorio.md)).
-  Con estilo de catálogo, córrelo ahora: con `design.md` y la tarjeta ya escritos, hereda el
-  mundo y solo resuelve jerarquía y composición por sección. Con "que impeccable decida", el
-  `shape` de la Fase 2 ya cumple. Su salida entra al plan.
-- **`plan.md`** — "Dirección de diseño" = la tarjeta íntegra + lo que aportó `shape`. Archivos: un
-  `app/home/components/<seccion>.tsx` `[nuevo]` por sección, `app/page.tsx`,
-  `styles/webpages-styles/home.scss`. Componentes y tokens: la primitiva y los componentes
-  del toolkit de cada sección; cada gesto de `home.scss` con su traducción de
-  `style-to-render.md`.
-- **`tasks.md`** — T-01/02 preparación, T-03+ una tarea por sección → su AC, T-90..95 de
-  la plantilla.
-- **Índice:** fila en `docs/03-specs/README.md`.
-- **Direction contract:** escribe el cuerpo del surface brief con el mapa de
-  `direction-card.md` (6 bloques, ≤ 150 palabras) bajo `## Direction contract` y guárdalo con
+1. **Comp:** [comp-led.md](references/comp-led.md) §1–3 — `build-phase.mjs start --comp`,
+   `comp-spec.mjs --grid` / `--auto`, revisar regiones contra la tabla del estilo,
+   `font-match`. Si eligió wireframe (sin imagen): build code-led, saltar este punto.
+2. **`spec.md`** — `superficie: landing`, `estado: draft`. Problema y Por qué ahora desde
+   el brief. Alcance = regiones/secciones del comp. Fuera de alcance: admin, panel, páginas
+   internas, contenido real que no se tenga (fotos, precios, cifras → de muestra). AC: uno
+   por sección + CTA en el fold sm/md/lg + sin scroll horizontal + **hero ≥ 0.72 en
+   `comp-diff`** (si hay comp).
+3. **`/impeccable shape`** — obligatorio en PLAN (ADR-0003). Con comp aprobado y
+   `design.md` escrito hereda el mundo: solo resuelve jerarquía y estados por sección.
+4. **`plan.md`** — "Comp aprobado": ruta del PNG + tabla región → kind → cómo se
+   construye (de `comp-led.md` §2 y del archivo del estilo), incluidas las fotos de stock
+   verificadas para cada `image`/`plate`. Archivos: un `app/<ruta>/components/<seccion>.tsx`
+   por sección, `page.tsx`, `<slug>.scss`. Componentes y tokens por sección.
+5. **`tasks.md`** — T-01/02 prep, T-03+ una por sección → AC, una tarea "medir hero con
+   `comp-diff`" antes de las secciones, T-90..95.
+6. **Direction contract** — `direction-card.md` → `.impeccable/surfaces/` vía
+   `surface-brief.mjs write app/<ruta>/page.tsx <cuerpo>` (a mano si el script falla).
+   FIRST VIEWPORT = la imagen descrita región por región; FORM = `comp:<png>`.
+7. Fila en `docs/03-specs/README.md`.
 
-  ```bash
-  node ~/.claude/skills/impeccable/scripts/surface-brief.mjs write app/page.tsx <archivo-del-cuerpo>
-  ```
+**Gates:** enseña la spec y pide aprobación explícita (`approved`); luego plan y tasks
+(`in-progress`). Con preguntas abiertas no se aprueba.
 
-  Si el script no existe o cambió de interfaz, escribe `.impeccable/surfaces/landing.md` a
-  mano y anótalo en la bitácora de `tasks.md`.
+## Fase 5 — Entrega
 
-**Gates:** enseña la spec y pide aprobación explícita antes de pasarla a `approved`. Luego
-enseña plan y tasks y pide aprobación antes de `in-progress`. Si hay preguntas abiertas, la
-spec no se aprueba.
+Para aquí y di:
 
-## Fase 6 — Entrega
+> Ejecuta `/spec-build <NNNN>-landing-<marca>` y después `/spec-verify`.
 
-Para aquí. Dile al usuario:
+`/spec-build` corre `/impeccable craft` **comp-led**: hero primero, `comp-diff` ≥ 0.72
+contra la imagen, luego secciones, motion y responsive; el finish reviewer recibe el comp.
+Construir desde la skill duplicaría eso y saltaría el momento en que el usuario aprueba
+el plan con la cabeza fría.
 
-> Ejecuta `/spec-build 0001-landing-<marca>` y después `/spec-verify 0001-landing-<marca>`.
-
-`/spec-build` ya corre `/impeccable craft` sobre el Direction contract (como hay
-`design.md` y contrato, impeccable **hereda el mundo** en lugar de abrir otro torneo de
-conceptos), hace `npm run shot` y lleva la bitácora. Construir desde aquí duplicaría todo
-eso y saltaría el momento en que el usuario aprueba el plan con la cabeza fría.
-
-Cierra con una lista de lo generado: tarjeta elegida, archivos de render tocados,
-resultado de typecheck/lint/contract, ruta de la spec y del surface brief, supuestos
-pendientes de confirmar y contenido sintético a reemplazar.
+Cierra con la lista de lo generado: imagen elegida, archivos de render tocados,
+typecheck/lint/contract, ruta de la spec, del surface brief y de `.impeccable/build/`,
+fotos de stock usadas y contenido de muestra a reemplazar.
 
 ---
 
 ## Reglas duras
 
-- Nunca hex ni `rgba()` en `.tsx` ni en `styles/webpages-styles/`. Los hex de los archivos
-  de estilo son **entrada para la paleta**, no valores para el código.
-- Nunca una clase de Tailwind del catálogo en el código: se traduce con
-  `style-to-render.md`.
+- **La imagen elegida manda.** Si una regla de `craft-floor` (gradient text, sombra dura,
+  vidrio, mayúsculas) choca con lo que la imagen muestra, gana la imagen, escrita con
+  tokens. Solo el usuario rebaja la autoridad del comp, con sus palabras.
+- Nunca hex ni `rgba()` en `.tsx` ni en `styles/webpages-styles/`. Los hex de los estilos
+  y del payload son entrada para `_palette.scss`.
+- Nunca una clase de Tailwind del catálogo: se traduce con `style-to-render.md`.
 - Nunca un nombre nuevo, renombrado o borrado en `_palette.scss`.
-- Nunca `clamp()` ni `font-family` en SCSS de página.
-- Nunca `<div>` para layout; los gestos van en `home.scss` bajo `.home__*`.
-- Nunca métricas, clientes, precios o testimonios inventados presentados como reales.
+- Nunca `clamp()`, `font-family` ni `@import url()` en SCSS.
+- Nunca `<div>` para layout; los gestos van en `<slug>.scss` bajo `.<slug>__*`.
+- Todo componente que importe `citrica-ui-toolkit` lleva `"use client"`; `page.tsx` queda
+  de servidor solo para `metadata`.
+- Nunca métricas, clientes, precios o testimonios inventados como reales. Fotos de stock
+  siempre marcadas de muestra y verificadas con `curl -I`.
+- No proponer fuentes de la lista de impeccable (Fraunces, Playfair Display, Cormorant,
+  Lora, Crimson, Newsreader, Syne, Space Grotesk, Space Mono, IBM Plex, Inter como display,
+  DM Sans, DM Serif, Outfit, Plus Jakarta Sans, Instrument Sans) salvo que `font-match`
+  no dé otra cercana a la imagen.
 
-## Por qué impeccable hereda en vez de competir
+## Por qué impeccable no compite con el catálogo
 
-impeccable no acepta "carriles estéticos enlatados" cuando abre un mundo nuevo, pero ante
-un **mundo establecido** —`docs/design.md` con identidad coherente y un surface brief con
-Direction contract— lo hereda y solo resuelve composición y oficio. Por eso esta skill
-escribe ambos **antes** del build: el estilo de catálogo se vuelve mundo de la marca, y
-`/impeccable craft` y `/impeccable audit` trabajan dentro de él. Si el usuario eligió "que
-impeccable decida", el mundo lo propuso impeccable en la Fase 2 y el resultado es el mismo.
+impeccable rechaza "carriles estéticos enlatados" cuando inventa un mundo, pero una
+dirección fijada por el usuario le gana al azar siempre (`new-work.md` §3), y un comp
+aprobado es un contrato espacial que solo el usuario puede rebajar. Por eso la skill fija
+`design.md`, el Direction contract y el comp **antes** del build: `shape` hereda, `craft`
+mide, el finish reviewer juzga contra la misma imagen.

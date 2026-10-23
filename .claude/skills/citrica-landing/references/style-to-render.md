@@ -20,6 +20,13 @@ las tarjetas, ni en el código. Si un agente las copia, viola la regla 4 del
 | Layout | `Container`/`Col` + `Section`, `Stack`, `Cluster`, `Media`, `AutoGrid`, `Grid`+`Cell` | Guía viva: `/dev/layout` |
 | Gesto de marca | `styles/webpages-styles/home.scss`, clases `.home__*` | Solo gestos: sombras, scrims, fondos, keyframes. Prohibido flex/grid/gap ahí |
 
+## Toolkit = cliente
+
+Todo componente que importe `citrica-ui-toolkit` lleva `"use client"` arriba: el toolkit
+no lo declara y desde un server component rompe (`createContext is not a function`). El
+`page.tsx` de la ruta queda de servidor solo para `export const metadata = buildMetadata(…)`
+y compone secciones cliente.
+
 ## Traducciones
 
 ### Layout
@@ -71,13 +78,22 @@ las tarjetas, ni en el código. Si un agente las copia, viola la regla 4 del
 | degradado iridiscente / cromado (Y2K) | `linear-gradient` de 3–4 paradas, todas `var(--color-*)` o `color-mix()`; nunca hex |
 | scanlines / retícula HUD | `repeating-linear-gradient(0deg, color-mix(in srgb, var(--color-primary) 6%, transparent) 0 1px, transparent 1px 4px)` como fondo de una `.home__*` |
 | esquinas recortadas (HUD) | `clip-path: polygon(...)` en `.home__*` |
+| fondo holográfico / iridiscente | `conic-gradient` o 2–3 `radial-gradient` con `color-mix` de `primary`, `tertiary`, `cuaternary`, `quinary` + `@keyframes` lento de `background-position`; estático con reduced-motion |
+| figura 3D, cromo, blob, estrella grande | es un **plate**: foto de stock en su lugar, SVG propio con `fill` de tokens, o recorte del comp marcado de muestra. Ver [comp-led.md](comp-led.md) §2 y §5 |
+| estrella ✦ / icono | `Icon name="Sparkle"` (Lucide), nunca un glifo de texto |
 | hairline editorial `border-t border-stone-300/50` | `border-top: 1px solid color-mix(in srgb, var(--color-outline) 50%, transparent)` |
 | líneas de retícula visibles (Swiss) | `border-inline-start: 1px solid var(--color-on-surface)` en celdas `.home__*`; nunca un `div` vacío para dibujar líneas |
 
 ### Tipografía
 
+Las fuentes se cargan con `next/font/google` en `lib/fonts.ts` (un `@import url()` en SCSS
+lo descarta Turbopack sin avisar). Cada fuente expone una variable y los slots de
+`settings.scss` la consumen: `a` = display/headline/title · `b` = base del html ·
+`c` = label y botones · `d` = body y subtitle. Mono o pixel solo en `c`, nunca en `d`.
+
 | Origen | En este repo |
 |---|---|
+| titular cromado / degradado | `.<slug>__chrome-text { background: linear-gradient(…tokens…); -webkit-background-clip: text; background-clip: text; color: transparent; }` sobre un `Text`; permitido cuando la imagen lo muestra |
 | `text-6xl font-bold` | `<Text variant="display">` (la escala vive en `_text.scss`) |
 | `tracking-tight` / `-0.02em` | `letter-spacing: -0.02em` en `.text-display` / `.text-headline` de `_text.scss` |
 | `tracking-widest text-xs uppercase` | `.text-label` con `letter-spacing: 0.16em; text-transform: uppercase` en `_text.scss` |

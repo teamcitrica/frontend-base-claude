@@ -1,7 +1,7 @@
 # ADR-0008 — Catálogo de estilos y skill `citrica-landing`
 
 - **Estado:** Aceptada
-- **Fecha:** 2026-10-21
+- **Fecha:** 2026-10-21 · revisada 2026-10-23 tras el primer dry-run
 
 ## Contexto
 
@@ -22,38 +22,52 @@ propia ronda de dirección en `/spec-plan`.
 
 Creamos la skill de proyecto `citrica-landing` (`.claude/skills/citrica-landing/`):
 
-1. Pregunta solo brief, paleta y estilo, en una ronda.
-2. El **catálogo de 9 estilos es opcional**: el usuario elige uno o deja que `impeccable`
-   proponga la dirección (`/impeccable shape`).
-3. Propone 2–3 **tarjetas de dirección** con una plantilla fija; el usuario elige.
-4. Ejecuta los pasos de render de `/brand-new` desde la tarjeta elegida.
-5. Escribe `docs/design.md` y `.impeccable/surfaces/landing.md` con el Direction contract
-   **antes** del build, para que `impeccable` herede la dirección en vez de competir con ella.
-6. Escribe la spec 0001 (spec, plan, tasks) respetando los gates, y entrega a `/spec-build`.
+1. Pregunta **una** cosa: el brief (o nada, si viene en el argumento). Voz, paleta y
+   tipografía se derivan del estilo elegido.
+2. El usuario **elige mirando**: una página de decisión en el navegador
+   (`serve-question.mjs` de impeccable) con las 9 imágenes del catálogo y una tarjeta
+   "que impeccable proponga". Sin navegador, las imágenes se muestran en el chat.
+3. **La imagen elegida es el comp aprobado.** Se registra con `build-phase.mjs start
+   --comp`, `comp-spec` la divide en regiones, y `/spec-build` construye el hero medido
+   contra ella con `comp-diff` (≥ 0.72). La composición, la escala y los materiales de la
+   imagen se respetan; el copy, la paleta de la marca y las fotos se sustituyen.
+4. Si elige impeccable, este propone tres estructuras propias (`concept-seed.mjs --scope
+   surface`) con esquema y foto buscada; los comps se generan solo si existe
+   `OPENAI_API_KEY`, avisando el coste.
+5. Ejecuta los pasos de render de `/brand-new` desde el estilo, escribe `docs/design.md`,
+   el Direction contract y la spec (gates intactos), y entrega a `/spec-build`.
+6. **Modo ruta** (`--ruta <slug>`): misma skill sin borrar nada, para probar una dirección
+   junto a la landing existente.
 
-Precedencia: **contrato > estilo de catálogo > impeccable**. Los hex de los archivos de
-estilo son entrada para `_palette.scss`, nunca valores para el código; las clases de
-Tailwind del catálogo solo existen en la columna "origen" de `style-to-render.md`.
+Precedencia: **contrato > imagen elegida > craft-floor de impeccable**. La imagen puede
+pedir texto cromado, sombra dura o vidrio; se construye con tokens. La regla de "romper el
+cliché" que traía el catálogo se retira: si el usuario eligió esa imagen, quiere esa imagen.
+
+Las fuentes de Google se cargan con `next/font` (`lib/fonts.ts`); el `@import url()` en
+SCSS lo descarta Turbopack. Los componentes que importan el toolkit llevan `"use client"`.
 
 `/brand-new` se conserva como camino manual.
 
 ## Consecuencias
 
-- Mejora: direcciones comparables antes de tocar código; menos preguntas; la forma de
-  trabajar (primitivas, toolkit, tokens) viene incluida.
-- Mejora: `shape` sigue siendo obligatorio en PLAN (ADR-0003) y es barato, porque hereda.
-- Empeora: la skill duplica parte de `/brand-new`; un cambio en sus pasos hay que reflejarlo
-  en ambos sitios.
-- Riesgo: depende del comportamiento de `impeccable` 4.1.3 (herencia de mundo,
-  `surface-brief.mjs`). Si cambia, la skill degrada a escribir el brief a mano; revisar este
-  ADR al actualizar `impeccable`.
-- Riesgo: los estilos con cliché conocido (lujo editorial, cyberpunk, aurora) exigen que la
-  tarjeta rompa el cliché en algún eje, o `shape`/`audit` los marcarán.
+- Mejora: el usuario ve antes de decidir y la landing se parece a lo que vio; la
+  fidelidad se mide, no se opina.
+- Mejora: una pregunta en vez de cuatro; la forma de trabajar (primitivas, toolkit,
+  tokens) viene incluida.
+- Empeora: la skill duplica parte de `/brand-new`; un cambio allí hay que reflejarlo aquí.
+- Empeora: sin generación de imágenes, los **plates** de la imagen (figuras 3D, mockups)
+  no se pueden producir: se sustituyen por fotos reales en su lugar o por un hueco honesto,
+  y el gate `plates` puede exigir `advance --force` con palabras del usuario.
+- Riesgo: depende de impeccable 4.1.3 (`serve-question`, `build-phase`, `comp-diff`,
+  herencia de mundo). Si cambia, la skill degrada a chat + build code-led; revisar este
+  ADR al actualizar impeccable.
 
 ## Alternativas consideradas
 
-- **Previews HTML por opción** — descartado por ahora: más lento y deja rutas que borrar.
-  Las tarjetas en markdown bastan para decidir.
+- **Tarjetas de dirección en markdown** — fue la primera versión; el usuario eligió a
+  ciegas y la landing no se pareció a la imagen. Descartado.
+- **Previews HTML construidos por opción** — más lento que la página de decisión y deja
+  rutas que borrar; la imagen del catálogo ya es el preview.
 - **El estilo manda siempre y se salta `impeccable`** — choca con ADR-0003.
 - **Que la skill también construya** — duplicaría `/spec-build` y diluiría el gate de plan
   aprobado antes de código.

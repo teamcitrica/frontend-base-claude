@@ -128,9 +128,10 @@ npm run contract        # avisa si el set de nombres derivó
 
 ## 5. El resto del render
 
-- **Tipografía:** `.ttf`/`.woff2` a `fonts/`, `@font-face` y slots `a/b/c/d` en
-  `styles/01-settings/settings.scss`. No crees `--font-<nombre>`: cambia qué fuente vive
-  en cada slot.
+- **Tipografía:** Google Fonts en `lib/fonts.ts` (`next/font`; nunca `@import url()` en
+  SCSS, Turbopack lo descarta); fuentes propias a `fonts/` con `@font-face`. Slots
+  `a/b/c/d` en `styles/01-settings/settings.scss` (`a` display · `b` base · `c` label y
+  botones · `d` body). No crees `--font-<nombre>`: cambia qué fuente vive en cada slot.
 - **Escala:** `styles/10-tokens/web/components/_text.scss` si la tipografía nueva pide
   otros tamaños. Ojo con los pisos de legibilidad de la marca.
 - **Forma:** `_form.scss` (radios), `_button.scss`.

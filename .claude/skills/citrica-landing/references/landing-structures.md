@@ -1,5 +1,9 @@
 # Esqueletos de landing
 
+> Con un **comp aprobado** (imagen del catálogo o generada) la estructura la fija la
+> imagen; esta referencia solo aplica a la ruta "que impeccable proponga" sin imagen
+> (wireframe, build code-led) y a las secciones que el comp no muestra.
+
 Cuatro esqueletos base. Una tarjeta de dirección elige uno y lo adapta: puede quitar,
 reordenar o fusionar secciones, pero nombra el esqueleto del que parte.
 

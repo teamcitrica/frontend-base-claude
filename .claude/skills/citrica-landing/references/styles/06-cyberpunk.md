@@ -1,6 +1,6 @@
 ---
 name: Cyberpunk / dark tech
-cliche_risk: alto — casi-negro + neón es un cliché que impeccable detecta; exige una razón de producto
+comp: 06-cyberpunk.png
 ---
 
 # Cyberpunk / dark tech
@@ -27,16 +27,16 @@ negro. Solo si el producto es técnico o de juego y la densidad de datos es real
 - `outline`: `primary` al 50 %.
 
 ## 3. Tipografía
-- **a (display):** Orbitron · Chakra Petch.
-- **b (texto):** Chakra Petch 400 · Rajdhani.
-- **c/d (datos, chips):** JetBrains Mono · Share Tech Mono.
-- `_text.scss`: display y headline en mayúsculas con `letter-spacing: 0.04em`; label mono.
+- **a (display/headline/title):** Orbitron · Chakra Petch.
+- **b (base) y d (body/subtitle):** Chakra Petch 400 · Rajdhani. El cuerpo de la imagen va
+  en mayúsculas anchas: `text-transform: uppercase` en `.text-body`.
+- **c (label, chips, datos):** JetBrains Mono · Share Tech Mono.
+- `_text.scss`: display y headline en mayúsculas con `letter-spacing: 0.04em`.
 - No Space Mono ni IBM Plex (lista de impeccable).
-
 ## 4. Forma
 `--radius-md: 0` · `--form-radius-btn: 0`. Esquinas con `clip-path` en vez de radio.
 
-## 5. Gestos permitidos en `home.scss`
+## 5. Gestos permitidos en `<slug>.scss`
 - Brillo neón (`box-shadow` con `color-mix` del `primary`) en CTA y marco principal.
 - Esquinas recortadas con `clip-path`.
 - Scanlines o retícula tenue de fondo con `repeating-linear-gradient`.
@@ -45,15 +45,26 @@ negro. Solo si el producto es técnico o de juego y la densidad de datos es real
 `Grid`+`Cell` para el HUD (panel principal + paneles laterales) · `Cluster` de chips de
 estado · `Stack gap={2}` para bloques densos de datos.
 
-## 7. Anti-patrones
+## 7. Qué muestra la imagen y cómo se construye
+
+La imagen es el **comp aprobado** cuando el usuario la elige: se reproduce su composición
+región por región ([comp-led.md](../comp-led.md)). El copy se reescribe para la marca; la
+posición, la escala y el material se respetan.
+
+![Cyberpunk](06-cyberpunk.png)
+
+| Región de la imagen | Kind | En este repo |
+|---|---|---|
+| Marco HUD con esquinas en L brillantes | `chrome` | `Section` con `.<slug>__hud` (borde `primary`, `clip-path`, `box-shadow` neón) envolviendo el `Grid` |
+| Menú de etiquetas entre corchetes arriba a la derecha | `chrome` | `Header` del toolkit con items `[MENU]`, o `Cluster` de `Text label` mono |
+| Columna izquierda: título de sistema, titular amarillo, línea de estado, cuerpo en mayúsculas, CTA cian, 3 chips | `text` | `Cell span={{lg:6}}` con `Stack`; titular `Text headline textColor="color-tertiary"`; `Button variant="primary"` con `clip-path`; chips `Cluster` de `Text label` con borde de su color |
+| Panel derecho anidado con grafo de red | `plate` | `Cell start={{lg:8}} span={{lg:5}}` con `.<slug>__panel` anidado; el grafo es SVG propio (círculos + líneas, `stroke: var(--color-primary)`) |
+| Etiquetas de datos y mini gráficas de barras alrededor del panel | `text` | `Text label` mono + SVG de barras con tokens |
+| Fondo negro con columnas de dígitos tenues y scanlines | `texture` | `.<slug>__scan` con `repeating-linear-gradient`; los dígitos, `Text label` con `opacity` baja en una `Cell` de fondo |
+
+Los datos pseudo-técnicos de la imagen no se copian: cada etiqueta lleva un dato real del producto o se omite.
+
+## 8. Anti-patrones
 - Texto de relleno pseudo-técnico (`SYS_LOAD`, `ENCRYPT_KEY`) sin significado: ruido.
 - Neón en párrafos: ilegible. El neón es para bordes y titulares.
 - Animaciones de glitch permanentes (accesibilidad y fatiga).
-- **Romper el cliché (obligatorio para pasar `shape`):** fondo no negro (azul petróleo muy
-  oscuro, verde fósforo), un solo neón en vez de tres, o datos reales del producto.
-
-## 8. Imagen de referencia
-![Cyberpunk](06-cyberpunk.png)
-- Marco HUD con esquinas en L brillantes y paneles anidados.
-- Titular amarillo como la acción; CTA cian con brillo y esquinas recortadas.
-- Chips de estado encajonados con borde de color.

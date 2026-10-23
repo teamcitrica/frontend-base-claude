@@ -7,6 +7,11 @@ edición si añades, renombras o borras uno ([ADR-0005](../../../../docs/04-deci
 
 ## Entrada
 
+La base es la **"Paleta de entrada" del estilo elegido** (sección 1 de su archivo): esos
+hex son los que hacen que la landing se parezca a la imagen. El brief solo los ajusta
+cuando choca (la marca tiene un color propio, el sector pide claro en vez de oscuro). No
+se pregunta la paleta.
+
 De la tarjeta elegida:
 
 | Entrada | Va a | Obligatoria |

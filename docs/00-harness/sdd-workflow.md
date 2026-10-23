@@ -62,9 +62,10 @@ un comando **no es un criterio de aceptación**. Reescribirlo.
 
 **Puerta:** la spec se aprueba antes de planear. Sin aprobación no se pasa a 2.
 
-> En una marca nueva, `/citrica-landing <marca>` escribe la spec 0001 (y su plan) en
-> `draft` desde la dirección elegida y pide las mismas aprobaciones. Las puertas no cambian.
-> Ver [ADR-0008](../04-decisions/0008-catalogo-de-estilos-landing.md).
+> En una marca nueva, `/citrica-landing <marca>` escribe la spec (y su plan) en `draft`
+> desde la imagen elegida y pide las mismas aprobaciones. Las puertas no cambian. Deja
+> además un comp aprobado en `.impeccable/build/`, y `/spec-build` construye medido
+> contra él. Ver [ADR-0008](../04-decisions/0008-catalogo-de-estilos-landing.md).
 
 ### 2 — PLAN · `/spec-plan <slug>`
 

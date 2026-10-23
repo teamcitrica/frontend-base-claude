@@ -1,6 +1,6 @@
 ---
 name: Aurora / malla de gradiente fluida
-cliche_risk: alto — near-black + luces de color roza el cliché que impeccable detecta; se diferencia por el hue y la contención
+comp: 09-aurora.png
 ---
 
 # Aurora / malla de gradiente
@@ -23,16 +23,15 @@ por líneas. Encaja con **C** y **A**.
 - `outline-variant`: blanco al 10 %.
 
 ## 3. Tipografía
-- **a (display):** Sora · Lexend (600–700).
-- **b/c:** Manrope · Figtree.
-- **d:** igual a b; JetBrains Mono si hay código.
-- `_text.scss`: display en mayúsculas opcional, `letter-spacing: -0.01em`.
+- **a (display/headline/title):** Sora · Lexend, 600–700.
+- **b (base) y d (body/subtitle):** Manrope · Figtree.
+- **c (label, botones):** la de b, 500; `JetBrains Mono` solo dentro del panel de código.
+- `_text.scss`: display en mayúsculas como la imagen, `letter-spacing: -0.01em`.
 - No Plus Jakarta Sans ni Inter como display (lista de impeccable).
-
 ## 4. Forma
 `--radius-md: 20px` · `--form-radius-btn: var(--radius-pill)`.
 
-## 5. Gestos permitidos en `home.scss`
+## 5. Gestos permitidos en `<slug>.scss`
 - `.home__aurora`: malla de `radial-gradient` con tokens, animada muy lenta (≥ 12s) y
   estática con reduced-motion.
 - Tarjeta oscura translúcida con blur y borde claro al 10 %.
@@ -42,14 +41,25 @@ por líneas. Encaja con **C** y **A**.
 `Section` sin cortes duros entre secciones (mismo fondo, la malla cambia de posición) ·
 `Container` + `Col lg 6/6` · `Stack` · `Media` para el panel de código/producto.
 
-## 7. Anti-patrones
+## 7. Qué muestra la imagen y cómo se construye
+
+La imagen es el **comp aprobado** cuando el usuario la elige: se reproduce su composición
+región por región ([comp-led.md](../comp-led.md)). El copy se reescribe para la marca; la
+posición, la escala y el material se respetan.
+
+![Aurora](09-aurora.png)
+
+| Región de la imagen | Kind | En este repo |
+|---|---|---|
+| Nav: logo "AURORA", 5 enlaces, "Login" en píldora | `chrome` | `Header` del toolkit con `showButton` |
+| Aurora magenta/turquesa fluyendo detrás de todo | `texture` | `Section tone="base"` con `.<slug>__aurora` (2–3 `radial-gradient` con `color-mix`, keyframes ≥ 12 s) |
+| Titular 2 líneas blanco pesado (col 1–6) | `text` | `Text variant="display" textColor="color-text-white"` |
+| Bajada gris clara | `text` | `Text variant="subtitle" textColor="color-on-surface-var"` |
+| Dos CTAs: borde de gradiente brillante + píldora oscura | `control` | `Button variant="primary"` + `.<slug>__glow-border`; `Button variant="secondary"` |
+| Panel de código translúcido con 3 puntos (col 8–12) | `plate` | `Cell start={{lg:8}} span={{lg:5}}` con `.<slug>__glass` y `Text label` mono con el código real del producto; si no hay código, `Media` con captura |
+
+El panel de código es honesto solo si hay producto técnico; para otra marca ocupa el lugar una foto en `Media ratio="4/3"` dentro del mismo vidrio.
+
+## 8. Anti-patrones
 - Malla que compite con el texto: el titular siempre sobre la zona más oscura.
 - Animación rápida o que reacciona al scroll en todo el fondo.
-- **Romper el cliché (obligatorio para pasar `shape`):** lienzo no casi-negro (azul
-  medianoche, ciruela profunda), luces con el hue de la marca, o una sola luz dominante.
-
-## 8. Imagen de referencia
-![Aurora](09-aurora.png)
-- Luz fluida magenta-turquesa ocupando el viewport detrás del titular.
-- Titular blanco pesado; CTA con borde de gradiente brillante.
-- Panel de código translúcido flotando a la derecha.
