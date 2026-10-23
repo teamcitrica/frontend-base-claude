@@ -1,6 +1,7 @@
 import "@/styles/globals.scss";
 import { Providers } from "../shared/providers";
 import { buildMetadata, viewport as seoViewport } from "@/lib/seo";
+import { fontVariables } from "@/lib/fonts";
 import { GoogleAnalytics, GoogleTagManager } from "@next/third-parties/google";
 // import { Toaster } from 'react-hot-toast';
 // import SupabaseProvider from '@/shared/context/supabase-context' // DESCOMENTAR PARA USAR SUPABASE
@@ -23,7 +24,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html suppressHydrationWarning lang="es">
+    <html suppressHydrationWarning className={fontVariables} lang="es">
       <head />
       <body>
         {/* Analítica de Google: GTM si el ID empieza por "GTM-", si no GA4.
