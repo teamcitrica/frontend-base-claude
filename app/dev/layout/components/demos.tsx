@@ -149,6 +149,12 @@ export const MediaDemo = () => (
       </Media>
       <Caption>Fotos más altas: platos, personas.</Caption>
     </Stack>
+    <Stack gap={3}>
+      <Media ratio="3/4">
+        <MediaFill label="ratio 3/4" />
+      </Media>
+      <Caption>Retrato: moda, personas de cuerpo entero.</Caption>
+    </Stack>
   </AutoGrid>
 );
 
