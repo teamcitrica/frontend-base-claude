@@ -93,6 +93,9 @@ lo descarta Turbopack sin avisar). Cada fuente expone una variable y los slots d
 
 | Origen | En este repo |
 |---|---|
+| cuerpo grande (comp con párrafos a 24–32px) | `Text variant="headlinecustom"` → clase `.text-headlinecustom` en `_text.scss` (escala 20/24/28 por defecto; cambiar valores, no clases) |
+| borde del botón más grueso | `--form-border-size-input` en `_form.scss` (lo heredan botones y campos); nunca `border` en `.<slug>__cta` |
+| botón de borde que se rellena al hover | `Button variant="secondary"` + tokens `secondary-btn-*` (bg transparente o tinte, borde y texto de acento, hover invertido) |
 | titular cromado / degradado | `.<slug>__chrome-text { background: linear-gradient(…tokens…); -webkit-background-clip: text; background-clip: text; color: transparent; }` sobre un `Text`; permitido cuando la imagen lo muestra |
 | `text-6xl font-bold` | `<Text variant="display">` (la escala vive en `_text.scss`) |
 | `tracking-tight` / `-0.02em` | `letter-spacing: -0.02em` en `.text-display` / `.text-headline` de `_text.scss` |

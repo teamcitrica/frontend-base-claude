@@ -37,8 +37,9 @@ luego `npm run shot` y `comp-diff.mjs --comp <png> --build .shots/<slug>-lg-fold
 --spec .impeccable/build/spec.json`; no se pasa a las secciones con menos de 0.72 ni con
 regiones `missing`. `build-phase.mjs status` dice en qué fase vas. El detalle está en
 `.claude/skills/citrica-landing/references/comp-led.md`. Donde el comp pida algo que no
-se puede producir (figura 3D, mockup), se pregunta al usuario **una** vez antes de
-`advance --force`.
+se puede producir (figura 3D, mockup) y el usuario **ya eligió** el sustituto, se fuerza
+citando esa elección sin volver a preguntar (`comp-led.md` §5); solo se pregunta si no
+hay decisión registrada.
 
 > **Precedencia: donde `impeccable` choque con el contrato, gana el contrato.** Sus
 > recomendaciones de `clamp()` y de composición de paleta **no** aplican aquí: la escala

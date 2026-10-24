@@ -166,6 +166,11 @@ fotos de stock usadas y contenido de muestra a reemplazar.
 
 ## Reglas duras
 
+- **Las decisiones registradas no se vuelven a preguntar.** Si un gate de `build-phase`
+  falla por una elección que el usuario ya hizo (foto en vez de plate) o por el toolkit
+  (`Header`, `Button`), la skill fuerza con la cita, según `comp-led.md` §5.
+- **Alinear antes de afinar** (`comp-led.md` §4b): posición por `inkBox`, luego escala,
+  luego copy. Dos rondas de `comp-diff`.
 - **La imagen elegida manda.** Si una regla de `craft-floor` (gradient text, sombra dura,
   vidrio, mayúsculas) choca con lo que la imagen muestra, gana la imagen, escrita con
   tokens. Solo el usuario rebaja la autoridad del comp, con sus palabras.
@@ -177,6 +182,10 @@ fotos de stock usadas y contenido de muestra a reemplazar.
 - Nunca `<div>` para layout; los gestos van en `<slug>.scss` bajo `.<slug>__*`.
 - Todo componente que importe `citrica-ui-toolkit` lleva `"use client"`; `page.tsx` queda
   de servidor solo para `metadata`.
+- Tras `eslint --fix`, relee antes de volver a editar el mismo archivo.
+- En sm: titulares con `_` o sin espacios llevan `overflow-wrap: anywhere`; texturas del
+  margen (`digits`) solo en `lg`; el CTA usa `textVariant="subtitle"` o `"body"` para no
+  partirse.
 - Nunca métricas, clientes, precios o testimonios inventados como reales. Fotos de stock
   siempre marcadas de muestra y verificadas con `curl -I`.
 - No proponer fuentes de la lista de impeccable (Fraunces, Playfair Display, Cormorant,
