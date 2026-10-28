@@ -37,7 +37,7 @@ al resto. Un hallazgo que decides no atender se anota como pendiente, no se borr
 Si la superficie es `api` o `infra`, sáltalo y dilo en el reporte.
 
 > Ver [ADR-0003](../../docs/04-decisions/0003-impeccable-obligatorio.md). Ruta del
-> script en este repo: `node ~/.claude/skills/impeccable/scripts/context.mjs`.
+> script en este repo: `~/.claude/skills/impeccable/scripts/impeccable context`.
 
 ## A. Tipos y lint
 
