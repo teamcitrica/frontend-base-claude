@@ -52,3 +52,8 @@ next-env.d.ts
 
 # Capturas de `npm run shot` (verificación visual, ADR-0004)
 .shots/
+
+# impeccable: estado de sesión (página de decisión, build comp-led)
+.impeccable/questions/
+.impeccable/build/
+.impeccable/review/

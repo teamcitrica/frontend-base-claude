@@ -41,7 +41,7 @@ Si la superficie es `api` o `infra`, sáltalo: no hay interfaz que diseñar.
 > primero. Ver [ADR-0003](../../docs/04-decisions/0003-impeccable-obligatorio.md).
 
 > Su Setup pide `node .agents/skills/impeccable/scripts/context.mjs`. **Esa ruta no
-> existe aquí.** Usa `node ~/.claude/skills/impeccable/scripts/context.mjs`.
+> existe aquí.** Usa `~/.claude/skills/impeccable/scripts/impeccable context`.
 
 ## 4. Investiga antes de planear
 

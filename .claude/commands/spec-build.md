@@ -31,6 +31,16 @@ decidió, con el nivel de acabado que `craft` exige.
 
 Si la superficie es `api` o `infra`, sáltalo.
 
+**Comp-led.** Si existe `.impeccable/build/state.json` (lo deja `/citrica-landing` al
+registrar la imagen elegida), `craft` construye **contra ese comp**: primero el hero,
+luego `npm run shot` y `comp-impeccable diff --comp <png> --build .shots/<slug>-lg-fold.png
+--spec .impeccable/build/spec.json`; no se pasa a las secciones con menos de 0.72 ni con
+regiones `missing`. `build-impeccable phase status` dice en qué fase vas. El detalle está en
+`.claude/skills/citrica-landing/references/comp-led.md`. Donde el comp pida algo que no
+se puede producir (figura 3D, mockup) y el usuario **ya eligió** el sustituto, se fuerza
+citando esa elección sin volver a preguntar (`comp-led.md` §5); solo se pregunta si no
+hay decisión registrada.
+
 > **Precedencia: donde `impeccable` choque con el contrato, gana el contrato.** Sus
 > recomendaciones de `clamp()` y de composición de paleta **no** aplican aquí: la escala
 > vive en `_text.scss` y el color en `_palette.scss`. El hook `PostToolUse` lo va a
@@ -38,7 +48,7 @@ Si la superficie es `api` o `infra`, sáltalo.
 > [ADR-0003](../../docs/04-decisions/0003-impeccable-obligatorio.md).
 
 > Su Setup pide `node .agents/skills/impeccable/scripts/context.mjs`. **Esa ruta no
-> existe aquí.** Usa `node ~/.claude/skills/impeccable/scripts/context.mjs`.
+> existe aquí.** Usa `~/.claude/skills/impeccable/scripts/impeccable context`.
 
 ## 4. Ejecuta
 

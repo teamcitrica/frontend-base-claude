@@ -40,7 +40,7 @@ tres choques concretos antes de hacerla obligatoria:
 3. **Ruta rota en el Setup.** Manda correr
    `node .agents/skills/impeccable/scripts/context.mjs`. En este repo **`.agents/` no
    existe**; la ruta que funciona es
-   `node ~/.claude/skills/impeccable/scripts/context.mjs`.
+   `~/.claude/skills/impeccable/scripts/impeccable context`.
 
 Sin una regla de precedencia explícita, estas colisiones se resuelven por accidente:
 gana quien haya leído último. Y como el hook bloquea de verdad, el resultado práctico
@@ -79,7 +79,7 @@ aplica. Nunca al revés.
 **3. La ruta del script se documenta corregida.** En este repo:
 
 ```bash
-node ~/.claude/skills/impeccable/scripts/context.mjs
+~/.claude/skills/impeccable/scripts/impeccable context
 ```
 
 ## Consecuencias

@@ -158,8 +158,8 @@ export const primitives: PrimitiveDoc[] = [
       "Para iconos: usa Icon del toolkit.",
     ],
     props: [
-      { name: "ratio", values: "16/10 · 4/3" },
-      { name: "radius", values: "md (12px, por defecto) · none" },
+      { name: "ratio", values: "16/10 · 4/3 · 3/4" },
+      { name: "radius", values: "md (--radius-md, por defecto) · none" },
     ],
     snippet: `<Media ratio="4/3">
   <Image fill alt="…" className="object-cover" src="…" />
