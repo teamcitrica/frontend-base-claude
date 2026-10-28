@@ -99,6 +99,9 @@ impeccable proponga), rebrandea y deja la spec lista para un `/spec-build` **fie
 imagen elegida** (comp-led). Con `--ruta` no borra nada. Ver
 [ADR-0008](docs/04-decisions/0008-catalogo-de-estilos-landing.md).
 
+Requisitos en la máquina (una vez): `yarn install` y
+`npx impeccable@latest install --global`; Chrome del sistema con escritorio.
+
 **¿Solo reiniciar a mano?** `/brand-new <marca>` — borra la superficie
 anterior y todas las specs, y rebrandea de cero. Es destructivo y confirma antes.
 El orden completo está en **[docs/rebranding.md](docs/rebranding.md)**.

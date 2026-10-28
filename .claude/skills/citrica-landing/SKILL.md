@@ -24,6 +24,21 @@ Ya viene decidido y no se pregunta:
   ([conventions.md](../../../docs/00-harness/conventions.md)).
 - La paleta y la tipografía salen del estilo elegido; el brief solo las ajusta.
 
+## Requisitos (quien clone el repo)
+
+La skill viaja en el repo (`.claude/skills/citrica-landing/`): Claude Code la ve sola al
+abrir el proyecto. Lo que **no** viaja y hay que tener en la máquina, una vez:
+
+```bash
+yarn install                                   # dependencias, incluida playwright
+npx impeccable@latest install --global         # impeccable 4.8+ en ~/.claude/skills/impeccable
+```
+
+Y un Chrome del sistema (para `npm run shot` y la página de decisión) con escritorio
+(`DISPLAY`); sin él, la skill cae al chat. **Antes de la Fase 2 comprueba** que existe
+`~/.claude/skills/impeccable/scripts/impeccable`; si no, para y da el comando de arriba.
+`OPENAI_API_KEY` es opcional (solo para generar comps).
+
 ## impeccable: la CLI
 
 Todo lo de impeccable se invoca con el lanzador `~/.claude/skills/impeccable/scripts/impeccable
