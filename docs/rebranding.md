@@ -18,8 +18,15 @@ Cambiar solo `docs/product.md` **no rebrandea nada visualmente**. Hay que bajar 
 
 ## Paso 0 — ¿Marca nueva sobre una base usada? Empieza limpio
 
-Si el repo ya tiene una marca encima —landing construida, specs cerradas— no rebrandees
-por encima: **arranca de cero** con
+**Camino rápido:** `/citrica-landing <marca> [brief] [--ruta <slug>]` pide solo el brief,
+enseña en el navegador las 9 imágenes del catálogo (o deja que impeccable proponga),
+ejecuta los pasos de abajo desde la imagen elegida y deja la spec lista para un
+`/spec-build` medido contra esa imagen. Con `--ruta` prueba la dirección en una ruta nueva
+sin borrar la landing actual. Ver
+[ADR-0008](04-decisions/0008-catalogo-de-estilos-landing.md).
+
+**Camino manual:** si el repo ya tiene una marca encima —landing construida, specs
+cerradas— no rebrandees por encima: **arranca de cero** con
 
 ```
 /brand-new <nombre-de-la-marca>
@@ -101,21 +108,25 @@ npm run contract   # avisa si el set de nombres derivó
 
 ### Paso 4 — Tipografía · `styles/01-settings/settings.scss` + `fonts/`
 
-1. Copia los `.ttf`/`.woff2` nuevos a [`fonts/`](../fonts/)
-2. Declara los `@font-face` (líneas ~30–110 de `settings.scss`)
-3. Reasigna los slots (líneas ~114–123):
+1. **Google Fonts:** cambia las familias en [`lib/fonts.ts`](../lib/fonts.ts)
+   (`next/font/google`). Cada una expone una variable `--font-brand-*` que se declara en
+   `<html>` desde `app/layout.tsx`. **No** uses `@import url()` en SCSS: Turbopack lo
+   descarta del CSS compilado y el navegador cae al fallback sin avisar.
+   **Fuentes propias:** `.ttf`/`.woff2` a [`fonts/`](../fonts/) y `@font-face` en
+   `settings.scss` (o `next/font/local` en `lib/fonts.ts`).
+2. Reasigna los slots en `settings.scss`:
 
 ```scss
-$font-family-a: 'Anton', Impact, sans-serif;      // display / headline / title
-$font-family-b: 'Lato', 'Helvetica Neue', sans-serif;  // subtitle / body / label
-$font-family-c: …    $font-family-d: …
-$font-family-a-admin: 'Inter', sans-serif;        // panel admin
+$font-family-a: var(--font-brand-display), Impact, sans-serif;   // display / headline / title
+$font-family-b: var(--font-brand-text), 'Helvetica Neue', sans-serif;  // base del html
+$font-family-c: …  // label y botones          $font-family-d: …  // body y subtitle
+$font-family-a-admin: var(--font-brand-admin), sans-serif;        // panel admin
 ```
 
 > Los slots se llaman `a/b/c/d` justamente para que la marca cambie sin renombrar nada.
 > No crees `--font-anton`; cambia qué fuente vive en el slot `a`.
 
-4. Ajusta la escala en `styles/10-tokens/web/components/_text.scss` si la nueva
+3. Ajusta la escala en `styles/10-tokens/web/components/_text.scss` si la nueva
    tipografía necesita otros tamaños por variante.
 
 ### Paso 5 — Forma · `styles/10-tokens/web/foundations/` y `components/`
@@ -201,7 +212,7 @@ Intención
 Render
   [ ] styles/10-tokens/web/colors/_palette.scss      ← el que cambia la pantalla
   [ ] styles/10-tokens/admin/colors/_palette.scss    ← si el panel también rebrandea
-  [ ] fonts/ + styles/01-settings/settings.scss      ← @font-face + slots a/b/c/d
+  [ ] lib/fonts.ts + styles/01-settings/settings.scss ← next/font + slots a/b/c/d
   [ ] styles/10-tokens/web/components/_text.scss     ← escala
   [ ] styles/10-tokens/web/components/_form.scss     ← radios y bordes
 
@@ -234,7 +245,7 @@ brief.
 Verificación rápida:
 
 ```bash
-node ~/.claude/skills/impeccable/scripts/context.mjs
+~/.claude/skills/impeccable/scripts/impeccable context
 ```
 
 Debe imprimir el contenido de ambos archivos, no `NO_PRODUCT_MD`.

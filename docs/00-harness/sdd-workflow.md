@@ -46,7 +46,7 @@ cambio no necesita spec, tampoco necesita `impeccable`.
 
 > Su Setup pide `node .agents/skills/impeccable/scripts/context.mjs`. **Esa ruta no
 > existe en este repo.** La que funciona:
-> `node ~/.claude/skills/impeccable/scripts/context.mjs`.
+> `~/.claude/skills/impeccable/scripts/impeccable context`.
 
 ### 1 — SPEC · `/spec-new <slug>`
 
@@ -61,6 +61,11 @@ Un criterio de aceptación que no se puede comprobar mirando la pantalla o corri
 un comando **no es un criterio de aceptación**. Reescribirlo.
 
 **Puerta:** la spec se aprueba antes de planear. Sin aprobación no se pasa a 2.
+
+> En una marca nueva, `/citrica-landing <marca>` escribe la spec (y su plan) en `draft`
+> desde la imagen elegida y pide las mismas aprobaciones. Las puertas no cambian. Deja
+> además un comp aprobado en `.impeccable/build/`, y `/spec-build` construye medido
+> contra él. Ver [ADR-0008](../04-decisions/0008-catalogo-de-estilos-landing.md).
 
 ### 2 — PLAN · `/spec-plan <slug>`
 

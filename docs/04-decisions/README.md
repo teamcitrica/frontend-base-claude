@@ -17,6 +17,7 @@ repo de ahora en adelante".
 | [0005](0005-arranque-de-marca.md) | Arranque de marca: se borra la anterior, y la paleta cambia valores, nunca nombres | Aceptada | 2026-08-01 |
 | [0006](0006-documentacion-refleja-render.md) | La documentación de diseño describe lo que se renderiza; escala de 4px con tokens globales | Aceptada | 2026-10-20 |
 | [0007](0007-layout-con-primitivas.md) | Layout con primitivas: `Container`/`Col` + `shared/components/layout/`; Tailwind fuera del layout | Aceptada | 2026-10-20 |
+| [0008](0008-catalogo-de-estilos-landing.md) | Catálogo de estilos opcional y skill `citrica-landing` para landings de marca nueva | Aceptada | 2026-10-21 |
 
 ## Cuándo escribir uno
 
