@@ -25,13 +25,13 @@ Creamos la skill de proyecto `citrica-landing` (`.claude/skills/citrica-landing/
 1. Pregunta **una** cosa: el brief (o nada, si viene en el argumento). Voz, paleta y
    tipografía se derivan del estilo elegido.
 2. El usuario **elige mirando**: una página de decisión en el navegador
-   (`serve-question.mjs` de impeccable) con las 9 imágenes del catálogo y una tarjeta
+   (`impeccable serve-question` de impeccable) con las 9 imágenes del catálogo y una tarjeta
    "que impeccable proponga". Sin navegador, las imágenes se muestran en el chat.
-3. **La imagen elegida es el comp aprobado.** Se registra con `build-phase.mjs start
+3. **La imagen elegida es el comp aprobado.** Se registra con `build-impeccable phase start
    --comp`, `comp-spec` la divide en regiones, y `/spec-build` construye el hero medido
    contra ella con `comp-diff` (≥ 0.72). La composición, la escala y los materiales de la
    imagen se respetan; el copy, la paleta de la marca y las fotos se sustituyen.
-4. Si elige impeccable, este propone tres estructuras propias (`concept-seed.mjs --scope
+4. Si elige impeccable, este propone tres estructuras propias (`concept-impeccable seed --scope
    surface`) con esquema y foto buscada; los comps se generan solo si existe
    `OPENAI_API_KEY`, avisando el coste.
 5. Ejecuta los pasos de render de `/brand-new` desde el estilo, escribe `docs/design.md`,
@@ -58,7 +58,8 @@ SCSS lo descarta Turbopack. Los componentes que importan el toolkit llevan `"use
 - Empeora: sin generación de imágenes, los **plates** de la imagen (figuras 3D, mockups)
   no se pueden producir: se sustituyen por fotos reales en su lugar o por un hueco honesto,
   y el gate `plates` puede exigir `advance --force` con palabras del usuario.
-- Riesgo: depende de impeccable 4.1.3 (`serve-question`, `build-phase`, `comp-diff`,
+- Riesgo (ya ocurrido una vez: 4.1.3 → 4.8.0 cambió `scripts/*.mjs` por el lanzador
+  `scripts/impeccable <verbo>`; mismos verbos): depende de impeccable (`serve-question`, `build-phase`, `comp-diff`,
   herencia de mundo). Si cambia, la skill degrada a chat + build code-led; revisar este
   ADR al actualizar impeccable.
 

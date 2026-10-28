@@ -2,7 +2,7 @@
 
 Una opción de landing es una **tarjeta con imagen** en la página de decisión
 ([decision-page.md](decision-page.md)), no un bloque de markdown. Sus campos son los de
-`serve-question.mjs`:
+`impeccable serve-question`:
 
 | Campo | Qué va |
 |---|---|

@@ -1,12 +1,12 @@
 # Página de decisión: elegir viendo
 
 Las opciones se eligen **mirando imágenes en el navegador**, nunca leyendo tarjetas de
-texto. El mecanismo es `serve-question.mjs` de impeccable: sirve una página local con una
+texto. El mecanismo es `impeccable serve-question` de impeccable: sirve una página local con una
 tarjeta por opción, cada una con su imagen, y devuelve la elegida.
 
 ```bash
 IMP=~/.claude/skills/impeccable/scripts
-node $IMP/serve-question.mjs --payload <payload.json> --timeout 900
+$IMP/impeccable serve-question --payload <payload.json> --timeout 900
 ```
 
 - Abre el navegador solo. Espera la respuesta y la imprime por stdout:
@@ -54,7 +54,7 @@ se anota en el Direction contract como ajuste puntual. Seguir con
 
 ## Ronda 2 — solo si eligió "Que impeccable proponga"
 
-1. `node $IMP/concept-seed.mjs --scope surface --mode persuade` (necesita
+1. `$IMP/impeccable concept-seed --scope surface --mode persuade` (necesita
    `docs/product.md` con la sección de la marca ya escrita, aunque sea provisional).
 2. Listar 5–7 estructuras propias a partir del brief; el script indica qué tres índices
    se reparten y cuál lidera (`kicker: "THE ROLL"`).
@@ -62,7 +62,7 @@ se anota en el Direction contract como ajuste puntual. Seguir con
    `curl -I`) y ponerla en `hero`. Dibujar la estructura en `wireframe`
    (`cols: 12`, `rows: 10`, regiones con `label`, `x`, `y`, `w`, `h`, `accent`).
 4. Si existe `OPENAI_API_KEY`: avisar el coste (≈ $0.05–0.25 por imagen) y generar un comp
-   por tarjeta con `generate-image.mjs --out .impeccable/mocks/decision/<id>.png`,
+   por tarjeta con `generate-impeccable image --out .impeccable/mocks/decision/<id>.png`,
    pasando `--ref` con la foto buscada. Sin key, **no** se generan imágenes.
 5. Payload con las tres tarjetas, `reroll: true` y `steer: true`. Servir, leer `ANSWER`.
 6. Con comp generado → comp aprobado, [comp-led.md](comp-led.md). Con wireframe → build

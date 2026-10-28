@@ -46,7 +46,7 @@ cambio no necesita spec, tampoco necesita `impeccable`.
 
 > Su Setup pide `node .agents/skills/impeccable/scripts/context.mjs`. **Esa ruta no
 > existe en este repo.** La que funciona:
-> `node ~/.claude/skills/impeccable/scripts/context.mjs`.
+> `~/.claude/skills/impeccable/scripts/impeccable context`.
 
 ### 1 — SPEC · `/spec-new <slug>`
 

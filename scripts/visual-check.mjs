@@ -119,7 +119,26 @@ for (const vp of VIEWPORTS) {
     }
     window.scrollTo(0, 0);
   });
-  await page.waitForTimeout(1200);
+  // Y espera a que todas las imágenes terminen de cargar: en páginas largas
+  // con fotos remotas, 120ms por paso no alcanza y la captura full-page sale
+  // con marcos vacíos que no son un defecto del build.
+  await page
+    .waitForFunction(
+      () => Array.from(document.images).every((img) => img.complete),
+      { timeout: 20000 },
+    )
+    .catch(() => findings.push(`${vp.name}: aviso — imágenes aún cargando a los 20s`));
+  // La captura full-page (captureBeyondViewport) puede dejar en blanco las
+  // imágenes lazy aunque `complete` sea true: fuerza eager y espera el decode.
+  await page.evaluate(() =>
+    Promise.all(
+      Array.from(document.images).map((img) => {
+        img.loading = "eager";
+        return img.decode().catch(() => undefined);
+      }),
+    ),
+  );
+  await page.waitForTimeout(600);
 
   const broken = await page.evaluate(() =>
     Array.from(document.images)

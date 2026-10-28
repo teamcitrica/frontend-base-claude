@@ -245,7 +245,7 @@ brief.
 Verificación rápida:
 
 ```bash
-node ~/.claude/skills/impeccable/scripts/context.mjs
+~/.claude/skills/impeccable/scripts/impeccable context
 ```
 
 Debe imprimir el contenido de ambos archivos, no `NO_PRODUCT_MD`.

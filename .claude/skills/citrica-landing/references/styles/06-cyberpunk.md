@@ -27,9 +27,11 @@ negro. Solo si el producto es técnico o de juego y la densidad de datos es real
 - `outline`: `primary` al 50 %.
 
 ## 3. Tipografía
-- **a (display/headline/title):** Orbitron · Chakra Petch.
-- **b (base) y d (body/subtitle):** Chakra Petch 400 · Rajdhani. El cuerpo de la imagen va
-  en mayúsculas anchas: `text-transform: uppercase` en `.text-body`.
+- **a (display/title):** Orbitron · Chakra Petch (cara ancha para el título de sistema).
+- **d (headline, body, subtitle):** Barlow Condensed 700–800 · Saira Extra Condensed: el
+  titular y el cuerpo del comp son condensados pesados en mayúsculas; `.text-headline`
+  apunta a `--font-family-d` en `_text.scss`. `text-transform: uppercase` en `.text-body`.
+- **b (base):** Chakra Petch 400 · Rajdhani.
 - **c (label, chips, datos):** JetBrains Mono · Share Tech Mono.
 - `_text.scss`: display y headline en mayúsculas con `letter-spacing: 0.04em`.
 - No Space Mono ni IBM Plex (lista de impeccable).

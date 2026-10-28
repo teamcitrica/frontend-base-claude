@@ -24,6 +24,14 @@ Ya viene decidido y no se pregunta:
   ([conventions.md](../../../docs/00-harness/conventions.md)).
 - La paleta y la tipografía salen del estilo elegido; el brief solo las ajusta.
 
+## impeccable: la CLI
+
+Todo lo de impeccable se invoca con el lanzador `~/.claude/skills/impeccable/scripts/impeccable
+<verbo>` (desde 4.8.0; antes eran `node scripts/<verbo>.mjs`, ya no existen). Verbos que
+usa esta skill: `context`, `serve-question`, `concept-seed`, `build-phase`, `comp-spec`,
+`font-match`, `comp-diff`, `surface-brief`, `generate-image`, `embed-prompt`. Si un verbo
+cambia de interfaz, `impeccable <verbo>` sin argumentos imprime el uso.
+
 ## Referencias
 
 | Archivo | Cuándo |
@@ -76,7 +84,7 @@ tarjetas (9 estilos con su PNG en `comp` + "Que impeccable proponga") en el scra
 sirve la página:
 
 ```bash
-node ~/.claude/skills/impeccable/scripts/serve-question.mjs --payload <payload.json> --timeout 900
+~/.claude/skills/impeccable/scripts/impeccable serve-question --payload <payload.json> --timeout 900
 ```
 
 Lee `ANSWER: {...}` de stdout. Exit 2 → no hay navegador: muestra los PNG en el chat con
@@ -84,7 +92,7 @@ Lee `ANSWER: {...}` de stdout. Exit 2 → no hay navegador: muestra los PNG en e
 
 - **Estilo del catálogo:** su PNG es el **comp aprobado**. No hay más rondas. El `steer`
   que haya escrito es un ajuste puntual y se anota.
-- **"Que impeccable proponga":** ronda 2 de `decision-page.md` (`concept-seed.mjs
+- **"Que impeccable proponga":** ronda 2 de `decision-page.md` (`concept-impeccable seed
   --scope surface`, tres estructuras con `wireframe` + foto buscada; comps generados solo
   si existe `OPENAI_API_KEY`, avisando el coste). Lo que elija es el comp aprobado, o el
   wireframe si no hubo imagen (build code-led).
@@ -105,7 +113,7 @@ Lee `references/styles/<estilo>.md` entero y mira su PNG.
    pares de contraste antes de escribir. Ajustar al brief solo si choca (color propio de
    la marca, claro/oscuro).
 4. **Fuentes:** `lib/fonts.ts` con `next/font/google` (familias de la sección 3 del
-   estilo; `font-match.mjs` afina cuando ya hay `spec.json`), variables `--font-brand-*`
+   estilo; `impeccable font-match` afina cuando ya hay `spec.json`), variables `--font-brand-*`
    en `<html>` (`app/layout.tsx`), slots `$font-family-a/b/c/d` en `settings.scss`.
    **Nunca `@import url()`** en SCSS. Slots: `a` display/headline/title · `b` base ·
    `c` label y botones · `d` body y subtitle.
@@ -123,8 +131,8 @@ sin violaciones nuevas, sin deriva de nombres en la paleta. Luego `/impeccable d
 cp -r docs/03-specs/_template docs/03-specs/<NNNN>-landing-<marca>
 ```
 
-1. **Comp:** [comp-led.md](references/comp-led.md) §1–3 — `build-phase.mjs start --comp`,
-   `comp-spec.mjs --grid` / `--auto`, revisar regiones contra la tabla del estilo,
+1. **Comp:** [comp-led.md](references/comp-led.md) §1–3 — `build-impeccable phase start --comp`,
+   `comp-impeccable spec --grid` / `--auto`, revisar regiones contra la tabla del estilo,
    `font-match`. Si eligió wireframe (sin imagen): build code-led, saltar este punto.
 2. **`spec.md`** — `superficie: landing`, `estado: draft`. Problema y Por qué ahora desde
    el brief. Alcance = regiones/secciones del comp. Fuera de alcance: admin, panel, páginas
@@ -140,7 +148,7 @@ cp -r docs/03-specs/_template docs/03-specs/<NNNN>-landing-<marca>
 5. **`tasks.md`** — T-01/02 prep, T-03+ una por sección → AC, una tarea "medir hero con
    `comp-diff`" antes de las secciones, T-90..95.
 6. **Direction contract** — `direction-card.md` → `.impeccable/surfaces/` vía
-   `surface-brief.mjs write app/<ruta>/page.tsx <cuerpo>` (a mano si el script falla).
+   `surface-impeccable brief write app/<ruta>/page.tsx <cuerpo>` (a mano si el script falla).
    FIRST VIEWPORT = la imagen descrita región por región; FORM = `comp:<png>`.
 7. Fila en `docs/03-specs/README.md`.
 
