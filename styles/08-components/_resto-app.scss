@@ -1,0 +1,96 @@
+// RESTO APP — gestos de "La cuenta clara" como componentes (SPEC-0007).
+// Componentes: shared/project-components/resto-app/
+//
+// Lo que antes cada landing escribía en su SCSS de página vive aquí una sola
+// vez. Solo tokens: color, espacio, radio y duración salen de `var(--…)`; los
+// únicos literales son el grosor de línea y `0`.
+
+// Envoltorio de landing: una sola tinta, selección de marca y foco visible.
+// !important: el Header del toolkit pone `outline: none` en sus enlaces (foco
+// invisible, comprobado tabulando en SPEC-0005). Los campos marcan foco con el
+// borde coral de `_input.scss`, así que se excluyen.
+.c-landing {
+  color: var(--color-on-surface);
+  background-color: var(--color-surface);
+
+  ::selection {
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary-container);
+  }
+
+  :focus-visible:not(input) {
+    outline: 2px solid var(--color-secondary) !important;
+    outline-offset: var(--space-1);
+  }
+
+  .o-section--inverse :focus-visible:not(input) {
+    outline-color: var(--color-text-white) !important;
+  }
+}
+
+// Logo: la altura sale de la escala de espacio; el ancho, de la proporción.
+// 48px en el header (área táctil del enlace del logo). `align-self`: dentro de
+// una Stack (flex en columna) se estiraba al ancho entero y el SVG quedaba
+// centrado en una caja de 1216px.
+.c-logo {
+  display: block;
+  align-self: flex-start;
+  width: auto;
+  height: var(--space-12);
+
+  &--lg {
+    height: var(--space-24);
+  }
+}
+
+// Tarjeta ticket: papel claro con sombra corta de hoja apoyada en el mostrador.
+// Doble clase: gana al fondo y al radio del Card de HeroUI sin !important.
+.c-ticket.c-ticket {
+  background-color: var(--color-surface-bright);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-paper);
+  // El cuerpo del Card ya trae su propio relleno: aquí solo se completa.
+  padding: var(--space-3);
+}
+
+// Marca de contenido de muestra dentro del ticket ("Muestra", "Ejemplo").
+.c-ticket__tag {
+  padding: var(--space-1) var(--space-3);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-surface-container-high);
+  white-space: nowrap;
+}
+
+// Tarjeta de módulo: papel claro con borde de divisor, sin sombra.
+.c-module.c-module {
+  background-color: var(--color-surface-bright);
+  border: 1px solid var(--color-outline-variant);
+  border-radius: var(--radius-md);
+  padding: var(--space-2);
+}
+
+.c-icon {
+  color: var(--color-secondary);
+  flex-shrink: 0;
+}
+
+// Fila de cuenta: punteado inferior; la última fila antecede al total.
+.c-row {
+  padding-block: var(--space-3);
+  border-bottom: 1px dashed var(--color-outline);
+}
+
+// Cifra: tabular y a la derecha, nunca partida; cede el concepto de al lado.
+// En Lora 700 `tnum` también ensancha espacios: solo en la cifra.
+.c-figure {
+  text-align: end;
+  white-space: nowrap;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+// Banda de total: arena de ticket.
+.c-total {
+  background-color: var(--color-tertiary);
+  border-radius: var(--form-radius-input);
+  padding: var(--space-4);
+}

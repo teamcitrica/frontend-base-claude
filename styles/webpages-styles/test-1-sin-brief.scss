@@ -1,0 +1,102 @@
+// Gestos de marca de /test-1-sin-brief — Resto App, SPEC-0005.
+// Solo gestos: tinta, papel, punteado de ticket y banda de total. El layout lo
+// hacen las primitivas; el color sale de tokens (sin hex, sin clamp()).
+// Ver docs/design.md → "La cuenta clara".
+
+// Una sola tinta: el texto suelto no hereda el casi negro de HeroUI.
+.test-1-sin-brief {
+  color: var(--color-on-surface);
+  background-color: var(--color-surface);
+
+  ::selection {
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary-container);
+  }
+
+  // !important: el Header del toolkit pone `outline: none` en sus enlaces y
+  // el foco de teclado quedaba invisible (comprobado tabulando). Los campos
+  // ya marcan foco con el borde coral (`_input.scss`), así que se excluyen.
+  :focus-visible:not(input) {
+    outline: 2px solid var(--color-secondary) !important;
+    outline-offset: 3px;
+  }
+}
+
+// Wordmark TEMPORAL "Resto App" en el header, hasta que llegue el logo.
+// Interlínea de 48px: el enlace del logo alcanza el área táctil mínima.
+.test-1-sin-brief__wordmark {
+  font-size: 28px;
+  line-height: 48px;
+}
+
+// Bandas alternas: la crema es el fondo; el contenedor da el cambio de tono.
+.test-1-sin-brief__band {
+  background-color: var(--color-surface-container);
+}
+
+// Ticket: papel claro con sombra corta de hoja apoyada en el mostrador.
+.test-1-sin-brief__ticket.test-1-sin-brief__ticket {
+  background-color: var(--color-surface-bright);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--color-shadow) 8%, transparent),
+    0 8px 8px -8px color-mix(in srgb, var(--color-shadow) 12%, transparent);
+  // El cuerpo del Card ya trae su propio relleno: aquí solo se completa.
+  padding: var(--space-3);
+}
+
+// Línea de la cuenta: punteado inferior, cifra a la derecha.
+.test-1-sin-brief__ticket-row {
+  padding-block: var(--space-3);
+  border-bottom: 1px dashed var(--color-outline);
+}
+
+// Cifras tabulares solo en las cifras: en Lora 700, `tnum` también ensancha
+// los espacios, así que no va en el texto corrido. La cifra nunca se parte;
+// cede el concepto de la izquierda.
+.test-1-sin-brief__figure {
+  text-align: end;
+  white-space: nowrap;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+// Sobre la banda azul el secundario es azul sobre azul: se reasignan sus
+// tokens a la pareja inversa, sin re-estilar el botón.
+.test-1-sin-brief__inverse {
+  --color-secondary-btn-text: var(--color-text-white);
+  --color-secondary-btn-border: var(--color-text-white);
+  --color-secondary-btn-border-hover: var(--color-text-white);
+  --color-secondary-btn-hover: var(--color-text-white);
+  --color-secondary-btn-text-hover: var(--color-text-black);
+}
+
+// Banda de total: arena cuando Resto App conviene; contenedor neutro cuando
+// la comisión sale más barata (se dice con honestidad, sin color de alarma).
+.test-1-sin-brief__total {
+  background-color: var(--color-tertiary);
+  border-radius: var(--form-radius-input);
+  padding: var(--space-4);
+  transition: background-color var(--duration-base) var(--ease-out);
+
+  &--neutral {
+    background-color: var(--color-surface-container-high);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+  }
+}
+
+// Fila del flujo (entra / sale): icono, nombre y detalle sobre punteado.
+.test-1-sin-brief__flow-row {
+  padding-block: var(--space-3);
+  border-bottom: 1px dashed var(--color-outline);
+}
+
+.test-1-sin-brief__flow-icon {
+  color: var(--color-secondary);
+}
+
+.test-1-sin-brief__footer {
+  padding-block: var(--space-16) var(--space-10);
+  background-color: var(--color-surface-container-high);
+}

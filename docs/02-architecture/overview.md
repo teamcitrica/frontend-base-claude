@@ -26,9 +26,12 @@ Estado se maneja con React Context (`shared/context/`) — no hay Redux/Zustand.
 
 ```
 app/                          # Next.js App Router
-├── page.tsx                  # Landing pública (superficie ImPulso)
+├── page.tsx                  # Landing pública (superficie ImPulso; marca Resto App, ADR-0009)
 ├── layout.tsx                # Layout raíz + providers
 ├── home/                     # Secciones y hooks de la landing
+├── test-1-sin-brief/         # Landing de Resto App (SPEC-0005): page.tsx + components/
+├── test-2-corto/             # Landing de Resto App en vidrio (SPEC-0006); reutiliza test-1-sin-brief/components/cuenta.ts
+├── test-3-sistema/           # Landing de Resto App solo con el sistema (SPEC-0007): sin SCSS de página, compone shared/project-components/resto-app/
 ├── dev/layout/               # Guía viva de las primitivas de layout (noindex)
 ├── admin/                    # Panel administrativo
 │   ├── reservas/  clientes/  tareas/  config-app/
@@ -55,7 +58,7 @@ styles/                       # Sistema de estilos ITCSS (ver 01-design/referenc
 shared/
 ├── components/layout/        # Primitivas de layout: Section, Stack, Cluster, Media, AutoGrid, Grid+Cell (ADR-0007)
 ├── components/organisms/     # Organismos propios (footer, navbar, sidebar-nav, login…)
-├── project-components/       # Componentes de dominio (s3-video)
+├── project-components/       # Componentes de dominio (s3-video; resto-app/: botones, tarjetas, filas y campos de "La cuenta clara", estilos en styles/08-components/_resto-app.scss)
 ├── context/                  # auth-context, supabase-context
 ├── types/  utils/
 └── providers.tsx

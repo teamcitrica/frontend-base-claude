@@ -18,6 +18,7 @@ repo de ahora en adelante".
 | [0006](0006-documentacion-refleja-render.md) | La documentación de diseño describe lo que se renderiza; escala de 4px con tokens globales | Aceptada | 2026-10-20 |
 | [0007](0007-layout-con-primitivas.md) | Layout con primitivas: `Container`/`Col` + `shared/components/layout/`; Tailwind fuera del layout | Aceptada | 2026-10-20 |
 | [0008](0008-catalogo-de-estilos-landing.md) | Catálogo de estilos opcional y skill `citrica-landing` para landings de marca nueva | Aceptada | 2026-10-21 |
+| [0009](0009-resto-app-reemplaza-impulso.md) | Resto App reemplaza a ImPulso como marca de la base; `/` hereda paleta y fuentes | Aceptada | 2026-10-28 |
 
 ## Cuándo escribir uno
 

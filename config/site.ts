@@ -5,26 +5,36 @@ const ROL_CLIENTE = 12;
 const SUBITEM_SEARCH_PARAM = "page";
 
 export const siteConfig = {
-  name: "New Project",
-  description: "This is a awesome project.",
+  name: "Resto App",
+  description:
+    "Sistema todo-en-uno para restaurantes, dark kitchens, bares y cafeterías. Costo fijo mensual, sin comisión por venta.",
 
+  // Marca de la base: Resto App (ADR-0009). `colors` va en sincronía con
+  // styles/10-tokens/web/colors/_palette.scss (primary / surface / on-surface).
   seo: {
     url: "https://frontend-base-claude.vercel.app",
-    siteName: "",
-    title: "",
-    description: "",
-    tagline: "",
-    imageAlt: "",
-    locale: "es_ES",
-    keywords: [] as string[],
+    siteName: "Resto App",
+    title: "Resto App — Todo tu local, un solo cierre",
+    description:
+      "Salón, mostrador, delivery propio y menú web entran al mismo flujo; cocina, caja y bancos salen del mismo cierre. Costo fijo mensual, sin comisión por venta.",
+    tagline: "Todo tu local, un solo cierre",
+    imageAlt: "Resto App — sistema todo-en-uno para restaurantes",
+    locale: "es_VE",
+    keywords: [
+      "sistema para restaurantes",
+      "punto de venta restaurante",
+      "delivery propio",
+      "menú web",
+      "Venezuela",
+    ] as string[],
     twitter: {
       site: "",
       creator: "",
     },
     colors: {
-      brand: "#E8622C",
-      background: "#111111",
-      foreground: "#F7F6F4",
+      brand: "#F95738",
+      background: "#F5F5EA",
+      foreground: "#083D77",
     },
     ogFont: "Manrope-ExtraBold.ttf",
     indexable: true,

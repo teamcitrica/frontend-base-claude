@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "dark-glow",
+        "value": "*",
+        "files": [
+          "styles/webpages-styles/test-2-corto.scss"
+        ],
+        "createdAt": "2026-10-30T18:03:22.112Z",
+        "reason": "user chose the Glassmorphism comp (2026-10-30), which shows the CTA with a soft glow halo; the style file allows 'Halo difuso del primary bajo el CTA' and ADR-0008 makes the chosen image win over craft-floor"
+      }
+    ]
+  }
+}

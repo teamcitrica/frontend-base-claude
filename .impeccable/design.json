@@ -1,54 +1,159 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-06-25T00:00:00.000Z",
-  "title": "Design System: Citrica Web Base",
+  "generatedAt": "2026-10-28T20:40:00Z",
+  "title": "Design System: Resto App — La cuenta clara",
   "extensions": {
     "colorMeta": {
-      "citrica-orange": {
+      "coral-accion": {
         "role": "primary",
-        "displayName": "Citrica Orange",
-        "canonical": "oklch(0.685 0.213 41)",
-        "tonalRamp": ["#4A1A00", "#7A2D00", "#B34200", "#D44E00", "#FF5B00", "#FF7A33", "#FF9D66", "#FFC2A1", "#FFE0D0", "#FFF2EB"]
+        "displayName": "Coral de acción",
+        "canonical": "#F95738",
+        "tonalRamp": [
+          "#4A1205",
+          "#8A2A14",
+          "#B23A1F",
+          "#E04A2C",
+          "#F95738",
+          "#FA6A4E",
+          "#FB8A70",
+          "#FCB8A6",
+          "#FEE3DC",
+          "#FFF3EF"
+        ]
       },
-      "ink": {
+      "azul-resto": {
         "role": "secondary",
-        "displayName": "Warm Ink",
-        "canonical": "oklch(0.255 0.008 60)",
-        "tonalRamp": ["#16120F", "#2A2521", "#38332E", "#4A443D", "#5C544C", "#8A8079", "#B0ABA4", "#C9C2B9", "#E8E4DF", "#F4F2EF"]
+        "displayName": "Azul Resto",
+        "canonical": "#083D77",
+        "tonalRamp": [
+          "#04223F",
+          "#062E5A",
+          "#083D77",
+          "#2C5A8C",
+          "#3E5E80",
+          "#6F849A",
+          "#9DB6D1",
+          "#C2D2E3",
+          "#D6E2EF",
+          "#EEF3F8"
+        ]
       },
-      "taupe": {
+      "arena-ticket": {
         "role": "tertiary",
-        "displayName": "Warm Taupe",
-        "canonical": "oklch(0.585 0.012 70)",
-        "tonalRamp": ["#3A352F", "#5C544C", "#6E665E", "#8A8079", "#A39A92", "#B0ABA4", "#C9C2B9", "#E4E0DB", "#EAE5E0", "#F4F2EF"]
+        "displayName": "Arena de ticket",
+        "canonical": "#E9DFC4",
+        "tonalRamp": [
+          "#3A3220",
+          "#524628",
+          "#6B5B33",
+          "#8F7B4A",
+          "#B6A273",
+          "#D9CBA4",
+          "#E9DFC4",
+          "#F2ECDA",
+          "#F7F3E8",
+          "#FBF9F3"
+        ]
       },
-      "surface": {
+      "crema-ticket": {
         "role": "neutral",
-        "displayName": "Surface Gray",
-        "canonical": "oklch(0.962 0 0)",
-        "tonalRamp": ["#1A1A1A", "#242424", "#333333", "#6E6E6E", "#B0ABA4", "#D9D9D9", "#E6E6E6", "#EDEDED", "#F2F2F2", "#FFFFFF"]
+        "displayName": "Crema ticket",
+        "canonical": "#F5F5EA",
+        "tonalRamp": [
+          "#DEDECF",
+          "#E6E6D8",
+          "#EBEBDC",
+          "#F0F0E3",
+          "#F5F5EA",
+          "#FBFBF5",
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF",
+          "#FFFFFF"
+        ]
       },
-      "error":   { "role": "semantic", "displayName": "Error Red",     "canonical": "oklch(0.55 0.21 18)",  "tonalRamp": ["#30030C", "#7A0A1F", "#A50C2A", "#D40F36", "#E84A66", "#F07E91", "#F6AAB6", "#FCCFD8", "#FDE5EA", "#FEF2F4"] },
-      "warning": { "role": "semantic", "displayName": "Warning Amber",  "canonical": "oklch(0.79 0.15 75)",  "tonalRamp": ["#322201", "#5C4007", "#8A610C", "#C28A0C", "#FAAC0F", "#FBC04A", "#FCD27E", "#FDE3AD", "#FEEECD", "#FFF8E8"] },
-      "success": { "role": "semantic", "displayName": "Success Green",  "canonical": "oklch(0.53 0.16 138)", "tonalRamp": ["#16300A", "#234E12", "#2F7D12", "#3E9A2A", "#5BB347", "#7FC56F", "#A7D89A", "#CDE9C4", "#E6F4D4", "#F4FAEC"] }
+      "azul-gris": {
+        "role": "neutral",
+        "displayName": "Azul gris (lado comisión)",
+        "canonical": "#4F6D8A",
+        "tonalRamp": [
+          "#12263A",
+          "#243E57",
+          "#3A5670",
+          "#4F6D8A",
+          "#6F8AA4",
+          "#A9BBCB",
+          "#C6D3DE",
+          "#DDE5EC",
+          "#EEF2F6",
+          "#F7F9FB"
+        ]
+      }
     },
     "typographyMeta": {
-      "note": { "displayName": "Typography", "purpose": "Not documented this pass — color + shape scope only. See _text.scss." }
+      "display": {
+        "displayName": "Display — Oleo Script",
+        "purpose": "Solo el titular del hero."
+      },
+      "headline": {
+        "displayName": "Headline — Oleo Script",
+        "purpose": "Títulos de sección."
+      },
+      "title": {
+        "displayName": "Title — Lora 700",
+        "purpose": "Títulos de tarjeta, totales y cifras de la calculadora (lnum; las cifras suman tnum)."
+      },
+      "body": {
+        "displayName": "Body — Lora",
+        "purpose": "Párrafos; 16px en todos los breakpoints."
+      },
+      "label": {
+        "displayName": "Label — Lora 600",
+        "purpose": "Etiquetas, nombres de canal, encabezados de columna del ticket."
+      }
     },
     "shadows": [
-      { "name": "accordion-splitted", "value": "0 1px 2px rgba(0,0,0,0.04)", "purpose": "Hairline lift on splitted accordion items." },
-      { "name": "accordion-shadow", "value": "0 2px 8px rgba(0,0,0,0.08)", "purpose": "Defined lift on the shadow accordion variant. The system ceiling — never exceed 8px blur." }
+      {
+        "name": "papel",
+        "value": "0 1px 2px color-mix(in srgb, var(--color-shadow) 8%, transparent)",
+        "purpose": "Tarjetas y ticket sobre la crema."
+      },
+      {
+        "name": "tecla",
+        "value": "0 3px 6px color-mix(in srgb, var(--color-shadow) 24%, transparent)",
+        "purpose": "Solo el CTA primario; al presionar baja 2px y se aplasta a 0 1px 2px."
+      }
     ],
     "motion": [
-      { "name": "field-focus", "value": "all 0.2s ease", "purpose": "Input/select label and border focus transitions." },
-      { "name": "accordion", "value": "border-color 0.2s ease, background-color 0.2s ease", "purpose": "Accordion item state transitions." }
+      {
+        "name": "ease-out",
+        "value": "cubic-bezier(0.25, 1, 0.5, 1)",
+        "purpose": "Curva por defecto de transiciones de estado."
+      },
+      {
+        "name": "duration-fast",
+        "value": "200ms",
+        "purpose": "Hover y presión de botones."
+      },
+      {
+        "name": "duration-base",
+        "value": "400ms",
+        "purpose": "Trazos y reveals cortos."
+      }
     ],
-    "shape": [
-      { "name": "form-radius-btn", "value": "20px", "purpose": "Pill buttons (min-width 140px)." },
-      { "name": "form-radius-input", "value": "10px", "purpose": "Inputs, selects, textareas (selects/textareas inherit this)." },
-      { "name": "form-radius-accordion", "value": "8px", "purpose": "Accordion items." },
-      { "name": "form-border-size-input", "value": "2px", "purpose": "Crisp field stroke for inputs/selects/buttons/textareas." },
-      { "name": "form-border-size-accordion", "value": "1px", "purpose": "Accordion item border." }
+    "breakpoints": [
+      {
+        "name": "sm",
+        "value": "0–767px"
+      },
+      {
+        "name": "md",
+        "value": "768–1023px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px+"
+      }
     ]
   },
   "components": [
@@ -56,74 +161,90 @@
       "name": "Primary Button",
       "kind": "button",
       "refersTo": "button-primary",
-      "description": "Highest-emphasis action. Brand orange fill, one per view.",
-      "html": "<button class=\"ds-btn-primary\">EMPEZAR</button>",
-      "css": ".ds-btn-primary { min-width: 140px; padding: 10px 20px; border: 2px solid #FF5B00; border-radius: 20px; background: #FF5B00; color: #FFFFFF; font-weight: 600; letter-spacing: 0.01em; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; } .ds-btn-primary:hover { background: #D44E00; border-color: #D44E00; } .ds-btn-primary:focus-visible { outline: 2px solid #FF5B00; outline-offset: 2px; }"
+      "description": "CTA coral: demo por WhatsApp. Texto y borde azul profundo, sombra de papel que se aplasta al presionar.",
+      "html": "<button class=\"ds-btn-primary\">Pedir demo por WhatsApp</button>",
+      "css": ".ds-btn-primary { font-family: var(--font-brand-text), Georgia, serif; font-weight: 700; font-size: 16px; min-height: 48px; padding: 10px 20px; border-radius: 12px; background: var(--color-primary-btn); color: var(--color-primary-btn-text); border: 2px solid var(--color-primary-btn-border); box-shadow: 0 3px 6px color-mix(in srgb, var(--color-shadow) 24%, transparent); cursor: pointer; transition: background-color 200ms cubic-bezier(0.25,1,0.5,1), transform 200ms cubic-bezier(0.25,1,0.5,1), box-shadow 200ms cubic-bezier(0.25,1,0.5,1); } .ds-btn-primary:hover { background: var(--color-primary-btn-hover); } .ds-btn-primary:active { transform: translateY(2px); box-shadow: 0 1px 2px color-mix(in srgb, var(--color-shadow) 24%, transparent); } .ds-btn-primary:focus-visible { outline: 2px solid var(--color-secondary); outline-offset: 3px; }"
     },
     {
       "name": "Secondary Button",
       "kind": "button",
       "refersTo": "button-secondary",
-      "description": "Warm-ink alternative action. Never purple.",
-      "html": "<button class=\"ds-btn-secondary\">CANCELAR</button>",
-      "css": ".ds-btn-secondary { min-width: 140px; padding: 10px 20px; border: 2px solid #2A2521; border-radius: 20px; background: #2A2521; color: #FFFFFF; font-weight: 600; letter-spacing: 0.01em; cursor: pointer; transition: background 0.2s ease, border-color 0.2s ease; } .ds-btn-secondary:hover { background: #000000; border-color: #000000; } .ds-btn-secondary:focus-visible { outline: 2px solid #2A2521; outline-offset: 2px; }"
+      "description": "Acción secundaria (prueba de 7 días): contorno azul que se rellena al hover.",
+      "html": "<button class=\"ds-btn-secondary\">Probar 7 días gratis</button>",
+      "css": ".ds-btn-secondary { font-family: var(--font-brand-text), Georgia, serif; font-weight: 700; font-size: 16px; min-height: 48px; padding: 10px 20px; border-radius: 12px; background: var(--color-secondary-btn); color: var(--color-secondary-btn-text); border: 2px solid var(--color-secondary-btn-border); cursor: pointer; transition: background-color 200ms cubic-bezier(0.25,1,0.5,1), color 200ms cubic-bezier(0.25,1,0.5,1); } .ds-btn-secondary:hover { background: var(--color-secondary-btn-hover); color: var(--color-secondary-btn-text-hover); } .ds-btn-secondary:focus-visible { outline: 2px solid var(--color-secondary); outline-offset: 3px; }"
     },
     {
-      "name": "Flat Button",
-      "kind": "button",
-      "refersTo": "button-flat",
-      "description": "Low-emphasis orange-text action.",
-      "html": "<button class=\"ds-btn-flat\">VER MÁS</button>",
-      "css": ".ds-btn-flat { min-width: 140px; padding: 10px 20px; border: 2px solid transparent; border-radius: 20px; background: transparent; color: #FF5B00; font-weight: 600; cursor: pointer; transition: background 0.2s ease, color 0.2s ease; } .ds-btn-flat:hover { background: rgba(255,91,0,0.08); color: #D44E00; } .ds-btn-flat:focus-visible { outline: 2px solid #FF5B00; outline-offset: 2px; }"
-    },
-    {
-      "name": "Primary Input",
+      "name": "Input",
       "kind": "input",
-      "refersTo": "input-primary",
-      "description": "Text field with the signature orange focus border.",
-      "html": "<label class=\"ds-field\"><span>Correo</span><input class=\"ds-input\" type=\"email\" placeholder=\"tucorreo@ejemplo.com\" /></label>",
-      "css": ".ds-field { display: flex; flex-direction: column; gap: 6px; max-width: 360px; } .ds-field span { color: #242424; font-size: 14px; font-weight: 500; } .ds-input { padding: 10px 14px; border: 2px solid #C9C5BF; border-radius: 10px; background: #FFFFFF; color: #242424; font-size: 15px; transition: border-color 0.2s ease; } .ds-input::placeholder { color: #6E6E6E; } .ds-input:hover { border-color: #FF5B00; } .ds-input:focus { outline: none; border-color: #FF5B00; }"
+      "refersTo": "input",
+      "description": "Campo grande: 56px de alto, texto de 16px, foco en coral.",
+      "html": "<label class=\"ds-field\"><span class=\"ds-field-label\">Ventas del mes (USD)</span><input class=\"ds-input\" inputmode=\"numeric\" placeholder=\"Ej. 12000\"></label>",
+      "css": ".ds-field { display: grid; gap: 6px; font-family: var(--font-brand-text), Georgia, serif; color: var(--color-primary-input-label); } .ds-field-label { font-size: 13px; font-weight: 600; letter-spacing: 0.04em; } .ds-input { min-height: 56px; padding: 0 16px; font: inherit; font-size: 16px; font-variant-numeric: lining-nums tabular-nums; color: var(--color-primary-input-text); background: var(--color-primary-input-bg); border: 2px solid var(--color-primary-input-border); border-radius: 12px; transition: border-color 200ms cubic-bezier(0.25,1,0.5,1); } .ds-input::placeholder { color: var(--color-primary-input-placeholder); } .ds-input:hover, .ds-input:focus-visible { border-color: var(--color-primary-input-border-hover); outline: none; }"
     },
     {
-      "name": "Accordion Item",
+      "name": "Ticket de cuenta",
       "kind": "custom",
-      "refersTo": "accordion-item",
-      "description": "Collapsible item; border turns orange when open.",
-      "html": "<div class=\"ds-accordion\"><button class=\"ds-accordion-trigger\">¿Cómo funciona?<svg class=\"ds-accordion-ind\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\"><path d=\"M6 9l6 6 6-6\"/></svg></button></div>",
-      "css": ".ds-accordion { border: 1px solid #E4E0DB; border-radius: 8px; background: #F2F2F2; overflow: hidden; transition: border-color 0.2s ease; } .ds-accordion:hover { border-color: #B0ABA4; } .ds-accordion-trigger { display: flex; align-items: center; justify-content: space-between; width: 100%; padding: 16px 20px; background: transparent; border: none; color: #242424; font-weight: 600; cursor: pointer; } .ds-accordion-ind { color: #FF5B00; }"
+      "refersTo": "card",
+      "description": "Firma del sistema: líneas con cifra alineada a la derecha, punteado y banda de total.",
+      "html": "<div class=\"ds-ticket\"><div class=\"ds-ticket-row\"><span>Comisión por venta (muestra)</span><span>USD 1.440</span></div><div class=\"ds-ticket-row\"><span>Resto App, costo fijo (muestra)</span><span>USD 120</span></div><div class=\"ds-ticket-total\"><span>Te quedas</span><span>USD 1.320</span></div></div>",
+      "css": ".ds-ticket { max-width: 360px; padding: 20px; border-radius: 16px; background: var(--color-surface-bright); color: var(--color-on-surface); box-shadow: 0 1px 2px color-mix(in srgb, var(--color-shadow) 8%, transparent); font-family: var(--font-brand-text), Georgia, serif; font-variant-numeric: lining-nums tabular-nums; } .ds-ticket-row { display: flex; justify-content: space-between; gap: 16px; padding: 10px 0; border-bottom: 1px dashed var(--color-outline); } .ds-ticket-total { display: flex; justify-content: space-between; margin-top: 12px; padding: 12px; border-radius: 12px; background: var(--color-tertiary); color: var(--color-on-tertiary); font-weight: 700; font-size: 22px; }"
+    },
+    {
+      "name": "Card",
+      "kind": "card",
+      "refersTo": "card",
+      "description": "Tarjeta de papel sobre crema.",
+      "html": "<article class=\"ds-card\"><h3 class=\"ds-card-title\">Salón y mostrador</h3><p class=\"ds-card-body\">Cada pedido entra al mismo flujo que el delivery y el menú web.</p></article>",
+      "css": ".ds-card { max-width: 320px; padding: 24px; border-radius: 16px; background: var(--color-surface-bright); color: var(--color-on-surface); border: 1px solid var(--color-outline-variant); box-shadow: 0 1px 2px color-mix(in srgb, var(--color-shadow) 8%, transparent); font-family: var(--font-brand-text), Georgia, serif; } .ds-card-title { margin: 0 0 8px; font-size: 24px; font-weight: 700; } .ds-card-body { margin: 0; font-size: 16px; line-height: 24px; color: var(--color-on-surface-var); }"
     }
   ],
   "narrative": {
-    "northStar": "The Engineered Orange",
-    "overview": "One color does the talking. The Citrica web base is a warm-neutral canvas with a single, unmistakable voice — brand orange #FF5B00 — applied with the precision of an engineered tool. The reference is Linear: sharp, restrained, confident. Orange appears exactly where attention should go and almost nowhere else. The system rejects the generic Bootstrap admin and the unstyled HeroUI demo; this pass removed the gold buttons, purple secondaries, cyan tertiaries, blue focus rings, and acid-lime calendars that had drifted in. If a color isn't orange, a warm neutral, or a semantic signal, it does not belong here.",
+    "northStar": "La cuenta clara",
+    "overview": "Resto App le habla a quien cierra la caja cada noche. La página entera se lee como una cuenta que cuadra: lo que entra (salón, mostrador, delivery propio, menú web), lo que sale (cocina, caja, bancos) y un total al final, que es un costo fijo sin comisión. El efecto ticket no se consigue cambiando de tipografía. Se consigue con líneas punteadas, cifras alineadas a la derecha y una banda de total. La calidez viene del papel: fondo crema, tinta azul, sombras leves como de hoja apoyada en el mostrador. El titular en Oleo Script pone la firma de marca, cercana y de barrio. Lora carga todo lo demás, también los números. El coral es escaso a propósito: cuando aparece, se hace clic.",
     "keyCharacteristics": [
-      "Single chromatic accent (brand orange); secondary and tertiary are deliberately neutral.",
-      "Warm-neutral grays for every surface, outline, and field — never cool, never default-Material.",
-      "Interactive focus is always orange, across inputs, selects, textareas, and calendars.",
-      "Tactile but tight shape: 20px pill buttons, 10px fields, 8px accordions, crisp 2px field borders.",
-      "Accessibility-first contrast on text and placeholders; no decorative light-gray."
+      "Crema de fondo, azul para todo el texto, coral solo para actuar.",
+      "Titulares en Oleo Script; cuerpo y botones en Lora con `lnum`; las cifras comparables suman `tnum`.",
+      "Gramática de ticket: punteado, columnas de cifras alineadas y una banda de total.",
+      "Cálido y cercano, con CTAs firmes: borde definido, 48px de alto y presión visible."
     ],
     "rules": [
-      { "name": "The One-Accent Rule", "body": "Orange is the only chromatic color. Secondary is ink, tertiary is taupe, semantics are signals — none is a 'brand color #2'. Two competing accents means one is wrong.", "section": "colors" },
-      { "name": "The Orange-Focus Rule", "body": "Every interactive focus/hover border — input, select, textarea, calendar cell — is orange. Focus is brand expression. Blue focus rings are forbidden.", "section": "colors" },
-      { "name": "The No-Material-Leftover Rule", "body": "Purple (#6B3FA0, #4F378B), gold (#D4AF37), cyan (#00FFFF), and acid lime (#E1FF00) are banned on sight — the HeroUI/Material defaults this system replaces.", "section": "colors" },
-      { "name": "The Flat-By-Default Rule", "body": "Surfaces are flat at rest. Separation is a border or tonal step, not a drop shadow. Shadows appear only where a component lifts, never above 8px blur.", "section": "elevation" }
+      {
+        "name": "The Coral Means Click Rule",
+        "body": "El coral marca exactamente lo que se pulsa o el estado que cambió. Si un elemento coral no es accionable ni un estado, es un defecto.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Ink Rule",
+        "body": "Todo el texto es azul (o crema sobre azul). Nada de negro ni de gris neutro: el azul es la tinta de la marca.",
+        "section": "colors"
+      },
+      {
+        "name": "The Script Stays Up Top Rule",
+        "body": "Oleo Script solo en display y headline. Nunca en cifras, botones, etiquetas ni párrafos: un script a 24px deja de leerse.",
+        "section": "typography"
+      },
+      {
+        "name": "The Aligned Figures Rule",
+        "body": "Toda cifra que se compara con otra va en Lora con `lnum tnum` y alineada a la derecha de su columna, como en un ticket. `tnum` va solo en la cifra, nunca en el texto corrido: en Lora 700 también ensancha los espacios.",
+        "section": "typography"
+      },
+      {
+        "name": "The Paper Not Glass Rule",
+        "body": "Sin blur, sin vidrio, sin sombras de más de 8px de desenfoque. Si algo flota, es papel, no luz. Única excepción acotada: /test-2-corto (vidrio solo en el hero, máximo dos capas, 4.5:1 sobre el punto más claro).",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "Do spend orange (#FF5B00) on one thing per view — the primary action or the focused element.",
-      "Do make every focus and hover border orange across inputs, selects, textareas, and calendars.",
-      "Do use ink (#2A2521) for the secondary button and any second emphasis; keep secondary/tertiary neutral.",
-      "Do keep body text at #242424 and placeholders at #6E6E6E or darker — verified contrast, never decorative light gray.",
-      "Do hold the shape scale: 20px pill buttons, 10px fields, 8px accordions.",
-      "Do deepen orange to #D44E00 for hover/pressed — same hue, darker, never a new color."
+      "Do reservar el coral #F95738 para CTAs y estados clave, siempre con texto y borde #04223F.",
+      "Do escribir todas las cifras comparables en Lora con `lnum tnum`, alineadas a la derecha.",
+      "Do lograr el efecto ticket con punteado, columnas alineadas y una banda de total.",
+      "Do mantener 48px de alto mínimo en botones y 56px en campos."
     ],
     "donts": [
-      "Don't reintroduce the Material/HeroUI leftovers: purple #6B3FA0/#4F378B, gold #D4AF37, cyan #00FFFF, acid lime #E1FF00, blue focus #265197.",
-      "Don't let the surface read as a generic Bootstrap admin — no default-blue, no boxy gray card grids.",
-      "Don't put white text on orange at body-copy size (~3:1); fine only for button/large/bold text.",
-      "Don't use a second chromatic accent. One screen, one orange.",
-      "Don't round cards past 16px or fields past their 10px token; pill is for buttons and tags only.",
-      "Don't pair a 1px border with a soft wide drop shadow, or push any shadow past 8px blur."
+      "Don't usar tipografía monoespaciada en ningún lugar (decisión del cliente).",
+      "Don't usar Oleo Script por debajo de headline (cifras, botones, etiquetas, párrafos).",
+      "Don't poner texto blanco ni #083D77 sobre coral: no llegan a 4.5:1.",
+      "Don't escribir hex ni `rgba()` en `.tsx` o en `styles/webpages-styles/`: el color sale de `_palette.scss`."
     ]
   }
 }

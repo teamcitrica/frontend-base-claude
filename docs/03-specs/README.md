@@ -11,6 +11,9 @@
 | 0002 | [Limpieza de residuos de proyectos anteriores (web)](0002-limpieza-web/spec.md) | infra | done | 2026-10-20 |
 | 0003 | [Tokens de fundamentos para la web](0003-foundations-web/spec.md) | infra | done | 2026-10-20 |
 | 0004 | [Primitivas de layout para la web](0004-layout-primitives/spec.md) | landing | done | 2026-10-20 |
+| 0005 | [Landing de Resto App — la cuenta de la comisión](0005-landing-restoapp/spec.md) | landing | in-progress | 2026-10-28 |
+| 0006 | [Landing de Resto App en vidrio (comp Glassmorphism)](0006-landing-restoapp-vidrio/spec.md) | landing | in-progress | 2026-10-30 |
+| 0007 | [Landing de Resto App construida solo con el sistema de diseño](0007-landing-restoapp-sistema/spec.md) | landing | in-progress | 2026-10-30 |
 
 <!-- Al crear una spec, agregar aquí una fila:
 | 0002 | Titulo -> 0002-slug/spec.md | landing | draft | 2026-08-01 |

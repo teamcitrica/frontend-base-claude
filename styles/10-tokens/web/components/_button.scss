@@ -14,10 +14,36 @@ $btn-citrica-ui: (
   )
 );
 
+// min-height 48px: área táctil mínima de la marca (Resto App).
+// Foco con `outline`, no con anillo de box-shadow: la sombra de papel del
+// primario pisaba el anillo de HeroUI y el foco de teclado quedaba invisible.
+// !important porque HeroUI fija `outline: none` en el botón.
 .btn-citrica-ui{
   border-radius: var(--form-radius-btn);
   min-width: 140px;
+  min-height: 48px;
   @include a-set($btn-citrica-ui);
+
+  &[data-focus-visible="true"],
+  &:focus-visible{
+    outline: 2px solid var(--color-secondary) !important;
+    outline-offset: 3px;
+  }
+
+  .o-section--inverse &[data-focus-visible="true"],
+  .o-section--inverse &:focus-visible{
+    outline-color: var(--color-text-white) !important;
+  }
+}
+
+// Sobre una banda `inverse` (azul) el secundario sería azul sobre azul: toma la
+// pareja crema. Es del sistema, no de una página (SPEC-0007).
+.o-section--inverse {
+  --color-secondary-btn-text: var(--color-text-white);
+  --color-secondary-btn-border: var(--color-text-white);
+  --color-secondary-btn-border-hover: var(--color-text-white);
+  --color-secondary-btn-hover: var(--color-text-white);
+  --color-secondary-btn-text-hover: var(--color-text-black);
 }
 
 // Botón solo-icono: cuadrado (sin el ancho mínimo ni el padding del botón base).
@@ -29,13 +55,32 @@ $btn-citrica-ui: (
   aspect-ratio: 1 / 1;
 }
 
+// Primario = CTA firme: borde definido (el contorno carga el contraste contra
+// la superficie) y sombra de papel que se aplasta al presionar.
 .btn-primary{
   background-color: var(--color-primary-btn);
-  border: none;
+  border: var(--form-border-size-btn) solid var(--color-primary-btn-border);
+  box-shadow: 0 3px 6px color-mix(in srgb, var(--color-shadow) 24%, transparent);
+  transition: background-color var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    box-shadow var(--duration-fast) var(--ease-out);
   &:hover{
     background-color: var(--color-primary-btn-hover);
+    border-color: var(--color-primary-btn-border-hover);
     .text-component {
       color: var(--color-primary-btn-text-hover) !important;
+    }
+  }
+  &:active{
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px color-mix(in srgb, var(--color-shadow) 24%, transparent);
+  }
+  // Sin movimiento: la presión queda solo en el cambio de color.
+  @media (prefers-reduced-motion: reduce){
+    transition: background-color var(--duration-fast) var(--ease-out);
+
+    &:active{
+      transform: none;
     }
   }
   span {

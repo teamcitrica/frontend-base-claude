@@ -1,0 +1,249 @@
+// Gestos de marca de /test-2-corto — Resto App en vidrio, SPEC-0006.
+// Composición del comp Glassmorphism con la marca de Resto App: azul profundo,
+// luces coral y celeste, vidrio crema. Vidrio SOLO en el hero (excepción acotada
+// de "The Paper Not Glass Rule", docs/design.md). Color desde tokens, sin hex,
+// sin clamp(); el layout lo hacen las primitivas.
+
+// Una sola tinta fuera del hero; foco visible también en los enlaces del Header.
+.test-2-corto {
+  color: var(--color-on-surface);
+  background-color: var(--color-surface);
+
+  ::selection {
+    background-color: var(--color-primary-container);
+    color: var(--color-on-primary-container);
+  }
+
+  :focus-visible:not(input) {
+    outline: 2px solid var(--color-secondary) !important;
+    outline-offset: 3px;
+  }
+}
+
+// Wordmark TEMPORAL "Resto App" hasta que llegue el logo (48px de alto táctil).
+.test-2-corto__wordmark {
+  font-size: 28px;
+  line-height: 48px;
+}
+
+// ---- HERO ----------------------------------------------------------------
+
+// Fondo: azul profundo con luces fuera de foco (coral arriba a la derecha,
+// celeste abajo a la izquierda). Estático: no hay animación que reducir.
+.test-2-corto__ambient {
+  // Llena el primer viewport como el comp; el panel frontal arranca a ~18 %.
+  min-height: 100vh;
+  padding-block: var(--space-24) var(--space-16);
+  background:
+    radial-gradient(
+      ellipse 34% 52% at 14% 70%,
+      color-mix(in srgb, var(--color-secondary-fixed) 92%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 30% 44% at 70% 10%,
+      color-mix(in srgb, var(--color-primary) 80%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 26% 36% at 32% 4%,
+      color-mix(in srgb, var(--color-primary-fixed-dim) 70%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      ellipse 22% 34% at 94% 22%,
+      color-mix(in srgb, var(--color-secondary-fixed-dim) 85%, transparent),
+      transparent 72%
+    ),
+    var(--color-on-secondary-container);
+  overflow: hidden;
+}
+
+// Vidrio: tinte azul (no crema puro) para que el texto crema mantenga
+// contraste sobre las luces; borde crema tenue y sombra corta de profundidad.
+.test-2-corto__glass {
+  // 60 %: con 42 % el peor píxel bajo la bajada y los mocks quedaba < 4.5:1.
+  background-color: color-mix(
+    in srgb,
+    var(--color-on-secondary-container) 60%,
+    transparent
+  );
+  backdrop-filter: blur(20px) saturate(140%);
+  border: 1px solid color-mix(in srgb, var(--color-text-white) 26%, transparent);
+  border-radius: var(--radius-md);
+  box-shadow: 0 24px 48px color-mix(in srgb, var(--color-shadow) 28%, transparent);
+
+  @supports not (backdrop-filter: blur(1px)) {
+    background-color: color-mix(
+      in srgb,
+      var(--color-on-secondary-container) 88%,
+      transparent
+    );
+  }
+}
+
+// Paneles traseros de la pila: solo en lg, desplazados respecto del frontal.
+// Más transparentes que el frontal; nunca llevan texto (máximo dos capas).
+.test-2-corto__glass--back {
+  display: none;
+  background-color: color-mix(
+    in srgb,
+    var(--color-text-white) 6%,
+    transparent
+  );
+
+  @include lg() {
+    display: block;
+  }
+}
+
+.test-2-corto__glass--up {
+  transform: translateY(calc(var(--space-8) * -1));
+}
+
+.test-2-corto__glass--down {
+  transform: translateY(var(--space-8));
+}
+
+// Panel frontal: relleno interior del cuerpo de texto.
+.test-2-corto__glass--front {
+  padding: var(--space-16) var(--space-6);
+
+  @include lg() {
+    padding-block: var(--space-24);
+  }
+}
+
+// Foco sobre el azul del hero: contorno crema (el azul de la regla general no
+// se ve sobre el vidrio azul; comprobado tabulando).
+.test-2-corto__ambient :focus-visible:not(input) {
+  outline-color: var(--color-text-white) !important;
+}
+
+// Texto y CTA centrados en el panel frontal, como en el comp.
+.test-2-corto__center {
+  text-align: center;
+}
+
+// Medida del bloque de texto del comp (44 % del ancho ≈ 640px a 1440): el
+// titular cae en 2 líneas y no queda bajo los mocks.
+.test-2-corto__copy {
+  max-width: 640px;
+  margin-inline: auto;
+}
+
+// Halo coral bajo el CTA (sin re-estilar el botón: el halo es de la envoltura).
+.test-2-corto__glow {
+  display: inline-block;
+  border-radius: var(--form-radius-btn);
+  box-shadow: 0 10px 36px color-mix(in srgb, var(--color-primary) 55%, transparent);
+}
+
+// Badge de vidrio arriba a la derecha: solo desde md. La visibilidad va en la
+// celda (bloque); el badge conserva el layout de su Cluster.
+.test-2-corto__badge-cell {
+  display: none;
+
+  @include md() {
+    display: block;
+  }
+}
+
+.test-2-corto__badge {
+  padding: var(--space-2) var(--space-4);
+}
+
+// Mocks de móvil: vidrio con contenido real de muestra. Proporción de teléfono.
+// Proporción de teléfono solo en lg (como el comp); en sm/md el alto lo da
+// el contenido, sin un vacío de vidrio bajo el ticket.
+.test-2-corto__phone {
+  padding: var(--space-4);
+  border-radius: var(--space-6);
+
+  @include lg() {
+    aspect-ratio: 9 / 17;
+  }
+}
+
+// Envoltorio de cada teléfono (gesto): el pequeño solo desde md, más bajo que
+// el grande como en el comp. En sm queda un solo mock (decisión del usuario).
+.test-2-corto__phone-slot {
+  width: 100%;
+  max-width: 220px;
+  margin-inline: auto;
+}
+
+.test-2-corto__phone-slot--small {
+  display: none;
+  max-width: 144px;
+
+  @include md() {
+    display: block;
+    transform: translateY(calc(var(--space-32) + var(--space-16)));
+  }
+}
+
+.test-2-corto__mock-icon {
+  color: var(--color-text-white);
+}
+
+.test-2-corto__mock-row {
+  padding-block: var(--space-2);
+  border-bottom: 1px dashed color-mix(in srgb, var(--color-text-white) 40%, transparent);
+}
+
+.test-2-corto__mock-total {
+  padding: var(--space-2) var(--space-3);
+  border-radius: var(--form-radius-input);
+  background-color: color-mix(in srgb, var(--color-text-white) 14%, transparent);
+}
+
+// ---- DEBAJO DEL HERO: papel, no vidrio ------------------------------------
+
+.test-2-corto__band {
+  background-color: var(--color-surface-container);
+}
+
+.test-2-corto__ticket.test-2-corto__ticket {
+  background-color: var(--color-surface-bright);
+  border-radius: var(--radius-md);
+  box-shadow: 0 1px 2px color-mix(in srgb, var(--color-shadow) 8%, transparent),
+    0 8px 8px -8px color-mix(in srgb, var(--color-shadow) 12%, transparent);
+  padding: var(--space-3);
+}
+
+.test-2-corto__row {
+  padding-block: var(--space-3);
+  border-bottom: 1px dashed var(--color-outline);
+}
+
+.test-2-corto__icon {
+  color: var(--color-secondary);
+}
+
+// Cifras tabulares solo en las cifras (en Lora 700 `tnum` ensancha espacios).
+.test-2-corto__figure {
+  text-align: end;
+  white-space: nowrap;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.test-2-corto__total {
+  background-color: var(--color-tertiary);
+  border-radius: var(--form-radius-input);
+  padding: var(--space-4);
+}
+
+// Botón sobre la banda azul: el contorno del foco en crema.
+.test-2-corto__inverse {
+  --color-secondary-btn-text: var(--color-text-white);
+  --color-secondary-btn-border: var(--color-text-white);
+  --color-secondary-btn-border-hover: var(--color-text-white);
+  --color-secondary-btn-hover: var(--color-text-white);
+  --color-secondary-btn-text-hover: var(--color-text-black);
+}
+
+.test-2-corto__footer {
+  padding-block: var(--space-16) var(--space-10);
+  background-color: var(--color-surface-container-high);
+}

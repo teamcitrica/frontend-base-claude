@@ -72,3 +72,141 @@ Best-effort with sensible, verified-contrast defaults (per the brand book's WCAG
 - Every photo with text over it gets a carbón overlay (40–60%) for contrast.
 - Visible focus on every interactive element (outline 2px `#111111`, offset 2px).
 - `prefers-reduced-motion` honored: the one orchestrated hero reveal (slide-up + yellow underline draw) degrades to a crossfade or instant state.
+
+---
+
+## Surface: /test-1-sin-brief
+
+> **Provisional** — escrito desde el brief de `/citrica-landing restoapp --ruta test-1-sin-brief`
+> (2026-10-28). Amplía este documento sin reemplazar ImPulso: lo de arriba sigue siendo la
+> superficie `/`. Esta sección manda solo en la ruta `/test-1-sin-brief`.
+
+### Register
+
+brand
+
+### Users
+
+**Who it's for:** Dueños y encargados de restaurantes, dark kitchens, bares y cafeterías
+en **Venezuela**. Llevan el día a día del local: el salón, el mostrador, el delivery propio
+y el cierre de caja. Hoy ese día vive repartido entre herramientas que no se hablan, y el
+cierre (cocina, caja y bancos) se cuadra a mano.
+
+**Context:** Landing de conversión en español de Venezuela. La visitante evalúa si cambiar
+su forma de operar vale el esfuerzo y el contrato anual.
+
+**Job to be done:** Que la dueña o el encargado vea que todo el local entra a un solo flujo
+y sale en un solo cierre, por un costo fijo, y **solicite una demo por WhatsApp**.
+
+### Product Purpose
+
+**Resto App** es un sistema todo-en-uno para la operación gastronómica. Salón, mostrador,
+delivery propio y menú web entran al mismo flujo; cocina, caja y bancos salen del mismo
+cierre. **Costo fijo mensual, sin comisión por venta, contrato anual.**
+
+**Conversión primaria:** solicitar una demo por WhatsApp.
+**Conversión secundaria:** prueba gratis de 7 días.
+
+### Brand Personality
+
+**North star:** *La cuenta clara* — la página se lee como una cuenta que cuadra.
+
+**Marca fijada por el cliente (2026-10-28):** crema `#F5F5EA`, texto azul `#083D77`,
+coral `#F95738` solo en CTAs y estados clave. Titulares en Oleo Script; cuerpo y cifras
+en Lora. Sin tipografía monoespaciada. El efecto ticket sale de líneas punteadas,
+cifras alineadas y totales, no de la tipografía.
+
+**Tono:** cálido y cercano (crema y tinta suaves, sombras leves de papel), con CTAs
+firmes y bien visibles. Claridad operativa sobre adjetivos; precio sin letra pequeña
+(fijo, sin comisión).
+
+**Accesibilidad de marca:** texto y borde del CTA coral en azul profundo `#04223F`
+(ni blanco ni `#083D77` alcanzan 4.5:1 sobre coral). Área táctil mínima de 48px;
+campos de 56px y texto de 16px en móvil.
+
+### Anti-references
+
+- Prometer cifras, clientes o testimonios que no existen: todo lo que no venga del brief
+  va como contenido de muestra marcado.
+- El lenguaje de "plataforma 360°" y "ecosistema": el producto se explica por el flujo
+  (entra → sale), no por adjetivos.
+
+### Open questions
+
+- Logo y nombre exacto de marca (¿"Resto App" o "RestoApp"?).
+- Número de WhatsApp de destino para la demo.
+- Precio mensual a mostrar (o si se oculta hasta la demo).
+- Moneda y medios de pago que debe nombrar el cierre de bancos.
+
+---
+
+## Surface: /test-2-corto
+
+> Escrito desde el brief de `/citrica-landing restoapp "sistema todo-en-uno para
+> restaurantes en Venezuela, costo fijo sin comisión por venta, CTA demo por WhatsApp"
+> --ruta test-2-corto` (2026-10-30). Comparte usuarios, propósito y marca con
+> `Surface: /test-1-sin-brief`; esta sección solo fija lo que cambia.
+
+### Register
+
+brand
+
+### Diferencia con /test-1-sin-brief
+
+- **Brief corto:** sistema todo-en-uno para restaurantes en Venezuela, costo fijo sin
+  comisión por venta. **Una sola conversión:** demo por WhatsApp (sin prueba de 7 días,
+  que el brief no menciona).
+- **Dirección visual:** Glassmorphism del catálogo (ver `docs/design.md` → Surface:
+  /test-2-corto), con la marca de Resto App.
+
+---
+
+## Surface: /test-3-sistema
+
+> Escrito desde el brief del documento "brief testin skill" (Google Docs, 2026-10-30)
+> pasado a `/citrica-landing restoapp … --ruta test-3-sistema`. Comparte usuarios,
+> propósito y marca con `Surface: /test-1-sin-brief`; esta sección fija lo que cambia.
+
+### Register
+
+brand
+
+### Objetivo del test
+
+Construir la landing **solo con los tokens y las primitivas del sistema de diseño**: sin
+colores, tamaños ni estilos sueltos, y con **componentes reutilizables** para botones,
+tarjetas, campos y filas de cuenta.
+
+### Diferencia con /test-1-sin-brief
+
+- **Público ampliado:** dueños y encargados de bajo a medio nivel técnico, que priorizan
+  lo práctico y **abren el enlace desde WhatsApp en el celular** (sm es el caso principal).
+  Dolor: herramientas dispersas, conciliación manual al cierre, fugas de caja y
+  comisiones de las apps de reparto.
+- **Sin precio público:** la sección de comisión muestra cuánto se pierde hoy y cierra
+  con **cotizar el plan fijo**. No hay monto mensual en la página.
+- **Conversión:** primaria, demo por WhatsApp; secundaria, prueba gratis de 7 días en
+  `https://restoapp.club/registro`.
+- **Contenido:** solo el del brief (hero, canales, caos vs. un solo flujo, operación en
+  vivo, finanzas y cierre, roles, modelo de cobro, preguntas frecuentes, cierre). Lo que
+  falte se marca pendiente, no se inventa.
+- **Logo real:** `public/img/logo-resto-app.svg` (azul, para crema) y
+  `logo-resto-app-light.svg` (crema, para azul), tomados de restoapp.club.
+
+### Tono
+
+Directo, pragmático, sin humo corporativo. Lenguaje de restaurante: comanda, arqueo,
+mesa, KDS, turno, caja.
+
+### Anti-references
+
+- Métricas de clientes, calificaciones u horas ahorradas: el brief las prohíbe.
+- "Solución disruptiva", "innovación 360°" y cualquier jerga corporativa vacía.
+- Fotos de banco de imágenes genéricas.
+
+### Conflictos del brief (resueltos así)
+
+- El contenido fuente pide "sans-serif moderna"; la sección *Marca* del mismo brief fija
+  Oleo Script + Lora. Gana *Marca* (más específica y ya decidida).
+- El contenido fuente pide fotos reales y capturas del sistema; no las hay. Se
+  representan con tickets de muestra marcados, y las capturas quedan pendientes.

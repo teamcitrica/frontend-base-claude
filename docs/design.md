@@ -1,37 +1,35 @@
 ---
-name: ImPulso — Growth & Content Agency (Gastronomía)
-description: High-contrast, market-poster brand system — Impulso Orange + Carbón + Amarillo Sazón, Anton display over Lato body, for the ImPulso gastronomic marketing landing
+name: Resto App — Sistema todo-en-uno para restaurantes
+description: Crema, azul y coral; Oleo Script en titulares sobre Lora; la página se lee como una cuenta que cuadra — líneas punteadas, cifras alineadas y un total.
 fonts:
-  display: "Anton"
-  body: "Lato"
+  display: "Oleo Script"
+  body: "Lora"
 colors:
-  # Marca
-  impulso-orange: "#E8622C"   # orange-500 — brand base: CTAs, accents, avatar, action
-  orange-hover: "#CE4F1D"     # orange-600 — primary button hover
-  orange-active: "#A83E15"    # orange-700 — active/pressed, small orange text on light (AA 7:1)
-  orange-50: "#FDEFE8"        # soft section backgrounds
-  orange-100: "#F9D5C2"       # hover of light fills, subtle borders
-  orange-300: "#F09A6B"       # disabled primary button
-  amarillo-sazon: "#F5DE4B"   # yellow-500 — highlighter underline, badges, markers
-  yellow-100: "#FCF6D4"       # callout / soft-notice backgrounds
-  yellow-600: "#D9BF28"       # yellow hover, badge borders (== warning)
-  # Neutrales
-  carbon: "#111111"           # neutral-900 — headlines, primary text, dark sections
-  blanco-plato: "#FFFFFF"     # neutral-0 — primary background, text on dark
-  neutral-50: "#F7F6F4"       # warm off-white — alternating section background
-  neutral-200: "#E2E0DC"      # borders, dividers
-  neutral-400: "#8C8C8C"      # secondary text / captions (large text only, 3.5:1)
-  neutral-600: "#4A4A4A"      # long-form paragraph text on light
-  # Semánticos
+  # Marca (fijados por el cliente, 2026-10-28)
+  crema-ticket: "#F5F5EA"        # surface — fondo de todas las secciones claras
+  azul-resto: "#083D77"          # on-surface / secondary — texto y estructura (9.84:1 sobre crema)
+  coral-accion: "#F95738"        # primary — solo CTAs y estados clave
+  azul-profundo: "#04223F"       # texto y borde del CTA coral (4.94:1 sobre coral; borde 14.65:1 sobre crema)
+  coral-hover: "#FA6A4E"         # hover del CTA (texto azul profundo 5.54:1)
+  coral-texto: "#B23A1F"         # coral para texto pequeño sobre crema (5.44:1)
+  coral-suave: "#FEE3DC"         # primary-container — fondo de estado clave
+  # Derivados (supuestos de la receta, no del cliente)
+  arena-ticket: "#E9DFC4"        # tertiary — papel de ticket, bandas de total
+  azul-gris: "#4F6D8A"           # cuaternary — lado "comisión" de la cuenta
+  gris-pizarra: "#5F6B77"        # quinary — texto terciario sobre claro
+  azul-secundario-texto: "#3E5E80"  # on-surface-var — texto secundario (6.14:1)
+  linea-punteada: "#6F849A"      # outline — bordes de UI y líneas del ticket (3.51:1)
+  divisor: "#D5D9D2"             # outline-variant — divisores decorativos
+  papel-claro: "#FBFBF5"         # surface-bright / container-lowest
+  # Semánticos (estándar, sin teñir)
   success: "#2E9E5B"
   warning: "#D9BF28"
   error: "#C63A2B"
-  info: "#2D6FA8"
 # Valores reales del render (ADR-0006). Los tokens viven en styles/10-tokens/web/foundations/
 rounded:
-  card: "12px"      # --radius-md (cards, media, superficies)
-  input: "10px"     # --form-radius-input
-  pill: "999px"     # --radius-pill (buttons, badges)
+  card: "16px"      # --radius-md (cards, media, superficies)
+  control: "12px"   # --form-radius-btn y --form-radius-input
+  pill: "999px"     # --radius-pill (badges)
 spacing:
   scale: "4px base — --space-N = N×4px, igual que Tailwind (gap-6 = --space-6 = 24px)"
   steps: "1:4 · 2:8 · 3:12 · 4:16 · 6:24 · 8:32 · 10:40 · 12:48 · 16:64 · 24:96 · 32:128"
@@ -47,225 +45,333 @@ motion:
 measure:
   prose: "--measure-prose 68ch"
   narrow: "--measure-narrow 52ch"
+typography:
+  display:
+    fontFamily: "Oleo Script, Georgia, cursive"
+    fontSize: "44px sm / 60px md / 76px lg"
+    fontWeight: 700
+    lineHeight: "50px / 66px / 84px"
+  headline:
+    fontFamily: "Oleo Script, Georgia, cursive"
+    fontSize: "30px sm / 40px md / 46px lg"
+    fontWeight: 400
+  title:
+    fontFamily: "Lora, Georgia, serif"
+    fontSize: "24px sm / 26px md / 28px lg"
+    fontWeight: 700
+    fontFeature: "lnum"
+  body:
+    fontFamily: "Lora, Georgia, serif"
+    fontSize: "16px"
+    fontWeight: 400
+    lineHeight: "24px"
+    fontFeature: "lnum"
+  label:
+    fontFamily: "Lora, Georgia, serif"
+    fontSize: "12px sm / 13px md-lg"
+    fontWeight: 600
+    letterSpacing: "0.04em"
+    fontFeature: "lnum"
 components:
   button-primary:
-    backgroundColor: "{colors.impulso-orange}"
-    textColor: "{colors.blanco-plato}"
-    font: "Lato 700, 16px"
-    padding: "14px 32px"
-    rounded: "{rounded.pill}"
-    hover: "{colors.orange-hover}"
-    active: "{colors.orange-active}"
-    focus: "outline 2px {colors.carbon} offset 2px"
+    backgroundColor: "{colors.coral-accion}"
+    textColor: "{colors.azul-profundo}"
+    rounded: "{rounded.control}"
+    height: "48px"
+    padding: "10px 20px sm-md / 20px 50px lg"
+  button-primary-hover:
+    backgroundColor: "{colors.coral-hover}"
+    textColor: "{colors.azul-profundo}"
   button-secondary:
     backgroundColor: "transparent"
-    border: "2px {colors.carbon}"
-    textColor: "{colors.carbon}"
-    rounded: "{rounded.pill}"
-    hover: "fill {colors.carbon}, text {colors.blanco-plato}"
-  button-tertiary:
-    backgroundColor: "transparent"
-    textColor: "{colors.orange-active}"
-    font: "Lato 700"
-    hover: "underline with {colors.amarillo-sazon} marker"
-  card-servicio:
-    backgroundColor: "{colors.blanco-plato}"
-    border: "1px {colors.neutral-200}"
+    textColor: "{colors.azul-resto}"
+    rounded: "{rounded.control}"
+    height: "48px"
+  button-secondary-hover:
+    backgroundColor: "{colors.azul-resto}"
+    textColor: "{colors.crema-ticket}"
+  input:
+    backgroundColor: "#FFFFFF"
+    textColor: "{colors.azul-resto}"
+    rounded: "{rounded.control}"
+    height: "56px"
+  card:
+    backgroundColor: "{colors.papel-claro}"
+    textColor: "{colors.azul-resto}"
     rounded: "{rounded.card}"
-    padding: "32px"
-    hover: "border {colors.impulso-orange} + shadow 0 8px 24px rgba(17,17,17,0.08)"
-    icon: "24px Lucide in 48px orange circle (avatar echo)"
-  badge:
-    backgroundColor: "{colors.amarillo-sazon}"
-    textColor: "{colors.carbon}"
-    font: "Lato 700, 12px uppercase"
-    padding: "4px 12px"
-    rounded: "{rounded.pill}"
-  metric:
-    number: "Anton 56–72px, {colors.impulso-orange} on light / {colors.amarillo-sazon} on carbón"
-    label: "Lato 400, 14px, {colors.neutral-600}"
 ---
 
-# Design System: ImPulso — La carta del mercado moderno
+# Design System: Resto App — La cuenta clara
 
-> **Source of truth.** This document is derived from `NEW_BRAND.md` (ImPulso Brand Toolkit v1.0, Julio 2026). Where they differ, the toolkit wins — update it there and re-derive.
+> **Fuente de verdad.** Marca fijada por el cliente el 2026-10-28 durante
+> `/citrica-landing restoapp --ruta test-1-sin-brief`: crema `#F5F5EA`, azul `#083D77`,
+> coral `#F95738`, Oleo Script en titulares, Lora en cuerpo y cifras, sin monoespaciada.
+> Este documento **reemplaza** al de ImPulso (decisión del usuario: sobrescribir). La
+> landing de ImPulso sigue en `/` y, como paleta y fuentes son globales, ya se pinta con
+> estos valores. La versión anterior está en el historial de git.
 >
-> **Implementation status — migrated & live.** The ImPulso values are already in code: the palette (`_palette.scss`), the type scale (`_text.scss`), the fonts (`settings.scss`), and the button/form tokens (`_button.scss` / `_form.scss`); the landing (`app/page.tsx`) is built on `citrica-ui-toolkit`. There is no legacy `#FF5B00` and no hardcoded hex. **When extending this surface, follow §10 to keep it single-sourced** — that section is the build contract, not the aspiration.
+> **Estado de implementación.** El render ya está en código: `_palette.scss`,
+> `lib/fonts.ts` + `settings.scss`, `_text.scss`, `_button.scss`, `_form.scss`,
+> `_input.scss` y `_radius.scss`. La landing `/test-1-sin-brief` aún no existe: la
+> construye `/spec-build` desde su spec.
 
-## 1. Overview
+## Overview
 
-**Creative North Star: "La carta del mercado moderno."**
+**Creative North Star: "La cuenta clara"**
 
-The bluntness of a market poster — Anton in caps, carbón black, a single decisive orange — disciplined by a growth agency's structure: clean 12-column grids, visible metrics, generous white space. The page moves in high contrast: bright, airy sections give way to at least one **carbón `#111111`** section per page — the "poster moment" where the brand shouts. Orange never decorates; **orange always means action.**
+Resto App le habla a quien cierra la caja cada noche. La página entera se lee como una
+cuenta que cuadra: lo que entra (salón, mostrador, delivery propio, menú web), lo que
+sale (cocina, caja, bancos) y un total al final, que es un costo fijo sin comisión. El
+efecto ticket no se consigue cambiando de tipografía. Se consigue con **líneas
+punteadas, cifras alineadas a la derecha y una banda de total**.
 
-This is a *results scoreboard*, not an editorial magazine. Anton is a concert-poster / sports-headline voice, the opposite of a display-serif specimen page. The energy is kinetic (the name is *ImPulso*), the register is warm and Peruvian, and every visual claim is backed by a real number.
+La calidez viene del papel: fondo crema, tinta azul, sombras leves como de hoja apoyada
+en el mostrador. El titular en Oleo Script pone la firma de marca, cercana y de barrio.
+Lora carga todo lo demás, también los números. El coral es escaso a propósito: cuando
+aparece, se hace clic.
 
-**Key characteristics:**
-- One decisive orange (`#E8622C`) reserved for action & accent — the 10% in a 60-30-10 discipline.
-- Carbón (`#111111`) as a full structural color, not just ink: entire sections invert to it for rhythm.
-- Amarillo Sazón (`#F5DE4B`) as *condiment* — a highlighter underline or a badge, max one per viewport.
-- Anton (display, caps only, ≥24px) over Lato (all reading). A hard poster/body split.
-- Food photography as protagonist; warm, contrasted, kinetic. Never cold or desaturated.
-- Two signature gestures: the **pulso bicolor** (a word split into two colors, echoing the Im/Pulso logo) and the **yellow highlighter underline**.
+**Key Characteristics:**
+- Crema de fondo, azul para todo el texto, coral solo para actuar.
+- Titulares en Oleo Script; cuerpo y botones en Lora con `lnum`; las cifras comparables suman `tnum`.
+- Gramática de ticket: punteado, columnas de cifras alineadas y una banda de total.
+- Cálido y cercano, con CTAs firmes: borde definido, 48px de alto y presión visible.
 
-## 2. Colors
+## Colors
 
-A high-contrast system on three brand pillars — orange (action), carbón (impact/structure), yellow (highlight) — over warm neutrals. Proportion is a rule, not a suggestion: **60% neutral / 30% carbón / 10% orange.**
+Crema de papel, tinta azul y un solo color de acción.
 
-### Primary — Impulso Orange
-- **Impulso Orange** (`#E8622C`, `orange-500`): the brand. CTAs, links, accents, the avatar circle, action icons. The 10%.
-- **Orange hover** (`#CE4F1D`, `orange-600`) / **Active** (`#A83E15`, `orange-700`): same hue, deeper. `orange-700` doubles as the **only** orange allowed for small text/links on light (7.0:1 AA).
-- **Tints:** `orange-50 #FDEFE8` (soft section bg), `orange-100 #F9D5C2` (subtle hover/border), `orange-300 #F09A6B` (disabled primary).
+### Primary
+- **Coral de acción** (#F95738): fondo del CTA (demo por WhatsApp, prueba de 7 días) y
+  de los estados clave (opción seleccionada, total destacado). Nada decorativo.
+- **Azul profundo** (#04223F): texto y borde de 2px del CTA coral. El coral sobre la
+  crema da 2.97:1; el borde azul profundo lleva el contraste del contorno (14.65:1).
+  Excepción aprobada por el usuario el 2026-10-28.
+- **Coral texto** (#B23A1F): cuando el coral tiene que ser texto pequeño sobre crema.
 
-### Structure — Carbón
-- **Carbón** (`#111111`, `neutral-900`): headlines, primary text, and **whole high-impact sections**. Not merely "ink" — it's a surface color. At least one carbón section per page. White text on carbón is 18.9:1.
+### Secondary
+- **Azul Resto** (#083D77): todo el texto y la estructura (9.84:1 sobre crema). Fondo de
+  las secciones `inverse`, con texto crema encima.
 
-### Highlight — Amarillo Sazón
-- **Amarillo Sazón** (`#F5DE4B`, `yellow-500`): the highlighter underline, badges, markers. **Condiment, not ingredient — max one yellow element per viewport.** `yellow-100 #FCF6D4` for soft callouts; `yellow-600 #D9BF28` for hover/badge borders.
+### Tertiary
+- **Arena de ticket** (#E9DFC4, supuesto): bandas de total y fondos de "papel" dentro de
+  la calculadora. Texto encima en azul (8.14:1).
 
 ### Neutral
-- **Blanco Plato** (`#FFFFFF`) primary bg; **neutral-50** (`#F7F6F4`, warm off-white) for alternating sections; **neutral-200** (`#E2E0DC`) borders/dividers.
-- **Text on light:** `neutral-600 #4A4A4A` for long paragraphs, `carbón #111111` for headings. **neutral-400 `#8C8C8C` is captions/large-text only (3.5:1)** — never key paragraphs.
+- **Crema ticket** (#F5F5EA): fondo de página.
+- **Papel claro** (#FBFBF5): tarjetas y campos sobre crema.
+- **Azul secundario** (#3E5E80): texto secundario (6.14:1).
+- **Línea punteada** (#6F849A): bordes de interfaz y punteado del ticket (3.51:1).
+- **Divisor** (#D5D9D2): divisores decorativos que no necesitan contraste.
+- **Azul gris** (#4F6D8A, supuesto): el lado "comisión" de la cuenta, que se lee como
+  pérdida sin usar rojo ni coral.
 
-### Semantic
-- **Success** `#2E9E5B` · **Warning** `#D9BF28` (derived from brand yellow) · **Error** `#C63A2B` (warm red, orange family) · **Info** `#2D6FA8` (minimal use).
+### Named Rules
+**The Coral Means Click Rule.** El coral marca exactamente lo que se pulsa o el estado
+que cambió. Si un elemento coral no es accionable ni un estado, es un defecto.
 
-### Named rules
-- **The 60-30-10 rule.** Neutral 60%, carbón 30%, orange 10%. If orange exceeds ~10% of a viewport, it stops reading as brand and starts reading as noise.
-- **The small-orange-text rule.** Any orange text below large/bold uses `#A83E15` (`orange-700`), never `#E8622C`. White-on-orange (3.4:1) is for buttons and large/bold headings only.
-- **The one-yellow rule.** Maximum one Amarillo Sazón element per viewport. It's a condiment.
-- **The overlay rule.** Any text over photography gets a carbón overlay at 40–60% first.
+**The One Ink Rule.** Todo el texto es azul (o crema sobre azul). Nada de negro ni de
+gris neutro: el azul es la tinta de la marca.
 
-## 3. Typography
+## Typography
 
-A hard two-family split: a poster voice and a reading voice, paired on a strong contrast axis (condensed display vs. humanist body).
+**Display Font:** Oleo Script (con Georgia, cursive)
+**Body Font:** Lora (con Georgia, serif)
+**Label/Buttons:** Lora
 
-**Display — Anton** (`Impact, 'Arial Narrow Bold', sans-serif` fallback). Condensed, blunt, market-poster presence. **Caps or brand capitalization ("ImPulso") only. Never below 24px. Never paragraphs.** Titles carry `letter-spacing: 0.01em` to offset the condensation.
+**Character:** Una firma de rótulo de restaurante (Oleo Script) sobre una serif de libro
+de cuentas (Lora). El script se queda arriba; las cifras y la lectura viven en Lora.
 
-**Body — Lato** (`'Helvetica Neue', Arial, sans-serif` fallback). All reading: paragraphs, nav, forms, captions. Body lines cap at 65–72 characters.
+### Hierarchy
+- **Display** (Oleo Script 700, 44 / 60 / 76px, interlínea 50 / 66 / 84px): solo el
+  titular del hero.
+- **Headline** (Oleo Script 400, 30 / 40 / 46px): títulos de sección.
+- **Title** (Lora 700, 24 / 26 / 28px, `lnum`): títulos de tarjeta, totales y
+  cifras de la calculadora (las cifras suman `tnum`).
+- **Body** (Lora 400, 16px / 24px en todos los tamaños, `lnum`): párrafos; medida
+  máxima `--measure-prose` (68ch).
+- **Label** (Lora 600, 12–13px, tracking 0.04em, `lnum`): etiquetas, nombres de
+  canal y encabezados de columna del ticket.
 
-> **Identity-preservation note.** Both families come straight from the committed ImPulso brand book, so the reflex-reject lists don't apply — Anton is a deliberate, distinctive poster choice, and Lato is the brand's specified reading face. Don't second-guess them on this surface.
+### Named Rules
+**The Script Stays Up Top Rule.** Oleo Script solo en display y headline. Nunca en
+cifras, botones, etiquetas ni párrafos: un script a 24px deja de leerse.
 
-### Scale (base 16px, ratio ~1.25)
+**The Aligned Figures Rule.** Toda cifra que se compara con otra va en Lora con
+`lnum tnum` y alineada a la derecha de su columna, como en un ticket. `tnum` va solo en
+la cifra, nunca en el texto corrido: en Lora 700 también ensancha los espacios.
 
-| Token | Size / line | Face & weight | Use |
-|---|---|---|---|
-| `display-xl` | 72px / 1.0 | Anton 400 | Hero |
-| `display-lg` | 56px / 1.05 | Anton 400 | Section titles |
-| `h1` | 44px / 1.1 | Anton 400 | Inner page title |
-| `h2` | 32px / 1.15 | Anton 400 | Section subtitles |
-| `h3` | 24px / 1.25 | Lato 700 | Card titles |
-| `h4` | 20px / 1.3 | Lato 700 | Minor subtitles |
-| `body-lg` | 18px / 1.6 | Lato 400 | Section intros |
-| `body` | 16px / 1.6 | Lato 400 | Standard paragraph |
-| `body-sm` | 14px / 1.5 | Lato 400 | Secondary text |
-| `caption` | 12px / 1.4, +0.08em, uppercase | Lato 400 | Eyebrows, labels |
+## Layout
 
-Fluid `clamp()` the two display steps for responsive heroes; keep display letter-spacing ≥ -0.02em (Anton is condensed, don't tighten further). Use `text-wrap: balance` on h1–h2, `text-wrap: pretty` on prose.
+Retícula de 12 / 6 / 4 columnas (lg / md / sm), contenedor máximo de 1366px y padding
+lateral de 112 / 56 / 24px. Ritmo de sección con `--section-y` (64px), `-tight` (40px) y
+`-airy` (96px). Las secciones alternan crema y azul `inverse` para marcar los cambios de
+tema. Todo layout se construye con `Container`/`Col` y las primitivas de
+`shared/components/layout/` (guía viva en `/dev/layout`).
 
-### Named rules
-- **The Anton-title rule.** Anton is titles-only, ≥24px, caps. Any Anton paragraph or sub-24px Anton is a defect.
-- **The eyebrow rule.** Section eyebrows are Lato 700, uppercase, 12–13px, `orange-700` on light / `yellow-500` on carbón — a deliberate, sparing device, not a per-section reflex.
+## Elevation & Depth
 
-## 4. Signature gestures
+Profundidad de papel: superficies planas con sombras leves y cortas, como una hoja
+apoyada en el mostrador, nunca halos difusos. El tono (crema → papel claro → arena)
+hace la mayor parte del trabajo de jerarquía.
 
-Two repeatable rúbricas that make a page unmistakably ImPulso. Each is used **sparingly** — presence, not pattern.
+### Shadow Vocabulary
+- **Papel** (`var(--shadow-paper)`, en `foundations/_elevation.scss`: `0 1px 2px` al 8 % +
+  `0 8px 8px -8px` al 12 % de `--color-shadow`): tarjetas y el ticket sobre la crema.
+- **Tecla** (`0 3px 6px color-mix(in srgb, var(--color-shadow) 24%, transparent)`):
+  solo el CTA primario; al presionar baja 2px y la sombra se aplasta a `0 1px 2px`.
 
-### The pulso bicolor
-In one key headline per page (hero or final CTA), the action word splits into two colors, echoing the Im/Pulso logo:
-- On white: `Im`(carbón) `Pulsa`(orange) tu restaurante
-- On carbón: `Más`(white) `mesas llenas`(orange)
+### Named Rules
+**The Paper Not Glass Rule.** Sin blur, sin vidrio, sin sombras de más de 8px de
+desenfoque. Si algo flota, es papel, no luz. Única excepción acotada: `/test-2-corto` (ver su sección al
+final de este documento).
 
-**Max once per page.** It's the brand signature, not a decorative reflex.
+## Shapes
 
-### The yellow highlighter underline
-A thick, slightly irregular highlighter stroke (`#F5DE4B`) under 1–3 key words of the hero. On the orchestrated hero reveal it "draws" left-to-right over ~400ms. Counts as the viewport's one yellow element.
+Esquinas suaves y consistentes: 16px en tarjetas y medios (`--radius-md`), 12px en
+botones y campos (`--form-radius-btn`, `--form-radius-input`). Píldora (999px) solo
+para badges. El borde punteado (`1px dashed var(--color-outline)`) es la firma del
+ticket: separa líneas de la cuenta y antecede al total.
 
-## 5. Layout
-
-> Values below are the rendered ones and their tokens ([ADR-0006](04-decisions/0006-documentacion-refleja-render.md)).
-> Source: `styles/10-tokens/web/foundations/`.
-
-- **Grid:** `Container`/`Col` — 12 / 6 / 4 columns (lg / md / sm), container 1366px, gutter 56 / 20 / 20px, side padding 112 / 56 / 24px.
-- **Composition:** layout primitives in `shared/components/layout/` ([ADR-0007](04-decisions/0007-layout-con-primitivas.md)) — `Section` (rhythm + tone), `Stack`, `Cluster`, `Media`, `AutoGrid`, and `Grid` + `Cell` for the bold moves the poster register asks for: text over full-bleed photography, asymmetric offsets, overlapping blocks, partial breakouts. Live reference: `/dev/layout`.
-- **Spacing:** 4px scale, `--space-N` = N × 4px, identical to Tailwind (`gap-6` = `var(--space-6)` = 24px). Steps: 1, 2, 3, 4, 6, 8, 10, 12, 16, 24, 32. Vary for rhythm — generous between sections, tight within groups.
-- **Section rhythm:** vertical padding `--section-y` (64px), `--section-y-tight` (40px) for pain/urgency, `--section-y-airy` (96px) for sections that breathe. Alternate white / `neutral-50` / carbón. At least one carbón section per page (the poster moment).
-- **Reading measure:** prose capped at `--measure-prose` (68ch); short leads at `--measure-narrow` (52ch).
-- **Shape:** `--radius-md` (12px) on cards, media and surfaces; inputs 10px (`--form-radius-input`); `--radius-pill` (999px) on buttons and badges. The orange avatar circle is the one fully-round hero shape. **Do not** round cards past 16px.
-- **Imagery:** food photography leads — warm, contrasted, kinetic (falling sauce, steam, fire, hands cooking). Duotone orange/carbón for text-over-photo sections; carbón overlay 40–60% behind white text; circular crops (avatar echo) for featured dishes/portraits. Zero imagery on this food brief is a bug — ship real photography, never colored placeholder blocks.
-
-## 6. Components
+## Components
 
 ### Buttons
-- **Primary:** orange fill `#E8622C`, white text, Lato 700 16px, `14px 32px`, pill. Hover `#CE4F1D`, active `#A83E15`, focus outline 2px carbón offset 2px.
-- **Secondary:** transparent, 2px carbón border, carbón text; hover inverts to carbón fill / white text. (On carbón: white border+text, hover inverts.)
-- **Tertiary / link:** `#A83E15` text, Lato 700, hover adds a yellow (`#F5DE4B`) highlighter underline.
+- **Shape:** 12px de radio, alto mínimo de 48px (área táctil).
+- **Primary:** fondo coral #F95738, texto azul profundo #04223F en Lora, borde de 2px
+  #04223F y sombra de tecla (ver Elevation). Padding 10px 20px (sm, md) y 20px 50px (lg).
+- **Hover / Active:** el fondo pasa a #FA6A4E; al presionar baja 2px y la sombra
+  se aplasta. Con `prefers-reduced-motion` solo cambia el color.
+- **Secondary:** transparente con borde azul de 2px; al hover se rellena de azul con
+  texto crema.
+- **Flat:** texto azul sin relleno, tinte azul al 8% en hover.
 
-### Card de servicio
-White fill, 1px `#E2E0DC` border, `--radius-md` (12px), `--space-8` (32px) padding. Hover: border → orange + subtle lift `0 8px 24px rgba(17,17,17,0.08)`. Icon: 24px Lucide inside a 48px orange circle (avatar echo). **Never** pair the 1px border with a wide shadow at rest — the lift is a hover-only affordance.
+### Cards / Containers
+- **Corner Style:** 16px.
+- **Background:** papel claro #FBFBF5 sobre crema; arena #E9DFC4 para la banda de total.
+- **Shadow Strategy:** "Papel" (ver Elevation).
+- **Border:** opcional, 1px `outline-variant`; punteado `outline` entre líneas del ticket.
 
-### Badge
-Amarillo Sazón fill, carbón text, Lato 700 12px uppercase, `4px 12px`, pill. One per viewport.
+### Inputs / Fields
+- **Style:** fondo blanco, borde de 2px en `outline` (#6F849A) y 12px de radio; 56px
+  de alto mínimo y texto de 16px (evita el zoom de iOS).
+- **Focus:** el borde pasa a coral #F95738 (3.26:1 sobre blanco).
+- **Placeholder:** #5A6B7D (5.48:1).
 
-### Métrica destacada
-Number in Anton 56–72px (`#E8622C` on light / `#F5DE4B` on carbón); label Lato 400 14px `neutral-600`. e.g. **"+180%"** / "reservas en 3 meses". At least one real, verifiable metric visible per page.
+### Ticket de cuenta (signature)
+Lista de líneas con etiqueta a la izquierda y cifra a la derecha (Lora `lnum tnum`),
+separadas por punteado; cierra con una banda de total en arena con la cifra en
+`title`. Es el gesto que convierte "costo fijo, sin comisión" en algo que se ve cuadrar.
 
-### Iconography
-Lucide, 1.5–2px stroke, 24px standard. Carbón on light, white on orange/carbón. Never multicolor.
+## Do's and Don'ts
 
-## 7. Motion
+### Do:
+- **Do** reservar el coral #F95738 para CTAs y estados clave, siempre con texto y borde #04223F.
+- **Do** escribir todas las cifras comparables en Lora con `lnum tnum`, alineadas a la derecha.
+- **Do** lograr el efecto ticket con punteado, columnas alineadas y una banda de total.
+- **Do** mantener 48px de alto mínimo en botones y 56px en campos.
 
-- Curve: `--ease-out` (`cubic-bezier(0.25, 1, 0.5, 1)`).
-- Hovers: `--duration-fast` (200ms).
-- **One orchestrated moment:** the hero reveal — title slides up in a light stagger (`--duration-slow`, 460ms) while the yellow underline draws left-to-right (`--duration-base`, 400ms).
-- Every animation ships a `prefers-reduced-motion` alternative (crossfade / instant). The underline draw becomes a static underline.
-- Ease-out with exponential curves; no bounce, no elastic. Don't animate layout properties.
+### Don't:
+- **Don't** usar tipografía monoespaciada en ningún lugar (decisión del cliente).
+- **Don't** usar Oleo Script por debajo de headline (cifras, botones, etiquetas, párrafos).
+- **Don't** poner texto blanco ni #083D77 sobre coral: no llegan a 4.5:1.
+- **Don't** escribir hex ni `rgba()` en `.tsx` o en `styles/webpages-styles/`: el color sale de `_palette.scss`.
 
-## 8. Recommended page structure
+## Implementation contract (tokens-first, component-first)
 
-The conversion long-scroll (from `NEW_BRAND.md` §6.5 and the landing copy):
-
-1. **Hero** — Anton headline with pulso bicolor + yellow underline, kinetic food photo, orange CTA. Eyebrow: "AGENCIA DE MARKETING GASTRONÓMICO". Headline: *"Deja de adivinar si tu marketing funciona. Empieza a llenar mesas con datos, no con suerte."*
-2. **Prueba social** — client logos or 3 large Anton-orange metrics.
-3. **El problema** — "¿Tu marketing es una caja negra?" — three concrete pains.
-4. **Por qué no lo has resuelto** — "No es falta de esfuerzo. Es falta de sistema."
-5. **La solución** — "El marketing no es presencia. Es flujo de comensales."
-6. **Cómo funciona — El Sistema Mesa Activa** (carbón section): 4 steps — diagnóstico de visibilidad → posicionamiento local → adquisición de comensales → optimización semanal.
-7. **Qué vas a conseguir** — "En 90 días, un restaurante con flujo constante."
-8. **Por qué confiar** — "Entendemos tu negocio porque lo vivimos" (operator credibility + testimonial).
-9. **Garantía** — 90-day commitment, "sin letras pequeñas."
-10. **CTA final** — orange or carbón section: "¿Hablamos esta semana?" → **[Agendar mi estudio gratuito]**.
-11. **Footer** — carbón, white monochrome logo, Lato links, avatar as favicon.
-
-## 9. Do's and Don'ts
-
-### Do
-- **Do** build on `citrica-ui-toolkit` and keep every color a `_palette.scss` token — pick a `Text` variant and a `Button` variant instead of restyling (see §10).
-- **Do** hold 60-30-10; spend orange only on action and one accent per view.
-- **Do** invert at least one full section to carbón per page — that's the brand's poster moment.
-- **Do** use `#A83E15` for any small orange text/link; reserve white-on-orange for buttons and large headings.
-- **Do** keep Anton to caps titles ≥24px; let Lato do all the reading.
-- **Do** lead with warm, kinetic, real food photography; overlay carbón 40–60% behind text.
-- **Do** deploy the pulso bicolor once and the yellow underline once per page — signatures, not patterns.
-
-### Don't
-- **Don't** exceed 10% orange or more than one yellow element per viewport.
-- **Don't** set Anton below 24px or in paragraphs; don't tighten display tracking past -0.02em.
-- **Don't** drift into the editorial-magazine lane (display serif + italic + drop caps + ruled columns) — this is a market-poster / scoreboard brand.
-- **Don't** ship colored placeholder blocks where food photography belongs; zero imagery on this brief is a defect.
-- **Don't** round cards past 16px, or pair a 1px border with a wide resting shadow.
-- **Don't** reach for corporate-cold jargon in on-screen copy ("sinergia," "holístico," "360°") — direct, sensory, data-backed only.
-- **Don't** hardcode a hex/rgba, add `--im-*`-style aliases, or hand-roll a component the toolkit already ships — colors come from `_palette.scss` tokens and UI from `citrica-ui-toolkit` (see §10).
-
-## 10. Implementation contract (tokens-first, component-first)
-
-> **Movido.** Las cuatro reglas vinculantes (color solo desde tokens, tipografía vía
-> `Text`, botones dirigidos por tokens, toolkit antes que markup propio) y el mapa de
-> archivos viven ahora en un solo lugar:
+> Las cuatro reglas vinculantes (color solo desde tokens, tipografía vía `Text`,
+> botones dirigidos por tokens, toolkit antes que markup propio) y el mapa de archivos
+> viven en un solo lugar:
 >
 > ### → **[implementation-contract.md](01-design/implementation-contract.md)**
 >
-> Este documento (`design.md`) cubre el **porqué** estético: paleta, escala
-> tipográfica, gestos de marca, layout, motion. El contrato cubre el **cómo** operativo.
->
-> Motivo del cambio: [ADR-0001](04-decisions/0001-contrato-fuente-unica.md).
+> Motivo: [ADR-0001](04-decisions/0001-contrato-fuente-unica.md).
+
+---
+
+# Surface: /test-2-corto — Resto App en vidrio
+
+> Amplía este documento en modo ruta (`/citrica-landing restoapp … --ruta test-2-corto`,
+> 2026-10-30). El sistema de arriba sigue vigente para toda la base; esta sección añade
+> solo lo propio de la ruta.
+
+## Dirección vigente
+
+- **Estilo:** `03-glassmorphism` del catálogo, elegido mirando la imagen.
+- **comp:** `.impeccable/mocks/test-2-corto-approved.png` (copia de
+  `.claude/skills/citrica-landing/references/styles/03-glassmorphism.png`).
+- **Decisión del usuario (2026-10-30):** "Vidrio con colores Resto". Se respeta la
+  **composición** del comp (paneles de vidrio apilados, luces difusas, mocks a la
+  derecha, badge arriba a la derecha); los **colores y las fuentes** son los de Resto App.
+  La paleta global, las fuentes y la escala **no cambian** (ADR-0009).
+- **Steer:** ninguno.
+
+### Traducción de la paleta del comp a la marca
+
+| Comp | Resto App (token existente) |
+|---|---|
+| Fondo pizarra `#1E293B` | azul profundo: `--color-on-secondary-container` (`#04223F`) |
+| Luz violeta / magenta | coral: `--color-primary` (`#F95738`) |
+| Luz cian | celeste: `--color-secondary-fixed-dim` (`#9DB6D1`) |
+| Vidrio blanco 5–10 % | `--color-text-white` (crema) al 8–12 % con `color-mix()` |
+| Texto blanco | `--color-text-white` (crema `#F5F5EA`) |
+| CTA violeta con halo | `Button variant="primary"` coral + halo de `--color-primary` |
+
+### Tipografía
+
+El comp usa una sans fina en mayúsculas (cercana a Sora). Se mantiene la marca:
+**Oleo Script** en el titular y **Lora** en bajada, botones y mocks. `font-match` no se
+usa: la familia la fijó el cliente.
+
+### Regiones del comp → repo
+
+| Región | Kind | En este repo |
+|---|---|---|
+| Fondo azul profundo con luces coral y celeste fuera de foco | `texture` | `Section` con `.test-2-corto__ambient` (2–3 `radial-gradient` con `color-mix` de tokens) |
+| Tres paneles de vidrio apilados y desplazados | `chrome` | `Grid` con 3 `Cell` en la misma `row`, `start` distinto, `.test-2-corto__glass` |
+| Titular de 2 líneas, centrado | `text` | `Text variant="display"` (Oleo Script) en `Stack` centrado, crema |
+| Bajada | `text` | `Text variant="subtitle" textColor="color-text-white"` |
+| CTA con halo | `control` | `Button variant="primary"` + `.test-2-corto__glow` |
+| Dos mocks de móvil en vidrio (derecha) | `plate` | paneles `.test-2-corto__glass` con `Media ratio="3/4"` que contienen componentes del toolkit (ticket de cierre, `Card`) — sin producto real, no se inventa una captura |
+| Badge "powered by" arriba a la derecha | `chrome` | `Cluster` pequeño en vidrio con el wordmark TEMPORAL |
+
+## Excepción a "The Paper Not Glass Rule"
+
+**Solo en `/test-2-corto`** se permite vidrio: `backdrop-filter: blur()` en paneles
+`.test-2-corto__glass` sobre el fondo de luces. Condiciones:
+
+- Nunca vidrio sobre vidrio sobre vidrio: máximo dos capas superpuestas con texto encima.
+- Todo texto sobre vidrio cumple 4.5:1 medido en el punto más claro del fondo.
+- `backdrop-filter` solo en el hero (no en secciones de scroll largo) y con fallback
+  opaco cuando el navegador no lo soporta.
+- El resto de la base sigue la regla original: papel, no vidrio.
+
+---
+
+# Surface: /test-3-sistema — La cuenta clara, como sistema
+
+> Brief del 2026-10-30 (`--ruta test-3-sistema`). **Misma dirección que el documento
+> principal** ("La cuenta clara", papel, no vidrio); sin imagen del catálogo, build
+> code-led. Lo que cambia es **cómo se construye**.
+
+## Dirección vigente
+
+- **Estilo:** "La cuenta clara" (estructura "La cuenta de la comisión"), decidido en el
+  brief. Sin `comp:`; la referencia es este documento.
+- **Regla de la ruta — The No Page Styles Rule.** `/test-3-sistema` no tiene SCSS de
+  página. Todo gesto (ticket, fila punteada, cifra tabular, banda de total, botón sobre
+  azul) vive en componentes de `shared/project-components/` con su estilo en
+  `styles/08-components/`, escrito solo con tokens (`--color-*`, `--space-*`,
+  `--radius-*`, `--form-radius-*`, `--duration-*`). Si una sección necesita un gesto que
+  no existe, se crea el componente; no se escribe una clase de página.
+
+## Componentes de la cuenta (reutilizables)
+
+| Pieza | Qué es | Gesto |
+|---|---|---|
+| Botones de conversión | Demo por WhatsApp, prueba de 7 días, cotizar | `Button` del toolkit; sobre `inverse`, el secundario toma la pareja crema |
+| Tarjeta ticket | Papel claro sobre crema | Radio 16px, sombra "Papel" |
+| Tarjeta de módulo | Icono + título + texto | Papel claro, borde `outline-variant` |
+| Fila de cuenta | Concepto a la izquierda, cifra o detalle a la derecha | Punteado inferior `outline`; la cifra en `lnum tnum`, a la derecha |
+| Banda de total | Cierre de la cuenta | Arena `tertiary`, texto `title` |
+| Campo de monto | Cifra con prefijo (`USD`) o sufijo (`%`) | `Input` del toolkit, 56px, solo dígitos |
+
+El logo real reemplaza al wordmark: azul sobre crema, versión light sobre azul.

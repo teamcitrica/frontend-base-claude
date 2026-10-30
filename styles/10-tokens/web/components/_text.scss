@@ -1,26 +1,26 @@
 // TEXT TOKEN: Typography
 
-// DISPLAY — ImPulso hero (Anton, mayúsculas)
+// DISPLAY — hero (Oleo Script, titular de marca)
 $display-responsive: (
    sm: (
-    font-size: 46px,
-    line-height: 46px
+    font-size: 44px,
+    line-height: 50px
   ),
   md: (
-    font-size: 70px,
-    line-height: 70px
+    font-size: 60px,
+    line-height: 66px
   ),
   lg: (
-    font-size: 92px,
-    line-height: 92px
+    font-size: 76px,
+    line-height: 84px
   )
 );
 .text-display {
   font-family: var(--font-family-a);
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  font-weight: 700;
+  letter-spacing: 0;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   text-wrap: balance;
   @include a-set($display-responsive);
   &-bold{
@@ -31,7 +31,7 @@ $display-responsive: (
   }
 }
 
-// HEADLINE — ImPulso títulos de sección (Anton, mayúsculas)
+// HEADLINE — títulos de sección (Oleo Script)
 $headline-responsive: (
   sm: (
     font-size: 30px,
@@ -50,9 +50,9 @@ $headline-responsive: (
 .text-headline {
   font-family: var(--font-family-a);
   font-weight: 400;
-  letter-spacing: 0.01em;
+  letter-spacing: 0;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   text-wrap: balance;
   @include a-set($headline-responsive);
   &-bold{
@@ -94,9 +94,8 @@ $body-big-responsive: (
   }
 }
 
-// TITLE — ImPulso títulos de card/step/garantía (Anton, mayúsculas)
-// sm = 24px, no 22: Anton nunca baja de 24px (piso de legibilidad de la
-// constitución — product.md, design.md, contrato y DoD §E). Ver SPEC-0001 T-03.
+// TITLE — títulos de card/paso y totales (Lora, cifras de caja alta). Oleo Script
+// queda para display/headline: a 24px un script pierde lectura en tarjetas.
 $title-responsive: (
   sm: (
     font-size: 24px,
@@ -112,11 +111,12 @@ $title-responsive: (
   )
 );
 .text-title {
-  font-family: var(--font-family-a);
-  font-weight: 400;
-  letter-spacing: 0.01em;
+  font-family: var(--font-family-d);
+  font-weight: 700;
+  letter-spacing: 0;
+  font-variant-numeric: lining-nums;
   text-decoration: none;
-  text-transform: uppercase;
+  text-transform: none;
   text-wrap: balance;
   @include a-set($title-responsive);
   &-bold{
@@ -147,6 +147,7 @@ $subtitle-responsive: (
   font-family: var(--font-family-d);
   font-weight: 400;
   letter-spacing: 0;
+  font-variant-numeric: lining-nums;
   text-decoration: none;
   text-transform: none;
   @include a-set($subtitle-responsive);
@@ -161,8 +162,8 @@ $subtitle-responsive: (
 // BODY
 $body-responsive: (
   sm: (
-    font-size: 14px,
-    line-height: 20px
+    font-size: 16px,
+    line-height: 24px
   ),
   md: (
     font-size: 16px,
@@ -177,6 +178,7 @@ $body-responsive: (
   font-family: var(--font-family-d);
   font-weight: 400;
   letter-spacing: 0;
+  font-variant-numeric: lining-nums;
   text-decoration: none;
   text-transform: none;
   @include a-set($body-responsive);
@@ -191,7 +193,7 @@ $body-responsive: (
 // LABEL
 $label-responsive: (
   sm: (
-    font-size: 11px,
+    font-size: 12px,
     line-height: 16px
   ),
   md: (
@@ -205,8 +207,9 @@ $label-responsive: (
 );
 .text-label {
   font-family: var(--font-family-c);
-  font-weight: 400;
-  letter-spacing: 0;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  font-variant-numeric: lining-nums;
   text-decoration: none;
   text-transform: none;
   @include a-set($label-responsive);

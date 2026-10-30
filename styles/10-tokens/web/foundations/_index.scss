@@ -1,17 +1,19 @@
 // ============================================
 // FOUNDATION TOKENS - WEB
 // ============================================
-// Espaciado, radios, motion y medida. Se emiten en :root desde
+// Espaciado, radios, elevación, motion y medida. Se emiten en :root desde
 // 04-generic/generic.scss. Fuente única: ADR-0006.
 
 @import './_space.scss';
 @import './_radius.scss';
+@import './_elevation.scss';
 @import './_motion.scss';
 @import './_measure.scss';
 
 @mixin foundation-tokens {
   @include space-tokens;
   @include radius-tokens;
+  @include elevation-tokens;
   @include motion-tokens;
   @include measure-tokens;
 }

@@ -1,0 +1,11 @@
+// ============================================
+// ELEVATION TOKENS - WEB
+// ============================================
+// Sombras con nombre del vocabulario de docs/design.md ("Elevation & Depth").
+// El color sale de --color-shadow; aquí solo vive la forma (SPEC-0007).
+
+@mixin elevation-tokens {
+  // Papel: hoja apoyada en el mostrador (tarjetas, ticket).
+  --shadow-paper: 0 1px 2px color-mix(in srgb, var(--color-shadow) 8%, transparent),
+    0 8px 8px -8px color-mix(in srgb, var(--color-shadow) 12%, transparent);
+}

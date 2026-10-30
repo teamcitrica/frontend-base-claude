@@ -19,8 +19,15 @@ $input-citrica-ui: (
   // max-width: 380px;
   @include a-set($input-citrica-ui);
 
+  // Campo grande y legible en móvil (Resto App): 56px de alto y texto de 16px,
+  // que además evita el zoom automático de iOS al enfocar.
   [data-slot="input-wrapper"] {
     border-radius: var(--form-radius-input);
+    min-height: 56px;
+  }
+
+  [data-slot="input"] {
+    font-size: 16px;
   }
 
   // Label placement inside by default
@@ -51,8 +58,15 @@ $input-citrica-ui: (
     }
   }
 
+  // !important: las utilidades de HeroUI (text-foreground-*) ganan en
+  // especificidad y dejaban la etiqueta y la ayuda en grises ajenos a la marca;
+  // la ayuda quedaba en ≈2.5:1.
   [data-slot="label"] {
-    color: var(--color-primary-input-label);
+    color: var(--color-primary-input-label) !important;
+  }
+
+  [data-slot="description"] {
+    color: var(--color-on-surface-var) !important;
   }
 
   [data-slot="input"] {

@@ -1,4 +1,4 @@
-import { Anton, Inter, Lato } from "next/font/google";
+import { Inter, Lora, Oleo_Script } from "next/font/google";
 
 // Fuentes de Google servidas por next/font (self-hosted en el build).
 // Un `@import url()` remoto en SCSS no sirve: Turbopack lo descarta del CSS
@@ -7,16 +7,17 @@ import { Anton, Inter, Lato } from "next/font/google";
 // styles/01-settings/settings.scss consumen.
 // Marca nueva = cambiar las familias aquí y los slots allá.
 
-const display = Anton({
+// Oleo Script: titulares de marca (Resto App). Solo display y headline.
+const display = Oleo_Script({
   subsets: ["latin"],
-  weight: "400",
+  weight: ["400", "700"],
   variable: "--font-brand-display",
   display: "swap",
 });
 
-const text = Lato({
+// Lora: cuerpo, botones y cifras (con cifras tabulares donde la fuente las trae).
+const text = Lora({
   subsets: ["latin"],
-  weight: ["400", "700", "900"],
   style: ["normal", "italic"],
   variable: "--font-brand-text",
   display: "swap",
