@@ -1,5 +1,4 @@
 "use client";
-
 import type { SidebarNavProps } from "../../types/sidebar";
 
 import { Suspense, useMemo } from "react";
@@ -12,8 +11,14 @@ import { Sidebar } from "citrica-ui-toolkit";
  * El componente del toolkit es agnóstico del router: no navega ni resuelve el
  * item activo por su cuenta. Este wrapper aporta las tres piezas que faltan:
  * navegación con `next/navigation`, marcado del item activo y filtrado por rol.
+ * El resto (logo, drawer móvil controlado) pasa tal cual; el toolkit ya cierra
+ * el drawer al navegar.
  */
-function SidebarNavContent({ items, roleId }: SidebarNavProps) {
+function SidebarNavContent({
+  items,
+  roleId,
+  ...sidebarProps
+}: SidebarNavProps) {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
@@ -34,6 +39,7 @@ function SidebarNavContent({ items, roleId }: SidebarNavProps) {
 
   return (
     <Sidebar
+      {...sidebarProps}
       activeHref={pathname}
       activeSubHref={activeSubHref}
       items={visibleItems}

@@ -1,1 +1,11 @@
-// 11-ATOMIC-DESIGN — overrides de organismos sobre el toolkit. Vacía a propósito.
+// 11-ATOMIC-DESIGN — overrides de organismos sobre el toolkit.
+
+// TEMPORAL (SPEC-0008) — el `Sidebar` de citrica-ui-toolkit 0.0.30 no marca el
+// foco de teclado en sus ítems principales ni en el botón de colapsar (medido
+// tabulando: sin outline, sombra, fondo ni borde). Se quita cuando el toolkit
+// lo corrija. `!important`: los botones del toolkit traen `outline: none`.
+// Offset negativo: el `nav` recorta en horizontal lo que sale del ítem.
+.c-sidebar button:focus-visible {
+  outline: 2px solid var(--color-admin-primary) !important;
+  outline-offset: -2px;
+}

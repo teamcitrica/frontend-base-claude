@@ -1,0 +1,36 @@
+// ADMIN SHELL — armazón del admin: Sidebar + (AdminNavbar y contenido).
+// Lo usa: app/admin/layout.tsx (SPEC-0008).
+//
+// En celular la página hace scroll normal (el AdminNavbar se fija solo). Desde
+// `md` (768px, el mismo `md` de Tailwind que usa el toolkit) la ventana queda
+// quieta: el Sidebar se fija a la altura de pantalla y solo el contenido hace
+// scroll.
+
+.c-admin-shell {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--color-admin-surface);
+  color: var(--color-admin-on-surface);
+}
+
+.c-admin-shell__column {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+
+  @include md() {
+    height: 100vh;
+  }
+}
+
+.c-admin-shell__content {
+  flex: 1;
+  min-width: 0;
+  padding: var(--space-2) var(--space-4) var(--space-10);
+
+  @include md() {
+    overflow-y: auto;
+    padding-inline: var(--space-6);
+  }
+}

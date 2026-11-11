@@ -17,8 +17,8 @@
 // $screen-mobile-sm: 320px;
 
 // BREAKPOINTS
-$break-tablet: 610px;
-$break-desktop: 1190px;
+$break-tablet: 767px;
+$break-desktop: 1279px;
 
 
 @mixin media-to-up($mq) {

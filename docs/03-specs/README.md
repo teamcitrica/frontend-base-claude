@@ -14,6 +14,7 @@
 | 0005 | [Landing de Resto App — la cuenta de la comisión](0005-landing-restoapp/spec.md) | landing | in-progress | 2026-10-28 |
 | 0006 | [Landing de Resto App en vidrio (comp Glassmorphism)](0006-landing-restoapp-vidrio/spec.md) | landing | in-progress | 2026-10-30 |
 | 0007 | [Landing de Resto App construida solo con el sistema de diseño](0007-landing-restoapp-sistema/spec.md) | landing | in-progress | 2026-10-30 |
+| 0008 | [Barra superior y sidebar del admin con los componentes nuevos del toolkit](0008-admin-navbar-sidebar/spec.md) | admin | in-progress | 2026-11-10 |
 
 <!-- Al crear una spec, agregar aquí una fila:
 | 0002 | Titulo -> 0002-slug/spec.md | landing | draft | 2026-08-01 |

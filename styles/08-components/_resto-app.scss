@@ -38,6 +38,10 @@
   width: auto;
   height: var(--space-12);
 
+  &--sm {
+    height: var(--space-8);
+  }
+
   &--lg {
     height: var(--space-24);
   }

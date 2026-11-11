@@ -1,3 +1,5 @@
+import type { ReactNode, RefObject } from "react";
+
 export interface SubMenuItem {
   title: string;
   href: string;
@@ -18,4 +20,18 @@ export interface SidebarNavProps {
    * (comportamiento de los layouts sin auth conectada).
    */
   roleId?: number | null;
+  /** Logo en la cabecera del sidebar abierto. */
+  header?: ReactNode;
+  /** Logo compacto con el sidebar colapsado. */
+  collapsedHeader?: ReactNode;
+  /**
+   * Drawer móvil controlado desde afuera (el ☰ del `AdminNavbar`). Si se pasa,
+   * el `Sidebar` del toolkit no dibuja su botón flotante.
+   */
+  mobileOpen?: boolean;
+  onMobileOpenChange?: (open: boolean) => void;
+  /** Elemento que recupera el foco al cerrar el drawer (el ☰). */
+  mobileReturnFocusRef?: RefObject<HTMLElement | null>;
+  /** Clase en el panel de escritorio y en el drawer. */
+  className?: string;
 }
